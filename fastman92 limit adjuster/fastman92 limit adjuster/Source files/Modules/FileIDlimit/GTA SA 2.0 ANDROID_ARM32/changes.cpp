@@ -1,0 +1,1128 @@
+Address_GTA_SA_2_00_CIplStore__Initialise_18E9A8_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18E9A8));
+Address_GTA_SA_2_00_CIplStore__Initialise_2802A0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2802A0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x280298),
+(void*)&patch_GTA_SA_2_00_CIplStore__Initialise_280298, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__Initialise_2802AE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2802AE));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2802A2),
+(void*)&patch_GTA_SA_2_00_CIplStore__Initialise_2802A2, 12
+);
+
+Address_GTA_SA_2_00_CIplStore__Initialise_2802D4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2802D4));
+Address_GTA_SA_2_00_CIplStore__Initialise_2802F6 = g_mCalc.GetCurrentVAbyPreferedVA(0x2802F6);
+Address_GTA_SA_2_00_CIplStore__Initialise_2802F4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2802F4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2802EA),
+(void*)&patch_GTA_SA_2_00_CIplStore__Initialise_2802EA, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__Shutdown_28043C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x28043C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x280434),
+(void*)&patch_GTA_SA_2_00_CIplStore__Shutdown_280434, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__Shutdown_280448_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280448));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x280440),
+(void*)&patch_GTA_SA_2_00_CIplStore__Shutdown_280440, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__Shutdown_28044E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x28044E));
+Address_GTA_SA_2_00_CIplStore__Shutdown_280478_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280478));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x280470),
+(void*)&patch_GTA_SA_2_00_CIplStore__Shutdown_280470, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__Shutdown_2804A8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2804A8));
+Address_GTA_SA_2_00_CIplStore__Shutdown_280556_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280556));
+Address_GTA_SA_2_00_CIplStore__Shutdown_280524_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280524));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x28051C),
+(void*)&patch_GTA_SA_2_00_CIplStore__Shutdown_28051C, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__RemoveAllIpls_280608_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280608));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2805FE),
+(void*)&patch_GTA_SA_2_00_CIplStore__RemoveAllIpls_2805FE, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__RemoveAllIpls_280614_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280614));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x28060A),
+(void*)&patch_GTA_SA_2_00_CIplStore__RemoveAllIpls_28060A, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__RemoveAllIpls_280618_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280618));
+Address_GTA_SA_2_00_CIplStore__RemoveAllIpls_280644_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x280644));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x28063A),
+(void*)&patch_GTA_SA_2_00_CIplStore__RemoveAllIpls_28063A, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__SetupRelatedIpls_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CIplStore__SetupRelatedIpls_281542_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281542));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281536),
+(void*)&patch_GTA_SA_2_00_CIplStore__SetupRelatedIpls_281536, 12
+);
+
+Address_GTA_SA_2_00_CIplStore__RemoveRelatedIpls_281656 = g_mCalc.GetCurrentVAbyPreferedVA(0x281656);
+Address_GTA_SA_2_00_CIplStore__RemoveRelatedIpls_281658_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281658));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x28164E),
+(void*)&patch_GTA_SA_2_00_CIplStore__RemoveRelatedIpls_28164E, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__LoadIpls_281A94_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281A94));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281A8C),
+(void*)&patch_GTA_SA_2_00_CIplStore__LoadIpls_281A8C, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__LoadIpls_281A9E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281A9E));
+Address_GTA_SA_2_00_CIplStore__LoadIpls_281AFE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281AFE));
+Address_GTA_SA_2_00_CIplStore__LoadIpls_281AF8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281AF8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281AEE),
+(void*)&patch_GTA_SA_2_00_CIplStore__LoadIpls_281AEE, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BA8 = g_mCalc.GetCurrentVAbyPreferedVA(0x281BA8);
+Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BAA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281BAA));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281BA0),
+(void*)&patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BA0, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281C84_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281C84));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281C7C),
+(void*)&patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281C7C, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BD0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281BD0));
+Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281C98_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281C98));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281C90),
+(void*)&patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281C90, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__RequestIpls_281D00_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281D00));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281CF6),
+(void*)&patch_GTA_SA_2_00_CIplStore__RequestIpls_281CF6, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__RequestIpls_281D90_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281D90));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281D88),
+(void*)&patch_GTA_SA_2_00_CIplStore__RequestIpls_281D88, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281DC8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281DC8));
+Address_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E4C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281E4C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281E44),
+(void*)&patch_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E44, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E5C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281E5C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281E54),
+(void*)&patch_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E54, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E64_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281E64));
+Address_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E8A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281E8A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281E80),
+(void*)&patch_GTA_SA_2_00_CIplStore__HaveIplsLoaded_281E80, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__LoadAllRemainingIpls_281F74_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281F74));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281F6C),
+(void*)&patch_GTA_SA_2_00_CIplStore__LoadAllRemainingIpls_281F6C, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__LoadAllRemainingIpls_281EC6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281EC6));
+Address_GTA_SA_2_00_CIplStore__LoadAllRemainingIpls_281F90_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281F90));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281F88),
+(void*)&patch_GTA_SA_2_00_CIplStore__LoadAllRemainingIpls_281F88, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__RequestIplAndIgnore_281FE0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281FE0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281FD8),
+(void*)&patch_GTA_SA_2_00_CIplStore__RequestIplAndIgnore_281FD8, 8
+);
+
+Address_GTA_SA_2_00_CIplStore__RemoveIplAndIgnore_18CCAC_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18CCAC));
+Address_GTA_SA_2_00_CIplStore__RemoveIplAndIgnore_28201A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x28201A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x282010),
+(void*)&patch_GTA_SA_2_00_CIplStore__RemoveIplAndIgnore_282010, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ReInit_2CF93C = g_mCalc.GetCurrentVAbyPreferedVA(0x2CF93C);
+Address_GTA_SA_2_00_CStreaming__ReInit_2CF93E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2CF93E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2CF934),
+(void*)&patch_GTA_SA_2_00_CStreaming__ReInit_2CF934, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ReInit_2CFA00_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2CFA00));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2CF9F2),
+(void*)&patch_GTA_SA_2_00_CStreaming__ReInit_2CF9F2, 14
+);
+
+Address_GTA_SA_2_00_CStreaming__ReInit_2CF97C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2CF97C));
+Address_GTA_SA_2_00_CStreaming__ReInit_2CFA46_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2CFA46));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2CFA36),
+(void*)&patch_GTA_SA_2_00_CStreaming__ReInit_2CFA36, 16
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveAllUnusedModels_2CFF6E = g_mCalc.GetCurrentVAbyPreferedVA(0x2CFF6E);
+Address_GTA_SA_2_00_CStreaming__RemoveAllUnusedModels_2CFF70_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2CFF70));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2CFF66),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveAllUnusedModels_2CFF66, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__SetMissionDoesntRequireModel_2CFFBE = g_mCalc.GetCurrentVAbyPreferedVA(0x2CFFBE);
+Address_GTA_SA_2_00_CStreaming__SetMissionDoesntRequireModel_2CFFC0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2CFFC0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2CFFB6),
+(void*)&patch_GTA_SA_2_00_CStreaming__SetMissionDoesntRequireModel_2CFFB6, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D024C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D024C));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D00F2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D00F2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D00E8),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D00E8, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0262_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0262));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0258_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0258));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D024C),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D024C, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0278_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0278));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D026E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D026E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D0262),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D0262, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D028E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D028E));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0284_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0284));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D0278),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D0278, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D02AA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D02AA));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D029C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D029C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D028E),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D028E, 14
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D02C0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D02C0));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D02B6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D02B6));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D02AA),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D02AA, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D02D6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D02D6));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D02C8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D02C8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D02C0),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D02C0, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D03CA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D03CA));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D03C4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D03C4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D03BC),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D03BC, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D03E0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D03E0));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D03D6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D03D6));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D03CA),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D03CA, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D03F6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D03F6));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D03EC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D03EC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D03E0),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D03E0, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D040C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D040C));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0402_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0402));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D03F6),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D03F6, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0416_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0416));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D040C),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D040C, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0434_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0434));
+Address_GTA_SA_2_00_CStreaming__RemoveModel_2D0428_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0428));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D041E),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveModel_2D041E, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ProcessLoadingChannel_2D2524_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2524));
+Address_GTA_SA_2_00_CStreaming__ProcessLoadingChannel_2D24F0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D24F0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D24E8),
+(void*)&patch_GTA_SA_2_00_CStreaming__ProcessLoadingChannel_2D24E8, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ProcessLoadingChannel_2D252E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D252E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D2524),
+(void*)&patch_GTA_SA_2_00_CStreaming__ProcessLoadingChannel_2D2524, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModel_2D2A08_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2A08));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D29FE),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModel_2D29FE, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModel_2D2A90_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2A90));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D2A88),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModel_2D2A88, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModel_2D2AC4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2AC4));
+Address_GTA_SA_2_00_CStreaming__RequestModel_2D2AA4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2AA4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D2A9C),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModel_2D2A9C, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModel_2D2AC0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2AC0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D2AB8),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModel_2D2AB8, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3030_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3030));
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D2FA8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D2FA8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D2FA0),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D2FA0, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3038_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3038));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3030),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3030, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D314C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D314C));
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3060_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3060));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3056),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3056, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3154_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3154));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D314C),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D314C, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32D8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D32D8));
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32AC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D32AC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D32A2),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32A2, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32E2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D32E2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D32D8),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32D8, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D33AA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D33AA));
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32F8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D32F8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D32EE),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D32EE, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_1962C0_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x1962C0));
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3310_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3310));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3308),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3308, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D331E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D331E));
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D331C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D331C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3312),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3312, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D3312_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3312));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D33B2),
+(void*)&patch_GTA_SA_2_00_CStreaming__ConvertBufferToObject_2D33B2, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__AreAnimsUsedByRequestedModels_2D354A = g_mCalc.GetCurrentVAbyPreferedVA(0x2D354A);
+Address_GTA_SA_2_00_CStreaming__AreAnimsUsedByRequestedModels_2D354C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D354C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3542),
+(void*)&patch_GTA_SA_2_00_CStreaming__AreAnimsUsedByRequestedModels_2D3542, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__AreAnimsUsedByRequestedModels_2D35B8 = g_mCalc.GetCurrentVAbyPreferedVA(0x2D35B8);
+Address_GTA_SA_2_00_CStreaming__AreAnimsUsedByRequestedModels_2D35B8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D35B8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D35B0),
+(void*)&patch_GTA_SA_2_00_CStreaming__AreAnimsUsedByRequestedModels_2D35B0, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D370E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D370E));
+Address_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D3694_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3694));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D368C),
+(void*)&patch_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D368C, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D376E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D376E));
+Address_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D3700_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3700));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D36F6),
+(void*)&patch_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D36F6, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D3732_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3732));
+Address_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D371A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D371A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D370E),
+(void*)&patch_GTA_SA_2_00_CStreaming__FinishLoadingLargeFile_2D370E, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B1C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3B1C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B12),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B12, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3BB4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3BB4));
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B34_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3B34));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B2C),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B2C, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B40_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3B40));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B38),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B38, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B5C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3B5C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B52),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B52, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B6C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3B6C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B64),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B64, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B98_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3B98));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B90),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B90, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3BA4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3BA4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3B9A),
+(void*)&patch_GTA_SA_2_00_CStreaming__GetNextFileOnCd_2D3B9A, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D3FAE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D3FAE));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D3FA2),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D3FA2, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D4086 = g_mCalc.GetCurrentVAbyPreferedVA(0x2D4086);
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D4088_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D4088));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D407E),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D407E, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D4180_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D4180));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D4178),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D4178, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D4194_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D4194));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D418C),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D418C, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D41A8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D41A8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D41A0),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D41A0, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D4232_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D4232));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D4228),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D4228, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D42BC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D42BC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D42B4),
+(void*)&patch_GTA_SA_2_00_CStreaming__RequestModelStream_2D42B4, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadScene_2D4C04 = g_mCalc.GetCurrentVAbyPreferedVA(0x2D4C04);
+Address_GTA_SA_2_00_CStreaming__LoadScene_2D4C04_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D4C04));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D4BFC),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadScene_2D4BFC, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__ClearFlagForAll_2D5052 = g_mCalc.GetCurrentVAbyPreferedVA(0x2D5052);
+Address_GTA_SA_2_00_CStreaming__ClearFlagForAll_2D5054_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D5054));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D504A),
+(void*)&patch_GTA_SA_2_00_CStreaming__ClearFlagForAll_2D504A, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D54BC = g_mCalc.GetCurrentVAbyPreferedVA(0x2D54BC);
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D54C2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D54C2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D54B4),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D54B4, 14
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5540_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D5540));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D5538),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5538, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5550_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D5550));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D5546),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5546, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5562_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D5562));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D5558),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5558, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D557C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D557C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D5570),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5570, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5590_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D5590));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D5586),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5586, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D55A2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D55A2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D5596),
+(void*)&patch_GTA_SA_2_00_CStreaming__RemoveLeastUsedModel_2D5596, 12
+);
+
+Address_GTA_SA_2_00_CStreaming__SetMissionDoesntRequireSpecialChar_2D887C = g_mCalc.GetCurrentVAbyPreferedVA(0x2D887C);
+Address_GTA_SA_2_00_CStreaming__SetMissionDoesntRequireSpecialChar_2D887E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D887E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D8874),
+(void*)&patch_GTA_SA_2_00_CStreaming__SetMissionDoesntRequireSpecialChar_2D8874, 10
+);
+
+Address_GTA_SA_2_00_CColStore__Initialise_18E9A8_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18E9A8));
+Address_GTA_SA_2_00_CColStore__Initialise_2E207C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E207C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2074),
+(void*)&patch_GTA_SA_2_00_CColStore__Initialise_2E2074, 8
+);
+
+Address_GTA_SA_2_00_CColStore__Initialise_2E2088_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2088));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E207E),
+(void*)&patch_GTA_SA_2_00_CColStore__Initialise_2E207E, 10
+);
+
+Address_GTA_SA_2_00_CColStore__Initialise_2E20AC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E20AC));
+Address_GTA_SA_2_00_CColStore__Initialise_2E20CC = g_mCalc.GetCurrentVAbyPreferedVA(0x2E20CC);
+Address_GTA_SA_2_00_CColStore__Initialise_2E20CC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E20CC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E20C2),
+(void*)&patch_GTA_SA_2_00_CColStore__Initialise_2E20C2, 10
+);
+
+Address_GTA_SA_2_00_CColStore__Shutdown_2E23A0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E23A0));
+Address_GTA_SA_2_00_CColStore__Shutdown_2E23F8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E23F8));
+Address_GTA_SA_2_00_CColStore__Shutdown_2E23C4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E23C4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E23BC),
+(void*)&patch_GTA_SA_2_00_CColStore__Shutdown_2E23BC, 8
+);
+
+Address_GTA_SA_2_00_CColStore__LoadCollision_2E2AAC = g_mCalc.GetCurrentVAbyPreferedVA(0x2E2AAC);
+Address_GTA_SA_2_00_CColStore__LoadCollision_2E2AAC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2AAC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2AA2),
+(void*)&patch_GTA_SA_2_00_CColStore__LoadCollision_2E2AA2, 10
+);
+
+Address_GTA_SA_2_00_CColStore__LoadCollision_2E2ACC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2ACC));
+Address_GTA_SA_2_00_CColStore__LoadCollision_2E2B18_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2B18));
+Address_GTA_SA_2_00_CColStore__LoadCollision_2E2B10_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2B10));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2B08),
+(void*)&patch_GTA_SA_2_00_CColStore__LoadCollision_2E2B08, 8
+);
+
+Address_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2C9C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2C9C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2C94),
+(void*)&patch_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2C94, 8
+);
+
+Address_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_19F7D0_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19F7D0));
+Address_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2D74_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2D74));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2D6A),
+(void*)&patch_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2D6A, 10
+);
+
+Address_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2D84_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2D84));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2D7C),
+(void*)&patch_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2D7C, 8
+);
+
+Address_GTA_SA_2_00_CColStore__RequestCollision_2E2E62_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2E62));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2E58),
+(void*)&patch_GTA_SA_2_00_CColStore__RequestCollision_2E2E58, 10
+);
+
+Address_GTA_SA_2_00_CColStore__RequestCollision_2E2EF4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2EF4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E2EEA),
+(void*)&patch_GTA_SA_2_00_CColStore__RequestCollision_2E2EEA, 10
+);
+
+Address_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E2F8E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E2F8E));
+Address_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E3014_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E3014));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E300C),
+(void*)&patch_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E300C, 8
+);
+
+Address_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E3024_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E3024));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E301A),
+(void*)&patch_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E301A, 10
+);
+
+Address_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E302A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E302A));
+Address_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E304C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E304C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E3044),
+(void*)&patch_GTA_SA_2_00_CColStore__HasCollisionLoaded_2E3044, 8
+);
+
+Address_GTA_SA_2_00_CColStore__RemoveAllCollision_2E308C = g_mCalc.GetCurrentVAbyPreferedVA(0x2E308C);
+Address_GTA_SA_2_00_CColStore__RemoveAllCollision_2E308C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E308C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E3084),
+(void*)&patch_GTA_SA_2_00_CColStore__RemoveAllCollision_2E3084, 8
+);
+
+Address_GTA_SA_2_00_CColStore__RemoveAllCollision_2E309A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E309A));
+Address_GTA_SA_2_00_CColStore__RemoveAllCollision_2E30C4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E30C4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E30BC),
+(void*)&patch_GTA_SA_2_00_CColStore__RemoveAllCollision_2E30BC, 8
+);
+
+Address_GTA_SA_2_00_CColStore__LoadAllBoundingBoxes_2E30F6 = g_mCalc.GetCurrentVAbyPreferedVA(0x2E30F6);
+Address_GTA_SA_2_00_CColStore__LoadAllBoundingBoxes_2E30F4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E30F4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E30EC),
+(void*)&patch_GTA_SA_2_00_CColStore__LoadAllBoundingBoxes_2E30EC, 8
+);
+
+Address_GTA_SA_2_00_CColStore__LoadAllBoundingBoxes_2E30F6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E30F6));
+Address_GTA_SA_2_00_CColStore__LoadAllBoundingBoxes_2E3128_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E3128));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E311E),
+(void*)&patch_GTA_SA_2_00_CColStore__LoadAllBoundingBoxes_2E311E, 10
+);
+
+Address_GTA_SA_2_00_CColStore__LoadAllCollision_2E3140 = g_mCalc.GetCurrentVAbyPreferedVA(0x2E3140);
+Address_GTA_SA_2_00_CColStore__LoadAllCollision_2E3140_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E3140));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E3138),
+(void*)&patch_GTA_SA_2_00_CColStore__LoadAllCollision_2E3138, 8
+);
+
+Address_GTA_SA_2_00_CColStore__LoadAllCollision_2E3170_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E3170));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E3168),
+(void*)&patch_GTA_SA_2_00_CColStore__LoadAllCollision_2E3168, 8
+);
+
+Address_GTA_SA_2_00_CColStore__BoundingBoxesPostProcess_2E31AE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E31AE));
+Address_GTA_SA_2_00_CColStore__BoundingBoxesPostProcess_2E323C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2E323C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2E3232),
+(void*)&patch_GTA_SA_2_00_CColStore__BoundingBoxesPostProcess_2E3232, 10
+);
+
+Address_GTA_SA_2_00_CPathFind__UpdateStreaming_319B28 = g_mCalc.GetCurrentVAbyPreferedVA(0x319B28);
+Address_GTA_SA_2_00_CPathFind__UpdateStreaming_319B28_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x319B28));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x319B1E),
+(void*)&patch_GTA_SA_2_00_CPathFind__UpdateStreaming_319B1E, 10
+);
+
+Address_GTA_SA_2_00_CPathFind__LoadSceneForPathNodes_319FAC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x319FAC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x319FA4),
+(void*)&patch_GTA_SA_2_00_CPathFind__LoadSceneForPathNodes_319FA4, 8
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__ShutDown_321C7E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x321C7E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x321C72),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__ShutDown_321C72, 12
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__StartPlaybackRecordedCar_321E04_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x321E04));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x321DFC),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__StartPlaybackRecordedCar_321DFC, 8
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__RequestRecordingFile_322054_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x322054));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32204C),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__RequestRecordingFile_32204C, 8
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__StopPlaybackRecordedCar_32241A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32241A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32240E),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__StopPlaybackRecordedCar_32240E, 12
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__StopPlaybackWithIndex_322596_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x322596));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32258A),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__StopPlaybackWithIndex_32258A, 12
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__SkipToEndAndStopPlaybackRecordedCar_3234C0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x3234C0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x3234B6),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__SkipToEndAndStopPlaybackRecordedCar_3234B6, 10
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__SaveOrRetrieveDataForThisFrame_323A94_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x323A94));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x323A8C),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__SaveOrRetrieveDataForThisFrame_323A8C, 8
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__RemoveRecordingFile_3242D8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x3242D8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x3242D0),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__RemoveRecordingFile_3242D0, 8
+);
+
+Address_GTA_SA_2_00_CVehicleRecording__RemoveAllRecordingsThatArentUsed_324426_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x324426));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32441A),
+(void*)&patch_GTA_SA_2_00_CVehicleRecording__RemoveAllRecordingsThatArentUsed_32441A, 12
+);
+
+Address_GTA_SA_2_00_CScriptsForBrains__StartOrRequestNewStreamedScriptBrain_32F870 = g_mCalc.GetCurrentVAbyPreferedVA(0x32F870);
+Address_GTA_SA_2_00_CScriptsForBrains__StartOrRequestNewStreamedScriptBrain_32F872_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32F872));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32F868),
+(void*)&patch_GTA_SA_2_00_CScriptsForBrains__StartOrRequestNewStreamedScriptBrain_32F868, 10
+);
+
+Address_GTA_SA_2_00_CScriptsForBrains__RequestAttractorScriptBrainWithThisName_32FC22 = g_mCalc.GetCurrentVAbyPreferedVA(0x32FC22);
+Address_GTA_SA_2_00_CScriptsForBrains__RequestAttractorScriptBrainWithThisName_32FC20_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32FC20));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32FC16),
+(void*)&patch_GTA_SA_2_00_CScriptsForBrains__RequestAttractorScriptBrainWithThisName_32FC16, 10
+);
+
+Address_GTA_SA_2_00_CScriptsForBrains__HasAttractorScriptBrainWithThisNameLoaded_32FD00_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32FD00));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32FCF8),
+(void*)&patch_GTA_SA_2_00_CScriptsForBrains__HasAttractorScriptBrainWithThisNameLoaded_32FCF8, 8
+);
+
+Address_GTA_SA_2_00_CTheScripts__ProcessWaitingForScriptBrainArray_32FEDC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32FEDC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32FED2),
+(void*)&patch_GTA_SA_2_00_CTheScripts__ProcessWaitingForScriptBrainArray_32FED2, 10
+);
+
+Address_GTA_SA_2_00_CTheScripts__ProcessWaitingForScriptBrainArray_32FF82_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32FF82));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32FF78),
+(void*)&patch_GTA_SA_2_00_CTheScripts__ProcessWaitingForScriptBrainArray_32FF78, 10
+);
+
+Address_GTA_SA_2_00_CTheScripts__ProcessWaitingForScriptBrainArray_32FFC2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x32FFC2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x32FFB8),
+(void*)&patch_GTA_SA_2_00_CTheScripts__ProcessWaitingForScriptBrainArray_32FFB8, 10
+);
+
+Address_GTA_SA_2_00_CStreamedScripts__StartNewStreamedScript_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CStreamedScripts__StartNewStreamedScript_335476_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x335476));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x33546A),
+(void*)&patch_GTA_SA_2_00_CStreamedScripts__StartNewStreamedScript_33546A, 12
+);
+
+Address_GTA_SA_2_00_CStreamedScripts__StartNewStreamedScript_191750_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x191750));
+Address_GTA_SA_2_00_CStreamedScripts__StartNewStreamedScript_3354A6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x3354A6));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x33549C),
+(void*)&patch_GTA_SA_2_00_CStreamedScripts__StartNewStreamedScript_33549C, 10
+);
+
+Address_GTA_SA_2_00_CStreamedScripts__GetStreamedScriptWithThisStartAddress_335506_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x335506));
+Address_GTA_SA_2_00_CStreamedScripts__GetStreamedScriptWithThisStartAddress_335504_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x335504));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x3354FC),
+(void*)&patch_GTA_SA_2_00_CStreamedScripts__GetStreamedScriptWithThisStartAddress_3354FC, 8
+);
+
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands2200To2299_339A98_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x339A98));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x339A90),
+(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands2200To2299_339A90, 8
+);
+
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands2200To2299_339ADC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x339ADC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x339AD2),
+(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands2200To2299_339AD2, 10
+);
+
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands2300To2399_191750_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x191750));
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands2300To2399_33B184_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x33B184));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x33B17A),
+(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands2300To2399_33B17A, 10
+);
+
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands2300To2399_18CCAC_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18CCAC));
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands2300To2399_33B1B4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x33B1B4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x33B1AA),
+(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands2300To2399_33B1AA, 10
+);
+
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands1200To1299_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands1200To1299_351236_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x351236));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x35122A),
+(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands1200To1299_35122A, 12
+);
+
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands1200To1299_191750_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x191750));
+Address_GTA_SA_2_00_CRunningScript__ProcessCommands1200To1299_35129E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x35129E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x351294),
+(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands1200To1299_351294, 10
+);
+
+Address_GTA_SA_2_00_CShopping__LoadPrices_35FF90_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x35FF90));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x35FF88),
+(void*)&patch_GTA_SA_2_00_CShopping__LoadPrices_35FF88, 8
+);
+
+Address_GTA_SA_2_00_CTimeInfo__FindOtherTimeModel_384D5A = g_mCalc.GetCurrentVAbyPreferedVA(0x384D5A);
+Address_GTA_SA_2_00_CTimeInfo__FindOtherTimeModel_384D5C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x384D5C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x384D52),
+(void*)&patch_GTA_SA_2_00_CTimeInfo__FindOtherTimeModel_384D52, 10
+);
+
+Address_GTA_SA_2_00_CTimeInfo__FindOtherTimeModel_384D84_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x384D84));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x384D7C),
+(void*)&patch_GTA_SA_2_00_CTimeInfo__FindOtherTimeModel_384D7C, 8
+);
+
+Address_GTA_SA_2_00_CModelInfo__ReInit2dEffects_385A36 = g_mCalc.GetCurrentVAbyPreferedVA(0x385A36);
+Address_GTA_SA_2_00_CModelInfo__ReInit2dEffects_385A38 = g_mCalc.GetCurrentVAbyPreferedVA(0x385A38);
+Address_GTA_SA_2_00_CModelInfo__ReInit2dEffects_385A38_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x385A38));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x385A2E),
+(void*)&patch_GTA_SA_2_00_CModelInfo__ReInit2dEffects_385A2E, 10
+);
+
+Address_GTA_SA_2_00_CModelInfo__GetModelInfo_385D60 = g_mCalc.GetCurrentVAbyPreferedVA(0x385D60);
+Address_GTA_SA_2_00_CModelInfo__GetModelInfo_385D60_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x385D60));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x385D58),
+(void*)&patch_GTA_SA_2_00_CModelInfo__GetModelInfo_385D58, 8
+);
+
+Address_GTA_SA_2_00_CModelInfo__GetModelInfoFromHashKey_385DF8 = g_mCalc.GetCurrentVAbyPreferedVA(0x385DF8);
+Address_GTA_SA_2_00_CModelInfo__GetModelInfoFromHashKey_385DFA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x385DFA));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x385DF0),
+(void*)&patch_GTA_SA_2_00_CModelInfo__GetModelInfoFromHashKey_385DF0, 10
+);
+
+Address_GTA_SA_2_00_CModelInfo__GetModelInfoUInt16_385E40 = g_mCalc.GetCurrentVAbyPreferedVA(0x385E40);
+Address_GTA_SA_2_00_CModelInfo__GetModelInfoUInt16_385E40_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x385E40));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x385E38),
+(void*)&patch_GTA_SA_2_00_CModelInfo__GetModelInfoUInt16_385E38, 8
+);
+
+Address_GTA_SA_2_00_CModelInfo__IsVehicleModelType_3863C4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x3863C4));
+Address_GTA_SA_2_00_CModelInfo__IsVehicleModelType_3863A8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x3863A8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x3863A0),
+(void*)&patch_GTA_SA_2_00_CModelInfo__IsVehicleModelType_3863A0, 8
+);
+
+Address_GTA_SA_2_00_CAnimManager__Shutdown_38DC5E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x38DC5E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x38DC50),
+(void*)&patch_GTA_SA_2_00_CAnimManager__Shutdown_38DC50, 14
+);
+
+Address_GTA_SA_2_00_CAnimManager__Shutdown_38DC70 = g_mCalc.GetCurrentVAbyPreferedVA(0x38DC70);
+Address_GTA_SA_2_00_CAnimManager__Shutdown_38DC70_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x38DC70));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x38DC66),
+(void*)&patch_GTA_SA_2_00_CAnimManager__Shutdown_38DC66, 10
+);
+
+Address_GTA_SA_2_00_CFileLoader__LoadCollisionFile_3EF4BC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x3EF4BC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x3EF4B2),
+(void*)&patch_GTA_SA_2_00_CFileLoader__LoadCollisionFile_3EF4B2, 10
+);
+
+Address_GTA_SA_2_00_InteriorGroup_c__Update_448C88_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x448C88));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x448C80),
+(void*)&patch_GTA_SA_2_00_InteriorGroup_c__Update_448C80, 8
+);
+
+Address_GTA_SA_2_00_InteriorGroup_c__ReferenceAnims_449AA8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x449AA8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x449AA0),
+(void*)&patch_GTA_SA_2_00_InteriorGroup_c__ReferenceAnims_449AA0, 8
+);
+
+Address_GTA_SA_2_00_InteriorGroup_c__Setup_44A044_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x44A044));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x44A03C),
+(void*)&patch_GTA_SA_2_00_InteriorGroup_c__Setup_44A03C, 8
+);
+
+Address_GTA_SA_2_00_CObject___CObject_191750_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x191750));
+Address_GTA_SA_2_00_CObject___CObject_4530D8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4530D8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4530CE),
+(void*)&patch_GTA_SA_2_00_CObject___CObject_4530CE, 10
+);
+
+Address_GTA_SA_2_00_CClothes__RequestMotionGroupAnims_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CClothes__RequestMotionGroupAnims_457F9E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x457F9E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x457F92),
+(void*)&patch_GTA_SA_2_00_CClothes__RequestMotionGroupAnims_457F92, 12
+);
+
+Address_GTA_SA_2_00_CClothes__RequestMotionGroupAnims_457FC4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x457FC4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x457FBA),
+(void*)&patch_GTA_SA_2_00_CClothes__RequestMotionGroupAnims_457FBA, 10
+);
+
+Address_GTA_SA_2_00_CColAccel__startCache_18E9A8_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18E9A8));
+Address_GTA_SA_2_00_CColAccel__startCache_4661B0 = g_mCalc.GetCurrentVAbyPreferedVA(0x4661B0);
+Address_GTA_SA_2_00_CColAccel__startCache_465F88_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x465F88));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x465F7E),
+(void*)&patch_GTA_SA_2_00_CColAccel__startCache_465F7E, 10
+);
+
+Address_GTA_SA_2_00_CColAccel__startCache_465F8E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x465F8E));
+Address_GTA_SA_2_00_CColAccel__startCache_465F9C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x465F9C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x465F92),
+(void*)&patch_GTA_SA_2_00_CColAccel__startCache_465F92, 10
+);
+
+Address_GTA_SA_2_00_CColAccel__startCache_466112 = g_mCalc.GetCurrentVAbyPreferedVA(0x466112);
+Address_GTA_SA_2_00_CColAccel__startCache_466114_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x466114));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46610A),
+(void*)&patch_GTA_SA_2_00_CColAccel__startCache_46610A, 10
+);
+
+Address_GTA_SA_2_00_CColAccel__endCache_4662AC = g_mCalc.GetCurrentVAbyPreferedVA(0x4662AC);
+Address_GTA_SA_2_00_CColAccel__endCache_4662AC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4662AC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4662A4),
+(void*)&patch_GTA_SA_2_00_CColAccel__endCache_4662A4, 8
+);
+
+Address_GTA_SA_2_00_CFileLoader__LoadLevel_18C748_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18C748));
+Address_GTA_SA_2_00_CFileLoader__LoadLevel_466B10_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x466B10));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x466B06),
+(void*)&patch_GTA_SA_2_00_CFileLoader__LoadLevel_466B06, 10
+);
+
+Address_GTA_SA_2_00_CFileLoader__LoadCollisionFileFirstTime_46B968_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46B968));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46B960),
+(void*)&patch_GTA_SA_2_00_CFileLoader__LoadCollisionFileFirstTime_46B960, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__Init2_46BAA8 = g_mCalc.GetCurrentVAbyPreferedVA(0x46BAA8);
+Address_GTA_SA_2_00_CStreaming__Init2_46BAA8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46BAA8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BAA0),
+(void*)&patch_GTA_SA_2_00_CStreaming__Init2_46BAA0, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__Init2_46BC0C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46BC0C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BC04),
+(void*)&patch_GTA_SA_2_00_CStreaming__Init2_46BC04, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__Init2_46BC46_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46BC46));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BC3C),
+(void*)&patch_GTA_SA_2_00_CStreaming__Init2_46BC3C, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C15A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46C15A));
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_19CA38_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19CA38));
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C15E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46C15E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46C150),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C150, 14
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1F2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46C1F2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46C1A2),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1A2, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1E4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46C1E4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46C1B8),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1B8, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_19D20C_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19D20C));
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1CA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46C1CA));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46C1C0),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1C0, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_19CD4C_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19CD4C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46C1CE),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1CE, 10
+);
+
+Address_GTA_SA_2_00_CStreaming__LoadCdDirectory_18D5CC_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18D5CC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46C1DC),
+(void*)&patch_GTA_SA_2_00_CStreaming__LoadCdDirectory_46C1DC, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__Save_487A24_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x487A24));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x487A1C),
+(void*)&patch_GTA_SA_2_00_CStreaming__Save_487A1C, 8
+);
+
+Address_GTA_SA_2_00_CStreaming__Load_487A74 = g_mCalc.GetCurrentVAbyPreferedVA(0x487A74);
+Address_GTA_SA_2_00_CStreaming__Load_487A74_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x487A74));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x487A6C),
+(void*)&patch_GTA_SA_2_00_CStreaming__Load_487A6C, 8
+);
+
+Address_GTA_SA_2_00_CScriptResourceManager__Load_48B7F0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48B7F0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48B7E6),
+(void*)&patch_GTA_SA_2_00_CScriptResourceManager__Load_48B7E6, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__Save_48E3A4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48E3A4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48E39A),
+(void*)&patch_GTA_SA_2_00_CIplStore__Save_48E39A, 10
+);
+
+Address_GTA_SA_2_00_CIplStore__Save_48E3BC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48E3BC));
+Address_GTA_SA_2_00_CIplStore__Save_48E3F8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48E3F8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48E3EE),
+(void*)&patch_GTA_SA_2_00_CIplStore__Save_48E3EE, 10
+);
+
+Address_GTA_SA_2_00_CPed___CPed_191750_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x191750));
+Address_GTA_SA_2_00_CPed___CPed_49F66C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x49F66C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x49F662),
+(void*)&patch_GTA_SA_2_00_CPed___CPed_49F662, 10
+);
+
+Address_GTA_SA_2_00_CPlayerPed__ProcessAnimGroups_4C6054_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4C6054));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4C604C),
+(void*)&patch_GTA_SA_2_00_CPlayerPed__ProcessAnimGroups_4C604C, 8
+);
+
+Address_GTA_SA_2_00_CPlayerPed__ProcessAnimGroups_4C6140_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4C6140));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4C6138),
+(void*)&patch_GTA_SA_2_00_CPlayerPed__ProcessAnimGroups_4C6138, 8
+);
+
+Address_GTA_SA_2_00_CTaskComplexPlayHandSignalAnim___CTaskComplexPlayHandSignalAnim_18CCAC_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x18CCAC));
+Address_GTA_SA_2_00_CTaskComplexPlayHandSignalAnim___CTaskComplexPlayHandSignalAnim_4D79B8_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4D79B8));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4D79AE),
+(void*)&patch_GTA_SA_2_00_CTaskComplexPlayHandSignalAnim___CTaskComplexPlayHandSignalAnim_4D79AE, 10
+);
+
+Address_GTA_SA_2_00_CTaskComplexPlayHandSignalAnim__ControlSubTask_4D7D18 = g_mCalc.GetCurrentVAbyPreferedVA(0x4D7D18);
+Address_GTA_SA_2_00_CTaskComplexPlayHandSignalAnim__ControlSubTask_4D7D1A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4D7D1A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4D7D0E),
+(void*)&patch_GTA_SA_2_00_CTaskComplexPlayHandSignalAnim__ControlSubTask_4D7D0E, 12
+);
+
+Address_GTA_SA_2_00_CTaskSimpleFight__GetAvailableComboSet_4D9268_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4D9268));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4D9260),
+(void*)&patch_GTA_SA_2_00_CTaskSimpleFight__GetAvailableComboSet_4D9260, 8
+);
+
+Address_GTA_SA_2_00_CTaskSimpleGangDriveBy__ManageAnim_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskSimpleGangDriveBy__ManageAnim_4E4616_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4E4616));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4E460A),
+(void*)&patch_GTA_SA_2_00_CTaskSimpleGangDriveBy__ManageAnim_4E460A, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexSitDownThenIdleThenStandUp__ControlSubTask_4ECA70_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4ECA70));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4ECA68),
+(void*)&patch_GTA_SA_2_00_CTaskComplexSitDownThenIdleThenStandUp__ControlSubTask_4ECA68, 8
+);
+
+Address_GTA_SA_2_00_CTaskComplexSunbathe__CreateFirstSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexSunbathe__CreateFirstSubTask_4ED98E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4ED98E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4ED982),
+(void*)&patch_GTA_SA_2_00_CTaskComplexSunbathe__CreateFirstSubTask_4ED982, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexSunbathe__CreateFirstSubTask_4ED9A2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4ED9A2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4ED996),
+(void*)&patch_GTA_SA_2_00_CTaskComplexSunbathe__CreateFirstSubTask_4ED996, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexSunbathe__ControlSubTask_4EDAFC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4EDAFC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4EDAF4),
+(void*)&patch_GTA_SA_2_00_CTaskComplexSunbathe__ControlSubTask_4EDAF4, 8
+);
+
+Address_GTA_SA_2_00_CTaskComplexSunbathe__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexSunbathe__ControlSubTask_4EDB7A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x4EDB7A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x4EDB6E),
+(void*)&patch_GTA_SA_2_00_CTaskComplexSunbathe__ControlSubTask_4EDB6E, 12
+);
+
+Address_GTA_SA_2_00_CCarEnterExit__SetAnimOffsetForEnterOrExitVehicle_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CCarEnterExit__SetAnimOffsetForEnterOrExitVehicle_5091EA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5091EA));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5091DE),
+(void*)&patch_GTA_SA_2_00_CCarEnterExit__SetAnimOffsetForEnterOrExitVehicle_5091DE, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexGangLeader__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexGangLeader__ControlSubTask_5155C2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5155C2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5155B6),
+(void*)&patch_GTA_SA_2_00_CTaskComplexGangLeader__ControlSubTask_5155B6, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexGangFollower__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexGangFollower__ControlSubTask_517002_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x517002));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x516FF6),
+(void*)&patch_GTA_SA_2_00_CTaskComplexGangFollower__ControlSubTask_516FF6, 12
+);
+
+Address_GTA_SA_2_00_CTaskGangHassleVehicle__ControlSubTask_518A74_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x518A74));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x518A6C),
+(void*)&patch_GTA_SA_2_00_CTaskGangHassleVehicle__ControlSubTask_518A6C, 8
+);
+
+Address_GTA_SA_2_00_CTaskGangHasslePed__ControlSubTask_5196B0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5196B0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5196A8),
+(void*)&patch_GTA_SA_2_00_CTaskGangHasslePed__ControlSubTask_5196A8, 8
+);
+
+Address_GTA_SA_2_00_CTaskComplexStareAtPed__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexStareAtPed__ControlSubTask_519CAE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x519CAE));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x519CA2),
+(void*)&patch_GTA_SA_2_00_CTaskComplexStareAtPed__ControlSubTask_519CA2, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexSignalAtPed__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexSignalAtPed__ControlSubTask_51A206_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x51A206));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x51A1FA),
+(void*)&patch_GTA_SA_2_00_CTaskComplexSignalAtPed__ControlSubTask_51A1FA, 12
+);
+
+Address_GTA_SA_2_00_CTaskGoToVehicleAndLean__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskGoToVehicleAndLean__ControlSubTask_51A8EA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x51A8EA));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x51A8DE),
+(void*)&patch_GTA_SA_2_00_CTaskGoToVehicleAndLean__ControlSubTask_51A8DE, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexGangJoinRespond__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexGangJoinRespond__ControlSubTask_51B38E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x51B38E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x51B382),
+(void*)&patch_GTA_SA_2_00_CTaskComplexGangJoinRespond__ControlSubTask_51B382, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexPartner__StreamRequiredAnims_534AF0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x534AF0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x534AE8),
+(void*)&patch_GTA_SA_2_00_CTaskComplexPartner__StreamRequiredAnims_534AE8, 8
+);
+
+Address_GTA_SA_2_00_CTaskComplexPartnerDeal__StreamRequiredAnims_534CB2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x534CB2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x534CA6),
+(void*)&patch_GTA_SA_2_00_CTaskComplexPartnerDeal__StreamRequiredAnims_534CA6, 12
+);
+
+Address_GTA_SA_2_00_CTaskComplexPartnerGreet__StreamRequiredAnims_534ED2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x534ED2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x534EC6),
+(void*)&patch_GTA_SA_2_00_CTaskComplexPartnerGreet__StreamRequiredAnims_534EC6, 12
+);
+
+Address_GTA_SA_2_00_CTaskSimplePlayerOnFoot__PlayIdleAnimations_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskSimplePlayerOnFoot__PlayIdleAnimations_538D1E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x538D1E));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x538D12),
+(void*)&patch_GTA_SA_2_00_CTaskSimplePlayerOnFoot__PlayIdleAnimations_538D12, 12
+);
+
+Address_GTA_SA_2_00_CTaskSimplePlayerOnFoot__PlayIdleAnimations_19BC1C_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19BC1C));
+Address_GTA_SA_2_00_CTaskSimplePlayerOnFoot__PlayIdleAnimations_538E58_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x538E58));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x538E4E),
+(void*)&patch_GTA_SA_2_00_CTaskSimplePlayerOnFoot__PlayIdleAnimations_538E4E, 10
+);
+
+Address_GTA_SA_2_00_CTaskSimpleSwim__ProcessSwimAnims_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskSimpleSwim__ProcessSwimAnims_53B48A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x53B48A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x53B47E),
+(void*)&patch_GTA_SA_2_00_CTaskSimpleSwim__ProcessSwimAnims_53B47E, 12
+);
+
+Address_GTA_SA_2_00_CTaskSimpleHoldEntity__StartAnim_541E8C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x541E8C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x541E84),
+(void*)&patch_GTA_SA_2_00_CTaskSimpleHoldEntity__StartAnim_541E84, 8
+);
+
+Address_GTA_SA_2_00_CTaskComplexGoPickUpEntity__ControlSubTask_192964_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x192964));
+Address_GTA_SA_2_00_CTaskComplexGoPickUpEntity__ControlSubTask_542BFA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x542BFA));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x542BEE),
+(void*)&patch_GTA_SA_2_00_CTaskComplexGoPickUpEntity__ControlSubTask_542BEE, 12
+);
+

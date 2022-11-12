@@ -1,0 +1,1122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include">
+      <UniqueIdentifier>{2264812f-dcd0-4b84-94df-ae101b53f837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include">
+      <UniqueIdentifier>{a50cacc4-c967-401f-b297-07bbbc12d052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\MemoryScanner">
+      <UniqueIdentifier>{c9a2f64d-a8d6-4a74-b10d-eede501369ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MemoryScanner">
+      <UniqueIdentifier>{fbe5d27e-589d-4614-8c80-aaa634d35c39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\MemoryAccess">
+      <UniqueIdentifier>{45f808d3-dfb6-4b31-bada-8bbf2cdd9228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MemoryAccess">
+      <UniqueIdentifier>{a86e3cc0-e745-4eda-ac66-64a0df784545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\Packing">
+      <UniqueIdentifier>{37406917-d31d-44e6-afb6-d6644c4a7779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\Packing">
+      <UniqueIdentifier>{eec830ba-ad1c-4673-a234-ebc39abf57ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\Array">
+      <UniqueIdentifier>{67d4559a-4c87-4d3f-b0ff-e7787ac41bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster">
+      <UniqueIdentifier>{b18e1dde-5a04-4844-aafb-41142eae1484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster">
+      <UniqueIdentifier>{97a60010-79fd-462c-a068-ccb97df2d217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\MemoryPermission">
+      <UniqueIdentifier>{9019d903-e985-46d4-b041-68268b4ca8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\KeyCheck">
+      <UniqueIdentifier>{51d1b7d7-580a-47d4-a6a0-ca7877f3795a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\lz4">
+      <UniqueIdentifier>{bf2aaece-aeae-4549-9e6e-e06131e4bc5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\Hashing">
+      <UniqueIdentifier>{db7aa113-b19e-4236-960d-fc16d4c7d637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\KeyCheck">
+      <UniqueIdentifier>{f3edc209-50d2-438d-bc70-7a000d47d2a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\lz4">
+      <UniqueIdentifier>{0902a290-2071-4fe6-a4fa-24bdeb02fef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\ForOtherProjects">
+      <UniqueIdentifier>{e6b1b37b-a36a-4f44-ab69-342a421d1592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\URL">
+      <UniqueIdentifier>{f095fccc-5fb9-47ed-83b5-16bcabdbe6db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\URL">
+      <UniqueIdentifier>{49c3e135-4c5f-4e5c-a377-219a1ea26024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\ForOtherProjects\FLA_not_required">
+      <UniqueIdentifier>{3b4f5c4e-ed6f-4ad0-afc7-43e51ba52ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\ForOtherProjects\FLA_required">
+      <UniqueIdentifier>{2ec30f47-1eea-4649-afef-3acf89eff7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\Library">
+      <UniqueIdentifier>{6cd4c6be-527f-4566-a8b3-f78b4ef533b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\Library">
+      <UniqueIdentifier>{376224b4-00eb-48d6-bc98-d270e979a124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\GameStructures">
+      <UniqueIdentifier>{95410c84-59a2-418d-967c-eeb1157d29db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\GameStructures">
+      <UniqueIdentifier>{e89dbe6f-1693-4a38-a988-0ec046d4cc19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\Modules">
+      <UniqueIdentifier>{ce2f1139-90be-49d6-b14e-72e1a0979ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\Modules">
+      <UniqueIdentifier>{c6c3bcea-0161-443b-9a55-d2535569159c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MemoryAddressCalculator">
+      <UniqueIdentifier>{c340bd61-81a3-42c1-b099-dc6eef7ceb4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\MemoryAddressCalculator">
+      <UniqueIdentifier>{052156ac-2aa0-46d3-8a8c-a0db022c0b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\Core">
+      <UniqueIdentifier>{f282e812-26c8-4705-80da-4b126debfe7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\Core">
+      <UniqueIdentifier>{96a6e8c3-7654-4618-9af9-00e98f173cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\Android">
+      <UniqueIdentifier>{0191596b-fb54-401b-8d10-ded85ae91ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\ForOtherProjects\Common">
+      <UniqueIdentifier>{0b961d00-b864-4b22-9c67-8b2001deec76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\CPU">
+      <UniqueIdentifier>{4b3c373c-80e6-44fc-96a6-d8dc9b867de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\LanguageTest">
+      <UniqueIdentifier>{6e519d7b-4867-461e-9dc9-63be3ae621e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\Structure">
+      <UniqueIdentifier>{c9517710-cbf8-470f-b9bf-e590423492ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games">
+      <UniqueIdentifier>{b5b9ac32-a57d-41e2-a82b-b6f0ee10b7a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games">
+      <UniqueIdentifier>{727fbc60-6aa0-4d52-a18a-9e90308c3749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\IniReader">
+      <UniqueIdentifier>{fdd875e4-7272-4583-adea-b4346fcc4fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\IniReader">
+      <UniqueIdentifier>{4bc3dffd-a9d6-4628-bea6-c9e175d22ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MemoryPermission">
+      <UniqueIdentifier>{a07be2c0-8482-4a23-8818-9ad135d9f66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MultiPlatformSupport">
+      <UniqueIdentifier>{59d1f701-27d2-433a-bd7b-8ee5f2c4b572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\Core\Configuration">
+      <UniqueIdentifier>{0ab4efcb-0553-401c-a15c-ecb73853d89c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\Core\Configuration">
+      <UniqueIdentifier>{fe01052b-0616-4a47-87be-e8cf1f1ee1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\IniReader\inih">
+      <UniqueIdentifier>{e0e0e3ff-96a3-415c-af19-8b54114b99bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\IniReader\inih">
+      <UniqueIdentifier>{66e49be0-0eb0-4185-a056-37b9518e1689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\IniReader\inih\cpp">
+      <UniqueIdentifier>{1e51a923-66a2-4bce-961f-32083933b681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\IniReader\inih\cpp">
+      <UniqueIdentifier>{b295ad0a-7697-43cf-a486-622b6ec53235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\DynamicTypes">
+      <UniqueIdentifier>{e15232d4-b87f-4fe1-af9e-617c1bc4e549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\XML">
+      <UniqueIdentifier>{cea23f5a-3198-4cc7-9bf3-b6dc2c818422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\XML\RapidXML">
+      <UniqueIdentifier>{fca1d151-ee17-433c-b39b-41f8828015a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\MultiPlatformSupport">
+      <UniqueIdentifier>{9c309b7d-ee15-4337-8177-44200a233811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\Rijndael">
+      <UniqueIdentifier>{f4faeec5-4298-428c-8a6f-f4380e58b5d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\Rijndael">
+      <UniqueIdentifier>{2df17b22-463c-4d89-8909-2a027e50a177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\Exception">
+      <UniqueIdentifier>{9a3555df-43bb-4ff0-9846-638e74b0570f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\GameStructures\ForOtherProjects">
+      <UniqueIdentifier>{5fb65a55-2956-475c-ba02-c008b12309a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\GameStructures\ForOtherProjects\FLA_not_required">
+      <UniqueIdentifier>{27b54f2a-8a7f-4bbf-be47-f262ea96b64f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.h">
+      <Filter>Header Files\fastman92 include\MemoryPermission</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryAccess\CMemoryAccess.h">
+      <Filter>Header Files\fastman92 include\MemoryAccess</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryAccess\CMemoryAccessWithinCurrentProcess.h">
+      <Filter>Header Files\fastman92 include\MemoryAccess</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Array\countof.h">
+      <Filter>Header Files\fastman92 include\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\PathStructures.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\KeyCheck\CKeyEncoder.h">
+      <Filter>Header Files\fastman92 include\KeyCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\KeyCheck\ComputerHashFunctions.h">
+      <Filter>Header Files\fastman92 include\KeyCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryScanner\CMemoryScanner.h">
+      <Filter>Header Files\fastman92 include\MemoryScanner</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Packing\GTAdataPackingEncryptionDetailsCommon.h">
+      <Filter>Header Files\fastman92 include\Packing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Packing\GTAdataPackingEncryptionDetailsCommonSpecial.h">
+      <Filter>Header Files\fastman92 include\Packing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\lz4\lib\lz4.h">
+      <Filter>Header Files\fastman92 include\lz4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\lz4\lib\lz4hc.h">
+      <Filter>Header Files\fastman92 include\lz4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Assertions.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\CBox2D.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\CVector.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\CVector2D.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\enumMemberNamePair.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\EnumOperators.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\fileIO.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\BitwiseOperation.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Library\Library.h">
+      <Filter>Header Files\fastman92 include\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\URL\url.h">
+      <Filter>Header Files\fastman92 include\URL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\ForOtherProjects\FLA_not_required\Main.h">
+      <Filter>Header Files\fastman92 limit adjuster\ForOtherProjects\FLA_not_required</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\ForOtherProjects\FLA_not_required\IDaccess.h">
+      <Filter>Header Files\fastman92 limit adjuster\ForOtherProjects\FLA_not_required</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\ForOtherProjects\FLA_required\Exports.h">
+      <Filter>Header Files\fastman92 limit adjuster\ForOtherProjects\FLA_required</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CCodeMover.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CGenericLogStorage.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CLimitAdjusterKeyCheck.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CPatch.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CPUmath.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\eGameVersion.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\eX86registerNum.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\FormattedOutput.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\GetObjectMadeOfString.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\GTASA_CRC32.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\LimitAdjuster.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\MemoryAllocation.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\ProjectConstants.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\StringFunctions.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\tLimitDefinition.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CarGeneratorsLimit.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CargrpLimit.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CHashStringLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CheatStringLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CoordinateMover.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CTest.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CThePluginPatches.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CUpdateChecker.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CVehicleAudioLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\Debugging.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\DebugOutput.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\Directory limits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\DynamicLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\ErrorReporting.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\FileIDlimit.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\FileLoader_LoadLevel_hooks.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\FileTypeManager.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\FXTloader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\GlobalExceptionHandler.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\GTASA_ID_access_functions.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\GTASA_ID_access_patches.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\GTASA_int32_base_movsx_patches.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\HandlingCfgLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\IDEsectionLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\IMGlimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\IPLsectionLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\IslandLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\MapLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\NotApropIDrangeLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\Options.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\OtherLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\PedgrpLimit.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\PlayerLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\RadarBlipSpriteFilenameLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\RendererLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\Restarts.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\RoadBloxBetterLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\RPFloader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\SaveOfVariableLength.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\SCMlimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\ShadowLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\SpecialLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\StreamingLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\StructureExtension.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\TrainTypeCarriagesLoader.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\VehicleSpecialFeatures.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\VehicleUpgradeLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\VisibilityLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\WaterLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\WeaponLimits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\WindowedMode.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\tHashPair.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\InlinedCodeRemoving.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Android\preferedUnorderedMap.h">
+      <Filter>Header Files\fastman92 include\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\ForOtherProjects\Common\CdDirectory.h">
+      <Filter>Header Files\fastman92 limit adjuster\ForOtherProjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\ForOtherProjects\Common\CValueExtension.h">
+      <Filter>Header Files\fastman92 limit adjuster\ForOtherProjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\ForOtherProjects\Common\common.h">
+      <Filter>Header Files\fastman92 limit adjuster\ForOtherProjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\LoadingScreenFontHooks.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CLimitAdjusterModule.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\Credits.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CAnimGroup.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CBaseModelInfo.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CCollisionFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CColModel.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CCoronas.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CEntity.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CFileID.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CFileMgr.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CGenericGameStorage.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CIplFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CKeyGen.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CModelInfo.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CollisionLink.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CPed.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CPointLights.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CPool.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CPtrNodeDoubleLink.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CPtrNodeSingleLink.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CRegisteredCorona.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CRunningScript.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CSceneEdit.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CSphere.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CStreaming.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CStreamingInfo.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CTimer.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\cTransmission.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CUnlimitedStore.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CVehicle.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CVehicleRecordingFileInfo.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\eIplFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\eModelID.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\ePedType.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\functions.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\HandlingExtendedStructs.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\IDstructures.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\Renderware.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\RwStream.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\RwV3D.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\tHandlingData.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\tTransmissionGear.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\TxdDef.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\LanguageTest\Identifiers.h">
+      <Filter>Header Files\fastman92 include\LanguageTest</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\CPU\x86.h">
+      <Filter>Header Files\fastman92 include\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CReference.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\DynamicAssert.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CText.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CCamera.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CPad.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\IniReader\CIniReader.h">
+      <Filter>Header Files\fastman92 include\IniReader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\eVehicleFlags.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\eVehHandlingID.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\eEntityType.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\ModelSpecialFeatures.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\Configuration\Configuration.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\Configuration\XMLexcelFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\Configuration\HTMLfile.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\Configuration\CSVfile.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\StrLexStuff.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\CEasterEggs.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\IniReader\inih\cpp\INIReader.h">
+      <Filter>Header Files\fastman92 include\IniReader\inih\cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\IniReader\inih\ini.h">
+      <Filter>Header Files\fastman92 include\IniReader\inih</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\COnlineContent.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\MemoryCall.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CFont.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\GameText.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\ProcessEntryPointCodeExecution.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\DynamicTypes\DynamicStructure.h">
+      <Filter>Header Files\fastman92 include\DynamicTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\GameSystem.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\XML\RapidXML\rapidxml.hpp">
+      <Filter>Header Files\fastman92 include\XML\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\XML\RapidXML\rapidxml_iterators.hpp">
+      <Filter>Header Files\fastman92 include\XML\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\XML\RapidXML\rapidxml_print.hpp">
+      <Filter>Header Files\fastman92 include\XML\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\XML\RapidXML\rapidxml_utils.hpp">
+      <Filter>Header Files\fastman92 include\XML\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\DynamicTypes\DynamicEnumeration.h">
+      <Filter>Header Files\fastman92 include\DynamicTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\MultiPlatformSupport\PlatformGeneralisation.h">
+      <Filter>Header Files\fastman92 include\MultiPlatformSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\eGame.h">
+      <Filter>Header Files\fastman92 include</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\CUserInterface.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\Rijndael\Rijndael.h">
+      <Filter>Header Files\fastman92 include\Rijndael</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\UsefulMacros.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CWorld.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Modules\BringBackTextureArchives.h">
+      <Filter>Header Files\fastman92 limit adjuster\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\TextureDatabase.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\Rockstar Games\CMemoryMgr.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAccess\CMemoryAccessWithinCurrentProcess.cpp">
+      <Filter>Source Files\fastman92 include\MemoryAccess</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAccess\CMemoryAccess.cpp">
+      <Filter>Source Files\fastman92 include\MemoryAccess</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.cpp">
+      <Filter>Source Files\fastman92 include\MemoryPermission</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Packing\Packing.cpp">
+      <Filter>Source Files\fastman92 include\Packing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Packing\GTAdataPacking.cpp">
+      <Filter>Source Files\fastman92 include\Packing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Packing\GTAdataPackingEncryptionDetailsInclude.cpp">
+      <Filter>Source Files\fastman92 include\Packing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryScanner\CMemoryScanner.cpp">
+      <Filter>Source Files\fastman92 include\MemoryScanner</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\KeyCheck\ComputerHashFunctions.cpp">
+      <Filter>Source Files\fastman92 include\KeyCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\lz4\lib\lz4.c">
+      <Filter>Source Files\fastman92 include\lz4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\lz4\lib\lz4hc.c">
+      <Filter>Source Files\fastman92 include\lz4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\fileIO.cpp">
+      <Filter>Source Files\fastman92 include</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Hashing\GTAIV_CRC32.cpp">
+      <Filter>Source Files\fastman92 include\Hashing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\KeyCheck\CKeyEncoder.cpp">
+      <Filter>Source Files\fastman92 include\KeyCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\URL\url.cpp">
+      <Filter>Source Files\fastman92 include\URL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Library\Library.cpp">
+      <Filter>Source Files\fastman92 include\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\ForOtherProjects\FLA_not_required\Main.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\ForOtherProjects\FLA_not_required</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\ForOtherProjects\FLA_not_required\IDaccess.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\ForOtherProjects\FLA_not_required</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAddressCalculator\CMemoryAddressCalculator.cpp">
+      <Filter>Source Files\fastman92 include\MemoryAddressCalculator</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CCodeMover.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CGenericLogStorage.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CLimitAdjusterKeyCheck.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CPatch.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CPUmath.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\dllmain.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\eGameVersion.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\Exports.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\FormattedOutput.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\GTASA_CRC32.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\LimitAdjuster.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CarGeneratorsLimit.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CargrpLimit.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CHashStringLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CheatStringLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CoordinateMover.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CTest.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CThePluginPatches.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CUpdateChecker.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CVehicleAudioLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\Debugging.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\DebugOutput.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\Directory limits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\DynamicLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\ErrorReporting.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\FileIDlimit.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\FileLoader_LoadLevel_hooks.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\FileTypeManager.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\FXTloader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\GlobalExceptionHandler.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\HandlingCfgLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\IDEsectionLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\IMGlimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\IPLsectionLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\IslandLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\MapLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\NotApropIDrangeLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\Options.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\OtherLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\PedgrpLimit.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\RadarBlipSpriteFilenameLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\RendererLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\Restarts.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\RoadBloxBetterLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\RPFloader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\SaveOfVariableLength.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\SCMlimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\ShadowLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\SpecialLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\StreamingLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\StructureExtension.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\TrainTypeCarriagesLoader.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\VehicleSpecialFeatures.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\VehicleUpgradeLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\VisibilityLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\WaterLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\WeaponLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\WindowedMode.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\InlinedCodeRemoving.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\LoadingScreenFontHooks.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\Credits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CCoronas.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CEntity.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CFileMgr.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CGenericGameStorage.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CKeyGen.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CModelInfo.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CPointLights.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CRunningScript.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CStreaming.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CTimer.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\functions.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\HandlingExtendedStructs.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\DynamicAssert.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\MemoryAllocation.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CLimitAdjusterModule.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CText.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CSceneEdit.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CCamera.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CPad.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\IniReader\CIniReader.cpp">
+      <Filter>Source Files\fastman92 include\IniReader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MultiPlatformSupport\PreprocessorConstantTest.cpp">
+      <Filter>Source Files\fastman92 include\MultiPlatformSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\ModelSpecialFeatures.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\Configuration\Configuration.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\Configuration\XMLexcelFile.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\Configuration\HTMLfile.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\Configuration\CSVfile.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\IniReader\inih\cpp\INIReader.cpp">
+      <Filter>Source Files\fastman92 include\IniReader\inih\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\IniReader\inih\ini.c">
+      <Filter>Source Files\fastman92 include\IniReader\inih</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\CEasterEggs.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\COnlineContent.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CFont.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\GameText.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\ProcessEntryPointCodeExecution.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\DynamicTypes\DynamicStructure.cpp">
+      <Filter>Header Files\fastman92 include\DynamicTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\GameSystem.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\eGame.cpp">
+      <Filter>Source Files\fastman92 include</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\ProjectConstants.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\CUserInterface.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Rijndael\Rijndael.cpp">
+      <Filter>Source Files\fastman92 include\Rijndael</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CWorld.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\BringBackTextureArchives.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\Renderware.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\TextureDatabase.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\ExecutableCode.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\RwStream.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\Rockstar Games\CMemoryMgr.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(FASTMAN92_INCLUDE)\Info.txt" />
+  </ItemGroup>
+</Project>

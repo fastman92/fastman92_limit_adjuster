@@ -1,0 +1,153 @@
+Address_GTA_SA_2_00_CWaterLevel__WaterLevelInitialise_593308_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593308));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5932FE),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__WaterLevelInitialise_5932FE, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593CBC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593CBC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x593CB4),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593CB4, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593DAC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593DAC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x593DA2),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593DA2, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593EB2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593EB2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x593EA8),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593EA8, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593D7C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593D7C));
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593FD0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593FD0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x593FC8),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593FC8, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593D60_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593D60));
+Address_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593FDE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x593FDE));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x593FD2),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FillQuadsAndTrianglesList_593FD2, 12
+);
+
+Address_GTA_SA_2_00_CWaterLevel__AddToQuadsAndTrianglesList_59431C = g_mCalc.GetCurrentVAbyPreferedVA(0x59431C);
+Address_GTA_SA_2_00_CWaterLevel__AddToQuadsAndTrianglesList_594322_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x594322));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x594314),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__AddToQuadsAndTrianglesList_594314, 14
+);
+
+Address_GTA_SA_2_00_CWaterLevel__MarkQuadsAndPolysToBeRendered_5943CA = g_mCalc.GetCurrentVAbyPreferedVA(0x5943CA);
+Address_GTA_SA_2_00_CWaterLevel__MarkQuadsAndPolysToBeRendered_5943CE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5943CE));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5943C2),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__MarkQuadsAndPolysToBeRendered_5943C2, 12
+);
+
+Address_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_5958B6_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5958B6));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5958AC),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_5958AC, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_595900_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x595900));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5958F6),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_5958F6, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_595930 = g_mCalc.GetCurrentVAbyPreferedVA(0x595930);
+Address_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_595934_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x595934));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x595928),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__GetWaterLevelNoWaves_595928, 12
+);
+
+Address_GTA_SA_2_00_CWaterLevel__TestLineAgainstWater_5960D2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5960D2));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5960C6),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__TestLineAgainstWater_5960C6, 12
+);
+
+Address_GTA_SA_2_00_CWaterLevel__TestLineAgainstWater_596222_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x596222));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x596218),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__TestLineAgainstWater_596218, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__TestLineAgainstWater_596252_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x596252));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x596248),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__TestLineAgainstWater_596248, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__ScanThroughBlocks_5966B0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5966B0));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5966A8),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__ScanThroughBlocks_5966A8, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FindNearestWaterAndItsFlow_59677C = g_mCalc.GetCurrentVAbyPreferedVA(0x59677C);
+Address_GTA_SA_2_00_CWaterLevel__FindNearestWaterAndItsFlow_59677C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x59677C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x596774),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FindNearestWaterAndItsFlow_596774, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__FindNearestWaterAndItsFlow_5967A4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5967A4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x59679C),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__FindNearestWaterAndItsFlow_59679C, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderSeaBedSegment_596CBC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x596CBC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x596CB4),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderSeaBedSegment_596CB4, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderDetailedSeaBedSegment_596E7A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x596E7A));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x596E6E),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderDetailedSeaBedSegment_596E6E, 12
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_597232_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x597232));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x597228),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderWater_597228, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_5972BC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5972BC));
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_597286_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x597286));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x59727C),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderWater_59727C, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_597AAC = g_mCalc.GetCurrentVAbyPreferedVA(0x597AAC);
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_5972D4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5972D4));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x5972CA),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderWater_5972CA, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_5973B2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5973B2));
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_597338_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x597338));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x597330),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderWater_597330, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_597920 = g_mCalc.GetCurrentVAbyPreferedVA(0x597920);
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_597920_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x597920));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x597918),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderWater_597918, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_5979F4_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5979F4));
+Address_GTA_SA_2_00_CWaterLevel__RenderWater_59793C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x59793C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x597934),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__RenderWater_597934, 8
+);
+
+Address_GTA_SA_2_00_CWaterLevel__BlockHit_59866A_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x59866A));
+Address_GTA_SA_2_00_CWaterLevel__BlockHit_59864C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x59864C));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x598642),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__BlockHit_598642, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__BlockHit_598678_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x598678));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x59866E),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__BlockHit_59866E, 10
+);
+
+Address_GTA_SA_2_00_CWaterLevel__BlockHit_5986B0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x5986B0));
+Address_GTA_SA_2_00_CWaterLevel__BlockHit_598684_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x598684));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x59867A),
+(void*)&patch_GTA_SA_2_00_CWaterLevel__BlockHit_59867A, 10
+);
+

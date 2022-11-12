@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include">
+      <UniqueIdentifier>{731228da-1c48-4f1c-8b4d-19eb73183bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include">
+      <UniqueIdentifier>{99fb7f15-6427-470c-b807-821dd7ed87fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 plugin loader">
+      <UniqueIdentifier>{1f7600b5-797e-4c55-8875-1aa6a2124e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 plugin loader">
+      <UniqueIdentifier>{9e3ad1c6-f5ff-4225-a504-8ce8ea453bd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 plugin loader\ForOtherProjects">
+      <UniqueIdentifier>{d3e7372a-d71f-4ec1-a4c8-c28dfb33ec6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 plugin loader\ForOtherProjects">
+      <UniqueIdentifier>{7c29a4f6-6523-461f-bfe3-b39fd3bb7680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster">
+      <UniqueIdentifier>{e61036e3-5569-496b-8645-41ad0ce5285b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\Core">
+      <UniqueIdentifier>{37672987-d2d8-45dd-aa20-7d188aae83e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MemoryPermission">
+      <UniqueIdentifier>{3886e048-44df-40f8-985d-16304d4b57d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\MemoryPermission">
+      <UniqueIdentifier>{38f9e41d-d7f4-43f3-9651-9820d9bf07c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\MemoryAddressCalculator">
+      <UniqueIdentifier>{40293975-415f-414c-b007-966dbfd2e0a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Loader.cpp">
+      <Filter>Source Files\fastman92 plugin loader</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files\fastman92 plugin loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files\fastman92 plugin loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\fastman92 limit adjuster\Source files\Core\CPatch.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\fastman92 limit adjuster\Source files\Core\MemoryAllocation.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\fileIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAddressCalculator\CMemoryAddressCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectConstants.cpp">
+      <Filter>Source Files\fastman92 plugin loader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Loader.h">
+      <Filter>Header Files\fastman92 plugin loader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForOtherProjects\Exports.h">
+      <Filter>Header Files\fastman92 plugin loader\ForOtherProjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files\fastman92 plugin loader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\fileIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

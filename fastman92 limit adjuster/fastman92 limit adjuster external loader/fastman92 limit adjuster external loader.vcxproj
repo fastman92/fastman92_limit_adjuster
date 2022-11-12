@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 1. ProjectConfigurations -->
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <!-- Import sheet related to different solution platforms in Visual Studio -->
+  <Import Project="$(FASTMAN92_INCLUDE)\MultiPlatformSupport\PropertySheet.props" />
+  <!-- 2. PropertyGroup Globals -->
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A3FE14EE-A705-449C-AB06-6A904F0AF392}</ProjectGuid>
+    <RootNamespace>fastman92limitAdjusterExternalLoader</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals" Condition="'$(SolutionPlatformSystem)'=='WIN'">
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals" Condition="'$(SolutionPlatformSystem)'=='ANDROID'">
+    <Keyword>Android</Keyword>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <!-- 3. PropertyGroup Configuration -->
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)'!='Debug'">false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(SolutionPlatformSystem)'=='ANDROID'" Label="Configuration">
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(SolutionPlatform)'=='WIN_X86'" Label="Configuration">
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(SolutionPlatform)'=='WIN_X64'" Label="Configuration">
+    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+  </PropertyGroup>
+  <!-- 4. Other configuration -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <IncludePath>$(IncludePath);$(FASTMAN92_INCLUDE)</IncludePath>
+    <TargetName>$fastman92limitAdjusterExternalLoader</TargetName>
+    <OutDir>$(SolutionDir)Output\$(Configuration)\$(SolutionPlatform)\</OutDir>
+    <IntDir>Intermediate\$(SolutionPlatform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(SolutionPlatformSystem)'=='WIN'">
+    <TargetExt>.asi</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(SolutionPlatformSystem)'=='ANDROID'">
+    <TargetName>libplugin_fastman92LimitAdjusterExternalLoader_$(SolutionPlatform)</TargetName>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <!-- 5. Itemdefinition groups -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);$(MultiPlatformSupportCommonPreprocessorDefinitions)</PreprocessorDefinitions>
+      <Cpp0xSupport>true</Cpp0xSupport>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization Condition="'$(Configuration)'=='Debug'">Disabled</Optimization>
+      <Optimization Condition="'$(Configuration)'!='Debug'">Full</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <CppLanguageStandard Condition="'$(SolutionPlatformSystem)'=='ANDROID'">gnu++11</CppLanguageStandard>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)'!='Debug'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <ClCompile Condition="'$(SolutionPlatformSystem)'=='ANDROID'">
+      <AdditionalOptions>$(AndroidCompilerAdditionalOptions)</AdditionalOptions>
+      <DebugInformationFormat>FullDebug</DebugInformationFormat>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
+    </ClCompile>
+    <Link Condition="'$(SolutionPlatformSystem)'=='WIN'">
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);$(MultiPlatformSupportCommonPreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <!-- 6. That's all -->
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

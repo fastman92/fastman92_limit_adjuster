@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />  
+	
+	<ItemGroup>
+		<ProjectVersionOnly Include="$(FASTMAN92_LIMIT_ADJUSTER_DEVELOPMENT_PATH)\Compilation settings\CurrentVersionOnly.txt"/>
+	</ItemGroup>
+  <PropertyGroup Label="UserMacros">
+	
+    <CompileLiteVersion>0</CompileLiteVersion>
+	<FLAcustomization>0</FLAcustomization>	
+	
+	<CommonPreprocessorDefinitions>PROJECT_VERSION_ONLY_RAW=$(FASTMAN92_LIMIT_ADJUSTER_VERSION_ONLY);COMPILE_LITE_VERSION=$(CompileLiteVersion);FLA_CUSTOMIZATION=$(FLAcustomization);FASTMAN92_LIMIT_ADJUSTER;FALSE=0;TRUE=1</CommonPreprocessorDefinitions>	
+	
+	
+	<CppLanguageStandard>gnu++11</CppLanguageStandard>
+	<Optimization>Full</Optimization>
+	
+    <debugAdditionalIncludeDirectories Condition="'$(Configuration)'=='Debug'">C:\Program Files (x86)\Visual Leak Detector\include</debugAdditionalIncludeDirectories>
+	<debugAdditionalIncludeDirectories Condition="'$(Configuration)'!='Debug'"></debugAdditionalIncludeDirectories>
+		
+	<debugAdditionalLibraryDirectories Condition="'$(SolutionPlatform)'=='WIN_X86' And '$(Configuration)'=='Debug'">C:\Program Files (x86)\Visual Leak Detector\lib\Win32</debugAdditionalLibraryDirectories>
+	<debugAdditionalLibraryDirectories Condition="'$(SolutionPlatform)'=='WIN_X64' And '$(Configuration)'=='Debug'">C:\Program Files (x86)\Visual Leak Detector\lib\Win64</debugAdditionalLibraryDirectories>
+	
+	<RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
+    <RuntimeLibrary Condition="'$(Configuration)'!='Debug'">MultiThreaded</RuntimeLibrary>
+	
+
+	
+  </PropertyGroup>
+  
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup />
+</Project>
