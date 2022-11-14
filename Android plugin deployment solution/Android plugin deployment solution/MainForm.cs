@@ -135,7 +135,7 @@ namespace Android_plugin_deployment_solution
             this.ScriptContent += "echo." + Environment.NewLine;
 
             this.ScriptContent += "goto loop" + Environment.NewLine;
-
+            
             this.RunScript();
         }
 
@@ -622,6 +622,8 @@ namespace Android_plugin_deployment_solution
             {
                 MessageBox.Show("Unable to write the script file! Command will not be executed.");
             }
+
+            // MessageBox.Show(this.ScriptContent);
 
             Process p = new Process();
 

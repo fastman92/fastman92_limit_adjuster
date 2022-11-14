@@ -403,7 +403,8 @@ FodyWeavers.xsd
 *.sln.iml
 
 # FLA directory
-!aaa/
+Intermediate/
+Output/
 
 # FLA removed files
 CCodeMover.cpp

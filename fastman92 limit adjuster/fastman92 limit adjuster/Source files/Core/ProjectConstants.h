@@ -8,7 +8,7 @@
 #include "../ForOtherProjects/Common/common.h"
 
 #define PROJECT_IS_UNRELEASED_EDITION 1
-#define PROJECT_USE_DEVELOPMENT_INI 1
+#define PROJECT_USE_DEVELOPMENT_INI 0
 
 #if !PROJECT_IS_UNRELEASED_EDITION && PROJECT_USE_DEVELOPMENT_INI
 #error "Release edition should not use a development INI"

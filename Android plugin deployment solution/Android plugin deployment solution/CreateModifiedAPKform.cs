@@ -157,7 +157,7 @@ namespace Android_plugin_deployment_solution
 
             mainForm.writeApplyPluginLoader();
 
-            string modifiedLibDir = mainForm.FilesDirectoryForCurrentGame + Path.DirectorySeparatorChar + "modified_lib";
+            string modifiedLibDir = mainForm.FilesDirectoryForCurrentGameArchitectureSpecific + Path.DirectorySeparatorChar + "modified_lib";
 
             // Copy files
             {
