@@ -947,6 +947,7 @@ unsigned int GetBufferID_replacement(CEntity* pEntity)
 	
 	unsigned int emuArray = *(unsigned int*)((char*)pResEntry + 0x38);
 	
+	// this condition was missing in game code
 	if (!emuArray)
 		return 0;
 

@@ -968,10 +968,10 @@ namespace Android_plugin_deployment_solution
         // Updates an additional file
         private void writeUpdateAdditionalFiles()
         {
-            string remotePathToPluginDir = GetRemotePathToPluginDir();
-
             if (!string.IsNullOrEmpty(this.additionalSOfileTextBox.Text))
             {
+                string remotePathToPluginDir = GetRemotePathToPluginDir();
+
                 string[] listOfNames = this.GetListOfAdditionalSOfilenames();
 
                 foreach (string filename in listOfNames)
@@ -1355,20 +1355,24 @@ namespace Android_plugin_deployment_solution
 
         private void deleteAdditionalFileButton_Click(object sender, EventArgs e)
         {
-            // Store path to library dir into variable
-            this.writeGetPathToLibraryDir();
-
             if (!string.IsNullOrEmpty(this.additionalSOfileTextBox.Text))
             {
+                string remotePathToPluginDir = GetRemotePathToPluginDir();
+
                 this.ScriptContent = String.Empty;
+
+
                 this.writeStopGameCommand();
+
+                // Store path to library dir into variable
+                this.writeGetPathToLibraryDir();
 
                 string[] listOfNames = this.GetListOfAdditionalSOfilenames();
 
                 foreach (string filename in listOfNames)
                 {
                     this.WriteRemoveFile(
-                    "%NATIVE_LIB_DIR%/" + filename);
+                    remotePathToPluginDir + "/" + filename);
                 }
 
                 this.writeEndToCommandPrompt();

@@ -161,13 +161,6 @@ extern "C"
 		OutputFormattedDebugString("--------------------------------------");
 		OutputFormattedDebugString("--------------------------------------");
 		OutputFormattedDebugString("Starting %s", PROJECT_FULL_NAME);
-
-		if(0)
-		{
-			uintptr_t target = 0x1234567812345678;
-			uint32_t instruction = 0xF2A00000 | (((target >> 16) & 0xFFFF) << 5);	// movk x0, #((target >> 16) & 0xFFFF), lsl #16
-			OutputFormattedDebugString("here 0x%08X\n", sizeof(uintptr_t));
-		}
 		#endif
 
 		memset(&startParams, NULL, sizeof(startParams));

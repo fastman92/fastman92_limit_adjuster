@@ -495,7 +495,7 @@ bool CPluginLoader::InitialiseLoading(
 			);
 		}
 		#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
-		else if (!strcmp(this->pApplicationIdentifier, "GTA_III|1.9|armeabi-v7a"))
+		else if (!strcmp(this->pApplicationIdentifier, "GTA_III|1.9|arm64-v8a"))
 		{
 			ReplacePointerToNvEventQueueActivity_init(
 				memCalc.GetCurrentVAbyPreferedVA(0x45EEE8)
