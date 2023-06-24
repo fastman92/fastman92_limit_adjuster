@@ -75,7 +75,7 @@ void CStreaming_VarInitialisation::Initialise()
 		Address_CStreaming__RequestModel = 0x4087E0;
 		Address_CStreaming__RemoveModel = 0x4089A0;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	{
 		Address_CStreaming__AddImageToList = (uintptr_t)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,

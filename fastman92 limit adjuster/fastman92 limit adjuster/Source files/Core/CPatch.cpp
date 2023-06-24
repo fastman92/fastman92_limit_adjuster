@@ -51,10 +51,14 @@ void CPatch::Init()
 	CPatch::m_ListOfPointersChanged.clear();
 
 	/////////////
+	CPatch::sizeOfMemory = 0;
+
 #if defined(IS_PLATFORM_WIN_X64) // || defined(IS_PLATFORM_ANDROID_X64)
 	CPatch::sizeOfMemory = 5 * 1024 * 1024;	// 5 MB
-	CPatch::pMemory = (uint8_t*)CMemoryAllocation::malloc_in_app_space(CPatch::sizeOfMemory);
 #endif
+
+	if (CPatch::sizeOfMemory != 0)
+		CPatch::AllocateBufferMemory();
 }
 
 // Returns number of memory changes
@@ -284,7 +288,8 @@ unsigned int CPatch::RedirectCodeEx(
 	eInstructionSet sourceInstructionSet,
 	uintptr_t dwAddress,
 	const void* to,
-	uintptr_t reportedNumberOfBytesOverwritten)
+	uintptr_t reportedNumberOfBytesOverwritten,
+	bool doNotSaveRegister)
 {
 	// Report an automated change
 	if (reportedNumberOfBytesOverwritten)
@@ -340,6 +345,17 @@ unsigned int CPatch::RedirectCodeEx(
 		sizeOfData = 5;
 		CPatch::PatchMemoryData(dwAddress, data, sizeOfData);
 	}
+	else if (sourceInstructionSet == INSTRUCTION_SET_ARM64)
+	{
+		uint32_t instruction;
+		to = CPatch::AllocRedirection((uintptr_t)to, sourceInstructionSet,
+			doNotSaveRegister ? TRAMPOLINE_REGISTER_DO_NOTHING : TRAMPOLINE_REGISTER_SAVE_REGISTER
+		);
+		instruction = 0x14000000;
+		instruction |= (((uintptr_t)to - dwAddress) >> 2) & ((2 << 26) - 1);
+
+		CPatch::PatchMemoryData(dwAddress, &instruction, sizeof(instruction));
+	}
 
 	CPatch::LeaveThisLevel();
 	return sizeOfData;
@@ -365,15 +381,13 @@ unsigned int CPatch::RedirectCode(uintptr_t dwAddress, void* to, uintptr_t repor
 
 void CPatch::RedirectFunction(uintptr_t functionJumpAddress, void* to)
 {
-	#ifdef IS_ARCHITECTURE_ARM32
 	CPatch::RedirectCodeEx(
 		GET_INSTRUCTION_SET_FROM_ADDRESS(functionJumpAddress),
 		GET_CODE_START(functionJumpAddress),
-		to
+		to,
+		0,
+		true
 	);
-	#else
-	RedirectCode(functionJumpAddress, to);
-	#endif
 }
 
 #if defined(IS_ARCHITECTURE_X86) || defined(IS_ARCHITECTURE_X64)
@@ -483,14 +497,16 @@ void CPatch::DisableFunctionByName(const char* name)
 // Writes data to memory
 void CPatch::WriteDataToMemory(void* dwAddress, const void* bData, int iSize)
 {
-	CPatch::DoTasksForMemoryAddress(dwAddress, iSize);
+	CPatch::DoTasksForMemoryAddress(dwAddress, iSize);	
 	
 	tMemoryPermissionChangeRequest request;
 	request.lpAddress = dwAddress;
 	request.dwSize = iSize;
+
 	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READWRITE);
 
-	SetMemoryPermission(&request);
+	if (!SetMemoryPermission(&request))
+		throw f92_runtime_error("CPatch::WriteDataToMemory, unable to set R+W permission. Error = %d", errno);
 	
 	memcpy(dwAddress, bData, iSize);
 
@@ -498,12 +514,16 @@ void CPatch::WriteDataToMemory(void* dwAddress, const void* bData, int iSize)
 	if (request.bIsOldProtectSet)
 	{
 		request.flNewProtect = request.lpflOldProtect;
-		SetMemoryPermission(&request);
+
+		if(!SetMemoryPermission(&request))
+			throw f92_runtime_error("CPatch::WriteDataToMemory, unable to set previous permission again. Error = %d", errno);
 	}
 	else
 	{
 		request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_EXECUTE_READ);
-		SetMemoryPermission(&request);
+
+		if(!SetMemoryPermission(&request))
+			throw f92_runtime_error("CPatch::WriteDataToMemory, unable to set R+E permission again. Error = %d", errno);
 	}
 }
 
@@ -523,7 +543,7 @@ void CPatch::CheckIfNotForbiddenAddress(const void* dwAddress, uint32_t size)
 }
 
 // Allocates a redirection, returns a pointer to the redirection code
-const void* CPatch::AllocRedirection(uintptr_t target, eInstructionSet instructionSet)
+const void* CPatch::AllocRedirection(uintptr_t target, eInstructionSet instructionSet, eTrampolineRegister trampolineRegisterAction)
 {
 	if (instructionSet == INSTRUCTION_SET_X64)
 	{
@@ -538,25 +558,55 @@ const void* CPatch::AllocRedirection(uintptr_t target, eInstructionSet instructi
 
 		return CPatch::WriteDataToBuffer(data, 16, 8);
 	}
+	else if (instructionSet == INSTRUCTION_SET_ARM64)
+	{
+		#if IS_PLATFORM_ANDROID
+		return ::AllocRedirection(target, 0, trampolineRegisterAction);
+		#endif
+	}
 
 	return nullptr;
 }
 
-// Writes data to buffer
-void* CPatch::WriteDataToBuffer(const void* ptr, size_t size, size_t alignment)
+// Allocates buffer memory
+void CPatch::AllocateBufferMemory()
 {
-	if (size > CPatch::sizeOfMemory)
+	CPatch::pMemory = 0;
+	CPatch::memoryPos = 0;
+
+	CPatch::pMemory = (uint8_t*)CMemoryAllocation::malloc_in_app_space(CPatch::sizeOfMemory);
+}
+
+// Moves buffer ahead before writing the data
+void* CPatch::MoveBufferAhead(size_t size, size_t alignment)
+{
+	if (size > CPatch::sizeOfMemory)	// it can never be written as it would over maximum size of memory
 		return NULL;
 
+	// Align
 	while (CPatch::memoryPos % alignment != 0)
 		CPatch::memoryPos++;
 
 	if (CPatch::memoryPos + size > CPatch::sizeOfMemory)
 	{
-		CPatch::pMemory = (uint8_t*)CMemoryAllocation::malloc_in_app_space(CPatch::sizeOfMemory);
-		CPatch::memoryPos = 0;
-		return NULL;
+		CPatch::AllocateBufferMemory();
+
+		// Align
+		while (CPatch::memoryPos % alignment != 0)
+			CPatch::memoryPos++;
+
+		if (CPatch::memoryPos + size > CPatch::sizeOfMemory)
+			return NULL;
 	}
+
+	return CPatch::pMemory + CPatch::memoryPos;
+}
+
+// Writes data to buffer
+void* CPatch::WriteDataToBuffer(const void* ptr, size_t size, size_t alignment)
+{
+	if (!CPatch::MoveBufferAhead(size, alignment))
+		throw f92_runtime_error("CPatch::WriteDataToBuffer, no more space");
 
 	memcpy(CPatch::pMemory + CPatch::memoryPos, ptr, size);
 	void* retPtr = CPatch::pMemory + CPatch::memoryPos;

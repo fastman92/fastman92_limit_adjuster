@@ -232,7 +232,7 @@ namespace Android_plugin_deployment_solution
                 this.PackageNameToRun = gameVersionDescription.packageName;
                 this.AndroidDATAdirectory = gameVersionDescription.packageName;
 
-                if (!string.IsNullOrEmpty(devPath))
+                if (this.developmentPackageNamesCheckbox.Checked)
                 {
                     if (this.PackageNameToRun == "com.rockstargames.bully" && gameVersionDescription.name == "1.0.0.18")
                         this.PackageNameToRun = "com.rockstargames.bully_1_0_0_18";
@@ -370,6 +370,8 @@ namespace Android_plugin_deployment_solution
 
             this.apkUsingAndroidUnprotected.Checked = !string.IsNullOrEmpty(devPath);
             // this.apkUsingAndroidUnprotected.Checked = !string.IsNullOrEmpty(devPath);
+
+            this.developmentPackageNamesCheckbox.Checked = !string.IsNullOrEmpty(devPath);
 
             this.SetOtherButtons();
 
@@ -616,7 +618,10 @@ namespace Android_plugin_deployment_solution
 
             try
             {
-                File.WriteAllText(batchFilePath, this.ScriptContent);
+                File.WriteAllText(batchFilePath,
+                    "ping 172.0.1.2 -n 1 -w 200 > nul" + Environment.NewLine +
+                    this.ScriptContent
+                    );
             }
             catch (Exception)
             {
@@ -909,7 +914,7 @@ namespace Android_plugin_deployment_solution
 
             this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'rm /data/local/tmp/update.so'\"" + Environment.NewLine;
             this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'rm " + remotePath + "'\"" + Environment.NewLine;
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push \"" + localPath + "\" \"/data/local/tmp/update.so\"" + Environment.NewLine;
+            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push -p \"" + localPath + "\" \"/data/local/tmp/update.so\"" + Environment.NewLine;
             this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chmod " + permission + " /data/local/tmp/update.so'\"" + Environment.NewLine;
             this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chown " + owner + " /data/local/tmp/update.so'\"" + Environment.NewLine;
             this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chown :" + owner + " /data/local/tmp/update.so'\"" + Environment.NewLine;
@@ -947,7 +952,7 @@ namespace Android_plugin_deployment_solution
                 string localPath = devPath + "\\fastman92 limit adjuster\\Dev INI files\\" + gameDescription.devIniFilename;
                 string remotePath = this.UserDirectoryForCurrentGame + "/" + gameDescription.devIniFilename;
 
-                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push \"" + localPath + "\" \"" + remotePath + "\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push -p \"" + localPath + "\" \"" + remotePath + "\"" + Environment.NewLine;
             }
         }
 
@@ -1486,6 +1491,12 @@ namespace Android_plugin_deployment_solution
             MessageBox.Show("This will open the following directory in explorer: \n"
                 + this.UserDirectoryForCurrentGameAccessFromComputer
                 + "\n\nUse LAN Drive Server on the Android device");
+        }
+
+        private void developmentPackageNamesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.SetPathsForCurrentGameVersion();
+            this.RefreshInformations();
         }
     }
 }

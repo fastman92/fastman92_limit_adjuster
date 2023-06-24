@@ -54,6 +54,7 @@ formatMacro(GTA_V_ANY, WIN_X64) \
 /* ////// ANDROID_ARMEABI_V7A ///// */ \
 /* //////////////////////////////// */ \
 /* GTA III */ \
+formatMacro(GTA_III_1_0, ANDROID_ARMEABI) \
 formatMacro(GTA_III_1_8, ANDROID_ARMEABI_V7A) \
 formatMacro(GTA_III_1_9, ANDROID_ARMEABI_V7A) \
 /* GTA VC */ \
@@ -114,14 +115,23 @@ formatMacro(GTA_VCS_1_0, PS2)
 		// Checks if game version is Bully SE
 		static bool IsAny_Bully_SE(eGameVersion gameVersion);
 
+		// Checks if game version is Bully SE VC classic for Windows
+		static bool IsAny_Bully_SE_classic_for_Windows(eGameVersion gameVersion);
+
 		// Checks if game version is GTA III
 		static bool IsAny_GTA_III(eGameVersion gameVersion);
+
+		// Checks if game version is GTA III classic for Windows
+		static bool IsAny_GTA_III_classic_for_Windows(eGameVersion gameVersion);
 
 		// Checks if game version is GTA III with Renderware Engine
 		static bool IsAny_GTA_III_Renderware(eGameVersion gameVersion);
 
 		// Checks if game version is GTA SA with Unreal Engine
 		static bool IsAny_GTA_III_UnrealEngine(eGameVersion gameVersion);
+
+		// Checks if it's GTA III for Android by War Drums
+		static bool Is_GTA_III_Android_Renderware(eGameVersion gameVersion);
 
 		/*
 		// Checks if game version is GTA III 1.8 or 1.9 on ANDROID_ARM32, they both have the same executable library
@@ -132,16 +142,25 @@ formatMacro(GTA_VCS_1_0, PS2)
 		// Checks if game version is GTA VC
 		static bool IsAny_GTA_VC(eGameVersion gameVersion);
 
+		// Checks if game version is GTA VC classic for Windows
+		static bool IsAny_GTA_VC_classic_for_Windows(eGameVersion gameVersion);
+
 		// Checks if game version is GTA VC with Renderware Engine
 		static bool IsAny_GTA_VC_Renderware(eGameVersion gameVersion);
 
 		// Checks if game version is GTA SA with Renderware Engine
 		static bool IsAny_GTA_VC_UnrealEngine(eGameVersion gameVersion);
 
+		// Checks if it's GTA VC for Android by War Drums
+		static bool Is_GTA_VC_Android_Renderware(eGameVersion gameVersion);
+
 		/////// GTA San Andreas ///////
 
 		// Checks if game version is GTA SA
 		static bool IsAny_GTA_SA(eGameVersion gameVersion);
+
+		// Checks if game version is GTA SA classic for Windows
+		static bool IsAny_GTA_SA_classic_for_Windows(eGameVersion gameVersion);
 
 		// Checks if game version is GTA SA with Renderware Engine
 		static bool IsAny_GTA_SA_Renderware(eGameVersion gameVersion);
@@ -209,7 +228,7 @@ formatMacro(GTA_VCS_1_0, PS2)
 		//////////////////
 
 		// Finds name by game enum member
-		static const char* GetGameEnumNameByMember(eGameVersion game);
+		static const char* GetPlatformEnumNameByMember(eGameVersion game);
 
 		// Finds name by game enum member, without platform name
 		static const char* GetGameNameByMemberWithoutPlatformName(eGameVersion game);

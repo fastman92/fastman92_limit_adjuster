@@ -39,7 +39,7 @@ void CMemoryMgr_varInitialisation::Initialise()
 		Address_CMemoryMgr__Malloc = 0x72F420;
 		Address_CMemoryMgr__Free = 0x72F430;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	Address_CMemoryMgr__Malloc = (uintptr_t)Library::GetSymbolAddress(
 		&g_LimitAdjuster.hModule_of_game,
 		"_ZN10CMemoryMgr6MallocEj"

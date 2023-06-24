@@ -3706,7 +3706,7 @@ void HandlingCfgLimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if(gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
 				Address_cHandlingDataMgr__ConvertDataToGameUnits = 0x5ABAA0;
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			Address_cHandlingDataMgr__ConvertDataToGameUnits = (uintptr_t)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN16cHandlingDataMgr22ConvertDataToGameUnitsEP13tHandlingData"
@@ -3743,7 +3743,7 @@ void HandlingCfgLimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				Address_cHandlingDataMgr__ConvertDataToGameUnits = 0x6F5080;
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			Address_cHandlingDataMgr__ConvertDataToGameUnits = (uintptr_t)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN16cHandlingDataMgr22ConvertDataToGameUnitsEP13tHandlingData"
@@ -3772,7 +3772,7 @@ void HandlingCfgLimits::Initialise()
 				this->mod_HandlingManager.ptr = (cHandlingDataMgr*)g_mCalc.GetCurrentVAbyPreferedVA(0x1454ACEB0);
 				///// this->CVehicleAnimGroupData__m_vehicleAnimGroups.gta_sa = (Game_GTASA::CAnimGroup*)0xC1CDC0;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->mod_HandlingManager.ptr = (cHandlingDataMgr*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"mod_HandlingManager"

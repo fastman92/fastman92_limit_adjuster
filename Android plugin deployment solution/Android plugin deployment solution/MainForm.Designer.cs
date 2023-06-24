@@ -79,8 +79,9 @@
             this.PortLabel = new System.Windows.Forms.Label();
             this.extractGameDataButton = new System.Windows.Forms.Button();
             this.apkUsingAndroidUnprotected = new System.Windows.Forms.CheckBox();
-            this.openFileDialog1 = new dnGREP.FileFolderDialog();
             this.externalDirectoryButton = new System.Windows.Forms.Button();
+            this.developmentPackageNamesCheckbox = new System.Windows.Forms.CheckBox();
+            this.openFileDialog1 = new dnGREP.FileFolderDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -606,10 +607,6 @@
             this.apkUsingAndroidUnprotected.UseVisualStyleBackColor = true;
             this.apkUsingAndroidUnprotected.CheckedChanged += new System.EventHandler(this.apkUsingAndroidUnprotected_CheckedChanged);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.SelectedPath = "";
-            // 
             // externalDirectoryButton
             // 
             this.externalDirectoryButton.Enabled = false;
@@ -621,11 +618,27 @@
             this.externalDirectoryButton.UseVisualStyleBackColor = true;
             this.externalDirectoryButton.Click += new System.EventHandler(this.externalDirectoryButton_Click);
             // 
+            // developmentPackageNamesCheckbox
+            // 
+            this.developmentPackageNamesCheckbox.AutoSize = true;
+            this.developmentPackageNamesCheckbox.Location = new System.Drawing.Point(376, 44);
+            this.developmentPackageNamesCheckbox.Name = "developmentPackageNamesCheckbox";
+            this.developmentPackageNamesCheckbox.Size = new System.Drawing.Size(168, 17);
+            this.developmentPackageNamesCheckbox.TabIndex = 51;
+            this.developmentPackageNamesCheckbox.Text = "Development package names";
+            this.developmentPackageNamesCheckbox.UseVisualStyleBackColor = true;
+            this.developmentPackageNamesCheckbox.CheckedChanged += new System.EventHandler(this.developmentPackageNamesCheckbox_CheckedChanged);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.SelectedPath = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 611);
+            this.Controls.Add(this.developmentPackageNamesCheckbox);
             this.Controls.Add(this.externalDirectoryButton);
             this.Controls.Add(this.apkUsingAndroidUnprotected);
             this.Controls.Add(this.extractGameDataButton);
@@ -742,6 +755,7 @@
         private System.Windows.Forms.Button extractGameDataButton;
         private System.Windows.Forms.CheckBox apkUsingAndroidUnprotected;
         private System.Windows.Forms.Button externalDirectoryButton;
+        private System.Windows.Forms.CheckBox developmentPackageNamesCheckbox;
     }
 }
 

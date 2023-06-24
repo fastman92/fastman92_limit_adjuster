@@ -321,7 +321,7 @@ void RendererLimits::Initialise()
 				this->CRenderer__ms_aVisibleLodPtrs.ptr = (void**)0xB748F8;
 				this->CRenderer__ms_aVisibleEntityPtrs.ptr = (void**)0xB75898;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CRenderer__ms_aInVisibleEntityPtrs.ptr = (void**)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN9CRenderer23ms_aInVisibleEntityPtrsE"

@@ -32,7 +32,7 @@ void CWorld_VarInitialisation::Initialise()
 	{
 		Address_CWorld__FindGroundZForCoord = (uintptr_t)0x569660;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	{
 		Address_CWorld__FindGroundZForCoord = (uintptr_t)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,

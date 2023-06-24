@@ -80,6 +80,10 @@ public:
 	void* pluginLoaderHandle;
 	const char* pTargetArchABI;
 
+	char* TrampolineSpacePtr;
+	unsigned int TrampolineSpaceSize;
+	unsigned int TrampolinePosition;
+
 	const char* pApplicationIdentifier;
 	char ms_applicationIdentifierDeprecated[4];
 	void* applicationLibHandle;

@@ -52,7 +52,7 @@ namespace Configuration {
 
 				for (unsigned int i = 0; i < pFLAworkbook->numberOfAllGamesInAllPlatforms; i++)
 				{
-					const char* gameName = pFLAworkbook->gameNamesInAllPlatforms[i];
+					const char* gameName = pFLAworkbook->gamesInAllPlatforms[i]->name;
 
 					fprintf(fp, i != gameColumnLast ? "%s," : "%s\n", gameName);
 				}

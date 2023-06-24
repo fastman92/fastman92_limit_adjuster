@@ -151,7 +151,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Name = "CreateModifiedAPKform";
-            this.Text = " ";
+            this.Text = "Create modified APK";
             this.Load += new System.EventHandler(this.CreateModifiedAPKform_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1984,7 +1984,7 @@ void SCMlimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				this->CTheScripts__ScriptSpace.ptr = (uint8_t*)0xA49960;
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CTheScripts__ScriptSpace.ptr = (uint8_t*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN11CTheScripts11ScriptSpaceE"
@@ -2002,7 +2002,7 @@ void SCMlimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				this->CTheScripts__MissionCleanUp.ptr = (void*)0xA90850;
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CTheScripts__MissionCleanUp.ptr = (void*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN11CTheScripts14MissionCleanUpE"
@@ -2018,7 +2018,7 @@ void SCMlimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				this->CTheScripts__ScriptsArray.array.SetArrayPtr((CRunningScript*)0xA8B430);
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CTheScripts__ScriptsArray.array.SetArrayPtr((CRunningScript*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN11CTheScripts12ScriptsArrayE"
@@ -2034,7 +2034,7 @@ void SCMlimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				this->CTheScripts__UsedObjectArray.gta_sa = (CScriptRequestedModel*)0xA44B70;	
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CTheScripts__UsedObjectArray.gta_sa = (CScriptRequestedModel*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN11CTheScripts15UsedObjectArrayE"
@@ -2050,7 +2050,7 @@ void SCMlimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				this->CTheScripts__SwitchJumpTable.gta_sa = (tScriptSwitchCase*)0xA43CF8;
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CTheScripts__SwitchJumpTable.gta_sa = (tScriptSwitchCase*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN11CTheScripts15SwitchJumpTableE"
@@ -2067,7 +2067,7 @@ void SCMlimits::Initialise()
 			#ifdef IS_PLATFORM_WIN_X86
 			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 				this->CTheScripts__ScriptsForBrains.gta_sa = (CScriptsForBrains*)0xA90CF0;
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CTheScripts__ScriptsForBrains.gta_sa = (CScriptsForBrains*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN11CTheScripts16ScriptsForBrainsE"

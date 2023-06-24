@@ -39,7 +39,7 @@ void CCoronas_VarInitialisation::Initialise()
 		Address_CCoronas__RegisterCorona_with_texture = 0x6FC180;
 		Address_CCoronas__RegisterCorona_with_coronaType = 0x6FC580;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	Address_CCoronas__RegisterCorona_with_texture = (uintptr_t)Library::GetSymbolAddress(
 		&g_LimitAdjuster.hModule_of_game,
 		"_ZN8CCoronas14RegisterCoronaEjP7CEntityhhhhRK7CVectorffP9RwTexturehhhhfbfbfbb"

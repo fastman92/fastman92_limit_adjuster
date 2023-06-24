@@ -162,7 +162,7 @@ void CFont_VarInitialisation::Initialise()
 	{
 		Address_CFont__PrintStringBully = 0x68D450;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)	
+	#elif defined(IS_PLATFORM_ANDROID)	
 	{
 		Address_CFont__SetBackground = (uintptr_t)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,

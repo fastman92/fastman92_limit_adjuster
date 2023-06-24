@@ -1305,6 +1305,83 @@ void GlobalExceptionHandler::RunExceptionHandler(int sig, siginfo_t *siginfo, vo
 		Context->uc_mcontext.arm_pc, Context->uc_mcontext.arm_pc, instructionPointerAddressStr,	// PC
 		Context->uc_mcontext.arm_cpsr, Context->uc_mcontext.arm_cpsr	// PSR
 	);
+	#elif defined(IS_ARCHITECTURE_ARM64)
+	PrintfToBuffer(&printing, true, true,
+		"\n\nGeneral registers:"
+		"\nX0 : 0x%016llX (%lld)"
+		"\nX1 : 0x%016llX (%lld)"
+		"\nX2 : 0x%016llX (%lld)"
+		"\nX3 : 0x%016llX (%lld)"
+		"\nX4 : 0x%016llX (%lld)"
+		"\nX5 : 0x%016llX (%lld)"
+		"\nX6 : 0x%016llX (%lld)"
+		"\nX7 : 0x%016llX (%lld)"
+		"\nX8 : 0x%016llX (%lld)"
+		"\nX9 : 0x%016llX (%lld)"
+		"\nX10: 0x%016llX (%lld)"
+		"\nX11: 0x%016llX (%lld)"
+		"\nX12: 0x%016llX (%lld)"
+		"\nX13: 0x%016llX (%lld)"
+		"\nX14: 0x%016llX (%lld)"
+		"\nX15: 0x%016llX (%lld)"
+		"\nX16: 0x%016llX (%lld)"
+		"\nX17: 0x%016llX (%lld)"
+		"\nX18: 0x%016llX (%lld)"
+		"\nX19: 0x%016llX (%lld)"
+		"\nX20: 0x%016llX (%lld)"
+		"\nX21: 0x%016llX (%lld)"
+		"\nX22: 0x%016llX (%lld)"
+		"\nX23: 0x%016llX (%lld)"
+		"\nX24: 0x%016llX (%lld)"
+		"\nX25: 0x%016llX (%lld)"
+		"\nX26: 0x%016llX (%lld)"
+		"\nX27: 0x%016llX (%lld)"
+		"\nX28: 0x%016llX (%lld)"
+		"\nX29: 0x%016llX (%lld)"
+		"\nX30: 0x%016llX (%lld)"
+
+		"\nSP : 0x%016llX (%lld)"
+		"\nPC : 0x%08X (%d) [%s]"
+		"\nPSR : 0x%08X (%d)"
+		,
+
+		Context->uc_mcontext.regs[0], Context->uc_mcontext.regs[0],
+		Context->uc_mcontext.regs[1], Context->uc_mcontext.regs[1],
+		Context->uc_mcontext.regs[2], Context->uc_mcontext.regs[2],
+		Context->uc_mcontext.regs[3], Context->uc_mcontext.regs[3],
+		Context->uc_mcontext.regs[4], Context->uc_mcontext.regs[4],
+		Context->uc_mcontext.regs[5], Context->uc_mcontext.regs[5],
+		Context->uc_mcontext.regs[6], Context->uc_mcontext.regs[6],
+		Context->uc_mcontext.regs[7], Context->uc_mcontext.regs[7],
+		Context->uc_mcontext.regs[8], Context->uc_mcontext.regs[8],
+		Context->uc_mcontext.regs[9], Context->uc_mcontext.regs[9],
+		Context->uc_mcontext.regs[10], Context->uc_mcontext.regs[10],
+		Context->uc_mcontext.regs[11], Context->uc_mcontext.regs[11],
+		Context->uc_mcontext.regs[12], Context->uc_mcontext.regs[12],
+		Context->uc_mcontext.regs[13], Context->uc_mcontext.regs[13],
+		Context->uc_mcontext.regs[14], Context->uc_mcontext.regs[14],
+		Context->uc_mcontext.regs[15], Context->uc_mcontext.regs[15],
+		Context->uc_mcontext.regs[16], Context->uc_mcontext.regs[16],
+		Context->uc_mcontext.regs[17], Context->uc_mcontext.regs[17],
+		Context->uc_mcontext.regs[18], Context->uc_mcontext.regs[18],
+		Context->uc_mcontext.regs[19], Context->uc_mcontext.regs[19],
+		Context->uc_mcontext.regs[20], Context->uc_mcontext.regs[20],
+		Context->uc_mcontext.regs[21], Context->uc_mcontext.regs[21],
+		Context->uc_mcontext.regs[22], Context->uc_mcontext.regs[22],
+		Context->uc_mcontext.regs[23], Context->uc_mcontext.regs[23],
+		Context->uc_mcontext.regs[24], Context->uc_mcontext.regs[24],
+		Context->uc_mcontext.regs[25], Context->uc_mcontext.regs[25],
+		Context->uc_mcontext.regs[26], Context->uc_mcontext.regs[26],
+		Context->uc_mcontext.regs[27], Context->uc_mcontext.regs[27],
+		Context->uc_mcontext.regs[28], Context->uc_mcontext.regs[28],
+		Context->uc_mcontext.regs[29], Context->uc_mcontext.regs[29],
+		Context->uc_mcontext.regs[30], Context->uc_mcontext.regs[30],
+
+		Context->uc_mcontext.sp, Context->uc_mcontext.sp,
+		Context->uc_mcontext.pc, Context->uc_mcontext.pc, instructionPointerAddressStr,	// PC
+		Context->uc_mcontext.pstate, Context->uc_mcontext.pstate	// PSR
+	);
+	
 	#else
 	PrintfToBuffer(&printing, true, true, "\n");
 	#endif

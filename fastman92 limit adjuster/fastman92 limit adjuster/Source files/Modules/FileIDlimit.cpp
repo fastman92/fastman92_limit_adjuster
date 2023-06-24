@@ -16346,8 +16346,7 @@ void FileIDlimit::Initialise()
 				// Variables
 				this->CModelInfo__ms_modelInfoPtrs.gta_sa = (CBaseModelInfo**)g_mCalc.GetCurrentVAbyPreferedVA(0x14508E730);
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
-			if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+			#elif defined(IS_PLATFORM_ANDROID)
 			{
 				// Variables
 				this->CModelInfo__ms_modelInfoPtrs.gta_sa = (CBaseModelInfo**)Library::GetSymbolAddress(

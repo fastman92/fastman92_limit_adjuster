@@ -7,6 +7,8 @@
 #pragma once
 #include "ProjectConstants.h"
 
+#include "../../../fastman92 plugin loader/ForOtherProjects/Exports.h"
+
 #include <Assembly\eInstructionSet.h>
 #include <Assembly/UsefulMacros.h>
 
@@ -155,7 +157,8 @@ public:
 		eInstructionSet sourceInstructionSet,
 		uintptr_t dwAddress,
 		const void* to,
-		uintptr_t reportedNumberOfBytesOverwritten = 0);
+		uintptr_t reportedNumberOfBytesOverwritten = 0,
+		bool doNotSaveRegister = false);
 
 	#ifndef IS_ARCHITECTURE_ARM32
 	static unsigned int RedirectCode(uintptr_t dwAddress, uintptr_t to, uintptr_t reportedNumberOfBytesOverwritten = 0);
@@ -195,9 +198,15 @@ public:
 	#endif
 
 	// Allocates a redirection, returns a pointer to the redirection code
-	static const void* AllocRedirection(uintptr_t target, eInstructionSet instructionSet = CURRENT_PROCESSOR_INSTRUCTION_SET);
+	static const void* AllocRedirection(uintptr_t target, eInstructionSet instructionSet = CURRENT_PROCESSOR_INSTRUCTION_SET, eTrampolineRegister trampolineRegisterAction = TRAMPOLINE_REGISTER_DO_NOTHING);
 
 private:
+	// Allocates buffer memory
+	static void AllocateBufferMemory();
+
+	// Moves buffer ahead before writing the data
+	static void* MoveBufferAhead(size_t size, size_t alignment);
+
 	// Writes data to buffer
 	static void* WriteDataToBuffer(const void* ptr, size_t size, size_t alignment);
 

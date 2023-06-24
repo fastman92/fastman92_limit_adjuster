@@ -23,8 +23,6 @@
 using namespace Game;
 
 namespace Configuration {
-	struct tDocumentationWorkbook;
-
 	namespace Formats
 	{
 		#ifdef IS_PLATFORM_WIN_X86
@@ -213,17 +211,35 @@ namespace Configuration {
 			lxw_format *field_supported_format = workbook_add_format(workbook);
 			SetExcelFieldSupportedFormat(field_supported_format);
 
+			lxw_format *field_supported_center_format = workbook_add_format(workbook);
+			SetExcelFieldSupportedFormat(field_supported_center_format);
+			format_set_align(field_supported_center_format, LXW_ALIGN_CENTER);
+
 			lxw_format *field_supported_wrap_format = workbook_add_format(workbook);
-			SetExcelFieldSupportedFormat(field_supported_format);
+			SetExcelFieldSupportedFormat(field_supported_wrap_format);
 			format_set_text_wrap(field_supported_wrap_format);
+
+			lxw_format *field_supported_wrap_center_format = workbook_add_format(workbook);
+			SetExcelFieldSupportedFormat(field_supported_wrap_center_format);
+			format_set_text_wrap(field_supported_wrap_center_format);
+			format_set_align(field_supported_wrap_center_format, LXW_ALIGN_CENTER);
 
 			// Field unsupported format
 			lxw_format *field_unsupported_format = workbook_add_format(workbook);
 			SetExcelFieldUnsupportedFormat(field_unsupported_format);
 
+			lxw_format *field_unsupported_center_format = workbook_add_format(workbook);
+			SetExcelFieldUnsupportedFormat(field_unsupported_center_format);
+			format_set_align(field_unsupported_center_format, LXW_ALIGN_CENTER);
+
 			lxw_format *field_unsupported_wrap_format = workbook_add_format(workbook);
-			SetExcelFieldUnsupportedFormat(field_unsupported_format);
+			SetExcelFieldUnsupportedFormat(field_unsupported_wrap_format);
 			format_set_text_wrap(field_unsupported_wrap_format);
+
+			lxw_format *field_unsupported_wrap_center_format = workbook_add_format(workbook);
+			SetExcelFieldUnsupportedFormat(field_unsupported_wrap_center_format);
+			format_set_text_wrap(field_unsupported_wrap_center_format);
+			format_set_align(field_unsupported_wrap_center_format, LXW_ALIGN_CENTER);
 
 			// Add sheet Features
 #if TRUE
@@ -250,15 +266,14 @@ namespace Configuration {
 				for (unsigned int i = 0; i < pFLAworkbook->countOfPlatforms; i++)
 				{
 					const tPlatformConfiguration* pPlatformConfiguration = pFLAworkbook->pPlatformList + i;
-					const eGameVersion* pGameVersion = pPlatformConfiguration->pGameList;
+					const CGameDescription* pGameDescription = pPlatformConfiguration->pGameList;
 					auto& formatInfo = topRightSideFormats[i % numberOfTopRightSideFormats];
 
 					unsigned int startColumnForCurrentPlatform = gameColumn;
 
-					while (*pGameVersion != GAME_VERSION_UNDEFINED)
+					while (pGameDescription->gameVersion != GAME_VERSION_UNDEFINED)
 					{
-						eGameVersion game = *pGameVersion;
-						const char* gameVersionName = pFLAworkbook->gameNamesInAllPlatforms[gameColumn];
+						const char* gameVersionName = pFLAworkbook->gamesInAllPlatforms[gameColumn]->name;
 
 						// Write game name
 						worksheet_write_string(
@@ -269,7 +284,7 @@ namespace Configuration {
 						);
 
 						gameColumn++;
-						pGameVersion++;
+						pGameDescription++;
 					}
 
 					unsigned int lastColumnForCurrentPlatform = gameColumn - 1;
@@ -279,14 +294,14 @@ namespace Configuration {
 						worksheet_merge_range(worksheet,
 							0, startColumnForCurrentPlatform + 3,
 							0, lastColumnForCurrentPlatform + 3,
-							pPlatformConfiguration->platformName,
+							pPlatformConfiguration->solutionPlatformName,
 							formatInfo.platform_name_format
 						);
 					else
 						worksheet_write_string(worksheet,
 							0,
 							startColumnForCurrentPlatform + 3,
-							pPlatformConfiguration->platformName,
+							pPlatformConfiguration->solutionPlatformName,
 							formatInfo.platform_name_format
 						);
 				}
@@ -338,78 +353,111 @@ namespace Configuration {
 							);
 
 						// Values per each configuration
-						for (unsigned int fieldID = 0;
-							fieldID < pFLAworkbook->numberOfAllGamesInAllPlatforms;
-							fieldID++)
+						gameColumn = 0;
+						
+						for (unsigned int i = 0; i < pFLAworkbook->countOfPlatforms; i++)
 						{
-							CConfigurationField* pField = pSectionEntry->pEntryArray + fieldID;
+							const tPlatformConfiguration* pPlatformConfiguration = pFLAworkbook->pPlatformList + i;
+							const CGameDescription* pGameList = pPlatformConfiguration->pGameList;
 
-							char cellText[256];
+							
+							unsigned countOfGameVersionsInPlatform = pPlatformConfiguration->GetCountOfGamesInList();
 
-							int l;
-
-							unsigned int formatID = 1;
-
-							if (pField->ExcelState == EXCEL_FIELD_STATE_SUPPORTED)
+							unsigned int startColumnForCurrentPlatform = gameColumn;
+							unsigned int lastColumnForCurrentPlatform = gameColumn + countOfGameVersionsInPlatform - 1;
+							
+							for (unsigned int gameVersionInPlatformIndex = 0; pGameList[gameVersionInPlatformIndex].gameVersion != GAME_VERSION_UNDEFINED; gameVersionInPlatformIndex++)
 							{
-								strcpy(cellText, "Supported");
-								formatID = 2;
+								eGameVersion game = pGameList[gameVersionInPlatformIndex].gameVersion;
+								const char* gameVersionName = pFLAworkbook->gamesInAllPlatforms[gameColumn + gameVersionInPlatformIndex]->name;
+																
+								CConfigurationField* pField = pSectionEntry->pEntryArray + gameColumn + gameVersionInPlatformIndex;
+								bool bIsOneValuePerPlatform = false;
+
+								char cellText[256];
+
+								int l;
+
+								unsigned int formatID = 1;
+
+								if (pField->ExcelState == EXCEL_FIELD_STATE_SUPPORTED)
+								{
+									strcpy(cellText, "Supported");
+									formatID = 2;
+								}
+								else if (pField->ExcelState == EXCEL_FIELD_STATE_NOT_SUPPORTED)
+								{
+									strcpy(cellText, "Not supported");
+									formatID = 1;
+								}
+								else if (pField->ExcelState == EXCEL_FIELD_STATE_SUPPORTED_ONLY_SHOW_VALUE)
+								{
+									formatID = 2;
+									cellText[0] = 0;
+								}
+								else if (pField->ExcelState == EXCEL_FIELD_STATE_NOT_SUPPORTED_ONLY_SHOW_VALUE)
+								{
+									formatID = 1;
+									cellText[0] = 0;
+								}
+								else
+								{
+									worksheet_write_blank(
+										worksheet,
+										row_id,
+										3 + gameColumn + gameVersionInPlatformIndex,
+										field_unsupported_format
+									);
+
+									formatID = 0;
+								}
+
+								if (formatID != 0)
+								{
+									l = strlen(cellText);
+
+									char valueStr[256];
+
+									if (pField->ValueToStr(valueStr))
+										sprintf(cellText + l, l != 0 ? " (%s)" : "%s", valueStr);
+
+									// Check if there is new line
+									lxw_format* format = NULL;
+
+									if (formatID == 2)
+									{
+										format = StrContainsNewLine(cellText)
+											? (!bIsOneValuePerPlatform ? field_supported_wrap_format : field_supported_wrap_center_format)
+											: (!bIsOneValuePerPlatform ? field_supported_format : field_supported_center_format);
+									}
+									else if (formatID == 1)
+										format = StrContainsNewLine(cellText)
+										? (!bIsOneValuePerPlatform ? field_unsupported_wrap_format : field_unsupported_wrap_center_format)
+										: (!bIsOneValuePerPlatform ? field_unsupported_format : field_unsupported_center_format);
+									
+
+									if (bIsOneValuePerPlatform && startColumnForCurrentPlatform != lastColumnForCurrentPlatform)
+										worksheet_merge_range(worksheet,
+											row_id, startColumnForCurrentPlatform + 3,
+											row_id, lastColumnForCurrentPlatform + 3,
+											cellText,
+											format
+										);
+									else
+										worksheet_write_string(worksheet, row_id, 3 + gameColumn + gameVersionInPlatformIndex, cellText, format);
+
+									if (bIsOneValuePerPlatform)
+										break;
+								}
 							}
-							else if (pField->ExcelState == EXCEL_FIELD_STATE_NOT_SUPPORTED)
-							{
-								strcpy(cellText, "Not supported");
-								formatID = 1;
-							}
-							else if (pField->ExcelState == EXCEL_FIELD_STATE_SUPPORTED_ONLY_SHOW_VALUE)
-							{
-								formatID = 2;
-								cellText[0] = 0;
-							}
-							else if (pField->ExcelState == EXCEL_FIELD_STATE_NOT_SUPPORTED_ONLY_SHOW_VALUE)
-							{
-								formatID = 1;
-								cellText[0] = 0;
-							}
-							else
-							{
-								worksheet_write_blank(
-									worksheet,
-									row_id,
-									3 + fieldID,
-									field_unsupported_format
-								);
 
-								continue;
-							}
-
-							l = strlen(cellText);
-
-							char valueStr[256];
-
-							if (pField->ValueToStr(valueStr))
-								sprintf(cellText + l, l != 0 ? " (%s)" : "%s", valueStr);
-
-							// Check if there is new line
-							lxw_format* format = NULL;
-
-							if (formatID == 2)
-							{
-								format = StrContainsNewLine(cellText)
-									? field_supported_wrap_format
-									: field_supported_format;
-							}
-							else if (formatID == 1)
-								format = StrContainsNewLine(cellText)
-								? field_unsupported_wrap_format
-								: field_unsupported_format;
-
-							worksheet_write_string(worksheet, row_id, 3 + fieldID, cellText, format);
+							gameColumn += countOfGameVersionsInPlatform;
 						}
 
 						row_id++;
 					}
 				}
-
+				
 				// Freeze panes
 				worksheet_freeze_panes(worksheet, 2, 3);
 			}

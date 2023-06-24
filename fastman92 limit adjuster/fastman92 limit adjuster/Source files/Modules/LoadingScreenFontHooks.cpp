@@ -13,6 +13,7 @@
 
 #include <Array\countof.h>
 #include <MultiPlatformSupport/PlatformGeneralisation.h>
+#include <MemoryPermission\MemoryPermission.h>
 #include <StrLexStuff.h>
 
 #include <stdio.h>
@@ -259,6 +260,24 @@ namespace Game_GTAVC
 			);
 	};
 	#endif
+
+	#ifdef IS_PLATFORM_ANDROID_ARM64_V8A
+	// patch for 0x188080
+	extern "C"
+	{
+		uintptr_t Address_CPathFind__FindNodePairClosestToCoors_188084_arm64 = 0;
+	}
+
+	static NAKED void patch_CPathFind__FindNodePairClosestToCoors_188080()
+	{
+		__asm(
+		RESTORE_TRAMPOLINE_REGISTER()
+			"SUB SP, SP, #0x20\n"
+			SAVE_TRAMPOLINE_REGISTER()
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CPathFind__FindNodePairClosestToCoors_188084_arm64)
+			);
+	}
+	#endif
 }
 
 uintptr_t Address_CFont_InitPerFrame;
@@ -281,7 +300,7 @@ namespace Game_GTASA
 		void LoadingScreenExtraCodeThisGame()
 		{
 			// state 11 - rwRENDERSTATEDESTBLEND
-			#ifdef IS_PLATFORM_ANDROID_ARM32
+			#ifdef IS_PLATFORM_ANDROID
 			RwRenderStateSet(11, 1);	// rwBLENDZERO
 			RwRenderStateSet(11, 6);	// rwBLENDINVSRCALPHA
 			#endif
@@ -355,7 +374,7 @@ namespace Game_GTASA
 		float* CLoadingScreen__m_TimeBarAppeared = 0;
 		uintptr_t Address_CLoadingScreen__RenderLoadingBar_goBack1 = 0;
 		uintptr_t Address_CLoadingScreen__RenderLoadingBar_goBack2 = 0;
-
+		
 		#ifdef IS_PLATFORM_ANDROID_ARM32
 		namespace Game_GTA_SA_1_08
 		{
@@ -433,6 +452,54 @@ namespace Game_GTASA
 			}
 		}
 
+		namespace Game_GTA_SA_2_10
+		{
+			static TARGET_THUMB NAKED void patch_CLoadingScreen__RenderLoadingBar_43B520()
+			{
+				__asm(
+				".thumb\n"
+					"STR             R0, [SP,#0x70-0x5C]\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R0, Address_CFont_InitPerFrame)
+					"BLX R0\n"
+
+					"VLDR S0, 101f\n"
+					"VMOV.F32 S2, #-14.0\n"
+
+					"LDR             R0, [SP,#0x70-0x5C]\n"
+
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_goBack1)
+
+					// Data
+					ASM_PUT_CONSTANT_FLOAT(101, 640.0)
+					);
+			}
+
+			// patch for 0x43B580
+			extern "C"
+			{
+				uintptr_t Address_CLoadingScreen__RenderLoadingBar_43B586 = 0;
+				uintptr_t Address_CLoadingScreen__RenderLoadingBar_43B58A_thumb = 0;
+			}
+
+			static TARGET_THUMB NAKED void patch_CLoadingScreen__RenderLoadingBar_43B580()
+			{
+				__asm(
+				".thumb\n"
+					"BLX LoadingScreenExtraCodeThisGame\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R0, Address_CFont__RenderFontBuffer)
+					"BLX R0\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R0, CLoadingScreen__m_TimeBarAppeared)
+
+					"VLDR            S0, [R0]\n"
+
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_goBack2)
+					);
+			}
+		}
+
 		namespace Game_GTA_SA_GER_2_09
 		{
 			// patch for 0x43B4E0
@@ -468,6 +535,43 @@ namespace Game_GTASA
 					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R0, CLoadingScreen__m_TimeBarAppeared)
 
 					"VLDR S0, [R0]\n"
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_goBack2)
+					);
+			}
+		}
+		#endif
+
+		#ifdef IS_PLATFORM_ANDROID_ARM64
+		namespace Game_GTA_SA_2_10
+		{
+			static NAKED void patch_CLoadingScreen__RenderLoadingBar_520990()
+			{
+				__asm(
+				RESTORE_TRAMPOLINE_REGISTER()
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X0, Address_CFont_InitPerFrame)
+					"BLR X0\n"
+
+					"MOV W4, #1\n"
+					SAVE_TRAMPOLINE_REGISTER()
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_goBack1)
+					);
+			}
+
+			// patch for 0x7534B249BC
+			static NAKED void patch_CLoadingScreen__RenderLoadingBar_5209BC()
+			{
+				__asm(
+					RESTORE_TRAMPOLINE_REGISTER()
+
+					"BL LoadingScreenExtraCodeThisGame\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X0, Address_CFont__RenderFontBuffer)
+					"BLR X0\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X19, CLoadingScreen__m_TimeBarAppeared)
+
+					SAVE_TRAMPOLINE_REGISTER()
 					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_goBack2)
 					);
 			}
@@ -660,7 +764,8 @@ void LoadingScreenFontHooks::ApplyHook()
 	*/
 	else if (gameVersion == GAME_VERSION_GTA_SA_1_08_ANDROID_ARMEABI_V7A
 		|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
-		|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A)
+		|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A
+		|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A)
 	{
 		ApplyHook_GTASA_prolog();
 
@@ -733,6 +838,21 @@ void LoadingScreenFontHooks::ApplyHook()
 			);
 			
 		}
+		else if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A)
+		{
+			using namespace Game_GTA_SA_2_10;
+
+			Address_CLoadingScreen__RenderLoadingBar_goBack1 = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x43B528));
+			CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x43B520),
+				(void*)&patch_CLoadingScreen__RenderLoadingBar_43B520
+			);
+
+			Address_CLoadingScreen__RenderLoadingBar_goBack2 = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x43B58A));
+			
+			CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x43B580),
+				(void*)&patch_CLoadingScreen__RenderLoadingBar_43B580
+			);
+		}
 	}
 	/*
 	else if (gameVersion == GAME_VERSION_BULLY_AE_1_0_0_18_ANDROID_ARMEABI_V7A)
@@ -757,7 +877,13 @@ void LoadingScreenFontHooks::ApplyHook()
 
 		if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A)
 		{
-			// asm_
+			using namespace Game_GTA_SA_2_10;
+			
+			Address_CLoadingScreen__RenderLoadingBar_goBack1 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x520994), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x520990), (void*)&patch_CLoadingScreen__RenderLoadingBar_520990);
+			
+			Address_CLoadingScreen__RenderLoadingBar_goBack2 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x5209C4), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x5209BC), (void*)&patch_CLoadingScreen__RenderLoadingBar_5209BC);
 		}
 	}
 	#endif

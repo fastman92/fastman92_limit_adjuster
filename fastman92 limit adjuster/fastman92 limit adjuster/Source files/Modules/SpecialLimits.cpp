@@ -524,7 +524,7 @@ void SpecialLimits::Initialise()
 
 	if (g_LimitAdjuster.IsGameVersionSetUpWithMemory())
 	{
-		#ifdef IS_PLATFORM_ANDROID_ARM32
+		#ifdef IS_PLATFORM_ANDROID
 		{
 			// Storage root buffer
 			StorageRootBuffer = (char*)Library::GetSymbolAddress(
@@ -858,8 +858,22 @@ void SpecialLimits::AlterFileLoadingOrder()
 	// CPatch::EnableDebugMode();
 
 	MAKE_DEAD_IF();
+
+	#if defined(IS_PLATFORM_ANDROID_ARM32) || defined(IS_PLATFORM_ANDROID_ARM64)
+	else if (gameVersion == GAME_VERSION_BULLY_AE_1_0_0_18_ANDROID_ARMEABI_V7A
+	|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A)
+	{
+	
+		CPatch::RedirectFunction(
+			(uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_Z7NvFOpenPKcS0_bb"),
+			(void*)&NvFOpen_replacement
+		);
+		
+	}
+	#endif
+
 	#ifdef IS_PLATFORM_ANDROID_ARM32
-	if (gameVersion == GAME_VERSION_GTA_III_1_8_ANDROID_ARMEABI_V7A)
+	else if (gameVersion == GAME_VERSION_GTA_III_1_8_ANDROID_ARMEABI_V7A)
 	{
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0xFA37C),
 			(void*)&patch_NvFOpen_plus_4<0x1C>
@@ -884,11 +898,10 @@ void SpecialLimits::AlterFileLoadingOrder()
 			(void*)&patch_NvFOpen_plus_4<0x14>
 		);
 	}
-	else if (gameVersion == GAME_VERSION_BULLY_AE_1_0_0_18_ANDROID_ARMEABI_V7A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A)
 	{
-		CPatch::RedirectFunction(
-				(uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_Z7NvFOpenPKcS0_bb"),
-				(void*)&NvFOpen_replacement
+		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x266DB8),
+		(void*)&patch_NvFOpen_plus_4<0x14>
 		);
 	}
 	#endif

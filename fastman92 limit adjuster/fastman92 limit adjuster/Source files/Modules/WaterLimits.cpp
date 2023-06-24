@@ -626,7 +626,7 @@ void WaterLimits::Initialise()
 				this->CWaterLevel__m_BlocksToBeRenderedOutsideWorldX.ptr = (int16_t*)0xC214D0;
 				this->CWaterLevel__m_BlocksToBeRenderedOutsideWorldY.ptr = (int16_t*)0xC21560;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			{
 				// Water triangles
 				this->CWaterLevel__m_aTriangles.gta_sa = (CWaterTriangle*)Library::GetSymbolAddress(

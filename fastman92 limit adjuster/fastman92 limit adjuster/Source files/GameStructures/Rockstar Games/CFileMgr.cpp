@@ -153,7 +153,7 @@ void CFileMgr_VarInitialisation::Initialise()
 		Address_CFileMgr__ReadLine = g_mCalc.GetCurrentVAbyPreferedVA(0x538E50);
 		Address_CFileMgr__CloseFile = g_mCalc.GetCurrentVAbyPreferedVA(0x538E70);
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	else if (true)
 	{
 		Address_CFileMgr__OpenFile = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_ZN8CFileMgr8OpenFileEPKcS1_");

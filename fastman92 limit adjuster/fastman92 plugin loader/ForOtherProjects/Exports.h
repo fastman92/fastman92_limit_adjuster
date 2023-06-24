@@ -5,6 +5,13 @@
 */
 #pragma once
 
+enum eTrampolineRegister
+{
+	TRAMPOLINE_REGISTER_DO_NOTHING,
+	TRAMPOLINE_REGISTER_SAVE_REGISTER,
+	TRAMPOLINE_REGISTER_RESTORE_REGISTER
+};
+
 #ifdef IS_PLATFORM_ANDROID
 #include <jni.h>
 #include <stdint.h>
@@ -85,5 +92,9 @@ extern "C"
 
 	// Returns jobject of main activity during launch
 	F92_LA_API jobject GetMainActivityDuringLaunch();
+
+	// Allocates redirection to certain address, trampoline
+	// Encoding: 0 - unspecified, 1 - ARM, 2 - Thumb
+	const void* AllocRedirection(uintptr_t target, int encoding = 0, eTrampolineRegister trampolineRegisterAction = TRAMPOLINE_REGISTER_DO_NOTHING);
 }
 #endif

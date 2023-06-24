@@ -468,7 +468,7 @@ void RoadBloxBetterLoader::Initialise()
 			// Script roadblocks
 			CRoadBlocks::ScriptRoadBlocks = (CScriptRoadblock*)0xA43AB8;
 		}
-		#elif defined(IS_PLATFORM_ANDROID_ARM32)
+		#elif defined(IS_PLATFORM_ANDROID)
 		{
 			using namespace Game_GTASA;
 

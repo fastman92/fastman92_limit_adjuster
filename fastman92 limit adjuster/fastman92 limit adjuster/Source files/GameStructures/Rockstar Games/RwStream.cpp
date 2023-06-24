@@ -31,7 +31,7 @@ void RwStream_varInitialisation::Initialise()
 	{
 		Address_RwStreamRead = 0x7EC9D0;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	Address_RwStreamRead = (uintptr_t)Library::GetSymbolAddress(
 		&g_LimitAdjuster.hModule_of_game,
 		"_Z12RwStreamReadP8RwStreamPvj"

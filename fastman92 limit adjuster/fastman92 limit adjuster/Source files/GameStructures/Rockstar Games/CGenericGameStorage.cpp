@@ -47,7 +47,7 @@ void CGenericGameStorage_VarInitialisation::Initialise()
 		CGenericGameStorage::ms_WorkBufferPos = (unsigned int*)g_mCalc.GetCurrentVAbyPreferedVA(0xC16EEC);
 		CGenericGameStorage::ms_CheckSum = (uint32_t*)g_mCalc.GetCurrentVAbyPreferedVA(0xC16134);
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	ptrCGenericGameStorage__SaveDataToWorkBuffer = (void*)Library::GetSymbolAddress(
 		&g_LimitAdjuster.hModule_of_game,
 		"_ZN19CGenericGameStorage21_SaveDataToWorkBufferEPvi"

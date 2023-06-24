@@ -376,7 +376,7 @@ namespace Android_plugin_deployment_solution
                         "ANDROID_ARMEABI_V7A",    // platformName
                         false,     // bCLEOavailable
                         true,     // bPubliclyAvailable
-                        false,     // bFLAavailable
+                        true,     // bFLAavailable
                         OBB_GTA_SA
                         ),
 
@@ -389,7 +389,7 @@ namespace Android_plugin_deployment_solution
                         "ANDROID_ARM64_V8A",    // platformName
                         false,     // bCLEOavailable
                         true,     // bPubliclyAvailable
-                        false,     // bFLAavailable
+                        true,     // bFLAavailable
                         OBB_GTA_SA
                         ),
 

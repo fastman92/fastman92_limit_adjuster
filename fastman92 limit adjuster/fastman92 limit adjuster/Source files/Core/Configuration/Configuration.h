@@ -30,8 +30,8 @@ namespace Configuration
 	enum eIniFieldState
 	{
 		INI_FIELD_NONE,	// not in the .ini
-		INI_FIELD_ACTIVE,	// in the .ini, but commented out
-		INI_FIELD_INACTIVE		// in the .ini, active
+		INI_FIELD_ACTIVE,	// in the .ini, active
+		INI_FIELD_INACTIVE		// in the .ini, but commented out
 	};
 
 	enum eExcelFieldState
@@ -56,6 +56,7 @@ namespace Configuration
 
 		eIniFieldState INIstate;
 		eExcelFieldState ExcelState;
+		bool bIsOneValuePerPlatform;
 
 		// set for few fields only. Other than that it should contain an empty string
 		char INIkeyName[128];
@@ -89,13 +90,54 @@ namespace Configuration
 		bool ValueToStr(char* str);
 	};
 
-	struct tPlatformConfiguration
+	class CGameDescription
 	{
-		const char* platformName;
-		const Game::eGameVersion* pGameList;
+	public:
+		Game::eGameVersion gameVersion;
+		uintptr_t preferedVA;
+		const char* humanReadableName;
+		const char* name;
+
+		const char* appLibIdentifier;
+		int sizeArray[4];
+		unsigned numberOfDefinedSizes = 0;
+
+		// Constructor
+		CGameDescription();
 	};
 
-#define PLATFORM_CONFIGURATION_EOF { nullptr, nullptr }
+#define BEGIN_GAME_DESCRIPTION_FUNCTION(versionXX, humanReadableNameXX, _preferedVA) CGameDescription([] { \
+	CGameDescription description; \
+	description.gameVersion = versionXX; \
+	description.humanReadableName = humanReadableNameXX; \
+	description.name = CGameVersion::GetGameNameByMemberWithoutPlatformName(versionXX); \
+	description.preferedVA = _preferedVA;
+
+
+#define END_GAME_DESCRIPTION_FUNCTION	return description; \
+}())
+
+	///////
+
+#define SECTION_FIELD_EOF { nullptr, nullptr }
+
+	#define PLATFORM_DESCRIPTION_EOF CGameDescription()
+
+	struct tPlatformConfiguration
+	{
+		const char* solutionPlatformName;
+		Game::eGamePlatform platform;
+		const CGameDescription* pGameList;
+		const char* platformABI;
+
+		// Returns count of games in list
+		unsigned int GetCountOfGamesInList() const;
+
+		// Returns text description about platform
+		std::string GetTextDescriptionAboutGames(bool bExtendedInfo = false) const;
+	};
+
+#define PLATFORM_CONFIGURATION_EOF { nullptr, GAME_PLATFORM_UNDEFINED, nullptr }
 
 	typedef void(*tProcessFieldFunc)(CConfigurationField* pField, eFieldProcessMode fieldProcessMode);
 
@@ -154,7 +196,8 @@ namespace Configuration
 		const tPlatformConfiguration* pPlatformList;
 		unsigned countOfPlatforms;
 
-		const char** gameNamesInAllPlatforms;
+		const Configuration::CGameDescription** gamesInAllPlatforms;
+		// const char** gameNamesInAllPlatforms;
 		unsigned int numberOfAllGamesInAllPlatforms;
 
 		tConfigurationSectionProcessed* pSectionArray;

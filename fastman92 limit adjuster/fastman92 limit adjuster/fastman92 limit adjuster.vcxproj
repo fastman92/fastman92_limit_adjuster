@@ -190,6 +190,7 @@
     <ClInclude Include="$(FASTMAN92_INCLUDE)\XML\RapidXML\rapidxml_utils.hpp" />
     <ClInclude Include="$(FASTMAN92_INCLUDE)\eGame.h" />
     <ClInclude Include="Source files\Core\CCodeMover.h" />
+    <ClInclude Include="Source files\Core\Configuration\TextFile.h" />
     <ClInclude Include="Source files\Core\CUserInterface.h" />
     <ClInclude Include="Source files\Core\CGenericLogStorage.h" />
     <ClInclude Include="Source files\Core\CLimitAdjusterModule.h" />
@@ -360,6 +361,7 @@
     <ClCompile Include="$(FASTMAN92_INCLUDE)\Rijndael\Rijndael.cpp" />
     <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp" />
     <ClCompile Include="Source files\Core\CCodeMover.cpp" />
+    <ClCompile Include="Source files\Core\Configuration\TextFile.cpp" />
     <ClCompile Include="Source files\Core\CUserInterface.cpp" />
     <ClCompile Include="Source files\Core\CGenericLogStorage.cpp" />
     <ClCompile Include="Source files\Core\CLimitAdjusterKeyCheck.cpp" />

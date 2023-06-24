@@ -3853,6 +3853,32 @@ void OtherLimits::SetVehicleColors(int iVehicleColors)
 	CGenericLogStorage::WriteLineSeparator();
 }
 
+unsigned int ReferencesLimit;
+
+#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
+namespace Game_GTASA_2_0
+{
+	// patch for 0x40E7D4
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_00_CReferences__Init_40E7DE_thumb = 0;	// loc_40E7DE
+	}
+
+	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CReferences__Init_40E7D4()
+	{
+		__asm(
+		".thumb\n"
+			"LDR R1, [R1]\n"
+			"STR R1, [R0]\n"
+			"ADDS R0, R1, #4\n"
+			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R1, ReferencesLimit)
+			
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CReferences__Init_40E7DE_thumb)
+			);
+	}
+}
+#endif
+
 // Sets the max number of references
 void OtherLimits::SetReferences(int iNumberOfReferences)
 {
@@ -3865,8 +3891,9 @@ void OtherLimits::SetReferences(int iNumberOfReferences)
 		iNumberOfReferences = this->ms_iReferencesLimit;
 
 	MAKE_DEAD_IF();
-#ifdef IS_PLATFORM_WIN_X86	
-	else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
+	
+	else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion)
+		|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 	{
 		using namespace Game_GTASA;
 
@@ -3876,16 +3903,40 @@ void OtherLimits::SetReferences(int iNumberOfReferences)
 			CReferences__aRefs.bIsAllocated.Set(true);
 		}
 	
-		// Patch
-		#if TRUE
+		MAKE_DEAD_IF();
+		#ifdef IS_PLATFORM_WIN_X86
+		else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 		{
-			CPatch::PatchPointer(0x5719B0 + 1, CReferences__aRefs.gta_sa);	// mov     eax, offset _ZN11CReferences5aRefsE ; CReferences::aRefs
-			CPatch::PatchUINT32(0x5719BA + 1, iNumberOfReferences);	// mov     edx, 3000
-			CPatch::PatchPointer(0x5719D1 + 2, CReferences__aRefs.gta_sa + iNumberOfReferences - 1);	// mov     _ZN11CReferences5aRefsE.m_pNext+5DB8h, 0
+			// Patch
+			#if TRUE
+			{
+				CPatch::PatchPointer(0x5719B0 + 1, CReferences__aRefs.gta_sa);	// mov     eax, offset _ZN11CReferences5aRefsE ; CReferences::aRefs
+				CPatch::PatchUINT32(0x5719BA + 1, iNumberOfReferences);	// mov     edx, 3000
+				CPatch::PatchPointer(0x5719D1 + 2, CReferences__aRefs.gta_sa + iNumberOfReferences - 1);	// mov     _ZN11CReferences5aRefsE.m_pNext+5DB8h, 0
+			}
+			#endif
+		}
+		#elif defined(IS_PLATFORM_ANDROID_ARMEABI_V7A)
+		else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+		{
+			using namespace Game_GTASA_2_0;
+
+			::ReferencesLimit = iNumberOfReferences;
+
+			// Patch pointers
+			#if TRUE
+			{
+					CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x679020), CReferences__aRefs.gta_sa);	// DCD _ZN11CReferences5aRefsE; CReferences::aRefs
+			}
+			#endif
+
+			Address_GTA_SA_2_00_CReferences__Init_40E7DE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x40E7DE));
+			CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x40E7D4),
+				(void*)&patch_GTA_SA_2_00_CReferences__Init_40E7D4
+			);
 		}
 		#endif
 	}
-#endif
 	else
 	{
 		CPatch::LeaveThisLevel();
@@ -5794,7 +5845,7 @@ void OtherLimits::Initialise()
 				// array of references
 				this->CReferences__aRefs.gta_sa = (CReference*)0xB9B9A8;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			// array of references
 			this->CReferences__aRefs.gta_sa = (CReference*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
@@ -5835,7 +5886,7 @@ void OtherLimits::Initialise()
 				// Coronas
 				this->CCoronas__aCoronas.gta_sa = (CRegisteredCorona*)0xC3E058;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			this->CCoronas__aCoronas.gta_sa = (CRegisteredCorona*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_ZN8CCoronas8aCoronasE"
@@ -5877,7 +5928,7 @@ void OtherLimits::Initialise()
 				// Object info array
 				this->CObjectData__ms_aObjectInfo.gta_sa = (CObjectInfo*)0xBB4A90;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			// Object info array
 			this->CObjectData__ms_aObjectInfo.gta_sa = (CObjectInfo*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
@@ -5897,7 +5948,7 @@ void OtherLimits::Initialise()
 				// Vehicle colors array
 				this->CVehicleModelInfo__ms_vehicleColourTable.gta_sa = (CRGBA*)0xB4E480;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			// Vehicle colors array
 			this->CVehicleModelInfo__ms_vehicleColourTable.gta_sa = (CRGBA*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,

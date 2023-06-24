@@ -109,7 +109,6 @@ void* CMemoryAllocation::malloc_in_app_space(size_t size)
 		500 * 1024 * 1024
 	);
 
-
 	/*
 #elif defined(IS_PLATFORM_ANDROID)
 	return AllocateNearTheAddress((void*)g_mCalc.GetCurrentModuleBase(),

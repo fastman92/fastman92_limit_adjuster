@@ -44,7 +44,7 @@ void CModelInfo_VarInitialisation::Initialise()
 		Address_CModelInfo_GetModelInfo = (void*)g_mCalc.GetCurrentVAbyPreferedVA(0x9BCB10);
 	else if(gameVersion == GAME_VERSION_GTA_EFLC_1_1_3_0_WIN_X86)
 		Address_CModelInfo_GetModelInfo = (void*)g_mCalc.GetCurrentVAbyPreferedVA(0x8A7DA0);
-#elif defined(IS_PLATFORM_ANDROID_ARM32)
+#elif defined(IS_PLATFORM_ANDROID)
 	else if (true)
 		Address_CModelInfo_GetModelInfo = (void*)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_ZN10CModelInfo12GetModelInfoEPKcPi");
 #endif

@@ -95,6 +95,9 @@ void CGameText::Initialise()
 	
 	//////////
 
+#if IS_PLATFORM_ANDROID
+	this->bUsesUnsignedShortForChars = true;
+#else
 	if (gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
 		this->bUsesUnsignedShortForChars = true;
 	else if (gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
@@ -103,12 +106,5 @@ void CGameText::Initialise()
 		this->bUsesUnsignedShortForChars = false;
 	else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
 		this->bUsesUnsignedShortForChars = true;
-	else if (gameVersion == GAME_VERSION_GTA_III_1_8_ANDROID_ARMEABI_V7A)
-		this->bUsesUnsignedShortForChars = true;
-	else if (gameVersion == GAME_VERSION_GTA_VC_1_09_ANDROID_ARMEABI_V7A)
-		this->bUsesUnsignedShortForChars = true;
-	else if (gameVersion == GAME_VERSION_GTA_SA_1_08_ANDROID_ARMEABI_V7A
-		|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
-		|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A)
-		this->bUsesUnsignedShortForChars = true;
+#endif
 }

@@ -207,14 +207,14 @@ namespace Configuration {
 						worksheet_merge_range(worksheet,
 							0, startColumnForCurrentPlatform + 3,
 							0, lastColumnForCurrentPlatform + 3,
-							pPlatformConfiguration->platformName,
+							pPlatformConfiguration->solutionPlatformName,
 							formatInfo.platform_name_format
 						);
 					else
 						worksheet_write_string(worksheet,
 							0,
 							startColumnForCurrentPlatform + 3,
-							pPlatformConfiguration->platformName,
+							pPlatformConfiguration->solutionPlatformName,
 							formatInfo.platform_name_format
 						);
 

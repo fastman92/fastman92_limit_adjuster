@@ -79,6 +79,7 @@ class CLimitAdjuster
 {
 private:
 	Game::eGameVersion m_GameVersion;
+
 	bool bIsAdditionalJavaCodeLoaded;
 	bool bIsGameMemorySetUp;
 	 
@@ -123,6 +124,9 @@ public:
 
 	char gameDetectedStr[64];
 
+	const Configuration::tPlatformConfiguration* pPlatformConfig;
+	const Configuration::CGameDescription* pGameVersionDescription;
+
 	// Package name
 	char PackageName[128];
 	char OriginalPackageName[128];
@@ -142,7 +146,7 @@ public:
 	void ProcessFLAaction(eFLA_actionToDo action, void* pData = 0);
 
 	// Processes an error of being unable to detect the game
-	static void ProcessUnableToDetectTheGame();
+	void ProcessUnableToDetectTheGame();
 
 	// Terminates game process
 	static void TerminateProcess();
@@ -166,6 +170,9 @@ public:
 
 	// Get path to file from root directory
 	std::string GetPathToFlaFileFromRootDirectory(const char* filename);
+
+	// Flushes instruction cache
+	void FlushInstructionCache();
 
 private:
 	// Starts limit adjuster

@@ -11,16 +11,19 @@
 #include <Exception\exception.h>
 #include <MemoryAddressCalculator/CMemoryAddressCalculator.h>
 #include <MultiPlatformSupport/PlatformGeneralisation.h>
+#include <MemoryPermission\MemoryPermission.h>
 
 #include "../fastman92 limit adjuster/Source files/Core/CPatch.h"
 #include "../fastman92 limit adjuster/Source files/Core/UsefulMacros.h"
 #include "../fastman92 limit adjuster/Source files/ForOtherProjects/Common/common.h"
+
 
 #include <string.h>
 
 #include <android/log.h>
 #include <dirent.h>
 #include <dlfcn.h>
+#include <errno.h>
 #include <limits.h>
 #include <sys\stat.h> 
 #include <stdexcept>
@@ -36,6 +39,47 @@ jobject CPluginLoader::ms_mainActivityDuringLaunch = 0;
 bool CPluginLoader::bCLEOloaded = false;
 
 #ifdef IS_PLATFORM_ANDROID
+
+#if 0
+extern "C" int JNIEXPORT  __attribute__((section("bar"))) myFunction()
+{
+	return 1;
+}
+
+
+static char myVar[] = "my string to be changed";
+
+void mprotect_test()
+{
+	tMemoryPermissionChangeRequest request; \
+	// request.lpAddress = &myVar;
+	// request.lpAddress = (void*)&myFunction;
+	request.lpAddress = g_Loader.TrampolineSpacePtr;
+	
+
+	request.dwSize = 4;
+
+	
+	
+	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READWRITE);
+	bool result = SetMemoryPermission(&request);
+
+	*(int*)request.lpAddress = 5;
+
+	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_EXECUTE_READ);
+	result = SetMemoryPermission(&request);
+
+	if (result)
+		OutputFormattedDebugString("mprotect worked\n");
+	else
+		OutputFormattedDebugString("mprotect did not work\n");
+
+
+	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READWRITE);
+	result = SetMemoryPermission(&request);
+}
+#endif
+
 // Sets the path to external storage directory
 static void GetPackageName(JNIEnv* env, jobject context, char* strPath, size_t bufferSize)
 {
@@ -217,7 +261,21 @@ static void ReplacePointerToNvEventQueueActivity_init(uintptr_t pInit)
 	CPluginLoaderHelper::original_NvEventQueueActivity_init =
 		*(CPluginLoaderHelper::type_NvEventQueueActivity_init_ptr*)pInit;
 
-	CPatch::PatchPointer(pInit, (void*)&CPluginLoaderHelper::NvEventQueueActivity_init);
+	tMemoryPermissionChangeRequest request;
+	request.lpAddress = (void*)pInit;
+	request.dwSize = sizeof(void*);
+
+	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READWRITE);
+
+	if (!SetMemoryPermission(&request))
+		throw f92_runtime_error("ReplacePointerToNvEventQueueActivity_init, unable to set R+W permission. Error = %d", errno);
+
+	*(void**)pInit = (void*)&CPluginLoaderHelper::NvEventQueueActivity_init;
+
+	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READONLY);
+
+	if (!SetMemoryPermission(&request))
+		throw f92_runtime_error("ReplacePointerToNvEventQueueActivity_init, unable to set R permission. Error = %d", errno);
 
 	OutputFormattedDebugString("Pointer to com.nvidia.devtech.NvEventQueueActivity.init replaced on 0x%llX%.",
 		(uint64_t)pInit
@@ -232,6 +290,10 @@ CPluginLoader::CPluginLoader()
 	this->ms_packageName[0] = 0;
 	this->FLApluginHandle = nullptr;
 	this->pTargetArchABI = TOSTRING(TARGET_ARCH_ABI);
+
+	this->TrampolineSpacePtr = 0;
+	this->TrampolineSpaceSize = 0;
+	this->TrampolinePosition = 0;
 }
 
 // Sets path by function from loader
@@ -256,6 +318,8 @@ void CPluginLoader::GetApplicationLibDirectoryPath(char* libPluginPath)
 }
 
 static int someVariable;
+
+
 
 // Initializes
 bool CPluginLoader::InitialiseLoading(
@@ -329,6 +393,9 @@ bool CPluginLoader::InitialiseLoading(
 	memcpy(this->ms_applicationIdentifierDeprecated, pApplicationIdentifierDeprecated, sizeof(this->ms_applicationIdentifierDeprecated));
 
 	this->pApplicationIdentifier = (const char*)dlsym(this->applicationLibHandle, "ApplicationIdentifierForPluginLoader");
+
+	this->TrampolineSpacePtr = (char*)dlsym(this->applicationLibHandle, "TrampolineSpace");
+	this->TrampolineSpaceSize = *(uint32_t*)dlsym(this->applicationLibHandle, "TrampolineSpaceSize");
 
 	if (!CPatch::IsInitialized())
 		CPatch::Init();
@@ -486,6 +553,8 @@ void CPluginLoader::LoadCLEO(const char* directory)
 			if (pJni_OnLoad)
 				pJni_OnLoad(this->m_javaVm, this->m_reserved);
 		}
+		else
+			OutputFormattedDebugString("Could not load CLEO.");
 	}
 	else
 		OutputFormattedDebugString("CLEO should not be loaded by plugin loader.");
@@ -599,7 +668,7 @@ void CPluginLoader::FinishLoadingPlugins()
 
 					pOnPluginLoadWhenAppIsInitialized(
 						&startParams
-					);
+					);					
 				}
 			}
 			else
@@ -630,6 +699,24 @@ void CPluginLoader::FinishLoadingPlugins()
 		}
 	}
 
+	// Set R+X permissions for trampoline space
+	if (this->TrampolineSpacePtr)
+	{
+		tMemoryPermissionChangeRequest request;
+		request.lpAddress = this->TrampolineSpacePtr;
+		request.dwSize = this->TrampolineSpaceSize;
+
+		// request.lpAddress = new char[request.dwSize];
+
+		request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_EXECUTE_READ);
+
+		bool result = SetMemoryPermission(&request);
+
+		if (!SetMemoryPermission(&request))
+			throw f92_runtime_error("TrampolineSpace, unable to set E+R permission again. Address: 0x%llX Error = %d",
+			(uint64_t)request.lpAddress, errno
+			);
+	}
 }
 
 static jobject getGlobalContext(JNIEnv *env)

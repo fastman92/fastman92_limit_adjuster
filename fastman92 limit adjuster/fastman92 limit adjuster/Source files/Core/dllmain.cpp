@@ -44,6 +44,68 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	LPVOID lpReserved
 	)
 {
+	/*
+	if(1)
+	{
+		PVOID USBXHCI_base = hModule;
+		PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)hModule;
+		PIMAGE_NT_HEADERS ntHeader = (PIMAGE_NT_HEADERS)((uintptr_t)(dosHeader)+(dosHeader->e_lfanew));
+
+		//Identify for valid PE file  
+		if (ntHeader->Signature == IMAGE_NT_SIGNATURE)
+		{
+			
+			PIMAGE_OPTIONAL_HEADER opHeader = &ntHeader->OptionalHeader;
+
+			IMAGE_DATA_DIRECTORY ImportsDirectory = opHeader->DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT];
+
+			IMAGE_IMPORT_DESCRIPTOR* pImportDescriptor = (IMAGE_IMPORT_DESCRIPTOR*)((char*)USBXHCI_base + ImportsDirectory.VirtualAddress);
+
+			
+			while (pImportDescriptor->OriginalFirstThunk)
+			{
+				
+				//LPCSTR LibraryName = (char*)USBXHCI_base + pImportDescriptor->Name;
+				//printf_MessageBox("herhe: %s", LibraryName);
+
+				PIMAGE_THUNK_DATA pOriginalFirstThunk = (PIMAGE_THUNK_DATA)((char*)USBXHCI_base + pImportDescriptor->OriginalFirstThunk);
+				PIMAGE_THUNK_DATA pFirstThunk = (PIMAGE_THUNK_DATA)((char*)USBXHCI_base + pImportDescriptor->FirstThunk);
+
+				PIMAGE_THUNK_DATA pOriginalThunk;
+				PIMAGE_THUNK_DATA pThunk;
+
+				unsigned int i = 0;
+
+				while (1)
+				{
+					pOriginalThunk = pOriginalFirstThunk + i;
+					pThunk = pFirstThunk + i;
+
+					if (!pOriginalThunk->u1.AddressOfData)
+						break;
+
+					__asm
+					{
+					}
+
+					PIMAGE_IMPORT_BY_NAME imageImportByName = (PIMAGE_IMPORT_BY_NAME)((char*)USBXHCI_base + pOriginalThunk->u1.AddressOfData);
+					LPCSTR functionName = (LPCSTR)&imageImportByName->Name;
+					PVOID* pFunctionAddress = (PVOID*)&pThunk->u1.Function;
+
+					printf_MessageBox("function: %s ptr: 0x%X \r\n", functionName, *pFunctionAddress);
+
+					i++;
+				}
+
+				pImportDescriptor++;
+			}
+		}
+	}
+	
+	printf_MessageBox("Finished");
+	ExitProcess(0);
+	*/
+
 	if (!bEnableTheFLA💥)
 		return TRUE;
 
@@ -99,6 +161,13 @@ extern "C"
 		OutputFormattedDebugString("--------------------------------------");
 		OutputFormattedDebugString("--------------------------------------");
 		OutputFormattedDebugString("Starting %s", PROJECT_FULL_NAME);
+
+		if(0)
+		{
+			uintptr_t target = 0x1234567812345678;
+			uint32_t instruction = 0xF2A00000 | (((target >> 16) & 0xFFFF) << 5);	// movk x0, #((target >> 16) & 0xFFFF), lsl #16
+			OutputFormattedDebugString("here 0x%08X\n", sizeof(uintptr_t));
+		}
 		#endif
 
 		memset(&startParams, NULL, sizeof(startParams));
@@ -112,7 +181,7 @@ extern "C"
 		startParams.applicationLibHandle = pPluginStartParams->applicationLibHandle;
 		
 		g_LimitAdjuster.ProcessFLAaction(eFLA_actionToDo::Start, &startParams);
-
+		
 		/*
 		LOGI("OnGameLibraryLoad! Path: %s Plugin handle: 0x%X Application base: 0x%X Identifier: 0x%08X",
 			libraryPath,

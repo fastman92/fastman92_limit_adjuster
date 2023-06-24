@@ -26,7 +26,7 @@ void CTimer_VarInitialisation::Initialise()
 	{
 		CTimer::m_snTimeInMilliseconds = (unsigned int*)0xB7CB84;
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	{
 		CTimer::m_snTimeInMilliseconds = (unsigned int*)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,

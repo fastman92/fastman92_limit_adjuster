@@ -19,6 +19,7 @@
 #include <Exception\exception.h>
 #include <fileIO.h>
 #include <MultiPlatformSupport/PlatformGeneralisation.h>
+#include <Assembly/UsefulMacros.h>
 
 #include <pthread.h>
 
@@ -247,6 +248,77 @@ extern "C"
 	F92_LA_API jobject GetMainActivityDuringLaunch()
 	{
 		return g_Loader.ms_mainActivityDuringLaunch;
+	}
+
+	// Allocates redirection to certain address, trampoline
+	// Encoding: 0 - unspecified, 1 - ARM, 2 - Thumb
+	const void* AllocRedirection(uintptr_t target, int encoding, eTrampolineRegister trampolineRegisterAction)
+	{
+		
+		auto oldPosition = g_Loader.TrampolinePosition;
+		auto NewPosition = g_Loader.TrampolinePosition;
+
+		MAKE_DEAD_IF();
+		#if IS_PLATFORM_ANDROID_ARM64
+		NewPosition = GET_ALIGNED_ADDRESS(NewPosition, 4);
+
+		// result = g_Loader.TrampolinePosition;
+		
+		// *(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0x14000000;
+
+		intptr_t difference = target - (uintptr_t)(g_Loader.TrampolineSpacePtr + NewPosition);
+		bool bCanBranchWithoutRegister = false; // difference >= -0x8000000 && difference < 0x8000000;
+
+		// OutputFormattedDebugString("Can jump: %d\n", bCanBranchWithoutRegister);
+		
+		// do something with trampoline register
+		if (trampolineRegisterAction == TRAMPOLINE_REGISTER_SAVE_REGISTER)
+		{
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0xF81F0FF0;	// STR X16, [SP, #-16]!
+			
+			NewPosition += 4;
+		}
+		else if (trampolineRegisterAction == TRAMPOLINE_REGISTER_RESTORE_REGISTER)
+		{
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0xF84107F0;	// LDR  x16, [sp], #16
+			NewPosition += 4;
+		}
+		
+		if (!bCanBranchWithoutRegister)
+		{
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0xD2800000 | 0x10 | ((target & 0xFFFF) << 5);	// movz x16, #(target & 0xFFFF)
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 4) = 0xF2A00000 | 0x10 | (((target >> 16) & 0xFFFF) << 5);	// movk x16, #((target >> 16) & 0xFFFF), lsl #16;
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 8) = 0xF2C00000 | 0x10 | (((target >> 32) & 0xFFFF) << 5);	// movk x16, #((target >> 32) & 0xFFFF), lsl #32;
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 12) = 0xF2E00000 | 0x10 | (((target >> 48) & 0xFFFF) << 5);	// movk x16, #((target >> 48) & 0xFFFF), lsl #48;
+
+			NewPosition += 16;
+
+			// br x16
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0xD61F0200;	// BR X16
+			NewPosition += 4;
+		}
+		else
+		{
+			uint32_t instruction;
+			instruction = 0x14000000;
+			instruction |= (((uintptr_t)target - (uintptr_t)(g_Loader.TrampolineSpacePtr + NewPosition)) >> 2) & ((2 << 26) - 1);
+			*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = instruction;
+			NewPosition += 4;
+		}
+
+		
+
+		// nop
+		*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0xD503201F;	// nop
+		NewPosition += 4;
+
+		g_Loader.TrampolinePosition = NewPosition;
+
+		return g_Loader.TrampolineSpacePtr + oldPosition;
+		#endif
+
+
+		return NULL;
 	}
 }
 #endif

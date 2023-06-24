@@ -735,6 +735,9 @@
     <ClInclude Include="Source files\GameStructures\Rockstar Games\CMemoryMgr.h">
       <Filter>Header Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
     </ClInclude>
+    <ClInclude Include="Source files\Core\Configuration\TextFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAccess\CMemoryAccessWithinCurrentProcess.cpp">
@@ -1114,6 +1117,9 @@
     </ClCompile>
     <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\Configuration\TextFile.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core\Configuration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

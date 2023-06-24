@@ -2089,7 +2089,7 @@ void DynamicLimits::SetReachDriver(unsigned int iReachDriver)
 {
 	MAKE_VAR_GAME_VERSION();
 	CPatch::EnterNewLevel();
-	CPatch::EnableDebugMode();
+	// CPatch::EnableDebugMode();
 
 	if (CPatch::IsDebugModeActive())
 		iReachDriver = this->ms_ReachDriverLimit;
@@ -2121,7 +2121,7 @@ void DynamicLimits::SetPropAnim(unsigned int iPropAnim)
 {
 	MAKE_VAR_GAME_VERSION();
 	CPatch::EnterNewLevel();
-	CPatch::EnableDebugMode();
+	// CPatch::EnableDebugMode();
 
 	if (CPatch::IsDebugModeActive())
 		iPropAnim = this->ms_PropAnimLimit;

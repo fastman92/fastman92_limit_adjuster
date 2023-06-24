@@ -14,6 +14,121 @@
 
 namespace Configuration {
 
+	CGameDescription::CGameDescription()
+	{
+		this->gameVersion = Game::GAME_VERSION_UNDEFINED;
+		this->preferedVA = 0;
+		this->humanReadableName = nullptr;
+		this->name = nullptr;
+		this->appLibIdentifier = nullptr;
+		this->numberOfDefinedSizes = 0;
+	}
+	// Returns count of games in list
+	unsigned int tPlatformConfiguration::GetCountOfGamesInList() const
+	{
+		const CGameDescription* pGameDescription = this->pGameList;
+		unsigned int count = 0;
+
+		while (pGameDescription->gameVersion != Game::GAME_VERSION_UNDEFINED)
+		{
+			pGameDescription++;
+			count++;
+		}
+
+		return count;
+	}
+
+	struct tDocumentationWorkbook;
+
+	static // Check if a char array contains a character
+		bool startWith(
+			const char * arr,
+			const char* substring)
+	{
+		bool result = false;
+		// get number of characters in substring
+		size_t subStrLen = strlen(substring);
+		// get number of characters in char array string
+		size_t mainStrLen = strlen(arr);
+		// Check if char array starts with the given substring
+		if (mainStrLen >= subStrLen &&
+			strncmp(arr, substring, subStrLen) == 0)
+		{
+			result = true;
+		}
+		return result;
+	}
+
+	// Returns text description about platform
+	std::string tPlatformConfiguration::GetTextDescriptionAboutGames(bool bExtendedInfo) const
+	{
+		std::string result;
+		char str[256];
+
+		enum
+		{
+			PLATFORM_TYPE_WIN,
+			PLATFORM_TYPE_ANDROID
+		} platformType;
+
+		if (startWith(this->solutionPlatformName, "WIN_"))
+			platformType = PLATFORM_TYPE_WIN;
+		else if (startWith(this->solutionPlatformName, "ANDROID_"))
+			platformType = PLATFORM_TYPE_ANDROID;
+
+		const CGameDescription* pGameDescription = this->pGameList;
+
+		unsigned int i = 1;
+
+		while (pGameDescription->gameVersion != Game::GAME_VERSION_UNDEFINED)
+		{
+			sprintf(str,
+				"\n%d. %s:\n",
+				i, pGameDescription->humanReadableName
+			);
+
+			result += str;
+
+			if (platformType == PLATFORM_TYPE_WIN)
+			{
+				if (pGameDescription->numberOfDefinedSizes)
+					for (unsigned j = 0; j < pGameDescription->numberOfDefinedSizes; j++)
+					{
+						sprintf(str, "\tEXE size:  %d bytes\n", pGameDescription->sizeArray[j]);
+						result += str;
+					}
+				else
+					result += "\tEXE size:  does not matter\n";
+
+			}
+			else if (platformType == PLATFORM_TYPE_ANDROID)
+			{
+				sprintf(str,
+					"\tSO library identifier: \"%s|%s\"\n",
+					pGameDescription->appLibIdentifier,
+					this->platformABI);
+
+				result += str;
+			}
+
+			{
+				const char* INIfilename = CLimitAdjuster::GetIniFilenameForGame(pGameDescription->gameVersion, false);
+
+				if (INIfilename)
+				{
+					sprintf(str, "\twill use %s\n", INIfilename);
+					result += str;
+				}
+			}
+
+			pGameDescription++;
+			i++;
+		}
+
+		return result;
+	}
+	
+
 	// Inits a structure
 	void CConfigurationField::Init()
 	{
@@ -21,6 +136,7 @@ namespace Configuration {
 
 		this->INIstate = INI_FIELD_NONE;
 		this->ExcelState = EXCEL_FIELD_STATE_EMPTY;
+		this->bIsOneValuePerPlatform = false;
 
 		this->comment[0] = 0;
 
@@ -114,7 +230,7 @@ namespace Configuration {
 		{
 			const tPlatformConfiguration* pPlatform = platformList;
 
-			while (pPlatform->platformName)
+			while (pPlatform->solutionPlatformName)
 			{
 				countOfPlatforms++;
 				pPlatform++;
@@ -131,21 +247,21 @@ namespace Configuration {
 		for (int i = 0; i < countOfPlatforms; i++)
 		{
 			const tPlatformConfiguration* pPlatformConfiguration = platformList + i;
-			const eGameVersion* pGameVersion = pPlatformConfiguration->pGameList;
+			const CGameDescription* pGameVersionDescription = pPlatformConfiguration->pGameList;
 			
-			if(*pGameVersion == GAME_VERSION_UNDEFINED)
+			if(pGameVersionDescription->gameVersion == GAME_VERSION_UNDEFINED)
 				pWorkbook->numberOfAllGamesInAllPlatforms++;
 			else
 			{
-				while (*pGameVersion != GAME_VERSION_UNDEFINED)
+				while (pGameVersionDescription->gameVersion != GAME_VERSION_UNDEFINED)
 				{
 					pWorkbook->numberOfAllGamesInAllPlatforms++;
-					pGameVersion++;
+					pGameVersionDescription++;
 				}
 			};
 		}
 
-		pWorkbook->gameNamesInAllPlatforms = new const char*[pWorkbook->numberOfAllGamesInAllPlatforms];
+		pWorkbook->gamesInAllPlatforms = new const Configuration::CGameDescription*[pWorkbook->numberOfAllGamesInAllPlatforms];
 
 		// Set up sections
 		pWorkbook->numberOfSections = 0;
@@ -217,19 +333,20 @@ namespace Configuration {
 		for (int i = 0; i < countOfPlatforms; i++)
 		{
 			const tPlatformConfiguration* pPlatformConfiguration = platformList + i;
-			const eGameVersion* pGameVersion = pPlatformConfiguration->pGameList;
+			pLimitAdjuster->pPlatformConfig = pPlatformConfiguration;
+
+			const CGameDescription* pGameVersionDescription = pPlatformConfiguration->pGameList;
 
 			// Is empty platform game list?
-			if (*pGameVersion == GAME_VERSION_UNDEFINED)
+			if (pGameVersionDescription->gameVersion == GAME_VERSION_UNDEFINED)
 				gameColumn++;
 			else
-				while (*pGameVersion != GAME_VERSION_UNDEFINED)
+				while (pGameVersionDescription->gameVersion != GAME_VERSION_UNDEFINED)
 				{
-					eGameVersion game = *pGameVersion;
-					pLimitAdjuster->SetGameInfo(0, 0, game, "N/A");
+					pWorkbook->gamesInAllPlatforms[gameColumn] = pGameVersionDescription;
 
-					const char* gameVersionName = CGameVersion::GetGameNameByMemberWithoutPlatformName(game);
-					pWorkbook->gameNamesInAllPlatforms[gameColumn] = gameVersionName;
+					eGameVersion game = pGameVersionDescription->gameVersion;
+					pLimitAdjuster->SetGameInfo(0, 0, game, "N/A");
 
 					// Initialize the modules
 					pLimitAdjuster->InitializeModules();
@@ -258,16 +375,69 @@ namespace Configuration {
 					// Shutdown the modules
 					pLimitAdjuster->ShutDownModules();
 
-					pGameVersion++;
+					pGameVersionDescription++;
 					gameColumn++;
 				}
+		}
+
+		// Count of features
+		tConfigurationSectionProcessed* pNoNameSection = std::find_if(pWorkbook->pSectionArray, pWorkbook->pSectionArray + pWorkbook->numberOfSections,
+			[](const tConfigurationSectionProcessed& pSection)
+		{
+			return !pSection.sectionName[0];
+		});
+
+		if (pNoNameSection)
+		{
+			tConfigurationSectionEntryProcessed* pSectionEntryCountOfFeatures = std::find_if(pNoNameSection->pEntryArray, pNoNameSection->pEntryArray + pNoNameSection->countOfEntries,
+				[](const tConfigurationSectionEntryProcessed& pSectionEntry)
+			{
+
+				return !strcmp(pSectionEntry.key, "Count of supported features");
+			});
+
+			if (pSectionEntryCountOfFeatures)
+			{
+				// Iterate over games
+				for (unsigned int gameID = 0; gameID < pWorkbook->numberOfAllGamesInAllPlatforms; gameID++)
+				{
+					unsigned int countOfFeaturesPerGame = 0;
+
+					// Iterate the sections
+					for (unsigned sectionID = 0; sectionID < pWorkbook->numberOfSections; sectionID++)
+					{
+						const tConfigurationSectionProcessed* pSectionProcessed = pWorkbook->pSectionArray + sectionID;
+
+						if (pSectionProcessed == pNoNameSection)	// skip no name section, when counting
+							continue;
+
+						// Iterate over entries
+						for (unsigned int sectionEntryID = 0;
+							sectionEntryID < pSectionProcessed->countOfEntries;
+							sectionEntryID++)
+						{
+							const tConfigurationSectionEntryProcessed* pSectionEntry = pSectionProcessed->pEntryArray + sectionEntryID;
+
+							const CConfigurationField* pField = &pSectionEntry->pEntryArray[gameID];
+
+							if (pField->INIstate == INI_FIELD_ACTIVE || pField->INIstate == INI_FIELD_INACTIVE)
+								countOfFeaturesPerGame++;
+						}
+					}
+
+					// Set count of supported features for this game
+					pSectionEntryCountOfFeatures->pEntryArray[gameID].SetIntValue(countOfFeaturesPerGame, INI_FIELD_NONE, EXCEL_FIELD_STATE_SUPPORTED_ONLY_SHOW_VALUE);
+				}
+			}
+
+			
 		}
 	}
 
 	// Clear documentation workbook, deallocates the data
 	void Workbook::ClearDocumentationWorkbook(tDocumentationWorkbook* pWorkbook)
 	{
-		delete[] pWorkbook->gameNamesInAllPlatforms;
+		delete[] pWorkbook->gamesInAllPlatforms;
 
 		for (unsigned sectionID = 0; sectionID < pWorkbook->numberOfSections; sectionID++)
 		{

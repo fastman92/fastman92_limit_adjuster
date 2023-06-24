@@ -79,7 +79,7 @@ void Functions_varInitialisation::Initialise()
 		pGTAIV_crc32FromLowerCaseString = g_mCalc.GetCurrentVAbyPreferedVA(0x45CF50);
 	else if(gameVersion == GAME_VERSION_GTA_EFLC_1_1_2_0_WIN_X86)
 		pGTAIV_crc32FromLowerCaseString = g_mCalc.GetCurrentVAbyPreferedVA(0x45A8B0);
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 	Address_FindPlayerCoors = (uintptr_t)Library::GetSymbolAddress(
 		&g_LimitAdjuster.hModule_of_game,
 		"_Z15FindPlayerCoorsi"

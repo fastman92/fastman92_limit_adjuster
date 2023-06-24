@@ -88,7 +88,7 @@ void ShadowLimits::SetShadowStored(unsigned int iShadowStoredLimit)
 		// Delete a variable
 		CCodeMover::DeleteVariable("SHADOW_STORED_LIMIT");
 	}
-	#elif defined(IS_PLATFORM_ANDROID_ARM32)
+	#elif defined(IS_PLATFORM_ANDROID)
 
 	#endif
 	else

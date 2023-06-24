@@ -105,7 +105,7 @@ void StreamingLimits::Initialise()
 			// Stream name array
 			this->streamNameArray.ptr = (char*)0x8E4098;
 		}
-		#elif defined(IS_PLATFORM_ANDROID_ARM32)
+		#elif defined(IS_PLATFORM_ANDROID)
 		{
 			if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 			{
