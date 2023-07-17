@@ -55,21 +55,21 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(179, 41);
+            this.label3.Location = new System.Drawing.Point(154, 41);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(173, 20);
+            this.label3.Size = new System.Drawing.Size(234, 20);
             this.label3.TabIndex = 12;
-            this.label3.Text = "SELECT INPUT APK";
+            this.label3.Text = "SELECT INPUT APK / APKS";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(188, 103);
+            this.label4.Location = new System.Drawing.Point(154, 103);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(164, 20);
+            this.label4.Size = new System.Drawing.Size(225, 20);
             this.label4.TabIndex = 13;
-            this.label4.Text = "CREATE NEW APK";
+            this.label4.Text = "CREATE NEW APK / APKS";
             // 
             // newAPKpath
             // 
@@ -91,7 +91,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "APK archive|*.apk|All files|*.*";
+            this.openFileDialog1.Filter = "APK(S) archive|*.apk;*.apks|All files|*.*";
             // 
             // saveFileDialog1
             // 
@@ -110,10 +110,12 @@
             // 
             // InformationTextBox
             // 
+            this.InformationTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.InformationTextBox.Location = new System.Drawing.Point(11, 178);
             this.InformationTextBox.Multiline = true;
             this.InformationTextBox.Name = "InformationTextBox";
             this.InformationTextBox.ReadOnly = true;
+            this.InformationTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.InformationTextBox.Size = new System.Drawing.Size(525, 215);
             this.InformationTextBox.TabIndex = 23;
             this.InformationTextBox.Text = "Informations";

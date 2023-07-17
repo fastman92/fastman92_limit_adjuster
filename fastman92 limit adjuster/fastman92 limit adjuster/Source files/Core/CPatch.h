@@ -7,7 +7,7 @@
 #pragma once
 #include "ProjectConstants.h"
 
-#include "../../../fastman92 plugin loader/ForOtherProjects/Exports.h"
+#include "../../../fastman92 plugin loader/ForOtherProjects/PluginLoaderExports.h"
 
 #include <Assembly\eInstructionSet.h>
 #include <Assembly/UsefulMacros.h>

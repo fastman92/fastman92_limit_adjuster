@@ -393,6 +393,19 @@ namespace Android_plugin_deployment_solution
                         OBB_GTA_SA
                         ),
 
+                    new GameVersionDescription(
+                        "2.11.32",  // name
+                        "com.rockstargames.gtasa", // packageName
+                        null, // identifierFourCCdeprecated
+                        "GTA_SA|2.11.32",  // identifier
+                        "libGame.so", // libraryFilename
+                        "ANDROID_ARM64_V8A",    // platformName
+                        false,     // bCLEOavailable
+                        true,     // bPubliclyAvailable
+                        true,     // bFLAavailable
+                        OBB_GTA_SA
+                        ),
+
                 }  
 
                 ),

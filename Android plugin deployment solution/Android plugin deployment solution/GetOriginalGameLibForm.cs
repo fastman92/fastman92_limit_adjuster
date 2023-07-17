@@ -7,7 +7,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 using System.Windows.Forms;
-using Ionic.Zip;
 
 namespace Android_plugin_deployment_solution
 {
@@ -105,32 +104,23 @@ namespace Android_plugin_deployment_solution
 
             string libFilePathOnPC = libDirectoryOnPC + Path.DirectorySeparatorChar + libraryFilename;
 
-            string extractedFilename = null;
+            bool extractedFilename = false;
+            string checkedPath = "lib/" + mainForm.platformDescription.platformABI + "/" + libraryFilename;
 
-            using (ZipFile zip = ZipFile.Read(APKfilePath))
+            using (System.IO.Compression.ZipArchive archive = System.IO.Compression.ZipFile.OpenRead(APKfilePath))
             {
-                FileStream fileStream;
-                
+                var entry = archive.GetEntry(checkedPath);
+
+                if (entry != null)
                 {
-                    string checkedPath = "lib/" + mainForm.platformDescription.platformABI + "/" + libraryFilename;
-
-                    foreach (ZipEntry zipFile in zip)
-                    {
-                        if (checkedPath == zipFile.FileName)
-                        {
-                            fileStream = File.Create(libFilePathOnPC);
-                            zipFile.Extract(fileStream);
-                            fileStream.Close();
-
-                            extractedFilename = checkedPath;
-                        }
-                    }
+                    entry.ExtractToFile(libFilePathOnPC, true);
+                    extractedFilename = true;
                 }
             }
 
-            if (extractedFilename != null)
+            if (extractedFilename)
                 MessageBox.Show(
-                    "File extracted: " + extractedFilename
+                    "File extracted: " + checkedPath
                      + Environment.NewLine + "Operation finished. Click OK to close.");
             else
                 MessageBox.Show("Error: unable to extract the SO library from APK archive!");

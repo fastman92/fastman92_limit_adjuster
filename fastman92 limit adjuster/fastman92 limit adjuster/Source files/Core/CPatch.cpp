@@ -302,7 +302,6 @@ unsigned int CPatch::RedirectCodeEx(
 	if (sourceInstructionSet == INSTRUCTION_SET_THUMB)
 	{
 		char code[12];
-		unsigned int sizeOfData = 0;
 
 		if (dwAddress % 4 == 0)
 		{
@@ -327,6 +326,7 @@ unsigned int CPatch::RedirectCodeEx(
 
 		*(uint32_t*)(code + 0) = 0xE51FF004;	// // LDR             R0, [PC, #0]
 		*(const void**)(code + 4) = to;	// pointer, where to jump
+		sizeOfData = sizeof(code);
 		CPatch::PatchMemoryData(dwAddress, code, sizeof(code));
 	}
 	else if (sourceInstructionSet == INSTRUCTION_SET_X86 || sourceInstructionSet == INSTRUCTION_SET_X64)
@@ -353,8 +353,9 @@ unsigned int CPatch::RedirectCodeEx(
 		);
 		instruction = 0x14000000;
 		instruction |= (((uintptr_t)to - dwAddress) >> 2) & ((2 << 26) - 1);
+		sizeOfData = sizeof(instruction);
 
-		CPatch::PatchMemoryData(dwAddress, &instruction, sizeof(instruction));
+		CPatch::PatchMemoryData(dwAddress, &instruction, sizeOfData);
 	}
 
 	CPatch::LeaveThisLevel();

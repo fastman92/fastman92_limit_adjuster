@@ -6,7 +6,7 @@
 
 // dllmain.cpp : Defines the entry point for the DLL application.
 
-#include "ForOtherProjects/Exports.h"
+#include "ForOtherProjects/PluginLoaderExports.h"
 #include "Loader.h"
 #include "Log.h"
 

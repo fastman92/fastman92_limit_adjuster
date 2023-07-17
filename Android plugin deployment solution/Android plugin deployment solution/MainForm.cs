@@ -273,13 +273,14 @@ namespace Android_plugin_deployment_solution
                     else if (this.PackageNameToRun == "com.rockstargames.gtasa" && gameVersionDescription.name == "2.10" && gameVersionDescription.platformName == "ANDROID_ARM64_V8A")
                         this.PackageNameToRun = "com.rockstargames.gtasa_2_10_arm64";
 
+                    else if (this.PackageNameToRun == "com.rockstargames.gtasa" && gameVersionDescription.name == "2.11.32" && gameVersionDescription.platformName == "ANDROID_ARM64_V8A")
+                        this.PackageNameToRun = "com.rockstargames.gtasa_2_11_32_arm64";
+
                     else if (this.PackageNameToRun == "com.rockstargames.gtalcs" && gameVersionDescription.name == "2.4")
                         this.PackageNameToRun = "com.rockstargames.gtalcs_2_4";
                     else if (this.PackageNameToRun == "com.rockstargames.gtactw" && gameVersionDescription.name == "1.04")
                         this.PackageNameToRun = "com.rockstargames.gtactw_1_04";
                 }
-
-                
             }
 
             // Files directory for current game
@@ -324,6 +325,9 @@ namespace Android_plugin_deployment_solution
 
         private void DeleteUnneccessaryFiles()
         {
+            if (true)
+                return;
+
             try
             {
                 Directory.Delete(@"\\?\" + this.tempDirectory, true);
@@ -897,32 +901,53 @@ namespace Android_plugin_deployment_solution
             getOriginalGameLib.ShowDialog();
         }
 
-        private void WriteRemoveFile(string remotePath)
+        private void WriteRemoveFile(string remotePath, bool bUseRoot)
         {
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'rm " + remotePath + "'\"" + Environment.NewLine;
+            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"";
+
+            if (bUseRoot)
+                this.ScriptContent += "su -c '";
+
+            this.ScriptContent += "rm " + remotePath;
+
+            if (bUseRoot)
+                this.ScriptContent += "'";
+
+            this.ScriptContent += "\"" + Environment.NewLine;
         }
 
-        private void WriteReplaceLibrary(string localPath, string remotePath, bool TryMkdir = false)
+        private void WriteReplaceLibrary(string localPath, string remotePath, bool bUseRoot, bool TryMkdir = false)
         {
             var pos = remotePath.LastIndexOf('/');
             
             string remoteDirectory = remotePath.Substring(0, pos);
 
-            // Let's check if it will help to resolve the problem of native libraries being restored by Android.
-            string owner = "root";  // default: system
-            string permission = "555";  // default: 755
+            this.WriteRemoveFile(remotePath, bUseRoot);
+            
+            if (bUseRoot)
+            {
+                // Let's check if it will help to resolve the problem of native libraries being restored by Android.
+                string owner = "root";  // default: system
+                string permission = "555";  // default: 755
 
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'rm /data/local/tmp/update.so'\"" + Environment.NewLine;
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'rm " + remotePath + "'\"" + Environment.NewLine;
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push -p \"" + localPath + "\" \"/data/local/tmp/update.so\"" + Environment.NewLine;
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chmod " + permission + " /data/local/tmp/update.so'\"" + Environment.NewLine;
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chown " + owner + " /data/local/tmp/update.so'\"" + Environment.NewLine;
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chown :" + owner + " /data/local/tmp/update.so'\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'rm /data/local/tmp/update.so'\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push -p \"" + localPath + "\" \"/data/local/tmp/update.so\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chmod " + permission + " /data/local/tmp/update.so'\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chown " + owner + " /data/local/tmp/update.so'\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'chown :" + owner + " /data/local/tmp/update.so'\"" + Environment.NewLine;
 
-            if(TryMkdir)
-                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'mkdir -p `dirname " + remotePath + "`'\"" + Environment.NewLine;
+                if (TryMkdir)
+                    this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'mkdir -p `dirname " + remotePath + "`'\"" + Environment.NewLine;
 
-            this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'cp -p /data/local/tmp/update.so " + remotePath + "'\"" + Environment.NewLine;
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"su -c 'cp -p /data/local/tmp/update.so " + remotePath + "'\"" + Environment.NewLine;
+            }
+            else
+            {
+                if (TryMkdir)
+                    this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " shell \"mkdir -p `dirname " + remotePath + "`\"" + Environment.NewLine;
+
+                this.ScriptContent += "\"" + this.adbEXEpath + "\"" + " push -p \"" + localPath + "\" \"" + remotePath + "\"" + Environment.NewLine;
+            }
         }
 
         public string GetRemotePathToPluginDir()
@@ -944,7 +969,7 @@ namespace Android_plugin_deployment_solution
 
             this.WriteReplaceLibrary(
                 releaseOrDebugDirectory + "\\" + filename,
-                remotePathToPluginDir + "/" + filename, true);
+                remotePathToPluginDir + "/" + filename, false, true);
 
             // Update dev INI file
             if (!string.IsNullOrEmpty(devPath))
@@ -978,7 +1003,7 @@ namespace Android_plugin_deployment_solution
                 {
                     this.WriteReplaceLibrary(
                         releaseOrDebugDirectory + "\\" + filename,
-                        remotePathToPluginDir + "/" + filename, true);
+                        remotePathToPluginDir + "/" + filename, false, true);
                 }
             }
         }
@@ -1067,7 +1092,7 @@ namespace Android_plugin_deployment_solution
 
             this.WriteReplaceLibrary(
                 releaseOrDebugDirectory + "\\" + filename,
-                "%NATIVE_LIB_DIR%/" + filename);
+                "%NATIVE_LIB_DIR%/" + filename, true);
 
             // update CLEO
             if (this.includeLibCLEOcheckBox.Checked && !string.IsNullOrEmpty(CLEOdirectoryPath))
@@ -1076,7 +1101,7 @@ namespace Android_plugin_deployment_solution
 
                 this.WriteReplaceLibrary(
                     CLEOdirectoryPath + "\\" + filename,
-                    "%NATIVE_LIB_DIR%/" + filename);
+                    "%NATIVE_LIB_DIR%/" + filename, true);
             }
 
             // update additional files
@@ -1087,7 +1112,8 @@ namespace Android_plugin_deployment_solution
 
             this.WriteReplaceLibrary(
                 modifiedLibFile,
-                "%NATIVE_LIB_DIR%/" + libraryFilename
+                "%NATIVE_LIB_DIR%/" + libraryFilename,
+                true
                 );
         }
 
@@ -1372,7 +1398,7 @@ namespace Android_plugin_deployment_solution
                 foreach (string filename in listOfNames)
                 {
                     this.WriteRemoveFile(
-                    remotePathToPluginDir + "/" + filename);
+                    remotePathToPluginDir + "/" + filename, false);
                 }
 
                 this.writeEndToCommandPrompt();

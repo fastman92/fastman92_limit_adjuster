@@ -6,7 +6,7 @@
 #include "Loader.h"
 
 #include "Log.h"
-#include "ForOtherProjects/Exports.h"
+#include "ForOtherProjects/PluginLoaderExports.h"
 
 #include <Exception\exception.h>
 #include <MemoryAddressCalculator/CMemoryAddressCalculator.h>

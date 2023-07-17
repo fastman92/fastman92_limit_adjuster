@@ -50,7 +50,7 @@
     <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(SolutionPlatform)'=='WIN_X64'" Label="Configuration">
-    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+    <PlatformToolset>Intel C++ Compiler 19.1</PlatformToolset>
   </PropertyGroup>
   <!-- 4. Other configuration -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />

@@ -92,7 +92,7 @@
 #include "../Modules/WaterLimits.h"
 #include "../Modules/WindowedMode.h"
 
-#include "../../../fastman92 plugin loader/ForOtherProjects/Exports.h"
+#include "../../../fastman92 plugin loader/ForOtherProjects/PluginLoaderExports.h"
 
 #include <fileIO.h>
 #include "GTASA_CRC32.h"

@@ -19,7 +19,7 @@
 
 #include <dlfcn.h>
 
-#include "../../../fastman92 plugin loader/ForOtherProjects/Exports.h"
+#include "../../../fastman92 plugin loader/ForOtherProjects/PluginLoaderExports.h"
 #endif
 
 // Visual leak detector

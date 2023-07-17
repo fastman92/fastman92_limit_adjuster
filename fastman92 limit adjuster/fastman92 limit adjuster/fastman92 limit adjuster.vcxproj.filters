@@ -938,9 +938,6 @@
     <ClCompile Include="Source files\Modules\ShadowLimits.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source files\Modules\SpecialLimits.cpp">
-      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Source files\Modules\StreamingLimits.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
     </ClCompile>
@@ -1115,11 +1112,14 @@
     <ClCompile Include="Source files\GameStructures\Rockstar Games\CMemoryMgr.cpp">
       <Filter>Source Files\fastman92 limit adjuster\GameStructures\Rockstar Games</Filter>
     </ClCompile>
-    <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source files\Core\Configuration\TextFile.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Core\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Modules\SpecialLimits.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
+      <Filter>Source Files\fastman92 include</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -919,6 +919,7 @@ void SpecialLimits::AlterFileLoadingOrder()
 	CPatch::LeaveThisLevel();
 }
 
+#if 0
 unsigned int GetBufferID_replacement(CEntity* pEntity)
 {
 	auto pRwObject = pEntity->m_pRwThing(pEntity).m_pRwObject;
@@ -966,6 +967,15 @@ int sortLODs_replacement(const void* ppEntityFirst, const void* ppEntitySecond)
 	else
 		return 0;
 }
+#endif
+
+typedef uintptr_t u_native;
+static unsigned int emu_Arrays_ID_offset = 0;
+
+static u_native emu_ArraysGetID(u_native vertexRef)
+{
+	return vertexRef ? *(u_native*)(vertexRef + emu_Arrays_ID_offset) : 0;
+}
 
 // Removes a requirement for LOD DFF to hold native PLG data
 void SpecialLimits::RemoveRequirementForLodDFFtoHoldNativePLGdata()
@@ -975,10 +985,11 @@ void SpecialLimits::RemoveRequirementForLodDFFtoHoldNativePLGdata()
 	// CPatch::EnableDebugMode();
 
 	MAKE_DEAD_IF();
-	#ifdef IS_PLATFORM_ANDROID_ARM32
+	#if defined(IS_PLATFORM_ANDROID) && (defined(IS_ARCHITECTURE_32_BIT) || defined(IS_ARCHITECTURE_64_BIT))
 	else if (gameVersion == GAME_VERSION_GTA_SA_1_08_ANDROID_ARMEABI_V7A
 	|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 	{
+#if 0
 		uintptr_t Address_SortLODs = (uintptr_t)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,
 			"_Z8sortLODsPKvS0_"
@@ -991,6 +1002,24 @@ void SpecialLimits::RemoveRequirementForLodDFFtoHoldNativePLGdata()
 			"_Z11GetBufferIDP7CEntity"
 			), (void*)&GetBufferID_replacement
 		);
+#endif
+
+		uintptr_t Address_emu_ArraysGetID = (uintptr_t)Library::GetSymbolAddress(
+			&g_LimitAdjuster.hModule_of_game,
+		#ifdef IS_ARCHITECTURE_64_BIT
+			"_Z15emu_ArraysGetIDj"
+		#else
+			"_Z15emu_ArraysGetIDy"
+		#endif
+		);
+
+		#ifdef IS_ARCHITECTURE_64_BIT
+		emu_Arrays_ID_offset = 48;
+		#else
+		emu_Arrays_ID_offset = 36;
+		#endif
+
+		CPatch::RedirectFunction(Address_emu_ArraysGetID, (void*)&emu_ArraysGetID);
 	}
 	#endif
 	else

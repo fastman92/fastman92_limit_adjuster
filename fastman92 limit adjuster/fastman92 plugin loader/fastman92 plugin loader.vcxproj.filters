@@ -83,9 +83,6 @@
     <ClInclude Include="Loader.h">
       <Filter>Header Files\fastman92 plugin loader</Filter>
     </ClInclude>
-    <ClInclude Include="ForOtherProjects\Exports.h">
-      <Filter>Header Files\fastman92 plugin loader\ForOtherProjects</Filter>
-    </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Header Files\fastman92 plugin loader</Filter>
     </ClInclude>
@@ -94,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForOtherProjects\PluginLoaderExports.h">
+      <Filter>Header Files\fastman92 plugin loader\ForOtherProjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

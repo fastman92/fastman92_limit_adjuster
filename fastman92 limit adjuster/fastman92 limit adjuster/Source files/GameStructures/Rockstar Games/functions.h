@@ -54,7 +54,7 @@ int	 game_fclose(FILE *);
 // Returns pointer to first atomic in clump
 RpAtomic* GetFirstAtomic(RpClump* pClump);
 
-unsigned int emu_ArraysGetID(unsigned int pEmuArray);
+// unsigned int emu_ArraysGetID(unsigned int pEmuArray);
 
 class Functions_varInitialisation : public CLimitAdjusterModule
 {

@@ -5,7 +5,7 @@
 */
 
 #pragma once
-#include "ForOtherProjects/Exports.h"
+#include "ForOtherProjects/PluginLoaderExports.h"
 
 #include <limits.h>
 #include <jni.h>

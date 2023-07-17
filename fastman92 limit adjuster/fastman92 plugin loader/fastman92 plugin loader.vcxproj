@@ -74,7 +74,7 @@
     <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(SolutionPlatform)'=='WIN_X64'" Label="Configuration">
-    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+    <PlatformToolset>Intel C++ Compiler 19.1</PlatformToolset>
   </PropertyGroup>
   <!-- 4. Other configuration -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClInclude Include="$(FASTMAN92_INCLUDE)\fileIO.h" />
     <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.h" />
-    <ClInclude Include="ForOtherProjects\Exports.h" />
+    <ClInclude Include="ForOtherProjects\PluginLoaderExports.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Log.h" />
   </ItemGroup>
