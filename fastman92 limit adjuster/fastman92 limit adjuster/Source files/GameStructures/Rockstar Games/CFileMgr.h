@@ -8,6 +8,8 @@
 
 #include "../../Core/CLimitAdjusterModule.h"
 
+#include "../WarMedia/OSFile.h"
+
 #define FILESTREAM int
 
 #define DIRNAMELENGTH 128
@@ -20,6 +22,8 @@ public:
 	static char *ms_dirName;
 	// length: 128
 	static char *ms_rootDirName;
+
+	static OSFileDataArea* fileDataArea;
 	// functions
 	static void Initialise();
 	static int ChangeDir(const char *path);

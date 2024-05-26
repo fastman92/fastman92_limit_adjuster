@@ -27,12 +27,12 @@
 #include <vld.h>
 #endif
 
-// Enable/disable the FLA
+// Enable/disable the FLArr
 
 const bool bEnableTheFLA💥 = true;
 
 // Enables the message box, works only if development INI is enabled.
-const bool EnableDevMessageBox = false;
+const bool EnableDevMessageBox = true;
 
 // Start params
 tLimitAdjusterStartParams startParams;

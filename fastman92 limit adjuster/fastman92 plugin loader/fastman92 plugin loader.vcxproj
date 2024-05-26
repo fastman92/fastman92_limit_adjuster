@@ -131,6 +131,9 @@
     <ClCompile Include="ProjectConstants.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\ELF\CRel.cpp" />
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\ELF\CSym.cpp" />
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\ELF\ELF_manager.cpp" />
     <ClInclude Include="$(FASTMAN92_INCLUDE)\fileIO.h" />
     <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.h" />
     <ClInclude Include="ForOtherProjects\PluginLoaderExports.h" />

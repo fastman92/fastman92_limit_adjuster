@@ -14,29 +14,35 @@
 #include <MemoryPermission\MemoryPermission.h>
 
 #include "../fastman92 limit adjuster/Source files/Core/CPatch.h"
+#include "../fastman92 limit adjuster/Source files/Core/MemoryCall.h"
 #include "../fastman92 limit adjuster/Source files/Core/UsefulMacros.h"
 #include "../fastman92 limit adjuster/Source files/ForOtherProjects/Common/common.h"
 
-
 #include <string.h>
 
-#include <android/log.h>
-#include <dirent.h>
-#include <dlfcn.h>
+#include <cstdlib>
 #include <errno.h>
 #include <limits.h>
 #include <sys\stat.h> 
 #include <stdexcept>
-#include <unistd.h>
 
 #include <Array/countof.h>
+#include <DynamicTypes/DynamicStructure.h>
 #include <fileIO.h>
+
+#include <dlfcn.h>
+#include <dirent.h>
+#include <android/log.h>
+#include <unistd.h>
 
 std::vector<CLoadedPluginInfo> CPluginLoader::ms_loadedPluginsArray;
 
 jobject CPluginLoader::ms_mainActivityDuringLaunch = 0;
 
 bool CPluginLoader::bCLEOloaded = false;
+
+CMemoryCall g_memoryCall;
+CDynamicStructAllocator g_StructAllocator;
 
 #ifdef IS_PLATFORM_ANDROID
 
@@ -209,6 +215,9 @@ static void GetExternalFilesDirectory(JNIEnv* env, jobject context, char* strPat
 
 uintptr_t pOriginal_GTAActivity_initTouchSense = 0;
 
+uintptr_t pOriginal_GTAActivity_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityContinue = 0;
+uintptr_t Address_original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity;
+
 class CPluginLoaderHelper
 {
 public:
@@ -220,9 +229,11 @@ public:
 	// from com.nvidia.devtech.NvEventQueueActivity
 	static jboolean NvEventQueueActivity_init(JNIEnv* env, jobject GTAactivity, jboolean paramBoolean)
 	{
-		jboolean bResult = original_NvEventQueueActivity_init(env, GTAactivity, paramBoolean);
+		// problem: NVEvent thread got spawned
 		
 		g_Loader.DoAppInitializationStage(env, GTAactivity);
+
+		jboolean bResult = original_NvEventQueueActivity_init(env, GTAactivity, paramBoolean);
 
 		return bResult;
 	}
@@ -251,6 +262,48 @@ public:
 		g_Loader.DoAppInitializationStage(env, GTAactivity);
 	}
 	#endif
+
+	#ifdef IS_PLATFORM_ANDROID_ARM64_V8A
+	// patch for 0x4CD7E48
+	template<int stack_value> static NAKED void original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity()
+	{
+		__asm(
+			"SUB SP, SP, #%c[stack_value]\n"
+
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(pOriginal_GTAActivity_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityContinue)
+
+			::[stack_value]"i"(stack_value)
+			);
+	}
+	#endif
+
+	static void JNICALL
+		Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityImproved(
+			JNIEnv *env,
+			jobject thiz,
+			jboolean b_use_external_files_dir,
+			jboolean b_public_log_files,
+			jstring internal_files_dir,
+			jstring external_files_dir,
+			jboolean b_package_data_inside_apk_value,
+			jstring apkpath) {
+		//*(int*)0 = 3;
+		//OutputFormattedDebugString("worksss!");
+
+		g_Loader.DoAppInitializationStage(env, thiz);
+
+		g_memoryCall.Function<void>(
+			Address_original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity,
+			env,
+			thiz,
+			b_use_external_files_dir,
+			b_public_log_files,
+			internal_files_dir,
+			external_files_dir,
+			b_package_data_inside_apk_value,
+			apkpath);
+
+	}
 	////////////////////////////////
 };
 
@@ -272,10 +325,11 @@ static void ReplacePointerToNvEventQueueActivity_init(uintptr_t pInit)
 
 	*(void**)pInit = (void*)&CPluginLoaderHelper::NvEventQueueActivity_init;
 
-	request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READONLY);
+	// Shouldn't restore a permission to F92_MEM_PAGE_READONLY, in GTA VC it lies in .data, which is R+W always
+	// request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READONLY);
 
-	if (!SetMemoryPermission(&request))
-		throw f92_runtime_error("ReplacePointerToNvEventQueueActivity_init, unable to set R permission. Error = %d", errno);
+	// if (!SetMemoryPermission(&request))
+	//	throw f92_runtime_error("ReplacePointerToNvEventQueueActivity_init, unable to set R permission. Error = %d", errno);
 
 	OutputFormattedDebugString("Pointer to com.nvidia.devtech.NvEventQueueActivity.init replaced on 0x%llX%.",
 		(uint64_t)pInit
@@ -319,7 +373,69 @@ void CPluginLoader::GetApplicationLibDirectoryPath(char* libPluginPath)
 
 static int someVariable;
 
+extern char **environ;
 
+static void mprotestTest(const char* libPluginPath)
+{
+	char path[PATH_MAX];
+
+	sprintf(path, "%s/libtest.so", libPluginPath);
+	void* libCloseHandle = dlopen(path, RTLD_GLOBAL | RTLD_LAZY);
+
+	sprintf(path, "%s/libmain_activity_launcher.so", libPluginPath);
+	void* libMainActivityLauncherHandle = dlopen(path, RTLD_GLOBAL | RTLD_LAZY);
+
+
+	// chdir(libPluginPath);
+
+	if (!libMainActivityLauncherHandle)
+	{
+		OutputFormattedDebugString("Unable to load: %s, %s", path, dlerror());
+		return;
+	}
+
+	char str[1024];
+
+	void (*mprotect_test)(char* outStr, size_t strCount);
+
+	mprotect_test = (decltype (mprotect_test))dlsym(libMainActivityLauncherHandle, "mprotect_test");
+
+	mprotect_test(str, sizeof(str));
+
+	OutputFormattedDebugString("First output: %s", str);
+
+	dlclose(libMainActivityLauncherHandle);
+	dlclose(libCloseHandle);
+
+	if(false)
+	{
+		const char* pGameLoad = (const char*)dlsym(g_Loader.applicationLibHandle, "_Z7NvFOpenPKcS0_bb");
+		
+		tMemoryPermissionChangeRequest request;
+		request.lpAddress = (void*)pGameLoad;
+		request.dwSize = 8;
+
+		// request.lpAddress = new char[request.dwSize];
+
+		request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_READWRITE);
+
+		bool result = SetMemoryPermission(&request);
+
+		OutputFormattedDebugString("aResult READWRITE: %d", result);
+
+		request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_EXECUTE_READ);
+
+		result = SetMemoryPermission(&request);
+
+		OutputFormattedDebugString("aResult EXECUTE_READ: %d", result);
+	}
+}
+
+#if PROJECT_USE_DEVELOPMENT_INI
+#include "../../Additional code/AdditionalCode1.cpp"
+#else
+void OnApplicationLaunch2() {}
+#endif
 
 // Initializes
 bool CPluginLoader::InitialiseLoading(
@@ -334,6 +450,7 @@ bool CPluginLoader::InitialiseLoading(
 		// Find out handle and base address of application library
 		Dl_info applicationModuleInfo;
 
+
 		if (!dladdr(someAddressFromApplicationLibrary, &applicationModuleInfo))
 		{
 			throw f92_runtime_error("Can't get an information about application library.");
@@ -346,6 +463,8 @@ bool CPluginLoader::InitialiseLoading(
 		memCalc.Initialize(0, (uintptr_t)this->m_baseAddressForApplicationLibrary);
 
 		const char* applicationModuleFilename = GetFilenameFromPath(applicationModuleInfo.dli_fname);
+
+		// OutputFormattedDebugString("name: %s\n", applicationModuleFilename);
 
 		this->applicationLibHandle = dlopen(applicationModuleFilename, 4);	// 4 - RTLD_NOLOAD
 	}
@@ -381,30 +500,30 @@ bool CPluginLoader::InitialiseLoading(
 	}
 	#endif
 	/////
-
+	
 	this->ms_loadedPluginsArray.clear();
 
 	this->m_javaVm = javaVm;
 	this->m_reserved = reserved;
-
-
+	
 	const char* pApplicationIdentifierDeprecated = (const char*)dlsym(this->applicationLibHandle, "ApplicationIdentifierForPluginLoaderDeprecated");
-
+	
 	memcpy(this->ms_applicationIdentifierDeprecated, pApplicationIdentifierDeprecated, sizeof(this->ms_applicationIdentifierDeprecated));
-
+	
 	this->pApplicationIdentifier = (const char*)dlsym(this->applicationLibHandle, "ApplicationIdentifierForPluginLoader");
 
 	this->TrampolineSpacePtr = (char*)dlsym(this->applicationLibHandle, "TrampolineSpace");
 	this->TrampolineSpaceSize = *(uint32_t*)dlsym(this->applicationLibHandle, "TrampolineSpaceSize");
 
+	this->SetTrampolineSpaceMemoryPermission(F92_MEM_PAGE_EXECUTE_READWRITE, "R+W+X");
+
 	if (!CPatch::IsInitialized())
 		CPatch::Init();
+	
+	this->GetApplicationLibDirectoryPath(libPluginPath);
 
 	// Add path from APK and load libcleo.so
 	{
-		char libPluginPath[PATH_MAX];
-		this->GetApplicationLibDirectoryPath(libPluginPath);
-
 		this->m_pluginDirectoryPaths.push_back(CPluginDirectory(libPluginPath, 0, ePluginLoadingMode::LOAD_FLA_ONLY));
 
 		this->LoadCLEO(libPluginPath);
@@ -413,6 +532,9 @@ bool CPluginLoader::InitialiseLoading(
 	// Replace JNI init function
 	{
 		MAKE_DEAD_IF();
+		else if (!strncmp(this->pApplicationIdentifier, "undefined|undefined|", 20))
+		{
+		}
 		#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 		else if (!strcmp(this->pApplicationIdentifier, "Bully_AE|1.0.0.18|armeabi-v7a"))	// Bully Scholarship Edition 1.0.0.18
 		{
@@ -513,16 +635,59 @@ bool CPluginLoader::InitialiseLoading(
 				memCalc.GetCurrentVAbyPreferedVA(0x56DBE8)
 			);
 		}
-		else if (!strcmp(this->pApplicationIdentifier, "GTA_SA|2.10|arm64-v8a"))	// GTA SA 2.10
+		else if (!strcmp(this->pApplicationIdentifier, "GTA_SA|2.10|arm64-v8a"))
 		{
 			ReplacePointerToNvEventQueueActivity_init(
 				memCalc.GetCurrentVAbyPreferedVA(0x824BF8)
 			);
 		}
+		else if (!strcmp(this->pApplicationIdentifier, "GTA_SA|2.11.32|arm64-v8a"))
+		{
+			ReplacePointerToNvEventQueueActivity_init(
+				memCalc.GetCurrentVAbyPreferedVA(0xA84E88)
+			);
+		}
+		else if (!strcmp(this->pApplicationIdentifier, "GTA_SA_DE_ROCKSTAR_GAMES|1.72.42919648|arm64-v8a"))
+		{
+		uintptr_t Address_of_nativeSetGlobalActivity = memCalc.GetCurrentVAbyPreferedVA(0x4CD7E48);
+
+			pOriginal_GTAActivity_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityContinue = Address_of_nativeSetGlobalActivity + 4;			
+
+			Address_original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity = (uintptr_t)&CPluginLoaderHelper::original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity<0x80>;
+
+			CPatch::RedirectCode(Address_of_nativeSetGlobalActivity, (void*)&CPluginLoaderHelper::Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityImproved);
+
+			OutputFormattedDebugString(
+				"Function Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity (0x%llX) redirected.",
+				(uint64_t)Address_of_nativeSetGlobalActivity
+			);
+		}
+		else if (!strcmp(this->pApplicationIdentifier, "GTA_SA_DE_ROCKSTAR_GAMES|1.86.44544238|arm64-v8a"))
+		{
+		uintptr_t Address_of_nativeSetGlobalActivity = memCalc.GetCurrentVAbyPreferedVA(0x4CF9C80);
+
+			pOriginal_GTAActivity_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityContinue = Address_of_nativeSetGlobalActivity + 4;			
+
+			Address_original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity = (uintptr_t)&CPluginLoaderHelper::original_Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity<0x80>;
+
+			CPatch::RedirectCode(Address_of_nativeSetGlobalActivity, (void*)&CPluginLoaderHelper::Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivityImproved);
+
+			OutputFormattedDebugString(
+				"Function Java_com_epicgames_ue4_GameActivity_nativeSetGlobalActivity (0x%llX) redirected.",
+				(uint64_t)Address_of_nativeSetGlobalActivity
+			);
+		}
+		#elif defined(IS_PLATFORM_ANDROID_X64)
+		else if (!strcmp(this->pApplicationIdentifier, "GTA_SA|2.11.32|x86_64"))
+		{
+			ReplacePointerToNvEventQueueActivity_init(
+				memCalc.GetCurrentVAbyPreferedVA(0xB51890)
+			);
+		}
 		#endif
 		else
 		{
-			throw f92_runtime_error("Missing code for initialisation of plugin loader for the current application version");
+			throw f92_runtime_error("Missing code for initialisation of plugin loader for the current application version: %s", this->pApplicationIdentifier);
 			return false;
 		}
 
@@ -592,7 +757,9 @@ void CPluginLoader::PrescanDirectory(
 		pluginInfo.loadingMode = ePluginLoadingMode::LOAD_PLUGINS;		
 
 		pluginInfo.pDirectory = pDirectory;
-		strncpy(pluginInfo.filename, drnt->d_name, sizeof(pluginInfo.filename));
+		strncpy(pluginInfo.filename, drnt->d_name, sizeof(pluginInfo.filename) - 1);
+		pluginInfo.filename[sizeof(pluginInfo.filename) - 1] = 0;
+
 
 		//////
 
@@ -633,7 +800,7 @@ void CPluginLoader::FinishLoadingPlugins()
 			OutputFormattedDebugString("Loading %s", path);
 
 			pluginHandle = dlopen(path, RTLD_GLOBAL | RTLD_LAZY);
-			
+
 			if (pluginInfo.loadingMode == ePluginLoadingMode::LOAD_FLA_ONLY)
 			{
 				OutputFormattedDebugString("The FLA was just loaded.");
@@ -698,7 +865,11 @@ void CPluginLoader::FinishLoadingPlugins()
 			}
 		}
 	}
+}
 
+// Loads plugins
+void CPluginLoader::SetTrampolineSpaceMemoryPermission(uint32_t flags, const char* permissionName)
+{
 	// Set R+X permissions for trampoline space
 	if (this->TrampolineSpacePtr)
 	{
@@ -706,16 +877,23 @@ void CPluginLoader::FinishLoadingPlugins()
 		request.lpAddress = this->TrampolineSpacePtr;
 		request.dwSize = this->TrampolineSpaceSize;
 
-		// request.lpAddress = new char[request.dwSize];
-
-		request.flNewProtect = GetNativeNewProtect(F92_MEM_PAGE_EXECUTE_READ);
+		request.flNewProtect = GetNativeNewProtect(flags);
 
 		bool result = SetMemoryPermission(&request);
 
 		if (!SetMemoryPermission(&request))
-			throw f92_runtime_error("TrampolineSpace, unable to set E+R permission again. Address: 0x%llX Error = %d",
-			(uint64_t)request.lpAddress, errno
+			throw f92_runtime_error("TrampolineSpace, unable to set %s permission. Address: 0x%llX Error = %d",
+				permissionName, (uint64_t)request.lpAddress, errno
 			);
+
+		/*
+		else
+		{
+			OutputFormattedDebugString("TrampolineSpace, success to set %s permission. Address: 0x%llX Error = %d",
+				permissionName, (uint64_t)request.lpAddress
+			);
+		}
+		*/
 	}
 }
 
@@ -806,6 +984,9 @@ void CPluginLoader::LoadPlugins()
 {
 	// Load from Android/Android_unprotected directory
 	{
+		const char* pluginsPathStr = 0;
+
+		const char* f92pluginsPath = 0;
 		jobject context = getGlobalContext(jniEnv);
 
 		jclass android_content_Context = jniEnv->GetObjectClass(context);
@@ -822,62 +1003,93 @@ void CPluginLoader::LoadPlugins()
 		jmethodID methodIDgetAbsolutePath = jniEnv->GetMethodID(classFile, "getAbsolutePath", "()Ljava/lang/String;");
 		jstring stringPath = (jstring)jniEnv->CallObjectMethod(pluginsDir, methodIDgetAbsolutePath);
 
-		const char* pluginsPathStr = 0;
-
 		if (stringPath)
+			f92pluginsPath = jniEnv->GetStringUTFChars(stringPath, NULL);
+		
+
+		pluginsPathStr = f92pluginsPath;
+
+		if (pluginsPathStr)
 		{
-			pluginsPathStr = jniEnv->GetStringUTFChars(stringPath, NULL);
+			// mprotestTest(pluginsPathStr);
 
 			this->m_pluginDirectoryPaths.push_back(CPluginDirectory(pluginsPathStr, this->ms_PluginDirectory, ePluginLoadingMode::LOAD_PLUGINS));
 
 			////////
 			remove_dir(pluginsPathStr, false);
 			
-			// Copy files to pluginsPathStr
-			if (DIR* dir = opendir(this->ms_PluginDirectory))
-			{
-				struct dirent *entry = NULL;
+			DIR* dir = opendir(this->ms_PluginDirectory);
 
-				while ((entry = readdir(dir)))
-				{
-					if (CheckIfValidSOlibraryName(entry->d_name))
-					{
-						char sourcePath[PATH_MAX];
-						char destinationPath[PATH_MAX];
-						sprintf(sourcePath, "%s/%s", this->ms_PluginDirectory, entry->d_name);
-						sprintf(destinationPath, "%s/%s", pluginsPathStr, entry->d_name);
-
-						FILE* sourceFp = fopen(sourcePath, "rb");
-
-						if (!sourceFp)
-							throw f92_runtime_error("Unable to open for reading: %s", sourcePath);
-
-						FILE* destinationFp = fopen(destinationPath, "wb");
-
-						if (!destinationFp)
-							throw f92_runtime_error("Unable to open for writing: %s", destinationFp);
-
-						fseek(sourceFp, 0, SEEK_END);
-						auto size = ftell(sourceFp);
-						fseek(sourceFp, 0, SEEK_SET);
-						
-						char* pContents = new char[size];
-
-						fread(pContents, size, 1, sourceFp);
-						fwrite(pContents, size, 1, destinationFp);
-
-						delete[] pContents;
-
-						fclose(sourceFp);
-						fclose(destinationFp);
-					}
-				}
-			}
-			else
+			if (!dir)
 				throw f92_runtime_error("Unable to open directory %s", this->ms_PluginDirectory);
 
+			// std::vector<std::string> copiedFilenames;
+
+			struct dirent *entry = NULL;
+			
+			/*
+			while ((entry = readdir(dir)))
+			{
+				if (entry->d_type == DT_REG)
+					copiedFilenames.push_back(entry->d_name);
+			}
+
+			
+			char copiedFilesPath[PATH_MAX];
+
+			sprintf(copiedFilesPath, "%s/copied_files.txt", pluginsPathStr);
+
+			FILE* copiedFilesFp = fopen(copiedFilesPath, "w");
+
+			if(!copiedFilesFp)
+				throw f92_runtime_error("Unable to create file %s", copiedFilesPath);
+
+			fclose(copiedFilesFp);
+
+			for (auto& filename : copiedFilenames)
+			{
+				OutputFormattedDebugString("%s", filename.c_str());
+			}
+			*/
+				
+			
+			while ((entry = readdir(dir)))
+			{
+				if (entry->d_type != DT_REG)
+					continue;
+					
+				char sourcePath[PATH_MAX];
+				char destinationPath[PATH_MAX];
+				sprintf(sourcePath, "%s/%s", this->ms_PluginDirectory, entry->d_name);
+				sprintf(destinationPath, "%s/%s", pluginsPathStr, entry->d_name);
+										
+				FILE* sourceFp = fopen(sourcePath, "rb");
+
+				if (!sourceFp)
+					throw f92_runtime_error("Unable to open for reading: %s", sourcePath);
+
+				FILE* destinationFp = fopen(destinationPath, "wb");
+
+				if (!destinationFp)
+					throw f92_runtime_error("Unable to open for writing: %s", destinationFp);
+
+				fseek(sourceFp, 0, SEEK_END);
+				auto size = ftell(sourceFp);
+				fseek(sourceFp, 0, SEEK_SET);
+
+				char* pContents = new char[size];
+
+				fread(pContents, size, 1, sourceFp);
+				fwrite(pContents, size, 1, destinationFp);
+
+				delete[] pContents;
+
+				fclose(sourceFp);
+				fclose(destinationFp);
+			}
+			
 			////////
-			jniEnv->ReleaseStringUTFChars(stringPath, pluginsPathStr);
+			jniEnv->ReleaseStringUTFChars(stringPath, f92pluginsPath);
 		}
 	}
 
@@ -902,6 +1114,9 @@ void CPluginLoader::LoadPlugins()
 // Initialises the directory paths
 void CPluginLoader::InitialiseDirectoryPaths(JNIEnv* jniEnv, jobject mainActivity)
 {
+	char externalStorageDirectory[PATH_LIMIT];
+	GetExternalStorageDirectory(jniEnv, externalStorageDirectory, sizeof(externalStorageDirectory));
+
 	bool bPathsInitialized = false;
 	jclass NvUtilClass = jniEnv->FindClass("com/nvidia/devtech/NvUtil");
 
@@ -962,21 +1177,120 @@ void CPluginLoader::InitialiseDirectoryPaths(JNIEnv* jniEnv, jobject mainActivit
 
 		bPathsInitialized = true;
 	}
+	else
+	{
+		jniEnv->ExceptionClear();
+
+		jclass Class = jniEnv->GetObjectClass(mainActivity);
+
+		jfieldID InternalFilesDirFieldID = jniEnv->GetFieldID(Class, "InternalFilesDir", "Ljava/lang/String;");
+
+
+		if (InternalFilesDirFieldID)
+		{
+			jstring InternalFilesDirVar = (jstring)jniEnv->GetObjectField(mainActivity, InternalFilesDirFieldID);
+
+			const char *InternalFilesDirStr = jniEnv->GetStringUTFChars(InternalFilesDirVar, 0);
+
+			std::string ContentPath = InternalFilesDirStr;
+
+			// Remove last slash from ContentPath
+			{
+				int len = ContentPath.length();
+
+				if (len > 1 && ContentPath[len - 1] == '/')
+					ContentPath.erase(len - 1);
+			}
+			
+			ContentPath += "/UE4Game/Gameface/Engine/Content";
+			
+			strcpy(CPluginLoader::ms_StorageRootDirectory, ContentPath.c_str());
+			strcpy(CPluginLoader::ms_StorageRootBaseDirectory, externalStorageDirectory);
+			bPathsInitialized = true;
+		}
+	}
 	
 	// default
 	if (jniEnv->ExceptionCheck())
 		jniEnv->ExceptionClear();
 
+
 	if (!bPathsInitialized)
 	{
-		GetExternalStorageDirectory(jniEnv, CPluginLoader::ms_StorageRootBaseDirectory, sizeof(CPluginLoader::ms_StorageRootBaseDirectory));
+		strcpy(CPluginLoader::ms_StorageRootBaseDirectory, externalStorageDirectory);
 		GetExternalFilesDirectory(jniEnv, mainActivity, CPluginLoader::ms_StorageRootDirectory, sizeof(CPluginLoader::ms_StorageRootDirectory));
+	}
+	
+	// Remove last slash from CPluginLoader::ms_StorageRootDirectory
+	{
+		int len = strlen(CPluginLoader::ms_StorageRootDirectory);
+
+		if (len > 1 && CPluginLoader::ms_StorageRootDirectory[len - 1] == '/')
+			CPluginLoader::ms_StorageRootDirectory[len - 1] = 0;
 	}
 
 	// Plugin directory
 	sprintf(this->ms_PluginDirectory, "%s/f92plugins/%s", this->ms_StorageRootDirectory, this->pTargetArchABI);
 
+	// OBB directory
+	char AndroidOBBdirectory[128];
+	char AndroidDirectory[128];
+
+	{
+		bool bReadFromF92launcher = false;
+
+		jclass classF92launcherSettings = jniEnv->FindClass("com/fastman92/main_activity_launcher/Settings");
+
+
+		if (classF92launcherSettings)
+		{
+			jfieldID fieldIDandroidDirectory = jniEnv->GetStaticFieldID(classF92launcherSettings, "AndroidDirectory", "Ljava/lang/String;");
+
+			if (fieldIDandroidDirectory)
+			{
+				jstring pStringFromField = (jstring)jniEnv->GetStaticObjectField(classF92launcherSettings, fieldIDandroidDirectory);
+
+				if (pStringFromField)
+				{
+					const char* pStr = jniEnv->GetStringUTFChars(pStringFromField, NULL);
+
+					strncpy(AndroidDirectory, pStr, sizeof(AndroidDirectory));
+
+					jniEnv->ReleaseStringUTFChars(pStringFromField, pStr);
+
+
+					////////////
+					jfieldID fieldIDandroidOBBdirectory = jniEnv->GetStaticFieldID(classF92launcherSettings, "AndroidOBBdirectory", "Ljava/lang/String;");
+
+					if (fieldIDandroidOBBdirectory)
+					{
+						jstring pStringFromField = (jstring)jniEnv->GetStaticObjectField(classF92launcherSettings, fieldIDandroidOBBdirectory);
+
+						if (pStringFromField)
+						{
+							const char* pStr = jniEnv->GetStringUTFChars(pStringFromField, NULL);
+
+							strncpy(AndroidOBBdirectory, pStr, sizeof(AndroidOBBdirectory));
+
+							jniEnv->ReleaseStringUTFChars(pStringFromField, pStr);
+
+							bReadFromF92launcher = true;
+						}
+					}
+				}
+			}
+		}
+
+		if (jniEnv->ExceptionCheck())
+			jniEnv->ExceptionClear();
+
+		if (bReadFromF92launcher)
+			sprintf(this->ms_ObbDirectory, "%s/%s/obb/%s", externalStorageDirectory, AndroidDirectory, AndroidOBBdirectory);
+		else
+			sprintf(this->ms_ObbDirectory, "%s/Android/obb/%s", externalStorageDirectory, this->ms_packageName);
+	}
 }
+
 
 // Does application initialization stage
 void CPluginLoader::DoAppInitializationStage(JNIEnv* jniEnv, jobject mainActivity)
@@ -1025,6 +1339,7 @@ void CPluginLoader::DoAppInitializationStage(JNIEnv* jniEnv, jobject mainActivit
 
 		strcpy(CPluginLoader::ms_originalPackageName, CPluginLoader::ms_packageName);
 	}
+
 	//////
 
 	GetCacheDirectory(jniEnv,

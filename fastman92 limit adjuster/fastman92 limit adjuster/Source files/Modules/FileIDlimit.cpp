@@ -5584,6 +5584,26 @@ namespace Game_GTASA
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CIplStore__Load_48E426_thumb)
 			);
 	}
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+	// patch for 0x61ACA4
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_11_32_CIplStore__Load_61ACA8_arm64 = 0;
+	}
+
+	static NAKED void patch_GTA_SA_2_11_32_CIplStore__Load_61ACA4()
+	{
+		__asm(
+		RESTORE_TRAMPOLINE_REGISTER()
+
+			"LDR W0, [SP,#4]\n"
+
+			"CMP X19, X0\n"
+
+			SAVE_TRAMPOLINE_REGISTER()
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Load_61ACA8_arm64)
+			);
+	}
 	#endif
 
 	static const char ENHANCED_FLAG_IDENTIFIER[] = "fastman92_modelFlags";
@@ -7233,6 +7253,46 @@ namespace Game_GTASA
 			// Branches
 			"1:\n"	// j__ZN10CModelInfo11AddPedModelEi
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CFileLoader__LoadPedObject_1A1440_arm)
+			);
+	}
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+	// patch for 0x5FEFA8
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_11_32_CFileLoader__LoadVehicleObject_5FEFAC_arm64 = 0;
+	}
+
+	static NAKED void patch_GTA_SA_2_11_32_CFileLoader__LoadVehicleObject_5FEFA8()
+	{
+		__asm(
+		RESTORE_TRAMPOLINE_REGISTER()
+			"LDR W0, [SP,#0x100+"/* var_94 */"-0x94]\n"
+			"BL ValidatePedOrVehicleID\n"
+
+			"LDR W0, [SP,#0x100+"/* var_94 */"-0x94]\n"
+
+			SAVE_TRAMPOLINE_REGISTER()
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CFileLoader__LoadVehicleObject_5FEFAC_arm64)
+			);
+	}
+
+	// patch for 0x5FF624
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_11_32_CFileLoader__LoadPedObject_5FF628_arm64 = 0;
+	}
+
+	static NAKED void patch_GTA_SA_2_11_32_CFileLoader__LoadPedObject_5FF624()
+	{
+		__asm(
+		RESTORE_TRAMPOLINE_REGISTER()
+			"LDR W0, [SP,#0x170+"/* var_120 */"-0x120]\n"
+			"BL ValidatePedOrVehicleID\n"
+
+			"LDR W0, [SP,#0x170+"/* var_120 */"-0x120]\n"
+
+			SAVE_TRAMPOLINE_REGISTER()
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CFileLoader__LoadPedObject_5FF628_arm64)
 			);
 	}
 	#endif
@@ -9632,7 +9692,6 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_PC_1_0_HOODLUM()
 }
 #endif
 
-#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 extern "C"
 {
 	// Addresses
@@ -9642,7 +9701,8 @@ extern "C"
 	///////////
 
 	#define DEFINE_VARS_FOR_FILE_TYPE(member, ...) uint32_t member##_BASE_ID; \
-	uint32_t member##_BASE_ID_PLUS_ONE; \
+	uint32_t member##_BASE_ID_NEGATED; \
+	int32_t member##_BASE_ID_PLUS_ONE; \
 	uint32_t member##_LAST_ID; \
 	uint32_t member##_COUNT; \
 	uint32_t member##_COUNT_MINUS_ONE;
@@ -9650,6 +9710,7 @@ extern "C"
 	uint32_t FILE_TYPE_IPL_COUNT_MINUS_TWO;
 
 	#define SET_FILE_TYPE_INFO_IN_VARIABLES(member, ...) member##_BASE_ID = GetBaseID(member); \
+			member##_BASE_ID_NEGATED = -GetBaseID(member); \
 			member##_BASE_ID_PLUS_ONE = member##_BASE_ID + 1; \
 			member##_LAST_ID = GetLastIDforType(member); \
 			member##_COUNT = GetFileIDcurrentLimit(member); \
@@ -9672,6 +9733,13 @@ extern "C"
 	uint32_t FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 0x7CE1C
 	uint32_t FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags; // GTA SA: 0x7B526
 	uint32_t FILE_TYPE_IPL_COUNT_multiplied_by_sizeof_IplDef = 0;	// 0x3400
+
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags;	// GTA SA: 500026
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 500036
+
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags_then_minus_314;	// GTA SA: 499712
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag_then_minus_324;	// GTA SA: 499712
+
 	uint32_t FILE_TYPE_COL_COUNT_multiplied_by_sizeof_CCollisionFile;	// 0x2BD4
 	uint32_t FILE_TYPE_SCM_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 0x80148
 	uint32_t FILE_TYPE_COUNT_OF_IDS = 0;
@@ -9679,11 +9747,12 @@ extern "C"
 	// see also: 0x46BC3C
 }
 
+#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 // GTA San Andreas
 namespace Game_GTASA
 {
 	// Automatically generated patches
-	#include "FileIDlimit/GTA SA 2.0 ANDROID_ARM32/functions.cpp"
+	#include "FileIDlimit/GTA SA 2.0 ANDROID_ARMEABI_V7A/functions.cpp"
 
 	//////////////////////////////////
 
@@ -9878,44 +9947,13 @@ namespace Game_GTASA
 			);
 	}
 }
-#endif
 
-#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 // Patches ID limits if neccessary.
-void FileIDlimit::PatchFileIDlimits_GTA_SA_2_0_ANDROID_ARM32()
+void FileIDlimit::PatchFileIDlimits_GTA_SA_2_0_ARMEABI_V7A()
 {
 	using namespace Game_GTASA;
 
-	// Set variables
-	#if TRUE
-	{
-		MAKE_FILE_TYPE_LIST(SET_FILE_TYPE_INFO_IN_VARIABLES);
-		FILE_TYPE_IPL_COUNT_MINUS_TWO = FILE_TYPE_IPL_COUNT_MINUS_ONE - 1;
-
-		Address_CStreaming__ms_aInfoForModel = (uintptr_t)this->CStreaming__ms_aInfoForModel.generic;
-		Address_CStreaming__ms_channel = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
-			"_ZN10CStreaming10ms_channelE");
-
-		Address_CStreamingInfo__ms_pArrayBase = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
-			"_ZN14CStreamingInfo13ms_pArrayBaseE");
-
-		FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_minus_one = GetBaseID(FILE_TYPE_TXD) * TypeDetails::SizeOf<CStreamingInfo>() - 1;
-		FILE_TYPE_COL_BASE_ID_multiplied_by_sizeof_CStreamingInfo_minus_one = GetBaseID(FILE_TYPE_COL) * TypeDetails::SizeOf<CStreamingInfo>() - 1;
-		negated_file_ID_offset_to_array_TxdDef_parent_index = -(TypeDetails::SizeOf<TxdDef_Android>() * FILE_TYPE_TXD_BASE_ID - offsetof(TxdDef_Android, parent_index));
-		negated_FILE_TYPE_DAT_LAST_ID_multiplied_by_sizeof_CStreamingInfo_plus_one = -(GetLastIDforType(FILE_TYPE_DAT) * TypeDetails::SizeOf<CStreamingInfo>() + 1);
-		FILE_TYPE_IFP_COUNT_plus_one_then_multiplied_by_sizeof_CStreamingInfo_then_minus_two = (GetFileIDcurrentLimit(FILE_TYPE_IFP) + 1) * TypeDetails::SizeOf<CStreamingInfo>() - 2;
-		FILE_TYPE_RRR_LAST_ID_multiplied_by_sizeof_CStreamingInfo_then_plus_one = GetLastIDforType(FILE_TYPE_RRR) * TypeDetails::SizeOf<CStreamingInfo>() + 1;
-		negated_file_ID_offset_to_array_to_CStreamedScriptInfo_status = -(TypeDetails::SizeOf<CStreamedScriptInfo>() * FILE_TYPE_SCM_BASE_ID - offsetof(CStreamedScriptInfo, status));
-		FILE_TYPE_TXD_COUNT_multiplied_by_sizeof_TxdDef = FILE_TYPE_TXD_COUNT * TypeDetails::SizeOf<TxdDef_Android>();
-		FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_TXD) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
-		FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_IFP) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
-		FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags = FILE_TYPE_IPL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, ucFlags);
-		FILE_TYPE_IPL_COUNT_multiplied_by_sizeof_IplDef = FILE_TYPE_IPL_COUNT * TypeDetails::SizeOf <CIplFile>();
-		FILE_TYPE_COL_COUNT_multiplied_by_sizeof_CCollisionFile = FILE_TYPE_COL_COUNT * TypeDetails::SizeOf <CCollisionFile>();
-		FILE_TYPE_SCM_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_SCM) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
-		FILE_TYPE_COUNT_OF_IDS = GetCountOfAllFileIDs();
-	}
-	#endif
+	this->SetVariables();
 	
 	// Patch pointers to CStreaming::ms_aInfoForModel
 	#if TRUE
@@ -9963,7 +10001,7 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_2_0_ANDROID_ARM32()
 	// Automatic patches
 	#if TRUE
 	{
-		#include "FileIDlimit/GTA SA 2.0 ANDROID_ARM32/changes.cpp"
+		#include "FileIDlimit/GTA SA 2.0 ANDROID_ARMEABI_V7A/changes.cpp"
 	}
 	#endif
 
@@ -10031,7 +10069,7 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_2_0_ANDROID_ARM32()
 			(void*)&patch_CPathFind__Shutdown_3191F0
 		);
 		
-		// CPathFind::LoadSceneForPathNodes 
+		// CPathFind::Shutdown
 		CPatch::RedirectMethod((uintptr_t)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,
 			"_ZN9CPathFind8ShutdownEv"
@@ -10093,6 +10131,215 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_2_0_ANDROID_ARM32()
 	#endif
 }
 #endif
+
+
+#ifdef IS_PLATFORM_ANDROID_ARM64_V8A
+
+// GTA San Andreas
+namespace Game_GTASA
+{
+	// Automatically generated patches
+	#include "FileIDlimit/GTA SA 2.11.32 ANDROID_ARM64_V8A/functions.cpp"
+
+	// patch for 0x601528
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_11_32_CStreaming__Init2_A87000 = 0;	// _ZN23CAEPedSpeechAudioEntity16s_nCJGangBangingE_ptr
+		uintptr_t Address_GTA_SA_2_11_32_CStreaming__Init2_60152C_arm64 = 0;
+	}
+
+	static NAKED void patch_GTA_SA_2_11_32_CStreaming__Init2_601528()
+	{
+		__asm(
+		RESTORE_TRAMPOLINE_REGISTER()
+			"BL patch_CStreaming__Init2_initializeLoadedAndRequested\n"
+
+			ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X8, Address_GTA_SA_2_11_32_CStreaming__Init2_A87000)
+
+			SAVE_TRAMPOLINE_REGISTER()
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CStreaming__Init2_60152C_arm64)
+			);
+	}
+}
+
+// #define TEST_ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(reg, symbol) __ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(reg, symbol, FULL_REG(reg))
+
+extern "C"
+{
+	DLL_EXPORT NAKED void bTest()
+	{
+		// LOAD_VALUE_INTO_REGISTER_SIGNED_2(X0, FILE_TYPE_IFP_COUNT, LOAD_VALUE_INTO_REGISTER_SIGNED_HELPER_1(X0))
+
+		__asm(
+		RESTORE_TRAMPOLINE_REGISTER()
+
+			// "adrp X20, FILE_TYPE_IFP_BASE_ID\n" 
+			// "add "#reg", "#reg", #:lo12:"#symbol"\n"
+
+			// STRINGIFY(FULL_REG(W20))
+			// "cmp W0, " TOSTRING(FULL_REG(W20)) "\n"
+
+			// ASM_LOAD_ADDRESS_OF_SYMBOL(X0, FILE_TYPE_IFP_COUNT)
+			// ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(X0, FILE_TYPE_IFP_COUNT)
+
+			// LOAD_VALUE_INTO_REGISTER_SIGNED_2(X0, FILE_TYPE_IFP_COUNT, LOAD_VALUE_INTO_REGISTER_SIGNED_HELPER_1(X0))
+			// LOAD_VALUE_INTO_REGISTER_SIGNED_2(LOAD_VALUE_INTO_REGISTER_SIGNED(X0), X0, FILE_TYPE_IFP_COUNT)
+
+			ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(W0, FILE_TYPE_IFP_COUNT)
+
+
+
+			SAVE_TRAMPOLINE_REGISTER()
+			);
+
+	}
+}
+
+// Patches ID limits if neccessary.
+void FileIDlimit::PatchFileIDlimits_GTA_SA_2_11_32_ANDROID_ARM64_V8A()
+{
+	using namespace Game_GTASA;
+
+	this->SetVariables();
+
+
+	// Patch pointers to CStreaming::ms_aInfoForModel
+	#if TRUE
+	{
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0xA86D30), CStreaming__ms_aInfoForModel.gta_sa);	// DCQ _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
+	}
+	#endif
+
+	// Patch limits itself
+	#if TRUE
+	{
+		// Model DFF limit, patch pointers to CModelInfo::ms_modelInfoPtrs
+		#if TRUE
+		{
+			CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0xA865E8), CModelInfo__ms_modelInfoPtrs.gta_sa);	// DCQ _ZN10CModelInfo16ms_modelInfoPtrsE; CModelInfo::ms_modelInfoPtrs
+		}
+		#endif
+
+		// IFP
+		#if TRUE
+		{
+			CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0xA86CB0), CAnimManager__ms_aAnimBlocks.gta_sa);	// DCQ _ZN12CAnimManager14ms_aAnimBlocksE; CAnimManager::ms_aAnimBlocks
+		}
+		#endif
+
+		// RRR
+		#if TRUE
+		{
+			CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0xA880A8), CVehicleRecording__StreamingArray.gta_sa);	// DCQ _ZN17CVehicleRecording14StreamingArrayE; CVehicleRecording::StreamingArray
+		}
+		#endif
+
+		// Model flags
+		#if TRUE
+		{
+			uintptr_t pFunc = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
+				"_ZN10CStreaming4SaveEv");
+
+			ApplyPatchForCStreaming__Save(this, pFunc);
+		}
+		#endif
+	}
+	#endif
+
+
+	// Automatic patches
+	#if TRUE
+	{
+		// CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x427B34), (void*)&bTest, 4);
+
+		#include "FileIDlimit/GTA SA 2.11.32 ANDROID_ARM64_V8A/changes.cpp"
+	}
+	#endif
+
+
+	return;
+
+	// Manual patches
+	#if FALSE
+	{
+		// CPathFind::LoadSceneForPathNodes 
+		CPatch::RedirectMethod((uintptr_t)Library::GetSymbolAddress(
+			&g_LimitAdjuster.hModule_of_game,
+			"_ZN9CPathFind8ShutdownEv"
+		), &CPathFind_extended::Shutdown);
+
+		// CPathFind::LoadSceneForPathNodes 
+		CPatch::RedirectMethod((uintptr_t)Library::GetSymbolAddress(
+			&g_LimitAdjuster.hModule_of_game,
+			"_ZN9CPathFind21LoadSceneForPathNodesE7CVector"
+		), &CPathFind_extended::LoadSceneForPathNodes);
+
+		// CStreaming::Init2
+		Address_GTA_SA_2_11_32_CStreaming__Init2_A87000 = g_mCalc.GetCurrentVAbyPreferedVA(0xA87000);
+		Address_GTA_SA_2_11_32_CStreaming__Init2_60152C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x60152C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+		CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x601528), (void*)&patch_GTA_SA_2_11_32_CStreaming__Init2_601528);
+
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x601560), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x601574), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x601580), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x601594), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x60159C), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x6015AC), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x6015C4), 4);
+		CPatch::NOPinstructions(g_mCalc.GetCurrentVAbyPreferedVA(0x6015D4), 4);
+	}
+	#endif
+}
+#endif
+
+// Sets variables
+void FileIDlimit::SetVariables()
+{
+	MAKE_VAR_GAME_VERSION();
+
+	// Set variables
+	#if TRUE
+	{
+		if (CGameVersion::IsAny_GTA_SA(gameVersion))
+		{
+			using namespace Game_GTASA;
+
+			MAKE_FILE_TYPE_LIST(SET_FILE_TYPE_INFO_IN_VARIABLES);
+			FILE_TYPE_IPL_COUNT_MINUS_TWO = FILE_TYPE_IPL_COUNT_MINUS_ONE - 1;
+
+			Address_CStreaming__ms_aInfoForModel = (uintptr_t)this->CStreaming__ms_aInfoForModel.generic;
+			Address_CStreaming__ms_channel = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
+				"_ZN10CStreaming10ms_channelE");
+
+			Address_CStreamingInfo__ms_pArrayBase = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
+				"_ZN14CStreamingInfo13ms_pArrayBaseE");
+
+			FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_minus_one = GetBaseID(FILE_TYPE_TXD) * TypeDetails::SizeOf<CStreamingInfo>() - 1;
+			FILE_TYPE_COL_BASE_ID_multiplied_by_sizeof_CStreamingInfo_minus_one = GetBaseID(FILE_TYPE_COL) * TypeDetails::SizeOf<CStreamingInfo>() - 1;
+			negated_file_ID_offset_to_array_TxdDef_parent_index = -(TypeDetails::SizeOf<TxdDef_Android>() * FILE_TYPE_TXD_BASE_ID - offsetof(TxdDef_Android, parent_index));
+			negated_FILE_TYPE_DAT_LAST_ID_multiplied_by_sizeof_CStreamingInfo_plus_one = -(GetLastIDforType(FILE_TYPE_DAT) * TypeDetails::SizeOf<CStreamingInfo>() + 1);
+			FILE_TYPE_IFP_COUNT_plus_one_then_multiplied_by_sizeof_CStreamingInfo_then_minus_two = (GetFileIDcurrentLimit(FILE_TYPE_IFP) + 1) * TypeDetails::SizeOf<CStreamingInfo>() - 2;
+			FILE_TYPE_RRR_LAST_ID_multiplied_by_sizeof_CStreamingInfo_then_plus_one = GetLastIDforType(FILE_TYPE_RRR) * TypeDetails::SizeOf<CStreamingInfo>() + 1;
+			negated_file_ID_offset_to_array_to_CStreamedScriptInfo_status = -(TypeDetails::SizeOf<CStreamedScriptInfo>() * FILE_TYPE_SCM_BASE_ID - offsetof(CStreamedScriptInfo, status));
+			FILE_TYPE_TXD_COUNT_multiplied_by_sizeof_TxdDef = FILE_TYPE_TXD_COUNT * TypeDetails::SizeOf<TxdDef_Android>();
+			FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_TXD) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags = (GetBaseID(FILE_TYPE_COL) + 1) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, ucFlags);
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = (GetBaseID(FILE_TYPE_COL) + 1) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags_then_minus_314 = FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags - 314;
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag_then_minus_324 = FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag - 324;
+
+			FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_IFP) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+			
+			FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags = FILE_TYPE_IPL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, ucFlags);
+			FILE_TYPE_IPL_COUNT_multiplied_by_sizeof_IplDef = FILE_TYPE_IPL_COUNT * TypeDetails::SizeOf <CIplFile>();
+			FILE_TYPE_COL_COUNT_multiplied_by_sizeof_CCollisionFile = FILE_TYPE_COL_COUNT * TypeDetails::SizeOf <CCollisionFile>();
+			FILE_TYPE_SCM_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_SCM) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+			FILE_TYPE_COUNT_OF_IDS = GetCountOfAllFileIDs();
+		}
+	}
+	#endif
+}
 
 // Patches ID limits if neccessary.
 void FileIDlimit::PatchFileIDlimits_GTA_SA()
@@ -10291,7 +10538,10 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA()
 		this->PatchFileIDlimits_GTA_SA_PC_1_0_HOODLUM();
 	#elif defined(IS_PLATFORM_ANDROID_ARMEABI_V7A)
 	if(gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
-		this->PatchFileIDlimits_GTA_SA_2_0_ANDROID_ARM32();
+		this->PatchFileIDlimits_GTA_SA_2_0_ARMEABI_V7A();
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+	if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
+		this->PatchFileIDlimits_GTA_SA_2_11_32_ANDROID_ARM64_V8A();
 	#endif
 
 	/////////////////////////////////
@@ -15602,7 +15852,9 @@ void FileIDlimit::PatchFileIDlimits()
 	else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
 		this->PatchFileIDlimits_Bully_SE_1_20();
 	#endif
-	else if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86
+		|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
+		|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 		this->PatchFileIDlimits_GTA_SA();	
 
 	CPatch::LeaveThisLevel();
@@ -15645,7 +15897,7 @@ void FileIDlimit::PatchSaveBlockLoadingFunctions()
 	{
 		using namespace Game_GTASA;		
 
-		// CIplStore::Load		
+		// CIplStore::Load
 		{
 			Address_CIplStore__Load_48E426_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48E426));
 			Address_CIplStore__Load_48E476_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48E476));
@@ -15669,6 +15921,26 @@ void FileIDlimit::PatchSaveBlockLoadingFunctions()
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x469EB4),
 			(void*)&patch_CFileLoader__LoadPedObject_469EB4
 		);
+
+		bIsPatchForLoadingSaveBlocksApplied = true;
+	}
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
+	{
+		using namespace Game_GTASA;
+
+		Address_GTA_SA_2_11_32_CIplStore__Load_61ACA8_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x61ACA8), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+		CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x61ACA4), (void*)&patch_GTA_SA_2_11_32_CIplStore__Load_61ACA4);
+
+		CPatch::RedirectFunction((uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
+			"_ZN10CStreaming4LoadEv"), (void*)&CStreaming__Load);
+
+		// Count of killeable IDs warnings
+		Address_GTA_SA_2_11_32_CFileLoader__LoadVehicleObject_5FEFAC_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x5FEFAC), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+		CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x5FEFA8), (void*)&patch_GTA_SA_2_11_32_CFileLoader__LoadVehicleObject_5FEFA8);
+
+		Address_GTA_SA_2_11_32_CFileLoader__LoadPedObject_5FF628_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x5FF628), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+		CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x5FF624), (void*)&patch_GTA_SA_2_11_32_CFileLoader__LoadPedObject_5FF624);
 
 		bIsPatchForLoadingSaveBlocksApplied = true;
 	}
@@ -16232,7 +16504,7 @@ void FileIDlimit::Initialise()
 		// DFF
 		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86)
 			maxLimitValue = INT_MAX;
-		else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+		else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A || gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 			maxLimitValue = SHRT_MAX;
 		else
 			maxLimitValue = false;
@@ -16242,7 +16514,7 @@ void FileIDlimit::Initialise()
 		// TXD
 		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86)
 			maxLimitValue = INT_MAX;
-		else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+		else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A || gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 			maxLimitValue = SHRT_MAX;
 		else
 			maxLimitValue = false;
@@ -16253,6 +16525,8 @@ void FileIDlimit::Initialise()
 		// for Android COL file ID in CColModel needs to be extended
 		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 			maxLimitValue = INT_MAX;
+		else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
+			maxLimitValue = 255;
 		else
 			maxLimitValue = false;
 
@@ -16268,7 +16542,7 @@ void FileIDlimit::Initialise()
 		this->RegisterFileType(FILE_TYPE_IPL, 256, maxLimitValue);			// base ID		25255
 
 		// DAT
-		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A || gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 			maxLimitValue = USHRT_MAX;
 		else
 			maxLimitValue = false;
@@ -16276,7 +16550,7 @@ void FileIDlimit::Initialise()
 		this->RegisterFileType(FILE_TYPE_DAT, 64, maxLimitValue);			// base ID		25511
 
 		// IFP
-		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A || gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 			maxLimitValue = INT_MAX;
 		else
 			maxLimitValue = false;
@@ -16284,7 +16558,7 @@ void FileIDlimit::Initialise()
 		this->RegisterFileType(FILE_TYPE_IFP, 180, maxLimitValue);			// base ID		25575
 
 		// RRR
-		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+		if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86 || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A || gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 			maxLimitValue = INT_MAX;
 		else
 			maxLimitValue = false;

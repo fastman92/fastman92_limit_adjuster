@@ -43,7 +43,8 @@ void CheatStringLoader::LoadCheatStrings()
 		return;
 
 #ifdef IS_PLATFORM_WIN_X86
-	FILE* fp = fopen(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\cheatStrings.dat").c_str(), "r");
+	auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\cheatStrings.dat");
+	FILE* fp = fopen(filenamePath.c_str(), "r");
 
 	if (!fp)
 	{

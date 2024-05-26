@@ -59,8 +59,10 @@ namespace Game_GTASA
 		
 		*CRoadBlocks::bGenerateDynamicRoadBlocks = false;
 
+		auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\paths\\roadblox.dat");
+
 		FILESTREAM fp = CFileMgr::OpenFile(
-			g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\paths\\roadblox.dat").c_str(),
+			filenamePath.c_str(),
 			"rb");;
 
 		CFileMgr::Read(fp, CRoadBlocks::NumRoadBlocks, sizeof(*CRoadBlocks::NumRoadBlocks));

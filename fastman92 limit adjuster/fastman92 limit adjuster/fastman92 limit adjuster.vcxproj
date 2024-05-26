@@ -274,6 +274,11 @@
     <ClInclude Include="Source files\GameStructures\Rockstar Games\tHandlingData.h" />
     <ClInclude Include="Source files\GameStructures\Rockstar Games\tTransmissionGear.h" />
     <ClInclude Include="Source files\GameStructures\Rockstar Games\TxdDef.h" />
+    <ClInclude Include="Source files\GameStructures\WarMedia\OSArray.h" />
+    <ClInclude Include="Source files\GameStructures\WarMedia\OSFile.h" />
+    <ClInclude Include="Source files\GameStructures\WarMedia\OSMutex.h" />
+    <ClInclude Include="Source files\GameStructures\WarMedia\ZIP.h" />
+    <ClInclude Include="Source files\GameStructures\WarMedia\ZIPFile.h" />
     <ClInclude Include="Source files\Modules\BringBackTextureArchives.h" />
     <ClInclude Include="Source files\Modules\CarGeneratorsLimit.h" />
     <ClInclude Include="Source files\Modules\CargrpLimit.h" />
@@ -308,6 +313,7 @@
     <ClInclude Include="Source files\Modules\IslandLimits.h" />
     <ClInclude Include="Source files\Modules\LoadingScreenFontHooks.h" />
     <ClInclude Include="Source files\Modules\MapLimits.h" />
+    <ClInclude Include="Source files\GameStructures\CMemoryAllocationByApp.h" />
     <ClInclude Include="Source files\Modules\ModelSpecialFeatures.h" />
     <ClInclude Include="Source files\Modules\NotApropIDrangeLoader.h" />
     <ClInclude Include="Source files\Modules\Options.h" />
@@ -406,6 +412,10 @@
     <ClCompile Include="Source files\GameStructures\Rockstar Games\Renderware.cpp" />
     <ClCompile Include="Source files\GameStructures\Rockstar Games\RwStream.cpp" />
     <ClCompile Include="Source files\GameStructures\Rockstar Games\TextureDatabase.cpp" />
+    <ClCompile Include="Source files\GameStructures\WarMedia\OSFile.cpp" />
+    <ClCompile Include="Source files\GameStructures\WarMedia\OSMutex.cpp" />
+    <ClCompile Include="Source files\GameStructures\WarMedia\ZIP.cpp" />
+    <ClCompile Include="Source files\GameStructures\WarMedia\ZIPFile.cpp" />
     <ClCompile Include="Source files\Modules\BringBackTextureArchives.cpp" />
     <ClCompile Include="Source files\Modules\CarGeneratorsLimit.cpp" />
     <ClCompile Include="Source files\Modules\CargrpLimit.cpp" />
@@ -438,6 +448,7 @@
     <ClCompile Include="Source files\Modules\IslandLimits.cpp" />
     <ClCompile Include="Source files\Modules\LoadingScreenFontHooks.cpp" />
     <ClCompile Include="Source files\Modules\MapLimits.cpp" />
+    <ClCompile Include="Source files\GameStructures\CMemoryAllocationByApp.cpp" />
     <ClCompile Include="Source files\Modules\ModelSpecialFeatures.cpp" />
     <ClCompile Include="Source files\Modules\NotApropIDrangeLoader.cpp" />
     <ClCompile Include="Source files\Modules\Options.cpp" />

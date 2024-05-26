@@ -86,8 +86,11 @@ namespace Game_GTASA
 
 // #define tVehicleAudioSettings_gap_fields_should_be_defined
 
+	typedef char Int8;
+
 	struct tVehicleAudioSettings : tVehicleAudioSettings_base
 	{
+		/*
 		int8_t VehicleType;
 	#ifdef tVehicleAudioSettings_gap_fields_should_be_defined
 		char gap_1[1];
@@ -114,27 +117,49 @@ namespace Game_GTASA
 		char gap_1D[3];
 	#endif
 		float increaseTheVolume;
+
+		*/
+
+		Int8 VehicleAudioType;
+		int16_t PlayerBank;
+		int16_t DummyBank;
+		Int8 BassSetting;
+		float BassFactor;
+		float EnginePitch;
+		Int8 HornType;
+		float HornPitch;
+		Int8 DoorType;
+		Int8 EngineUpgrade;
+		Int8 RadioStation;
+		Int8 RadioType;
+		Int8 VehicleAudioTypeForName;
+		float EngineVolumeOffset;
 	};
 
-	VALIDATE_SIZE(tVehicleAudioSettings, 0x24);
+	struct tVehicleAudioSettings_DefinitiveEdition : tVehicleAudioSettings
+	{
+		int32_t UnknownValueAddedInGTA_DE;	// value zero for all entries
+	};
+
+	VALIDATE_SIZE(tVehicleAudioSettings_DefinitiveEdition, 0x28);
 
 	struct tVehicleAudioSettings_sscanf
 	{
 		char modelName[IMG_FASTMAN92_GTASA_MAX_FILENAME_LENGTH + 1];
-		int VehicleType;
-		int EngineOnSound;
-		int EngineOffSound;
-		int field_6;
-		float field_8;
-		float field_C;
-		int HornTon;
-		float HornHigh;
-		int DoorSound;
-		int field_19;
-		int RadioNum;
+		int VehicleAudioType;
+		int PlayerBank;
+		int DummyBank;
+		int BassSetting;
+		float BassFactor;
+		float EnginePitch;
+		int HornType;
+		float HornPitch;
+		int DoorType;
+		int EngineUpgrade;
+		int RadioStation;
 		int RadioType;
-		int vehicleTypeForAudio;
-		float increaseTheVolume;
+		int VehicleAudioTypeForName;
+		float EngineVolumeOffset;
 	};
 }
 
@@ -394,7 +419,7 @@ private:
 	union {
 		void* generic;
 		std::vector<Game_GTA_old::tVehicleAudioSettings_extended>* gta_old;	// old games like GTA III and GTA VC
-		std::vector<Game_GTASA::tVehicleAudioSettings>* gta_sa;	// GTA SA
+		std::vector<Game_GTASA::tVehicleAudioSettings_DefinitiveEdition>* gta_sa;	// GTA SA
 		std::vector<Game_GTAIV::tVehicleAudioSettings>* gta_iv;	// GTA IV, GTA EFLC
 	} ms_VehicleAudioEntries;
 

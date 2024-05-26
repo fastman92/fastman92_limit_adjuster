@@ -71,45 +71,65 @@ bool strEndCompare(const char* str, const char* needle)
 	return !memcmp(str + l_str - l_needle, needle, l_needle);
 }
 
-#ifdef IS_ARCHITECTURE_ARM32
-jint NAKED JNIEXPORT ToAddIntoFile_JNI_OnLoad(JavaVM* javaVm, void* reserved)
-{
-	__asm volatile(
-		".thumb\n"
-		"mov r2, pc\n"
-
-		"ldr r3, PluginLoader_JNI_OnLoad%=\n"
-		"add r3, pc\n"
-		"ldr r3, [r3]\n"
-		"bx r3\n"
-
-		".align 4\n"
-		"PluginLoader_JNI_OnLoad%=:.word 0x65874327\n" // PluginLoader_JNI_OnLoad, offset: -4
-		: :
-		);
-}
-
-#elif IS_ARCHITECTURE_ARM64
-unsigned int someValue;
-
-jint NAKED JNIEXPORT ToAddIntoFile_JNI_OnLoad(JavaVM* javaVm, void* reserved)
-{
-	__asm volatile(
-		"adrp x2, #0\n" \
-		"ldr w3, PluginLoader_JNI_OnLoad\n"
-		"add x3, x2, x3\n"
-		"ldr x3, [x3]\n"
-
-		"br x3\n"
-
-		".align 4\n"
-		"PluginLoader_JNI_OnLoad:.word 0x65874327\n" // PluginLoader_JNI_OnLoad, offset: -4
-		);
-}
-#endif
+void OnApplicationLaunch2();
 
 extern "C"
 {
+	#ifdef IS_ARCHITECTURE_ARM32
+	jint NAKED JNIEXPORT ToAddIntoFile_JNI_OnLoad(JavaVM* javaVm, void* reserved)
+	{
+		__asm volatile(
+			".thumb\n"
+			"mov r2, pc\n"
+
+			"ldr r3, PluginLoader_JNI_OnLoad%=\n"
+			"add r3, pc\n"
+			"ldr r3, [r3]\n"
+			"bx r3\n"
+
+			".align 4\n"
+			"PluginLoader_JNI_OnLoad%=:.word 0x65874327\n" // PluginLoader_JNI_OnLoad, offset: -4
+			: :
+			);
+	}
+
+	#elif IS_ARCHITECTURE_ARM64
+	unsigned int someValue;
+
+	jint NAKED JNIEXPORT ToAddIntoFile_JNI_OnLoad(JavaVM* javaVm, void* reserved)
+	{
+		__asm volatile(
+			"adrp x2, #0\n" \
+			"ldr w3, PluginLoader_JNI_OnLoad\n"
+			"add x3, x2, x3\n"
+			"ldr x3, [x3]\n"
+
+			"br x3\n"
+
+			".align 4\n"
+			"PluginLoader_JNI_OnLoad:.word 0x65874327\n" // PluginLoader_JNI_OnLoad, offset: -4
+			);
+	}
+	#elif IS_ARCHITECTURE_X64
+	unsigned int someValue;
+
+	jint NAKED JNIEXPORT ToAddIntoFile_JNI_OnLoad(JavaVM* javaVm, void* reserved)
+	{
+		__asm volatile(
+			".intel_syntax\n"
+			"lea    rdx, [rip]\n"
+
+			"mov ecx, [rip+PluginLoader_JNI_OnLoad]\n"
+			"add rcx, rdx\n"
+			"mov rcx, qword ptr[rcx]\n"
+			"jmp rcx\n"
+
+			".align 4\n"
+			"PluginLoader_JNI_OnLoad:.4byte 0x65874327\n" // PluginLoader_JNI_OnLoad, offset: -4
+			);
+	}
+	#endif
+
 	#if 0
 	// This function will load the SO libraries
 	void JNIEXPORT ProcessPluginLoading()
@@ -137,10 +157,26 @@ extern "C"
 	
 	#if 1
 
+	extern "C"
+		JNIEXPORT void JNICALL
+		Java_com_fastman92_main_1activity_1launcher_Functions_OnApplicationStartup_17548652(JNIEnv *env,
+			jclass clazz) {
+		OnApplicationLaunch2();
+	}
+
 	// This function will load the SO libraries
 	jint JNIEXPORT PluginLoader_OnLoad(JavaVM* javaVm, void* reserved, const void* someAddressFromApplicationLibrary)
 	{
+		/*
+		// Call original JNI_OnLoad
+		{
+			type_JNI_OnLoad pJni_OnLoad = (type_JNI_OnLoad)dlsym(g_Loader.applicationLibHandle, "Original_JNI_OnLoad");
+			return pJni_OnLoad(javaVm, reserved);
+		}
+		*/
+
 		OutputFormattedDebugString("Starting plugin loader %s, %s", PROJECT_VERSION, TOSTRING(SOLUTION_PLATFORM));
+
 		
 		try
 		{
@@ -244,6 +280,12 @@ extern "C"
 		return g_Loader.ms_CacheDirectory;
 	}
 
+	// Returns the pointer to OBB directory
+	F92_LA_API const char* GetObbDirectoryPath()
+	{
+		return g_Loader.ms_ObbDirectory;
+	}
+
 	// Returns jobject of main activity during launch
 	F92_LA_API jobject GetMainActivityDuringLaunch()
 	{
@@ -254,12 +296,11 @@ extern "C"
 	// Encoding: 0 - unspecified, 1 - ARM, 2 - Thumb
 	const void* AllocRedirection(uintptr_t target, int encoding, eTrampolineRegister trampolineRegisterAction)
 	{
-		
 		auto oldPosition = g_Loader.TrampolinePosition;
 		auto NewPosition = g_Loader.TrampolinePosition;
 
 		MAKE_DEAD_IF();
-		#if IS_PLATFORM_ANDROID_ARM64
+		#if IS_ARCHITECTURE_ARM64
 		NewPosition = GET_ALIGNED_ADDRESS(NewPosition, 4);
 
 		// result = g_Loader.TrampolinePosition;
@@ -306,8 +347,6 @@ extern "C"
 			NewPosition += 4;
 		}
 
-		
-
 		// nop
 		*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0xD503201F;	// nop
 		NewPosition += 4;
@@ -315,8 +354,24 @@ extern "C"
 		g_Loader.TrampolinePosition = NewPosition;
 
 		return g_Loader.TrampolineSpacePtr + oldPosition;
-		#endif
+		#elif defined(IS_ARCHITECTURE_X64)
+		NewPosition = GET_ALIGNED_ADDRESS(NewPosition, 4);
 
+		// WIN_X64 uses an external buffer to write a long code
+		*(uint16_t*)(g_Loader.TrampolineSpacePtr + NewPosition) = 0x35FF;	// push TARGET_ADDRESS
+		*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 2) = 2;
+		*(uint8_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 6) = 0xC3;	// retn
+		*(uint8_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 7) = 0x90;
+		*(uint64_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 8) = (uint64_t)target;
+
+		*(uint32_t*)(g_Loader.TrampolineSpacePtr + NewPosition + 16) = 0x90909090;	// 4x nop
+
+		NewPosition += 16 + 4;
+
+		g_Loader.TrampolinePosition = NewPosition;
+
+		return g_Loader.TrampolineSpacePtr + oldPosition;
+		#endif
 
 		return NULL;
 	}

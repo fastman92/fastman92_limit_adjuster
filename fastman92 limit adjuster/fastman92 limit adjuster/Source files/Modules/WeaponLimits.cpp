@@ -6576,7 +6576,9 @@ void WeaponLimits::LoadWeaponTypes()
 
 	const char* filename = "data\\gtasa_weapon_config.dat";
 
-	FILE* fp = fopen(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(filename).c_str(), "r");
+	auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(filename);
+
+	FILE* fp = fopen(filenamePath.c_str(), "r");
 
 	if (!fp)
 	{
@@ -6809,7 +6811,9 @@ void WeaponLimits::LoadMeleeTypes()
 
 	const char* filename = "data\\gtasa_melee_config.dat";
 
-	FILE* fp = fopen(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(filename).c_str(), "r");
+	auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(filename);
+
+	FILE* fp = fopen(filenamePath.c_str(), "r");
 
 	if (!fp)
 	{

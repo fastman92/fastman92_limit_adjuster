@@ -24,7 +24,9 @@ void CTrainTypeCarriagesLoader::LoadTrainTypeCarriages()
 	if (bTrainTypeCarriagesLoaded)
 		return;
 
-	FILE* fp = fopen(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(this->m_filePath).c_str(), "r");
+	auto filePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(this->m_filePath);
+
+	FILE* fp = fopen(filePath.c_str(), "r");
 
 	if (!fp)
 	{

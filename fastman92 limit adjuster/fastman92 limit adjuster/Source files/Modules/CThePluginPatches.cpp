@@ -995,10 +995,11 @@ void CThePluginPatches::DoCLEOloading(bool bEnableCLEOpatch)
 						);
 
 						// NOP createTrampoline(dword_10E04, 4, (int)alternative_ProcessOneCommand, &dword_10E2C);
-						CPatch::WriteDataToMemory(
+						CPatch::WriteDataToUnwritableMemory(
 							(void*)memCalc.GetCurrentVAbyPreferedVA(0x4AB0),
 							"\x00\xbf\x00\xbf",
-							4
+							4,
+							true
 						);
 
 						cleo_alternative_ProcessOneCommand = memCalc.GetCurrentVAbyPreferedVA(
@@ -1088,10 +1089,11 @@ void CThePluginPatches::DoCLEOloading(bool bEnableCLEOpatch)
 						);
 
 						// NOP createTrampoline(dword_10E04, 4, (int)alternative_ProcessOneCommand, &dword_10E2C);
-						CPatch::WriteDataToMemory(
+						CPatch::WriteDataToUnwritableMemory(
 							(void*)memCalc.GetCurrentVAbyPreferedVA(0x4F28),
 							"\x00\xbf\x00\xbf",
-							4
+							4,
+							true
 						);
 
 						cleo_alternative_ProcessOneCommand = memCalc.GetCurrentVAbyPreferedVA(

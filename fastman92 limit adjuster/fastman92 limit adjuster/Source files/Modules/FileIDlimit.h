@@ -155,6 +155,7 @@ namespace Game_GTASA
 	};
 
 	VALIDATE_SIZE_ONLY_ON_32_BIT_ARCHITECTURE(CStreamedScriptInfo, 0x20);
+	VALIDATE_SIZE_ONLY_ON_64_BIT_ARCHITECTURE(CStreamedScriptInfo, 0x28);
 
 	struct CStreamedScripts_Footer
 	{
@@ -696,6 +697,9 @@ private:
 	// Allocates collision file extension if enabled
 	void AllocateCollisionFileExtensionArrayIfEnabled();
 
+	// Sets variables
+	void SetVariables();
+
 	#ifdef IS_PLATFORM_WIN_X86
 	// Patches ID limits if neccessary.
 	void PatchFileIDlimits_GTA_III_1_0();
@@ -719,7 +723,10 @@ private:
 	void PatchFileIDlimits_Bully_SE_1_20();
 	#elif defined(IS_PLATFORM_ANDROID_ARMEABI_V7A)
 	// Patches ID limits if neccessary.
-	void PatchFileIDlimits_GTA_SA_2_0_ANDROID_ARM32();
+	void PatchFileIDlimits_GTA_SA_2_0_ARMEABI_V7A();
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+	// Patches ID limits if neccessary.
+	void PatchFileIDlimits_GTA_SA_2_11_32_ANDROID_ARM64_V8A();
 	#endif
 
 	// Patches ID limits if neccessary.

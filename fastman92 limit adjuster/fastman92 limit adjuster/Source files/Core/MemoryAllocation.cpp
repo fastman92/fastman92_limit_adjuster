@@ -6,7 +6,8 @@
 
 #include "MemoryAllocation.h"
 
-#include "FormattedOutput.h"
+#include "LimitAdjuster.h"
+// #include "FormattedOutput.h"
 
 #include <stdint.h>
 #ifdef IS_PLATFORM_WIN
@@ -71,7 +72,7 @@ void* CMemoryAllocation::AllocateNearTheAddress(void* pAddress, uint32_t sizeToB
 	char line[1024];
 	line[0] = 0;
 
-	OutputFormattedDebugString("Start of line reading: %d", processID);
+	// OutputFormattedDebugString("Start of line reading: %d", processID);
 
 	while (fgets(line, sizeof(line), fp))
 	{

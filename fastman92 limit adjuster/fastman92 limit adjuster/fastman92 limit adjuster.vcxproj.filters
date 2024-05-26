@@ -187,6 +187,18 @@
     <Filter Include="Source Files\fastman92 limit adjuster\GameStructures\ForOtherProjects\FLA_not_required">
       <UniqueIdentifier>{27b54f2a-8a7f-4bbf-be47-f262ea96b64f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\fastman92 limit adjuster\GameStructures\WarMedia">
+      <UniqueIdentifier>{9a3ca32c-4a0f-4500-ba42-8ee2ff43ae79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 limit adjuster\GameStructures\WarMedia">
+      <UniqueIdentifier>{483f6403-ace1-44ac-b471-9cacfcc9fa3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fastman92 include\ELF">
+      <UniqueIdentifier>{cdd71305-fbc9-46bd-bc81-95b71f5753f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fastman92 include\ELF">
+      <UniqueIdentifier>{50c3550b-81eb-4450-805f-b9287f495707}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.h">
@@ -295,9 +307,6 @@
       <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source files\Core\LimitAdjuster.h">
-      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source files\Core\MemoryAllocation.h">
       <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source files\Core\ProjectConstants.h">
@@ -738,6 +747,27 @@
     <ClInclude Include="Source files\Core\Configuration\TextFile.h">
       <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source files\GameStructures\WarMedia\OSFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\Core\MemoryAllocation.h">
+      <Filter>Header Files\fastman92 limit adjuster\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\CMemoryAllocationByApp.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\WarMedia\OSMutex.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\WarMedia\ZIPFile.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\WarMedia\OSArray.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Source files\GameStructures\WarMedia\ZIP.h">
+      <Filter>Header Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAccess\CMemoryAccessWithinCurrentProcess.cpp">
@@ -1013,9 +1043,6 @@
     <ClCompile Include="Source files\Core\DynamicAssert.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source files\Core\MemoryAllocation.cpp">
-      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source files\Core\CLimitAdjusterModule.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
     </ClCompile>
@@ -1120,6 +1147,24 @@
     </ClCompile>
     <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
       <Filter>Source Files\fastman92 include</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\WarMedia\OSFile.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\Core\MemoryAllocation.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\CMemoryAllocationByApp.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\WarMedia\OSMutex.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\WarMedia\ZIPFile.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Source files\GameStructures\WarMedia\ZIP.cpp">
+      <Filter>Source Files\fastman92 limit adjuster\GameStructures\WarMedia</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

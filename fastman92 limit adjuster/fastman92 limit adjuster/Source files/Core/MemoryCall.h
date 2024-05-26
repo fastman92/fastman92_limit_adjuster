@@ -4,6 +4,8 @@
 *
 */
 
+#pragma once
+
 #include <stdint.h>
 
 /*
@@ -43,7 +45,7 @@ public:
 
 	template <typename Ret, typename... Args>
 	static Ret Function(uintptr_t address, Args... args) {
-		uintptr_t address_ = address;
+		volatile uintptr_t address_ = address;
 		return reinterpret_cast<Ret(__cdecl *)(Args...)>(address_)(args...);
 	}
 

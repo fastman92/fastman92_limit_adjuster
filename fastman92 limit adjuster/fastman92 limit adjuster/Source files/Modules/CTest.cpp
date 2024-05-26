@@ -488,6 +488,7 @@ static TARGET_THUMB NAKED void patch_CCarCtrl__GenerateOneRandomCar_2E853E()
 // Runs test
 void CTest::Run()
 {
+	return;
 	if (!PROJECT_USE_DEVELOPMENT_INI)
 		return;
 

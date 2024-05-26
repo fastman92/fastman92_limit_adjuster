@@ -76,6 +76,7 @@ extern "C"
 	uint32_t ScriptSpaceSize;
 	uint32_t MAINsegmentSize;
 	uint32_t MissionSize;
+	uint32_t HalfMissionSize;
 
 	#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 	// patch for 0x329EC4
@@ -88,7 +89,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R1, ScriptSpaceSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, ScriptSpaceSize)
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Init_329ECC_thumb)
 			);
 	}
@@ -103,7 +104,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R8, MAINsegmentSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R8, MAINsegmentSize)
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Init_32A068_thumb)
 			);
 	}
@@ -119,7 +120,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R8, MAINsegmentSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R8, MAINsegmentSize)
 			"BLT 1f\n"
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Init_32A0E4_thumb)
 
@@ -139,7 +140,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R2, MissionSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R2, MissionSize)
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_LoadMissionScript_34E1C8_thumb)
 			);
 	}
@@ -154,7 +155,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R9, MissionSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R9, MissionSize)
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CRunningScript__ProcessCommands1000To1099_34E6F8_thumb)
 			);
 	}
@@ -170,7 +171,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R9, MissionSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R9, MissionSize)
 			"BLT 1f\n"
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CRunningScript__ProcessCommands1000To1099_34E78C_thumb)
 
@@ -190,10 +191,52 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R1, MAINsegmentSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, MAINsegmentSize)
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CRunningScript__ProcessCommands1000To1099_34E79C_thumb)
 			);
 	}
+
+	// patch for 0x48C0B8
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_00_CTheScripts__Save_19EA40_arm = 0;	// j__ZN19CGenericGameStorage21_SaveDataToWorkBufferEPvi
+		uintptr_t Address_GTA_SA_2_00_CTheScripts__Save_48C0C0_thumb = 0;
+	}
+
+	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CTheScripts__Save_48C0B8()
+	{
+		__asm(
+		".thumb\n"
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, HalfMissionSize)
+			"BL 1f\n"
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Save_48C0C0_thumb)
+
+			// Branches
+			"1:\n"	// j__ZN19CGenericGameStorage21_SaveDataToWorkBufferEPvi
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Save_19EA40_arm)
+			);
+	}
+
+	// patch for 0x48C0C2
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_00_CTheScripts__Save_48C0CE_thumb = 0;
+	}
+
+	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CTheScripts__Save_48C0C2()
+	{
+		__asm(
+		".thumb\n"
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, HalfMissionSize)
+			"BL 1f\n"
+			"MOV R0, #0x1000\n"
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Save_48C0CE_thumb)
+
+			// Branches
+			"1:\n"	// j__ZN19CGenericGameStorage21_SaveDataToWorkBufferEPvi
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Save_19EA40_arm)
+			);
+}
 
 	// patch for 0x48C98A
 	extern "C"
@@ -205,7 +248,7 @@ extern "C"
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R3, MAINsegmentSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R3, MAINsegmentSize)
 			"LDR R1, =("/* missionScript_ptr */"0x67627C - 0x48C99C)\n"
 			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Load_48C994_thumb)
 			);
@@ -214,16 +257,38 @@ extern "C"
 	// patch for 0x48CA62
 	extern "C"
 	{
-		uintptr_t Address_GTA_SA_2_00_CTheScripts__Load_48CA6C_thumb = 0;
+		uintptr_t Address_GTA_SA_2_00_CTheScripts__Load_48CA70_thumb = 0;
 	}
 
 	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CTheScripts__Load_48CA62()
 	{
 		__asm(
 		".thumb\n"
-			ASM_LOAD_4BYTE_UNSIGNED_VALUE_STORED_ON_SYMBOL(R0, MAINsegmentSize)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R0, MAINsegmentSize)
 			"ADDS R5, R1, R0\n"
-			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Load_48CA6C_thumb)
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, HalfMissionSize)
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Load_48CA70_thumb)
+			);
+	}
+
+	// patch for 0x48CA78
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_00_CTheScripts__Load_193B8C_arm = 0;	// j__ZN19CGenericGameStorage23_LoadDataFromWorkBufferEPvi
+		uintptr_t Address_GTA_SA_2_00_CTheScripts__Load_48CA80_thumb = 0;
+	}
+
+	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CTheScripts__Load_48CA78()
+	{
+		__asm(
+		".thumb\n"
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, HalfMissionSize)
+			"BL 1f\n"
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Load_48CA80_thumb)
+
+			// Branches
+			"1:\n"	// j__ZN19CGenericGameStorage23_LoadDataFromWorkBufferEPvi
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CTheScripts__Load_193B8C_arm)
 			);
 	}
 	#endif
@@ -273,6 +338,7 @@ void SCMlimits::PatchScriptSpaceLimits()
 	////
 	::MAINsegmentSize = this->iMAINsegmentSize;
 	::MissionSize = this->iMissionSize;
+	::HalfMissionSize = this->iMissionSize / 2;
 	////
 	
 	ScriptSpaceSize = this->GetScriptSpaceSize();
@@ -446,14 +512,31 @@ void SCMlimits::PatchScriptSpaceLimits()
 			(void*)&patch_GTA_SA_2_00_CRunningScript__ProcessCommands1000To1099_34E794, 8
 		);
 
+		Address_GTA_SA_2_00_CTheScripts__Save_19EA40_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19EA40));
+		Address_GTA_SA_2_00_CTheScripts__Save_48C0C0_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48C0C0));
+		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48C0B8),
+			(void*)&patch_GTA_SA_2_00_CTheScripts__Save_48C0B8, 8
+		);
+
+		Address_GTA_SA_2_00_CTheScripts__Save_48C0CE_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48C0CE));
+		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48C0C2),
+			(void*)&patch_GTA_SA_2_00_CTheScripts__Save_48C0C2, 12
+		);
+
 		Address_GTA_SA_2_00_CTheScripts__Load_48C994_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48C994));
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48C98A),
 			(void*)&patch_GTA_SA_2_00_CTheScripts__Load_48C98A, 10
 		);
 
-		Address_GTA_SA_2_00_CTheScripts__Load_48CA6C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48CA6C));
+		Address_GTA_SA_2_00_CTheScripts__Load_48CA70_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48CA70));
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48CA62),
-			(void*)&patch_GTA_SA_2_00_CTheScripts__Load_48CA62, 10
+			(void*)&patch_GTA_SA_2_00_CTheScripts__Load_48CA62, 14
+		);
+
+		Address_GTA_SA_2_00_CTheScripts__Load_193B8C_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x193B8C));
+		Address_GTA_SA_2_00_CTheScripts__Load_48CA80_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x48CA80));
+		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x48CA78),
+			(void*)&patch_GTA_SA_2_00_CTheScripts__Load_48CA78, 8
 		);
 	}	
 	#endif

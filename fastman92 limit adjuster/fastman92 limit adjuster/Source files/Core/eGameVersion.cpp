@@ -165,7 +165,9 @@ namespace Game
 	{
 		return gameVersion == GAME_VERSION_GTA_TRILOGY_SA_ANY_WIN_X64
 			|| gameVersion == GAME_VERSION_GTA_TRILOGY_SA_1_0_0_14388_WIN_X64
-			|| gameVersion == GAME_VERSION_GTA_TRILOGY_SA_1_0_0_14718_WIN_X64;
+			|| gameVersion == GAME_VERSION_GTA_TRILOGY_SA_1_0_0_14718_WIN_X64
+			|| gameVersion == GAME_VERSION_GTA_TRILOGY_SA_1_0_17_37984884_WIN_X64
+			|| gameVersion == GAME_VERSION_GTA_SA_DE_ROCKSTAR_1_72_42919648_ANDROID_ARM64_V8A;
 	}
 
 	// Checks if it's GTA SA for Android by War Drums
@@ -173,9 +175,13 @@ namespace Game
 	{
 		return gameVersion == GAME_VERSION_GTA_SA_1_08_ANDROID_ARMEABI_V7A
 			|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
+			|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A
+
 			|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A
 			|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A
-			|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A;
+
+			|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A
+			|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64;
 	}
 
 	// Checks if game version is GTA SA 1.0,
@@ -194,7 +200,8 @@ namespace Game
 	// Checks if game version is GTA LCS
 	bool CGameVersion::IsAny_GTA_LCS(eGameVersion gameVersion)
 	{
-		return gameVersion == GAME_VERSION_GTA_LCS_2_4_ANDROID_ARMEABI_V7A;
+		return gameVersion == GAME_VERSION_GTA_LCS_2_4_ANDROID_ARMEABI_V7A
+			|| gameVersion == GAME_VERSION_GTA_LCS_2_4_235_ANDROID_ARM64_V8A;
 	}
 
 	// GTA Vice City Stories

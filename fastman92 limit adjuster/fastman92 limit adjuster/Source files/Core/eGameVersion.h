@@ -44,6 +44,7 @@ formatMacro(BULLY_SE_1_2, WIN_X86) \
 /* GTA SA */ \
 formatMacro(GTA_TRILOGY_SA_1_0_0_14388, WIN_X64) \
 formatMacro(GTA_TRILOGY_SA_1_0_0_14718, WIN_X64) \
+formatMacro(GTA_TRILOGY_SA_1_0_17_37984884, WIN_X64) \
 formatMacro(GTA_TRILOGY_SA_ANY, WIN_X64) \
 /* GTA V */ \
 formatMacro(GTA_V_1_0_323_1, WIN_X64) \
@@ -79,11 +80,22 @@ formatMacro(GTA_III_1_9, ANDROID_ARM64_V8A) \
 formatMacro(GTA_VC_1_10, ANDROID_ARM64_V8A) \
 formatMacro(GTA_VC_1_12, ANDROID_ARM64_V8A) \
 formatMacro(GTA_SA_2_10, ANDROID_ARM64_V8A) \
+formatMacro(GTA_SA_2_11_32, ANDROID_ARM64_V8A) \
+formatMacro(GTA_SA_DE_ROCKSTAR_1_72_42919648, ANDROID_ARM64_V8A) \
+formatMacro(GTA_SA_DE_ROCKSTAR_1_86_44544238, ANDROID_ARM64_V8A) \
+/* GTA LCS */ \
+formatMacro(GTA_LCS_2_4_235, ANDROID_ARM64_V8A) \
+/* //////////////////////////////// */ \
+/* ////// ANDROID_X64       /////// */ \
+/* //////////////////////////////// */ \
+formatMacro(GTA_SA_2_11_32, ANDROID_X64) \
 /* ////////////////////// */ \
 /* //////// PS2 ///////// */ \
 /* ////////////////////// */ \
 formatMacro(GTA_SA_1_0, PS2) \
 formatMacro(GTA_VCS_1_0, PS2)
+
+
 
 #define PUT_GAME_VERSION_MEMBER_FROM_LIST(game_version, platform) GAME_VERSION_##game_version##_##platform,
 

@@ -28,6 +28,7 @@ struct CPluginDirectory
 	std::string copiedFromPath;
 	ePluginLoadingMode loadingMode;
 
+
 	CPluginDirectory(const char* path, const char* copiedFromPath, ePluginLoadingMode loadingMode)
 	{
 		this->path = path;
@@ -64,13 +65,16 @@ public:
 	char ms_originalPackageName[128];
 
 	char ms_InitialDirectory[PATH_LIMIT];	// EXE directory on Windows, slash on Android
-	char ms_StorageRootDirectory[PATH_LIMIT];	// EXE directory on Windows, STORAGE_ROOT on Android
+	char ms_StorageRootDirectory[PATH_LIMIT];	// EXE directory on Windows, STORAGE_ROOT on Android, GameFace directory for GTA Trilogy games
 	char ms_StorageRootBaseDirectory[PATH_LIMIT];	// Unset on Windows, STORAGE_ROOT_BASE on Android
 	char ms_PluginDirectory[PATH_LIMIT];	// Plugin directory, set on Android
+	char ms_ObbDirectory[PATH_LIMIT];	// Obb path, set on Android
 
 	char ms_CacheDirectory[PATH_LIMIT];	// DEX cache directory
 
 	static std::vector<CLoadedPluginInfo> ms_loadedPluginsArray;
+
+	char libPluginPath[PATH_MAX];
 	std::vector<CPluginDirectory> m_pluginDirectoryPaths;
 
 	JavaVM* m_javaVm;
@@ -124,6 +128,9 @@ public:
 
 	// Loads plugins
 	void FinishLoadingPlugins();
+
+	// Loads plugins
+	void SetTrampolineSpaceMemoryPermission(uint32_t flags, const char* permissionName);
 
 	// Checks if valid plugin name
 	static bool CheckIfValidPluginFileName(const char* filename);

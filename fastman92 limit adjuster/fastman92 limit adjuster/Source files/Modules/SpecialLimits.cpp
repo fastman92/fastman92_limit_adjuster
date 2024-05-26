@@ -13,9 +13,15 @@
 #include "../Core/LimitAdjuster.h"
 
 #include "../GameStructures/Rockstar Games/CEntity.h"
+#include "../GameStructures/Rockstar Games/CFileMgr.h"
 #include "../GameStructures/Rockstar Games/CFont.h"
 #include "../GameStructures/Rockstar Games/functions.h"
 #include "../GameStructures/Rockstar Games/GameSystem.h"
+
+#include "../GameStructures/WarMedia/OSFile.h"
+#include "../GameStructures/WarMedia/ZIP.h"
+
+#include "../../../fastman92 plugin loader/ForOtherProjects/PluginLoaderExports.h"
 
 // #include <errno.h>
 // #include <dirent.h>
@@ -23,6 +29,8 @@
 #include <CRGBA.h>
 #include <Array/countof.h>
 #include <MultiPlatformSupport/PlatformGeneralisation.h>
+
+#include <cstdio>
 
 using namespace Game;
 
@@ -35,10 +43,11 @@ class CCheats
 
 bool** CCheats::m_aCheatsActive = (bool**)(0x407404 + 2);
 
-static char* StorageRootBuffer;
-static char* StorageBaseRootBuffer;
+// static char* StorageRootBuffer;
+// static char* StorageBaseRootBuffer;
 
 static uintptr_t Address_NvAPKOpen = 0;
+static uintptr_t Address_NvAPKOpenFromPack = 0;
 
 #ifdef IS_PLATFORM_WIN_X86
 namespace Game_GTASA
@@ -526,6 +535,7 @@ void SpecialLimits::Initialise()
 	{
 		#ifdef IS_PLATFORM_ANDROID
 		{
+			/*
 			// Storage root buffer
 			StorageRootBuffer = (char*)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
@@ -537,11 +547,17 @@ void SpecialLimits::Initialise()
 				&g_LimitAdjuster.hModule_of_game,
 				"StorageBaseRootBuffer"
 			);
+			*/
 
 			// Asset manager open
 			Address_NvAPKOpen = (uintptr_t)Library::GetSymbolAddress(
 				&g_LimitAdjuster.hModule_of_game,
 				"_Z9NvAPKOpenPKc"
+			);
+
+			Address_NvAPKOpenFromPack = (uintptr_t)Library::GetSymbolAddress(
+				&g_LimitAdjuster.hModule_of_game,
+				"_Z17NvAPKOpenFromPackPKc"
 			);
 		}
 		#endif
@@ -667,18 +683,6 @@ void SpecialLimits::FixCheatsTypedFromKeyboardNotWorking()
 	CPatch::LeaveThisLevel();
 }
 
-enum eNvidiaFileHandleType
-{
-	NVIDIA_HANDLE_ASSET,
-	NVIDIA_HANDLE_FILE,
-};
-
-struct tNvidiaFileHandle
-{
-	eNvidiaFileHandleType type;
-	void* ptr;
-};
-
 extern "C"
 {
 	#define ALTER_NVFOPEN_FUNCTION
@@ -686,18 +690,32 @@ extern "C"
 	#ifdef IS_PLATFORM_ANDROID
 	// opens files from file system / APK archive
 
+	static bool NvOpenFileFromFileSystem(const char* filepath, NvFileHandle* pFileHandle)
+	{
+		if (FILE* fp = game_fopen(filepath, "rb"))
+		{
+			pFileHandle->type = NVIDIA_HANDLE_FILE;
+			pFileHandle->ptr = fp;
+			return true;
+		}
+		else
+			return false;
+	}
+
 	// directoryPath can be NULL
-	tNvidiaFileHandle* NvFOpen_replacement(const char* directoryPath, const char* filename, bool arg3, bool arg4)
+	NvFileHandle* NvFOpen_replacement(const char* directoryPath, const char* filename, bool userOnly, bool checkAPK)
 	{
 		static bool data_app_path_used = false;
 		static char savedPathToSDcard[512];
 		static int lenOfsavedPathToSDcard = -1;
 
 		char filepath[516];
-		tNvidiaFileHandle* pFileHandle = (tNvidiaFileHandle*)game_malloc(sizeof(tNvidiaFileHandle));
+		NvFileHandle* pFileHandle = (NvFileHandle*)game_malloc(sizeof(NvFileHandle));
 
 		if (!directoryPath)
 		{
+			// OutputFormattedDebugString("FILE: %s", filename);
+
 			if (filename[0] == '/')
 			{
 				if (strncmp(filename, "/data/app", 9) == 0)
@@ -728,23 +746,19 @@ extern "C"
 					}
 					*/
 
-					sprintf(filepath, "%s%s", StorageBaseRootBuffer, filename);
+					sprintf(filepath, "%s%s", g_LimitAdjuster.StorageRootBase, filename);
 					// OutputFormattedDebugString("Filepath: %s 1", filepath);
 				}
 			}
 			else
 			{
-				sprintf(filepath, "%s%s", StorageRootBuffer, filename);
+				sprintf(filepath, "%s%s", g_LimitAdjuster.StorageRootDirectory, filename);
 				// OutputFormattedDebugString("Filepath: %s 2", filepath);
 			}
 			
 		use_fopen:
-			if (FILE* fp = game_fopen(filepath, "rb"))
-			{
-				pFileHandle->type = NVIDIA_HANDLE_FILE;
-				pFileHandle->ptr = fp;
+			if (NvOpenFileFromFileSystem(filepath, pFileHandle))
 				return pFileHandle;
-			}
 			else
 			{
 				game_free(pFileHandle);
@@ -753,10 +767,11 @@ extern "C"
 		}
 		else
 		{
-			sprintf(filepath, "%s/%s%s", StorageRootBuffer, directoryPath, filename);
-			// OutputFormattedDebugString("Filepath: %s %s %s 4", StorageRootBuffer, directoryPath, filename);
-
-			if (data_app_path_used || !arg4 || arg3)
+			
+			sprintf(filepath, "%s/%s%s", g_LimitAdjuster.StorageRootDirectory, directoryPath, filename);
+			// OutputFormattedDebugString("Filepath: %s %s %s 4", g_LimitAdjuster.StorageRootDirectory, directoryPath, filename);
+			
+			if (data_app_path_used || !checkAPK || userOnly)
 				goto use_fopen;	
 		}
 
@@ -764,20 +779,32 @@ extern "C"
 		
 		// OutputFormattedDebugString("xFilepath: %s before", filepath);
 
-		if (FILE* fp = game_fopen(filepath, "rb"))
-		{
-			// OutputFormattedDebugString("xFilepath: %s success", filepath);
-			pFileHandle->type = NVIDIA_HANDLE_FILE;
-			pFileHandle->ptr = fp;
+		if (NvOpenFileFromFileSystem(filepath, pFileHandle))
 			return pFileHandle;
-		}
 
 		// OutputFormattedDebugString("xFilepath: %s failed", filepath);
 		#endif
 		
-		void* pAssetHandle = g_memoryCall.Function<void*>(Address_NvAPKOpen, filename);
 
-		// OutputFormattedDebugString("directory: 0x%X filename: %s arg3: %d arg4: %d asset: 0x%X", directoryPath, filename, arg3, arg4, pAssetHandle);
+		void* pAssetHandle = nullptr;
+
+		if (Address_NvAPKOpenFromPack)	// only available in newest game versions such as GTA SA 2.11.32
+		{
+			pAssetHandle = g_memoryCall.Function<void*>(Address_NvAPKOpenFromPack, filename);
+
+			if (pAssetHandle)
+				pFileHandle->type = NVIDIA_HANDLE_FILE;
+		}
+		
+		if (!pAssetHandle)
+		{
+			pAssetHandle = g_memoryCall.Function<void*>(Address_NvAPKOpen, filename);
+
+			if (pAssetHandle)
+				pFileHandle->type = NVIDIA_HANDLE_ASSET;
+		}
+
+		// OutputFormattedDebugString("directory: 0x%X filename: %s asset: 0x%X", directoryPath, filename, pAssetHandle);
 
 		#ifndef ALTER_NVFOPEN_FUNCTION
 		if (!pAssetHandle)
@@ -789,8 +816,7 @@ extern "C"
 			return NULL;
 		}
 		#endif
-				
-		pFileHandle->type = NVIDIA_HANDLE_ASSET;
+		
 		pFileHandle->ptr = pAssetHandle;
 		return pFileHandle;
 	}
@@ -859,16 +885,18 @@ void SpecialLimits::AlterFileLoadingOrder()
 
 	MAKE_DEAD_IF();
 
-	#if defined(IS_PLATFORM_ANDROID_ARM32) || defined(IS_PLATFORM_ANDROID_ARM64)
+	#if defined(IS_PLATFORM_ANDROID_ARM32) || defined(IS_PLATFORM_ANDROID_ARM64) || defined(IS_PLATFORM_ANDROID_X64)
 	else if (gameVersion == GAME_VERSION_BULLY_AE_1_0_0_18_ANDROID_ARMEABI_V7A
-	|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A)
+	|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A
+
+	|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A
+	|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64
+	)
 	{
-	
 		CPatch::RedirectFunction(
-			(uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_Z7NvFOpenPKcS0_bb"),
+			Address_NvFOpen,
 			(void*)&NvFOpen_replacement
-		);
-		
+		);		
 	}
 	#endif
 
@@ -1004,19 +1032,25 @@ void SpecialLimits::RemoveRequirementForLodDFFtoHoldNativePLGdata()
 		);
 #endif
 
-		uintptr_t Address_emu_ArraysGetID = (uintptr_t)Library::GetSymbolAddress(
-			&g_LimitAdjuster.hModule_of_game,
-		#ifdef IS_ARCHITECTURE_64_BIT
-			"_Z15emu_ArraysGetIDj"
-		#else
-			"_Z15emu_ArraysGetIDy"
-		#endif
-		);
+		const char* emu_ArraysGetID_mangledName = nullptr;
 
 		#ifdef IS_ARCHITECTURE_64_BIT
 		emu_Arrays_ID_offset = 48;
+		emu_ArraysGetID_mangledName = "_Z15emu_ArraysGetIDy";
 		#else
 		emu_Arrays_ID_offset = 36;
+		emu_ArraysGetID_mangledName = "_Z15emu_ArraysGetIDj";
+		#endif
+
+		uintptr_t Address_emu_ArraysGetID = (uintptr_t)Library::GetSymbolAddress(
+			&g_LimitAdjuster.hModule_of_game,
+			emu_ArraysGetID_mangledName
+		);
+
+		#ifdef IS_ARCHITECTURE_64_BIT
+		
+		#else
+		
 		#endif
 
 		CPatch::RedirectFunction(Address_emu_ArraysGetID, (void*)&emu_ArraysGetID);
@@ -1628,7 +1662,113 @@ namespace Bully_SE
 			);
 	}
 }
+#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+namespace Game_GTASA
+{
+	// patch for 0x812874
+	extern "C"
+	{
+		uintptr_t Address_sub_812874_812878_arm64 = 0;
+	}
+
+	static NAKED void patch_sub_812874_812874()
+	{
+		__asm(
+			"SUB SP, SP, #0x40\n"
+
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_sub_812874_812878_arm64)
+			);
+	}
+
+	static void VerifyPipeline(char *pipeline, int stage)
+	{
+		
+		char* superBlock = *(char**)(pipeline + 0x30);
+		uint32_t superBlockSize = *(uint32_t*)(pipeline + 0x38);
+
+		uint32_t numberOfNodes = *(uint32_t*)(pipeline + 4);
+		char* nodes = *(char**)(pipeline + 8);
+
+		if (numberOfNodes >= 1)
+		{
+
+			
+			char* firstNodePrivateData = *(char**)(nodes + 0x28);
+
+			if (firstNodePrivateData)
+			{
+				uintptr_t intoBlock = (uintptr_t)firstNodePrivateData - (uintptr_t)superBlock;
+
+				if(intoBlock < superBlockSize)
+					OutputFormattedDebugString("Verify %d, OK %p 0x%X intoBlock: %p firstNodePrivateData: %p", stage, superBlock, superBlockSize, intoBlock, firstNodePrivateData);
+				else
+					OutputFormattedDebugString("Verify %d, Problem %p 0x%X intoBlock: %p firstNodePrivateData: %p", stage, superBlock, superBlockSize, intoBlock, firstNodePrivateData);
+			}
+		}
+	}
+
+	static bool ReallocAndFixupSuperBlockTest(char *pipeline, uint32_t newSize)
+	{
+		VerifyPipeline(pipeline, 0);
+
+		bool result = true;
+
+		result = g_memoryCall.Function<bool>((uintptr_t)&patch_sub_812874_812874, pipeline, newSize);
+		
+		VerifyPipeline(pipeline, 1);
+
+		return result;
+	}
+}
 #endif
+
+void AddToPointer(void* ptr, uintptr_t difference)
+{
+	if (*(char**)ptr)
+		*(char**)ptr = *(char**)ptr + difference;
+}
+
+// Improved version
+RwBool ReallocAndFixupSuperBlock(RxPipeline *pipeline, RwUInt32 newSize)
+{
+	char* oldSuperBlock = (char*)pipeline->superBlock(pipeline);
+	char* newSuperBlock = (char*)(*RwEngineInstance)->memoryFuncs(*RwEngineInstance).rwrealloc(oldSuperBlock, newSize);
+
+	if (newSuperBlock)
+	{
+		uintptr_t ptrDifference = newSuperBlock - oldSuperBlock;
+
+		pipeline->superBlock(pipeline) = newSuperBlock;
+		pipeline->superBlockSize(pipeline) = newSize;
+
+		pipeline->nodes(pipeline) = (RxPipelineNode*)newSuperBlock;
+
+		AddToPointer(pipeline->embeddedPacket.GetPtr(pipeline), ptrDifference);
+		AddToPointer(pipeline->inputRequirements.GetPtr(pipeline), ptrDifference);
+
+		for (unsigned int i = 0; i < pipeline->numNodes(pipeline); i++)
+		{
+			RxPipelineNode* pNode = pipeline->nodes(pipeline) + i;
+			
+			AddToPointer(&pNode->outputs, ptrDifference);
+			AddToPointer(&pNode->slotClusterRefs, ptrDifference);
+			AddToPointer(&pNode->slotsContinue, ptrDifference);
+			AddToPointer(&pNode->privateData, ptrDifference);
+			AddToPointer(&pNode->inputToClusterSlot, ptrDifference);
+			AddToPointer(&pNode->topSortData, ptrDifference);
+		}
+
+		return true;
+	}
+	else
+	{
+		RwError code;
+		code.pluginID = 0;
+		code.errorCode = _rwerror(0x80000013, newSize);
+		RwErrorSet(&code);
+		return false;
+	}
+}
 
 // Fix HAL crashing on devices with Android 11 and higher
 void SpecialLimits::FixHALCrashingOnDevicesWithAndroid11AndHigher()
@@ -1636,6 +1776,10 @@ void SpecialLimits::FixHALCrashingOnDevicesWithAndroid11AndHigher()
 	MAKE_VAR_GAME_VERSION();
 	CPatch::EnterNewLevel();
 	// CPatch::EnableDebugMode();
+
+	bool bCrashOnStartupHALFixed = true;
+	bool bCrashOnReallocFixed = true;
+	bool bCrashOnCaseSensitivePathsFixed = true;
 
 	MAKE_DEAD_IF();
 	#ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
@@ -1770,14 +1914,94 @@ void SpecialLimits::FixHALCrashingOnDevicesWithAndroid11AndHigher()
 	}
 	#endif
 	else
+		bCrashOnStartupHALFixed = false;
+
+	MAKE_DEAD_IF();
+	#if defined(IS_PLATFORM_ANDROID_ARMEABI_V7A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A)
+		CPatch::RedirectFunction(g_mCalc.GetCurrentVAbyPreferedVA(0x1DF488), (void*)&ReallocAndFixupSuperBlock);
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A)
+		CPatch::RedirectFunction(g_mCalc.GetCurrentVAbyPreferedVA(0x278DF8), (void*)&ReallocAndFixupSuperBlock);
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
+		CPatch::RedirectFunction(g_mCalc.GetCurrentVAbyPreferedVA(0x812874), (void*)&ReallocAndFixupSuperBlock);
+	#elif defined(IS_PLATFORM_ANDROID_X64)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64)
+		CPatch::RedirectFunction(g_mCalc.GetCurrentVAbyPreferedVA(0x8B89C0), (void*)&ReallocAndFixupSuperBlock);
+	#endif
+	else
+		bCrashOnReallocFixed = false;
+
+
+	///////////////////////
+	#if IS_PLATFORM_ANDROID
+	struct CFileMgrChange {
+
+		static const char* GetPathInsideStorageBase(const char* path)
+		{
+			const char* result = strstr(path, "/Android");
+
+			if (result)
+				return result;
+
+			return strstr(path, "/android");
+		}
+
+		static void Initialize()
+		{
+			{
+				const char* obbPath = GetPathInsideStorageBase(GetObbDirectoryPath());
+
+				if (obbPath)
+				{
+
+					char dataMainPath[PATH_MAX];
+					sprintf(dataMainPath, "%s/split_data_main.apk", obbPath);
+
+					ZIPFile* ZIPstorage = ZIP_FileCreate(dataMainPath);
+
+					if (ZIPstorage)
+						ZIP_AddStorage(ZIPstorage);
+				}
+			}
+
+			*CFileMgr::fileDataArea = OSFDA_Storage_0;
+		}
+	};
+	#endif
+
+	MAKE_DEAD_IF();
+
+	#if defined(IS_PLATFORM_ANDROID)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A
+		|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64
+	)
+	{
+		CPatch::RedirectFunction(
+			(uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_Z11OS_FileOpen14OSFileDataAreaPPvPKc16OSFileAccessType"),
+			(void*)&OS_FileOpen_replacement
+		);
+
+		CPatch::RedirectFunction(
+			(uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_ZN8CFileMgr10InitialiseEv"),
+			(void*)&CFileMgrChange::Initialize
+		);
+	}
+	#endif
+	else
+		bCrashOnCaseSensitivePathsFixed = false;
+
+	if (!bCrashOnStartupHALFixed && !bCrashOnReallocFixed && !bCrashOnCaseSensitivePathsFixed)
 	{
 		CPatch::LeaveThisLevel();
 		return;
 	}
 
 	this->ms_bFixHALCrashingOnDevicesWithAndroid11AndHigher = true;
+
+	// CPatch::PatchMemoryData(g_mCalc.GetCurrentVAbyPreferedVA(0x55B68C), "\x02\x00\x80\x52", 4, true); // GTA SA 2.10 ARM64 TextureDatabase
 	
-	CGenericLogStorage::SaveFormattedTextLn("SPECIAL: Fix HAL crashing on devices with Android 11 and higher enabled.");
+	CGenericLogStorage::SaveFormattedTextLn("SPECIAL: Fix crashes on newer systems enabled.");
 	CGenericLogStorage::WriteLineSeparator();
 
 	CPatch::LeaveThisLevel();
@@ -1787,6 +2011,19 @@ void SpecialLimits::FixHALCrashingOnDevicesWithAndroid11AndHigher()
 void SpecialLimits::DisableCINFOandMINFOLoading()
 {
 	MAKE_VAR_GAME_VERSION();
+
+	char filePath[FLA_MAX_PATH];
+
+	sprintf(filePath, "%s" PATH_SEPARATOR "%s", g_LimitAdjuster.StorageRootDirectory, "models" PATH_SEPARATOR "minfo.bin");
+	std::remove(filePath);
+
+	sprintf(filePath, "%s" PATH_SEPARATOR "%s", g_LimitAdjuster.StorageRootDirectory, "cinfo.bin");
+	std::remove(filePath);
+
+	sprintf(filePath, "%s" PATH_SEPARATOR "%s", g_LimitAdjuster.StorageRootDirectory, "models" PATH_SEPARATOR "cinfo.bin");
+	std::remove(filePath);
+
+	/*
 	CPatch::EnterNewLevelAndDisableDebugState();
 	// CPatch::EnableDebugMode();
 
@@ -1811,11 +2048,10 @@ void SpecialLimits::DisableCINFOandMINFOLoading()
 		CPatch::LeaveThisLevel();
 		return;
 	}
+	*/
 
 	ms_bDisableCINFOandMINFOLoading = true;
 
 	CGenericLogStorage::SaveFormattedTextLn("SPECIAL: Disable CINFO.BIN and MINFO.BIN loading");
 	CGenericLogStorage::WriteLineSeparator();
-
-	CPatch::LeaveThisLevel();
 }

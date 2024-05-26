@@ -193,6 +193,9 @@ private:
 	// Shuts down limit adjuster modules
 	void ShutDownModules();
 
+	// Manages error message
+	void ManageErrorMessage(const char* msg);
+
 	// For configuration workbook initialisation
 	friend class Configuration::Workbook;
 

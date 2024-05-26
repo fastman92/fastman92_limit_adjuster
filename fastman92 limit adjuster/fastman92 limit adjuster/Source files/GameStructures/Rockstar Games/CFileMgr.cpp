@@ -19,6 +19,7 @@ static uintptr_t Address_CFileMgr__CloseFile;
 
 char *CFileMgr::ms_dirName = (char *)0xB71A60;
 char *CFileMgr::ms_rootDirName = (char *)0xB71AE0;
+OSFileDataArea* CFileMgr::fileDataArea = 0;
 
 // functions
 void CFileMgr::Initialise()
@@ -162,6 +163,8 @@ void CFileMgr_VarInitialisation::Initialise()
 		Address_CFileMgr__CloseFile = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_ZN8CFileMgr9CloseFileEj");
 
 		Address_OS_FileRead = (decltype(Address_OS_FileRead))Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_Z11OS_FileReadPvS_i");
+
+		CFileMgr::fileDataArea = (OSFileDataArea*)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game, "_ZN8CFileMgr12fileDataAreaE");
 	}
 	#endif
 }

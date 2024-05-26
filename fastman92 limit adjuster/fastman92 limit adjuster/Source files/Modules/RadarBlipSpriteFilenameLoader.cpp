@@ -294,7 +294,9 @@ void RadarBlipSpriteFilenameLoader::LoadBlipSpriteFilenames()
 	for (int i = 0; i < totalNumberOfElements; i++)
 		RadarBlipSpriteFilenames.ptr[i] = "";	// empty string
 	
-	FILE* fp = fopen(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\gtasa_radarBlipSpriteFilenames.dat").c_str(), "r");
+	auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\gtasa_radarBlipSpriteFilenames.dat");
+
+	FILE* fp = fopen(filenamePath.c_str(), "r");
 
 	if (!fp)
 	{

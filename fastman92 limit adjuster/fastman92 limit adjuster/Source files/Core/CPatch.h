@@ -11,6 +11,7 @@
 
 #include <Assembly\eInstructionSet.h>
 #include <Assembly/UsefulMacros.h>
+#include <MemoryPermission\MemoryPermission.h>
 
 #include <stdint.h>
 #include <vector>
@@ -46,6 +47,13 @@ struct tChangedPointer
 };
 */
 
+enum eCodeRedirectOption : int
+{
+	CODE_REDIRECT_NONE = 0x0,
+	CODE_REDIRECT_DO_NOT_SAVE_REGISTER = 0x1,
+	CODE_REDIRECT_NO_ALLOC_REDIRECTION = 0x2
+};
+
 class CPatch
 {
 public:
@@ -71,7 +79,10 @@ public:
 	static void DoTasksForMemoryAddress(void* dwAddress, int iSize);
 
 	// Writes data to memory
-	static void WriteDataToMemory(void* dwAddress, const void* bData, int iSize);
+	static void WriteDataToUnwritableMemory(void* dwAddress, const void* bData, int iSize, bool bMustBeExecutable);
+
+	// Restores old permission
+	static void RestoreOldExecuteReadPermission(tMemoryPermissionChangeRequest* pRequest, const char* functionName, bool bMustBeExecutable);
 
 public:
 
@@ -116,7 +127,7 @@ public:
 	static bool IsDebugModeActive();
 
 	// Patches memory data
-	static void PatchMemoryData(uintptr_t dwAddress, const void* bData, int iSize);
+	static void PatchMemoryData(uintptr_t dwAddress, const void* bData, int iSize, bool bMustBeExecutable = false);
 
 	// Patches UINT8 value
 	static void PatchUINT8(uintptr_t dwAddress, uint8_t to);
@@ -151,33 +162,28 @@ public:
 		eInstructionSet sourceInstructionSet,
 		uintptr_t dwAddress,
 		uintptr_t to,
-		uintptr_t reportedNumberOfBytesOverwritten = 0);
+		uintptr_t reportedNumberOfBytesOverwritten = 0,
+		eCodeRedirectOption options = CODE_REDIRECT_NONE);
 
 	static unsigned int RedirectCodeEx(
 		eInstructionSet sourceInstructionSet,
 		uintptr_t dwAddress,
 		const void* to,
 		uintptr_t reportedNumberOfBytesOverwritten = 0,
-		bool doNotSaveRegister = false);
+		eCodeRedirectOption options = CODE_REDIRECT_NONE);
 
 	#ifndef IS_ARCHITECTURE_ARM32
-	static unsigned int RedirectCode(uintptr_t dwAddress, uintptr_t to, uintptr_t reportedNumberOfBytesOverwritten = 0);
-	static unsigned int RedirectCode(uintptr_t dwAddress, void* to, uintptr_t reportedNumberOfBytesOverwritten = 0);
-
-	// Redirects a method
-	template<typename T> static void RedirectMethod(uintptr_t dwAddress, T method)
-	{
-		RedirectCode(dwAddress, GetMethodAsVoidPointer(method));
-	}
-	#else
-	// Redirects a method
-	template<typename T> static void RedirectMethod(uintptr_t methodJmpAddress, T method)
-	{
-		RedirectCodeEx(GET_INSTRUCTION_SET_FROM_ADDRESS(methodJmpAddress), GET_CODE_START(methodJmpAddress), GetMethodAsVoidPointer(method));
-	}
+	static unsigned int RedirectCode(uintptr_t dwAddress, uintptr_t to, uintptr_t reportedNumberOfBytesOverwritten = 0, eCodeRedirectOption options = CODE_REDIRECT_NONE);
+	static unsigned int RedirectCode(uintptr_t dwAddress, void* to, uintptr_t reportedNumberOfBytesOverwritten = 0, eCodeRedirectOption options = CODE_REDIRECT_NONE);
 	#endif
 
-	static void RedirectFunction(uintptr_t functionJumpAddress, void* to);
+	// Redirects a method
+	template<typename T> static void RedirectMethod(uintptr_t dwAddress, T method, eCodeRedirectOption options = CODE_REDIRECT_NONE)
+	{
+		RedirectFunction(dwAddress, GetMethodAsVoidPointer(method), options);
+	}
+
+	static unsigned int RedirectFunction(uintptr_t functionJumpAddress, void* to, eCodeRedirectOption options = CODE_REDIRECT_NONE);
 
 	#if defined(IS_ARCHITECTURE_X86) || defined(IS_ARCHITECTURE_X64)
 	// Redirects code, returns the number of bytes at specified location
@@ -199,6 +205,9 @@ public:
 
 	// Allocates a redirection, returns a pointer to the redirection code
 	static const void* AllocRedirection(uintptr_t target, eInstructionSet instructionSet = CURRENT_PROCESSOR_INSTRUCTION_SET, eTrampolineRegister trampolineRegisterAction = TRAMPOLINE_REGISTER_DO_NOTHING);
+
+	// Sets pointer
+	void SetPointer(uintptr_t& variable, void* newPtr);
 
 private:
 	// Allocates buffer memory

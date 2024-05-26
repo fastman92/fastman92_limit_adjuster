@@ -90,6 +90,9 @@ extern "C"
 	// Returns the pointer to cache directory
 	F92_LA_API const char* GetCacheDirectoryPath();
 
+	// Returns the pointer to OBB directory
+	F92_LA_API const char* GetObbDirectoryPath();
+
 	// Returns jobject of main activity during launch
 	F92_LA_API jobject GetMainActivityDuringLaunch();
 

@@ -85,9 +85,11 @@ void NotApropIDrangeLoader::LoadNotApropIDranges()
 
 	using namespace Game_BullyScholarschipEdition;
 
+	auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(
+		"Objects\\bully_scholarship_edition_not_prop_id_ranges.dat");
+
 	FILE* fp = fopen(
-		g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(
-		"Objects\\bully_scholarship_edition_not_prop_id_ranges.dat").c_str(),
+		filenamePath.c_str(),
 		"r");
 
 	if (!fp)

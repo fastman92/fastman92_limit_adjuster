@@ -136,13 +136,13 @@ bool ModelSpecialFeatures::GetModelID(const char* modelName, int* pModelID)
 void ModelSpecialFeatures::LoadConfiguration()
 {
 	this->mapOfIds.clear();
-	const char* filename = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\model_special_features.dat").c_str();
+	auto filename = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\model_special_features.dat");
 
-	FILE* fp = fopen(filename, "r");
+	FILE* fp = fopen(filename.c_str(), "r");
 
 	if (!fp)
 	{
-		printf_MessageBox("Unable to load %s", filename);
+		printf_MessageBox("Unable to load %s", filename.c_str());
 		g_LimitAdjuster.TerminateProcess();
 	}
 

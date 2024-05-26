@@ -2152,7 +2152,7 @@ namespace Game_GTASA
 	}
 
 	// Automatic patches
-	#include "WorldSectorLimits/GTA SA 2.0 ANDROID_ARM32/functions.cpp"	
+	#include "WorldSectorLimits/GTA SA 2.0 ANDROID_ARMEABI_V7A/functions.cpp"	
 
 	// Manual patches
 	#if TRUE
@@ -2342,7 +2342,7 @@ void MapLimits::PatchWorldSectors_GTA_SA_2_0_ANDROID_ARM32()
 	// Automatic patches
 	#if TRUE
 	{
-		#include "WorldSectorLimits/GTA SA 2.0 ANDROID_ARM32/changes.cpp"
+		#include "WorldSectorLimits/GTA SA 2.0 ANDROID_ARMEABI_V7A/changes.cpp"
 	}
 	#endif
 }
@@ -4190,7 +4190,7 @@ void MapLimits::PatchWaterMapSize_GTA_IV_1_0_7_0()
 namespace Game_GTASA
 {
 	// Automatic patches
-	#include "WaterMapSizeLimits/GTA SA 2.0 ANDROID_ARM32/functions.cpp"
+	#include "WaterMapSizeLimits/GTA SA 2.0 ANDROID_ARMEABI_V7A/functions.cpp"
 }
 
 // Patches water map size
@@ -4210,7 +4210,7 @@ void MapLimits::PatchWaterMapSize_GTA_SA_2_0_ANDROID_ARM32()
 	// Automatic patches
 	#if TRUE
 	{
-		#include "WaterMapSizeLimits/GTA SA 2.0 ANDROID_ARM32/changes.cpp"
+		#include "WaterMapSizeLimits/GTA SA 2.0 ANDROID_ARMEABI_V7A/changes.cpp"
 	}
 	#endif
 }
@@ -5154,7 +5154,8 @@ bool MapLimits::PatchPaths_DoInitialisingWork()
 		iTotalNumberOfPathFiles = iNumberOfPathFilesPerDimension * iNumberOfPathFilesPerDimension;
 		iTotalNumberOfPathFilesMinusOne = iTotalNumberOfPathFiles - 1;
 		iTotalNumberOfPathFilesMinusTwo = iTotalNumberOfPathFiles - 2;
-		iNumberOfPathInteriorSlots = this->iNumberOfPathInteriorSlots;
+		::iNumberOfPathInteriorSlots = this->iNumberOfPathInteriorSlots;
+
 		iTotalNumberOfPathFilesIncludingInterior = iTotalNumberOfPathFiles + iNumberOfPathInteriorSlots;
 
 		fPathsMapMaxCoord = (float)(MapLimits::ms_pathsMapSize / 2);
@@ -5375,7 +5376,7 @@ namespace Game_GTASA
 	{
 		__asm
 		{
-			mov     word ptr[ecx + eax + CPathNode_extended_latest::m_nExFloodID], 0;
+			mov     word ptr[ecx + eax + CPathNode_extended_latest::GroupExtended], 0;
 			push 0x44E66B;
 			retn;
 		}
@@ -5385,7 +5386,7 @@ namespace Game_GTASA
 	{
 		__asm
 		{
-			cmp     word ptr[eax + CPathNode_extended_latest::m_nExFloodID], 0;
+			cmp     word ptr[eax + CPathNode_extended_latest::GroupExtended], 0;
 			jz loc_44E6F1;
 
 			push 0x44E6D6;
@@ -5403,8 +5404,8 @@ namespace Game_GTASA
 		{
 			mov     dx, word ptr[esp + 20h - 0x10];
 			mov esi, eax;
-			mov     dword ptr[eax + CPathNode::m_pPrev], 0;
-			mov[eax + CPathNode_extended_latest::m_nExFloodID], dl;
+			mov     dword ptr[eax + CPathNode::pNext], 0;
+			mov[eax + CPathNode_extended_latest::GroupExtended], dl;
 
 			push 0x44E700;
 			retn;
@@ -5415,7 +5416,7 @@ namespace Game_GTASA
 	{
 		__asm
 		{
-			mov bx, [eax + CPathNode_extended_latest::m_nExFloodID];
+			mov bx, [eax + CPathNode_extended_latest::GroupExtended];
 			test bx, bx;
 			push 0x44E749;
 			retn;
@@ -5428,11 +5429,11 @@ namespace Game_GTASA
 		{
 			mov     bx, word ptr[esp + 20h - 0x10];
 			test bx, bx;
-			mov[eax + CPathNode_extended_latest::m_nExFloodID], bx;
+			mov[eax + CPathNode_extended_latest::GroupExtended], bx;
 
 			jnz loc_44E75A;
 
-			mov     word ptr[eax + CPathNode_extended_latest::m_nExFloodID], 8000h;
+			mov     word ptr[eax + CPathNode_extended_latest::GroupExtended], 8000h;
 
 			push 0x44E75A;
 			retn;
@@ -5447,8 +5448,8 @@ namespace Game_GTASA
 	{
 		__asm
 		{
-			mov     cx, [ebp + ebx + CPathNode_extended_latest::m_nExFloodID];
-			mov     dx, [eax + edi + CPathNode_extended_latest::m_nExFloodID];
+			mov     cx, [ebp + ebx + CPathNode_extended_latest::GroupExtended];
+			mov     dx, [eax + edi + CPathNode_extended_latest::GroupExtended];
 			add     ebp, ebx;
 			add     eax, edi;
 			cmp     cx, dx;
@@ -5462,7 +5463,7 @@ namespace Game_GTASA
 	{
 		__asm
 		{
-			mov     dx, [eax + edx + CPathNode_extended_latest::m_nExFloodID];
+			mov     dx, [eax + edx + CPathNode_extended_latest::GroupExtended];
 			mov     word ptr[esp + 10h + 4], dx;
 
 			push 0x4522C7;
@@ -5475,7 +5476,7 @@ namespace Game_GTASA
 		__asm
 		{
 			mov     cx, word ptr[esp + 1Ch + 4];
-			mov[eax + esi + CPathNode_extended_latest::m_nExFloodID], cx;
+			mov[eax + esi + CPathNode_extended_latest::GroupExtended], cx;
 
 			push 0x4523A2;
 			retn;
@@ -5883,6 +5884,31 @@ namespace Game_GTASA
 	}
 	#endif
 
+	void SetCPathNodeFromSerializedData(CPathNode* pPathNodeToSet, const CPathNodeSerialize* pSerialized)
+	{
+		pPathNodeToSet->pNext = 0;
+		pPathNodeToSet->pPrevious = 0;
+		pPathNodeToSet->Coors = pSerialized->Coors;
+		pPathNodeToSet->DistanceToTarget = pSerialized->DistanceToTarget;
+		pPathNodeToSet->IndexAdjacentNodes = pSerialized->IndexAdjacentNodes;
+		pPathNodeToSet->Address = pSerialized->Address;
+		pPathNodeToSet->Width = pSerialized->Width;
+		pPathNodeToSet->Group = pSerialized->Group;
+		pPathNodeToSet->m_dwFlags = pSerialized->m_dwFlags;
+	}
+
+	void SetCPathNode_fastman92_version_2_fromSerializedData(CPathNode_fastman92_version_2* pPathNodeToSet, const CPathNode_fastman92_version_2_Serialize* pSerialized)
+	{
+		SetCPathNodeFromSerializedData(pPathNodeToSet, pSerialized);
+		pPathNodeToSet->CoorsExtended = pSerialized->CoorsExtended;
+	}
+
+	void SetCPathNode_fastman92_version_4_fromSerializedData(CPathNode_fastman92_version_4* pPathNodeToSet, const CPathNode_fastman92_version_4_Serialize* pSerialized)
+	{
+		SetCPathNode_fastman92_version_2_fromSerializedData(pPathNodeToSet, pSerialized);
+		pPathNodeToSet->GroupExtended = pSerialized->GroupExtended;
+	}
+
 	// Loads path file.
 	void __thiscall CPathFind_extended::LoadPathFindData(RwStream *stream, int index)
 	{
@@ -5952,9 +5978,9 @@ namespace Game_GTASA
 					// Is extended structure already implemented?
 					#ifdef PATH_NODES_EXTENDED_IMPLEMENTED
 					{
-						uint32_t sizeOfOriginalData = numNodes * sizeof(CPathNode);
+						uint32_t sizeOfOriginalData = numNodes * sizeof(CPathNodeSerialize);
 
-						CPathNode* pPathNodesDataOrig = (CPathNode*)CMemoryMgr::Malloc(sizeOfOriginalData);
+						CPathNodeSerialize* pPathNodesDataOrig = (CPathNodeSerialize*)CMemoryMgr::Malloc(sizeOfOriginalData);
 						pPathNodesMemory = (CPathNode_extended_latest*)CMemoryMgr::Malloc(numNodes * sizeof(CPathNode_extended_latest));
 
 						RwStreamRead(stream, pPathNodesDataOrig, sizeOfOriginalData);
@@ -5989,7 +6015,7 @@ namespace Game_GTASA
 						// convert data from old format to new format
 						for (unsigned i = 0; i < numNodes; i++)
 						{
-							memcpy(&pPathNodesMemory[i], &pPathNodesDataOrig[i], sizeof(CPathNode));
+							SetCPathNodeFromSerializedData(&pPathNodesMemory[i], &pPathNodesDataOrig[i]);
 
 							// memset(pPathNodesMemory[i].useless, 0xEE, sizeof(pPathNodesMemory[i].useless));
 
@@ -5998,20 +6024,20 @@ namespace Game_GTASA
 							pPathNodesMemory[i].m_wAreaId = GetNewAreaIndex(pPathNodesMemory[i].m_wAreaId);
 							#endif
 
-							pPathNodesMemory[i].m_extended_posn.x = pPathNodesMemory[i].m_posn.x;
-							pPathNodesMemory[i].m_extended_posn.y = pPathNodesMemory[i].m_posn.y;
-							pPathNodesMemory[i].m_extended_posn.z = pPathNodesMemory[i].m_posn.z;
+							pPathNodesMemory[i].CoorsExtended.x = pPathNodesMemory[i].Coors.x;
+							pPathNodesMemory[i].CoorsExtended.y = pPathNodesMemory[i].Coors.y;
+							pPathNodesMemory[i].CoorsExtended.z = pPathNodesMemory[i].Coors.z;
 
 							// Are extended coordinates already implemented?
 							#if TRUE
 							{
-								pPathNodesMemory[i].m_posn.x = newValueForDeprecatedCoordinate;
-								pPathNodesMemory[i].m_posn.y = newValueForDeprecatedCoordinate;
-								pPathNodesMemory[i].m_posn.z = newValueForDeprecatedCoordinate;
+								pPathNodesMemory[i].Coors.x = newValueForDeprecatedCoordinate;
+								pPathNodesMemory[i].Coors.y = newValueForDeprecatedCoordinate;
+								pPathNodesMemory[i].Coors.z = newValueForDeprecatedCoordinate;
 							}
 							#endif
 
-							pPathNodesMemory[i].m_nExFloodID = pPathNodesMemory[i].m_nFloodID;
+							pPathNodesMemory[i].GroupExtended = pPathNodesMemory[i].Group;
 
 							/////////////
 
@@ -6069,13 +6095,13 @@ namespace Game_GTASA
 
 							//////
 
-							pNaviNodesMemory[i].extended_pos.x = pNaviNodesMemory[i].pos.x;
-							pNaviNodesMemory[i].extended_pos.y = pNaviNodesMemory[i].pos.y;
+							pNaviNodesMemory[i].CoorsExtended.x = pNaviNodesMemory[i].Coors.x;
+							pNaviNodesMemory[i].CoorsExtended.y = pNaviNodesMemory[i].Coors.y;
 
 							// Are extended coordinates already implemented?
 							#if TRUE
-							pNaviNodesMemory[i].pos.x = newValueForDeprecatedCoordinate;
-							pNaviNodesMemory[i].pos.y = newValueForDeprecatedCoordinate;
+							pNaviNodesMemory[i].Coors.x = newValueForDeprecatedCoordinate;
+							pNaviNodesMemory[i].Coors.y = newValueForDeprecatedCoordinate;
 							#endif
 
 							// pNaviNodesMemory[i].extended_posX = newValueForDeprecatedCoordinate;
@@ -6278,55 +6304,51 @@ namespace Game_GTASA
 
 					if (formatVersion == 2)
 					{
-						uint32_t sizeOfOldData = numNodes * sizeof(CPathNode_fastman92_version_2);
+						uint32_t sizeOfOldData = numNodes * sizeof(CPathNode_fastman92_version_2_Serialize);
 
-						CPathNode_fastman92_version_2* pPathNodesDataOld = (CPathNode_fastman92_version_2*)CMemoryMgr::Malloc(sizeOfOldData);
+						CPathNode_fastman92_version_2_Serialize* pPathNodesDataOld = (CPathNode_fastman92_version_2_Serialize*)CMemoryMgr::Malloc(sizeOfOldData);
 
 						RwStreamRead(stream, pPathNodesDataOld, sizeOfOldData);
 
 						// convert data from old format to new format
 						for (unsigned i = 0; i < numNodes; i++)
 						{
-							memcpy(&pPathNodesMemory[i], &pPathNodesDataOld[i], sizeof(CPathNode_fastman92_version_2));
+							SetCPathNode_fastman92_version_2_fromSerializedData(&pPathNodesMemory[i], &pPathNodesDataOld[i]);
 
-							pPathNodesMemory[i].m_nExFloodID = pPathNodesMemory[i].m_nFloodID;
+							pPathNodesMemory[i].GroupExtended = pPathNodesMemory[i].Group;
 						}
 
 						CMemoryMgr::Free(pPathNodesDataOld);
 					}
 					else if (formatVersion == 3)
 					{
-						uint32_t sizeOfOldData = numNodes * sizeof(CPathNode_fastman92_version_3);
+						uint32_t sizeOfOldData = numNodes * sizeof(CPathNode_fastman92_version_3_Serialize);
 
-						CPathNode_fastman92_version_3* pPathNodesDataOld = (CPathNode_fastman92_version_3*)CMemoryMgr::Malloc(sizeOfOldData);
+						CPathNode_fastman92_version_3_Serialize* pPathNodesDataOld = (CPathNode_fastman92_version_3_Serialize*)CMemoryMgr::Malloc(sizeOfOldData);
 
 						RwStreamRead(stream, pPathNodesDataOld, sizeOfOldData);
 
 						// convert data from old format to new format
 						for (unsigned i = 0; i < numNodes; i++)
 						{
-							memcpy(&pPathNodesMemory[i], &pPathNodesDataOld[i], sizeof(CPathNode_fastman92_version_2));
+							SetCPathNode_fastman92_version_2_fromSerializedData(&pPathNodesMemory[i], &pPathNodesDataOld[i]);
 
-							pPathNodesMemory[i].m_nExFloodID = pPathNodesDataOld[i].m_nExFloodID;
+							pPathNodesMemory[i].GroupExtended = pPathNodesDataOld[i].GroupExtended;
 						}
 
 						CMemoryMgr::Free(pPathNodesDataOld);
 					}
 					else if (formatVersion == 4)
 					{
-						uint32_t sizeOfOldData = numNodes * sizeof(CPathNode_fastman92_version_4);
+						uint32_t sizeOfOldData = numNodes * sizeof(CPathNode_fastman92_version_4_Serialize);
 
-						CPathNode_fastman92_version_4* pPathNodesDataOld = (CPathNode_fastman92_version_4*)CMemoryMgr::Malloc(sizeOfOldData);
+						CPathNode_fastman92_version_4_Serialize* pPathNodesDataOld = (CPathNode_fastman92_version_4_Serialize*)CMemoryMgr::Malloc(sizeOfOldData);
 
 						RwStreamRead(stream, pPathNodesDataOld, sizeOfOldData);
 
 						// convert data from old format to new format
 						for (unsigned i = 0; i < numNodes; i++)
-						{
-							memcpy(&pPathNodesMemory[i], &pPathNodesDataOld[i], sizeof(CPathNode_fastman92_version_2));
-
-							pPathNodesMemory[i].m_nExFloodID = pPathNodesDataOld[i].m_nExFloodID;
-						}
+							SetCPathNode_fastman92_version_4_fromSerializedData(&pPathNodesMemory[i], &pPathNodesDataOld[i]);
 
 						CMemoryMgr::Free(pPathNodesDataOld);
 					}
@@ -6358,8 +6380,8 @@ namespace Game_GTASA
 							memcpy(&pNaviNodesMemory[i], &pNaviNodesDataOld[i], sizeof(CCarPathLink));
 
 							//////
-							pNaviNodesMemory[i].extended_pos.x = pNaviNodesDataOld[i].extended_pos.x;
-							pNaviNodesMemory[i].extended_pos.y = pNaviNodesDataOld[i].extended_pos.y;
+							pNaviNodesMemory[i].CoorsExtended.x = pNaviNodesDataOld[i].CoorsExtended.x;
+							pNaviNodesMemory[i].CoorsExtended.y = pNaviNodesDataOld[i].CoorsExtended.y;
 						}
 
 						CMemoryMgr::Free(pNaviNodesDataOld);
@@ -6380,8 +6402,8 @@ namespace Game_GTASA
 							memcpy(&pNaviNodesMemory[i], &pNaviNodesDataOld[i], sizeof(CCarPathLink));
 
 							//////
-							pNaviNodesMemory[i].extended_pos.x = pNaviNodesDataOld[i].extended_pos.x;
-							pNaviNodesMemory[i].extended_pos.y = pNaviNodesDataOld[i].extended_pos.y;
+							pNaviNodesMemory[i].CoorsExtended.x = pNaviNodesDataOld[i].CoorsExtended.x;
+							pNaviNodesMemory[i].CoorsExtended.y = pNaviNodesDataOld[i].CoorsExtended.y;
 						}
 
 						CMemoryMgr::Free(pNaviNodesDataOld);
@@ -6558,11 +6580,15 @@ namespace Game_GTASA
 				do
 				{
 					// bit 8 gets the value of bit 5
+					pPathNode->SwitchedOffOriginal = pPathNode->SwitchedOff;
+
+					/*
 					pPathNode->m_dwFlags = BitwiseOperation::ChangeOneBit(
 						pPathNode->m_dwFlags,
 						8,
 						BitwiseOperation::TestBit(pPathNode->m_dwFlags, 5)
 					);
+					*/
 
 					pPathNode++;
 					i++;					
@@ -6860,7 +6886,7 @@ namespace Game_GTASA
 
 		// node -> m_nNodeType = 159;
 
-		CompressedVector_extended* pos = &node->m_extended_posn;
+		CompressedVector_extended* pos = &node->CoorsExtended;
 
 		// pos -> x += 5 * COORD_INT_MULTIPLIER;
 		// pos -> y += 5 * COORD_INT_MULTIPLIER;
@@ -6873,7 +6899,7 @@ namespace Game_GTASA
 		int numberOfLinks = node->GetNumberOfLinks();
 
 
-		CNodeAddress* nodeLinks = this->m_pNodeLinks(this)[node->m_nodeInfo.areaId];
+		CNodeAddress* nodeLinks = this->m_pNodeLinks(this)[node->Address.areaId];
 
 		// node->m_nFloodID = assignedFloodID++;
 
@@ -9845,7 +9871,7 @@ namespace Game_GTASA
 	}
 
 	// Automatic patches
-	#include "PathsMapSize/GTA SA 2.0 ANDROID_ARM32/functions.cpp"
+	#include "PathsMapSize/GTA SA 2.0 ANDROID_ARMEABI_V7A/functions.cpp"
 
 	// Manual patches
 	#if TRUE
@@ -10644,15 +10670,15 @@ namespace Game_GTASA
 	}
 
 	// Automatic patches
-	#include "PathsMapSizeDebugging/GTA SA 2.0 ANDROID_ARM32/functions.cpp"
+	#include "PathsMapSizeDebugging/GTA SA 2.0 ANDROID_ARMEABI_V7A/functions.cpp"
 	#endif
 
 	extern "C"
 	{
 		void CheckForCCarPathLink_extended(const CCarPathLink_extended_latest* ptr, uintptr_t address)
 		{
-			if (ptr->pos.x == ptr->extended_pos.x
-				&& ptr->pos.y == ptr->extended_pos.y)
+			if (ptr->Coors.x == ptr->CoorsExtended.x
+				&& ptr->Coors.y == ptr->CoorsExtended.y)
 				return;
 
 			OutputFormattedDebugString("Bad CCarPathLink: 0x%X", address);
@@ -10660,9 +10686,9 @@ namespace Game_GTASA
 
 		void CheckForCPathNode_extended(const CPathNode_extended_latest* ptr, uintptr_t address)
 		{
-			if (ptr->m_posn.x == ptr->m_extended_posn.x
-				&& ptr->m_posn.y == ptr->m_extended_posn.y
-				&& ptr->m_posn.z == ptr->m_extended_posn.z)
+			if (ptr->Coors.x == ptr->CoorsExtended.x
+				&& ptr->Coors.y == ptr->CoorsExtended.y
+				&& ptr->Coors.z == ptr->CoorsExtended.z)
 				return;
 
 			OutputFormattedDebugString("Bad CPathNode: 0x%X", address);
@@ -10791,7 +10817,7 @@ void MapLimits::PatchPaths_GTA_SA_2_0_ANDROID_ARM32()
 	#if TRUE
 	if (!CPatch::IsDebugModeActive())
 	{
-		#include "PathsMapSize/GTA SA 2.0 ANDROID_ARM32/changes.cpp"
+		#include "PathsMapSize/GTA SA 2.0 ANDROID_ARMEABI_V7A/changes.cpp"
 	}
 	#endif
 
@@ -10806,7 +10832,7 @@ void MapLimits::PatchPaths_GTA_SA_2_0_ANDROID_ARM32()
 		*/
 		
 
-		#include "PathsMapSizeDebugging/GTA SA 2.0 ANDROID_ARM32/changes.cpp"
+		#include "PathsMapSizeDebugging/GTA SA 2.0 ANDROID_ARMEABI_V7A/changes.cpp"
 	}
 	#endif
 
@@ -10828,6 +10854,12 @@ void MapLimits::PatchPaths_GTA_SA_2_0_ANDROID_ARM32()
 					&g_LimitAdjuster.hModule_of_game,
 					"_ZN9CPathFind18UnLoadPathFindDataEi"
 				), &CPathFind_extended::UnLoadPathFindData);
+			}
+			#endif
+
+			// Group
+			#if 1
+			{
 			}
 			#endif
 
@@ -10978,6 +11010,9 @@ void MapLimits::PatchPaths_GTA_SA_2_0_ANDROID_ARM32()
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x319834),
 			(void*)&patch_CPathFind__UpdateStreaming_319834
 		);
+
+		// Group
+		
 
 		//// racing
 		#if 0
@@ -11142,7 +11177,7 @@ namespace Game_GTASA
 			static const CRGBA naviNodeColor = { 38, 127, 0, 255 };
 			static const CRGBA naviLineColor = { 1, 254, 7, 255 };
 			static const CRGBA naviLineDirectionColor = { 0, 0, 0, 255 };
-
+			
 			/*
 			#if FALSE
 			{
@@ -11279,15 +11314,15 @@ namespace Game_GTASA
 							if (bPathsPatchEnabled)
 							{
 								CCarPathLink_extended_latest* pNode = &ThePaths->m_pNaviNodes.extended(ThePaths)[i][j];
-								pos.x = (float)pNode->extended_pos.x / PATH_COORD_MULTIPLIER;
-								pos.y = (float)pNode->extended_pos.y / PATH_COORD_MULTIPLIER;
+								pos.x = (float)pNode->CoorsExtended.x / PATH_COORD_MULTIPLIER;
+								pos.y = (float)pNode->CoorsExtended.y / PATH_COORD_MULTIPLIER;
 							}
 							else
 							{
 								CCarPathLink* pNode = &ThePaths->m_pNaviNodes.standard(ThePaths)[i][j];
 
-								pos.x = (float)pNode->pos.x / PATH_COORD_MULTIPLIER;
-								pos.y = (float)pNode->pos.y / PATH_COORD_MULTIPLIER;
+								pos.x = (float)pNode->Coors.x / PATH_COORD_MULTIPLIER;
+								pos.y = (float)pNode->Coors.y / PATH_COORD_MULTIPLIER;
 							}
 
 							// CWorld::FindGroundZForCoord
@@ -12613,7 +12648,9 @@ void MapLimits::PatchNumberOfTracksDatFiles()
 	{
 	using namespace Game_GTASA;
 
-	TrackFilenameLoader.Load(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\Paths\\gtasa_tracks_config.dat").c_str());
+	auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("data\\Paths\\gtasa_tracks_config.dat");
+
+	TrackFilenameLoader.Load(filenamePath.c_str());
 
 	ms_NumberOfTracksDatFiles = TrackFilenameLoader.m_vecTrackFilenames.size();
 

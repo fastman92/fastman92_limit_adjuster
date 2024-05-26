@@ -19,6 +19,23 @@ using namespace Game;
 
 IDEsectionLimits g_IDEsectionLimits;
 
+// Initialises store, calls constructors
+static void InitialiseStoreFindConstructorByName(
+	const char* constructorName,
+	Game_GTA_old::CStore* pStore,
+	unsigned int numberOfElements,
+	unsigned int elementSize)
+{
+	uintptr_t constructorMethod = (uintptr_t)
+		Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
+			constructorName
+		);
+
+	// Call constructors
+	for (unsigned int i = 0; i < numberOfElements; i++)
+		g_memoryCall.Method<void>(constructorMethod, (char*)pStore->array + i * elementSize);
+}
+
 #ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 uintptr_t Address_CBaseModelInfo__CBaseModelInfo = 0;
 
@@ -33,23 +50,6 @@ static TARGET_THUMB NAKED void patch_IDE_cars_store_construct_count()
 		"ADD R4, #4\n"
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_IDE_cars_store_construct_goBack)
 	);
-}
-
-// Initialises store, calls constructors
-static void InitialiseStoreFindConstructorByName(
-	const char* constructorName,
-	Game_GTA_old::CStore* pStore,
-	unsigned int numberOfElements,
-	unsigned int elementSize)
-{
-	uintptr_t constructorMethod = (uintptr_t)
-		Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
-		constructorName
-		);
-
-	// Call constructors
-	for (unsigned int i = 0; i < numberOfElements; i++)
-		g_memoryCall.Method<void>(constructorMethod, (char*)pStore->array + i * elementSize);
 }
 
 // Initialises store, calls constructors
@@ -283,6 +283,42 @@ void IDEsectionLimits::SetVehicleModels(unsigned int iVehicleModels)
 			(void*)&patch_IDE_cars_store_construct_count
 		);
 	}
+	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A) && 0
+	else if(gameVersion == GAME_VERSION_GTA_SA_DE_ROCKSTAR_1_72_42919648_ANDROID_ARM64_V8A)
+	{
+		using namespace Game_GTA_old;
+
+		if (iVehicleModels > this->VehicleModelsLimit)
+		{
+			unsigned int elementSize = 0x6C8;
+			unsigned int IDE_cars_store_size = sizeof(uint32_t) + iVehicleModels * elementSize;
+			IDE_cars_store.gta_sa = (CStore*)new_in_app_space char[IDE_cars_store_size];
+			memset(IDE_cars_store.gta_sa, NULL, IDE_cars_store_size);
+			IDE_cars_store.bIsAllocated.Set(true);
+
+			InitialiseStoreFindConstructorByName("_ZN17CVehicleModelInfoC2Ev", IDE_cars_store.gta_sa, iVehicleModels, elementSize);
+		}
+		
+		// Patch references
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x1A408C), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x1A3F9C));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x1A4090), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x1A3FB8));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x3859AC), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x3857A2));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x385CFC), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x385B8C));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x385D00), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x385B9A));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x385D04), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x385B9E));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x385D3C), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x385C8C));
+		CPatch::PatchPointer(g_mCalc.GetCurrentVAbyPreferedVA(0x3860BC), (char*)&IDE_cars_store.gta_sa->count - g_mCalc.GetCurrentVAbyPreferedVA(0x38609C));
+		
+		// Alter constructor, which is not executed
+		// Address_IDE_cars_store_construct_goBack = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x1A3F98));
+
+		/*
+		CPatch::RedirectCodeEx(
+			INSTRUCTION_SET_THUMB,
+			g_mCalc.GetCurrentVAbyPreferedVA(0x1A3F90),
+			(void*)&patch_IDE_cars_store_construct_count
+		);
+		*/
 	#endif
 	else if (CGameVersion::IsAny_GTA_IV_or_EFLC(gameVersion) && IDE_cars_store.gta_iv)
 	{

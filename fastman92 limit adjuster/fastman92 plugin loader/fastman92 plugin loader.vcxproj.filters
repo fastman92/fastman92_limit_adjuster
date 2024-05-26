@@ -46,6 +46,9 @@
     <Filter Include="Source Files\fastman92 include\MemoryAddressCalculator">
       <UniqueIdentifier>{40293975-415f-414c-b007-966dbfd2e0a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\fastman92 include\ELF">
+      <UniqueIdentifier>{04371c2a-11e5-4dc8-9596-a66009b7a766}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Loader.cpp">
@@ -60,23 +63,32 @@
     <ClCompile Include="..\fastman92 limit adjuster\Source files\Core\CPatch.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectConstants.cpp">
+      <Filter>Source Files\fastman92 plugin loader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.cpp">
+      <Filter>Source Files\fastman92 include\MemoryPermission</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAddressCalculator\CMemoryAddressCalculator.cpp">
+      <Filter>Source Files\fastman92 include\MemoryAddressCalculator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
+      <Filter>Source Files\fastman92 include</Filter>
+    </ClCompile>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\fileIO.cpp">
+      <Filter>Source Files\fastman92 include</Filter>
+    </ClCompile>
     <ClCompile Include="..\fastman92 limit adjuster\Source files\Core\MemoryAllocation.cpp">
       <Filter>Source Files\fastman92 limit adjuster\Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(FASTMAN92_INCLUDE)\fileIO.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\ELF\CRel.cpp">
+      <Filter>Source Files\fastman92 include\ELF</Filter>
     </ClCompile>
-    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryAddressCalculator\CMemoryAddressCalculator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\ELF\CSym.cpp">
+      <Filter>Source Files\fastman92 include\ELF</Filter>
     </ClCompile>
-    <ClCompile Include="$(FASTMAN92_INCLUDE)\MemoryPermission\MemoryPermission.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(FASTMAN92_INCLUDE)\Exception\exception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectConstants.cpp">
-      <Filter>Source Files\fastman92 plugin loader</Filter>
+    <ClCompile Include="$(FASTMAN92_INCLUDE)\ELF\ELF_manager.cpp">
+      <Filter>Source Files\fastman92 include\ELF</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

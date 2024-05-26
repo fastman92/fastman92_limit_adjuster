@@ -576,6 +576,97 @@ namespace Game_GTASA
 					);
 			}
 		}
+
+		namespace Game_GTASA_2_11_32
+		{
+			// patch for 0x5C2B70
+			extern "C"
+			{
+				uintptr_t Address_CLoadingScreen__RenderLoadingBar_5C2B74_arm64 = 0;
+			}
+
+			static NAKED void patch_CLoadingScreen__RenderLoadingBar_5C2B70()
+			{
+				__asm(
+					RESTORE_TRAMPOLINE_REGISTER()
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X0, Address_CFont_InitPerFrame)
+					"BLR X0\n"
+
+					"MOV W4, #1\n"
+
+					SAVE_TRAMPOLINE_REGISTER()
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_5C2B74_arm64)
+					);
+			}
+
+			// patch for 0x5C2B94
+			extern "C"
+			{
+				uintptr_t Address_CLoadingScreen__RenderLoadingBar_5C2B9C_arm64 = 0;
+			}
+
+			static NAKED void patch_CLoadingScreen__RenderLoadingBar_5C2B94()
+			{
+				__asm(
+				RESTORE_TRAMPOLINE_REGISTER()
+
+					"BL LoadingScreenExtraCodeThisGame\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X0, Address_CFont__RenderFontBuffer)
+					"BLR X0\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(X19, CLoadingScreen__m_TimeBarAppeared)
+
+					SAVE_TRAMPOLINE_REGISTER()
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_5C2B9C_arm64)
+					);
+			}
+		}
+		#endif
+
+		#ifdef IS_PLATFORM_ANDROID_X64
+		namespace Game_GTASA_2_11_32
+		{
+			// patch for 0x637F33
+			extern "C"
+			{
+				uintptr_t Address_CLoadingScreen__RenderLoadingBar_637F3B = 0;
+			}
+
+			static NAKED void patch_CLoadingScreen__RenderLoadingBar_637F33()
+			{
+				__asm(
+				".intel_syntax\n"
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(RAX, Address_CFont_InitPerFrame)
+					"call rax\n"
+
+					"mov qword ptr [rsp+60h+"/* var_60 */"-0x60], rbx\n"
+					"movzx edi, r13w\n"
+
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_637F3B)
+					);
+			}
+
+			// patch for 0x637F61
+			extern "C"
+			{
+				uintptr_t Address_CLoadingScreen__RenderLoadingBar_637F68 = 0;
+			}
+			static NAKED void patch_CLoadingScreen__RenderLoadingBar_637F61()
+			{
+				__asm(
+				".intel_syntax\n"
+					"call LoadingScreenExtraCodeThisGame\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(rax, Address_CFont__RenderFontBuffer)
+					"call rax\n"
+
+					ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(rbx, CLoadingScreen__m_TimeBarAppeared)
+
+					ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CLoadingScreen__RenderLoadingBar_637F68)
+					);
+			}
+		}
 		#endif
 	}
 }
@@ -869,7 +960,7 @@ void LoadingScreenFontHooks::ApplyHook()
 	}
 	*/
 	#elif defined(IS_PLATFORM_ANDROID_ARM64_V8A)
-	else if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A || gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
 	{
 		ApplyHook_GTASA_prolog();
 
@@ -884,6 +975,33 @@ void LoadingScreenFontHooks::ApplyHook()
 			
 			Address_CLoadingScreen__RenderLoadingBar_goBack2 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x5209C4), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x5209BC), (void*)&patch_CLoadingScreen__RenderLoadingBar_5209BC);
+		}
+		else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A)
+		{
+			using namespace Game_GTASA_2_11_32;
+			Address_CLoadingScreen__RenderLoadingBar_5C2B74_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x5C2B74), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x5C2B70), (void*)&patch_CLoadingScreen__RenderLoadingBar_5C2B70);
+
+			Address_CLoadingScreen__RenderLoadingBar_5C2B9C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x5C2B9C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x5C2B94), (void*)&patch_CLoadingScreen__RenderLoadingBar_5C2B94);
+		}
+	}
+	#elif defined(IS_PLATFORM_ANDROID_X64)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64)
+	{
+		ApplyHook_GTASA_prolog();
+
+		using namespace Game_GTASA;
+
+		if (gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64)
+		{
+			using namespace Game_GTASA_2_11_32;
+
+			Address_CLoadingScreen__RenderLoadingBar_637F3B = g_mCalc.GetCurrentVAbyPreferedVA(0x637F3B);
+			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x637F33), (void*)&patch_CLoadingScreen__RenderLoadingBar_637F33);
+
+			Address_CLoadingScreen__RenderLoadingBar_637F68 = g_mCalc.GetCurrentVAbyPreferedVA(0x637F68);
+			CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x637F61), (void*)&patch_CLoadingScreen__RenderLoadingBar_637F61);
 		}
 	}
 	#endif

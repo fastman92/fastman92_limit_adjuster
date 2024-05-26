@@ -84,23 +84,24 @@ void CVehicleAudioLoader::SetVehicleAudioSettings_GTA_SA(const Game_GTASA::tVehi
 
 	pModelExtInfo->VehicleAudioID = vehicleAudioID;
 
-	tVehicleAudioSettings audioSettings;
+	tVehicleAudioSettings_DefinitiveEdition audioSettings;
 	memset(&audioSettings, NULL, sizeof(audioSettings));
 
-	audioSettings.VehicleType = pScanfSettings->VehicleType;
-	audioSettings.EngineOnSound = pScanfSettings->EngineOnSound;
-	audioSettings.EngineOffSound = pScanfSettings->EngineOffSound;
-	audioSettings.field_6 = pScanfSettings->field_6;
-	audioSettings.field_8 = pScanfSettings->field_8;
-	audioSettings.field_C = pScanfSettings->field_C;
-	audioSettings.HornTon = pScanfSettings->HornTon;
-	audioSettings.HornHigh = pScanfSettings->HornHigh;
-	audioSettings.DoorSound = pScanfSettings->DoorSound;
-	audioSettings.field_19 = pScanfSettings->field_19;
-	audioSettings.RadioNum = pScanfSettings->RadioNum;
+	audioSettings.VehicleAudioType = pScanfSettings->VehicleAudioType;
+	audioSettings.PlayerBank = pScanfSettings->PlayerBank;
+	audioSettings.DummyBank = pScanfSettings->DummyBank;
+	audioSettings.BassSetting = pScanfSettings->BassSetting;
+	audioSettings.BassFactor = pScanfSettings->BassFactor;
+	audioSettings.EnginePitch = pScanfSettings->EnginePitch;
+	audioSettings.HornType = pScanfSettings->HornType;
+	audioSettings.HornPitch = pScanfSettings->HornPitch;
+	audioSettings.DoorType = pScanfSettings->DoorType;
+	audioSettings.EngineUpgrade = pScanfSettings->EngineUpgrade;
+	audioSettings.RadioStation = pScanfSettings->RadioStation;
 	audioSettings.RadioType = pScanfSettings->RadioType;
-	audioSettings.vehicleTypeForAudio = pScanfSettings->vehicleTypeForAudio;
-	audioSettings.increaseTheVolume = pScanfSettings->increaseTheVolume;
+	audioSettings.VehicleAudioTypeForName = pScanfSettings->VehicleAudioTypeForName;
+	audioSettings.EngineVolumeOffset = pScanfSettings->EngineVolumeOffset;
+	audioSettings.UnknownValueAddedInGTA_DE = 0;
 
 	this->ms_VehicleAudioEntries.gta_sa->push_back(audioSettings);
 
@@ -1309,42 +1310,42 @@ namespace Game_GTASA
 		#endif
 
 
-			char field_8[32];
-			char field_C[32];
-			char HornHigh[32];
-			char increaseTheVolume[32];
+			char BassFactor[32];
+			char EnginePitch[32];
+			char HornPitch[32];
+			char EngineVolumeOffset[32];
 
-			DoubleToStr(pVehicleAudioSettings->field_8, field_8);
-			DoubleToStr(pVehicleAudioSettings->field_C, field_C);
-			DoubleToStr(pVehicleAudioSettings->HornHigh, HornHigh);
-			DoubleToStr(pVehicleAudioSettings->increaseTheVolume, increaseTheVolume);
+			DoubleToStr(pVehicleAudioSettings->BassFactor, BassFactor);
+			DoubleToStr(pVehicleAudioSettings->EnginePitch, EnginePitch);
+			DoubleToStr(pVehicleAudioSettings->HornPitch, HornPitch);
+			DoubleToStr(pVehicleAudioSettings->EngineVolumeOffset, EngineVolumeOffset);
 
 			CGenericLogStorage::SaveFormattedTextLn(
 				"%-43s %-13d %-6d %-6d %-9d %-12s %-12s %-9d %-12s %-11d %-10d %-10d %-11d %-17d %s",
 				aDefaultListOfVehicleModelNames[ID - 400],
 
-				pVehicleAudioSettings->VehicleType,
-				pVehicleAudioSettings->EngineOnSound,
-				pVehicleAudioSettings->EngineOffSound,
+				pVehicleAudioSettings->VehicleAudioType,
+				pVehicleAudioSettings->PlayerBank,
+				pVehicleAudioSettings->DummyBank,
 
-				pVehicleAudioSettings->field_6,
-				field_8,
-				field_C,
+				pVehicleAudioSettings->BassSetting,
+				BassFactor,
+				EnginePitch,
 
-				pVehicleAudioSettings->HornTon,
-				HornHigh,
-				pVehicleAudioSettings->DoorSound,
-				pVehicleAudioSettings->field_19,
+				pVehicleAudioSettings->HornType,
+				HornPitch,
+				pVehicleAudioSettings->DoorType,
+				pVehicleAudioSettings->EngineUpgrade,
 
-				pVehicleAudioSettings->RadioNum,
+				pVehicleAudioSettings->RadioStation,
 				pVehicleAudioSettings->RadioType,
 
-				pVehicleAudioSettings->vehicleTypeForAudio,
-				increaseTheVolume
+				pVehicleAudioSettings->VehicleAudioTypeForName,
+				EngineVolumeOffset
 
 			);
 
-			pVehicleAudioSettings++;
+			// pVehicleAudioSettings = (char*)(pVehicleAudioSettings;
 		}
 	}
 #endif
@@ -2510,20 +2511,20 @@ void CVehicleAudioLoader::LoadVehicleAudioSettings_GTA_SA(const char* line, bool
 
 	sscanf(line, "%s %d %d %d %d %f %f %d %f %d %d %d %d %d %f",
 		audioSettings.modelName,
-		&audioSettings.VehicleType,
-		&audioSettings.EngineOnSound,
-		&audioSettings.EngineOffSound,
-		&audioSettings.field_6,
-		&audioSettings.field_8,
-		&audioSettings.field_C,
-		&audioSettings.HornTon,
-		&audioSettings.HornHigh,
-		&audioSettings.DoorSound,
-		&audioSettings.field_19,
-		&audioSettings.RadioNum,
+		&audioSettings.VehicleAudioType,
+		&audioSettings.PlayerBank,
+		&audioSettings.DummyBank,
+		&audioSettings.BassSetting,
+		&audioSettings.BassFactor,
+		&audioSettings.EnginePitch,
+		&audioSettings.HornType,
+		&audioSettings.HornPitch,
+		&audioSettings.DoorType,
+		&audioSettings.EngineUpgrade,
+		&audioSettings.RadioStation,
 		&audioSettings.RadioType,
-		&audioSettings.vehicleTypeForAudio,
-		&audioSettings.increaseTheVolume
+		&audioSettings.VehicleAudioTypeForName,
+		&audioSettings.EngineVolumeOffset
 	);
 
 	this->SetVehicleAudioSettings_GTA_SA(&audioSettings);
@@ -2875,8 +2876,10 @@ void CVehicleAudioLoader::LoadVehicleAudioSettings()
 			true
 		);
 		
+		auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("pc\\audio\\config\\addedVehicleAudioSettings.ini");
+
 		this->LoadVehicleAudioSettings_GTA_IV_EFLC(
-			g_LimitAdjuster.GetPathToFlaFileFromRootDirectory("pc\\audio\\config\\addedVehicleAudioSettings.ini").c_str(),
+			filenamePath.c_str(),
 			true);
 		
 		if (pGameEpisodeNum)
@@ -2899,8 +2902,11 @@ void CVehicleAudioLoader::LoadVehicleAudioSettings()
 					filename = "TBoGT\\pc\\audio\\config\\TBoGT_vehicleAudioSettings.ini";
 			}
 
-			if(filename)
-				this->LoadVehicleAudioSettings_GTA_IV_EFLC(g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(filename).c_str(), true);
+			if (filename)
+			{
+				auto filenamePath = g_LimitAdjuster.GetPathToFlaFileFromRootDirectory(filename);
+				this->LoadVehicleAudioSettings_GTA_IV_EFLC(filenamePath.c_str(), true);
+			}
 		}
 	}
 #endif
@@ -2996,7 +3002,7 @@ void CVehicleAudioLoader::ApplyVehicleAudioLoaderIfEnabled()
 			return;
 
 		using namespace Game_GTASA;
-		this->ms_VehicleAudioEntries.gta_sa = new std::vector<tVehicleAudioSettings>;
+		this->ms_VehicleAudioEntries.gta_sa = new std::vector<tVehicleAudioSettings_DefinitiveEdition>;
 
 		if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
 		{
@@ -3182,7 +3188,7 @@ void CVehicleAudioLoader::ApplyVehicleAudioLoaderIfEnabled()
 			return;
 
 		using namespace Game_GTASA;
-		this->ms_VehicleAudioEntries.gta_sa = new std::vector<tVehicleAudioSettings>;
+		this->ms_VehicleAudioEntries.gta_sa = new std::vector<tVehicleAudioSettings_DefinitiveEdition>;
 
 		if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 		{

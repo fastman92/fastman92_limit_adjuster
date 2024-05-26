@@ -5,8 +5,7 @@
 */
 
 #pragma once
-
-#include "LimitAdjuster.h"
+#include <stdint.h>
 
 class tMemoryInGameSpaceDummy {};
 

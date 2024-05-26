@@ -17,7 +17,7 @@
 using namespace Game;
 
 namespace Configuration {
-	class tDocumentationWorkbook;
+	struct tDocumentationWorkbook;
 
 	namespace Formats
 	{

@@ -18,6 +18,7 @@
 #include "Configuration/TextFile.h"
 #include "Configuration/XMLexcelFile.h"
 
+#include "../GameStructures/CMemoryAllocationByApp.h"
 #include "../GameStructures/Rockstar Games/CCamera.h"
 #include "../GameStructures/Rockstar Games/CCoronas.h"
 #include "../GameStructures/Rockstar Games/CFileMgr.h"
@@ -37,6 +38,11 @@
 #include "../GameStructures/Rockstar Games/functions.h"
 #include "../GameStructures/Rockstar Games/Renderware.h"
 #include "../GameStructures/Rockstar Games/RwStream.h"
+
+#include "../GameStructures/WarMedia/OSFile.h"
+#include "../GameStructures/WarMedia/OSMutex.h"
+#include "../GameStructures/WarMedia/ZIP.h"
+#include "../GameStructures/WarMedia/ZIPFile.h"
 
 #include "../Modules/BringBackTextureArchives.h"
 #include "../Modules/CarGeneratorsLimit.h"
@@ -185,10 +191,13 @@ static CLimitAdjusterModule* LimitAdjusterPtrs[] =
 	&g_LoadingScreenFontHooks,
 	&g_loadLevelHooks,
 	&g_mapLimits,
+	&g_memoryAllocationByApp,
 	&g_modelSpecialFeatures,
 	&g_notApropIDrangeLoader,
 	&g_OnlineContent,
 	&g_options,
+	&g_OSFile_VarInitialisation,
+	&g_OSMutex_VarInitialisation,
 	&g_otherLimits,
 	&g_pedGrpLimits,
 	&g_pluginPatches,
@@ -212,6 +221,8 @@ static CLimitAdjusterModule* LimitAdjusterPtrs[] =
 	&g_vehicleAudioLoader,
 	&g_vehicleSpecialFeatures,
 	&g_visibilityLimits,
+	&g_ZIP_VarInitialisation,
+	&g_ZIPFile_VarInitialisation
 };
 
 // Configuration
@@ -285,6 +296,13 @@ namespace Configuration
 		description.numberOfDefinedSizes = 2;
 		END_GAME_DESCRIPTION_FUNCTION,
 
+		BEGIN_GAME_DESCRIPTION_FUNCTION(GAME_VERSION_GTA_TRILOGY_SA_1_0_17_37984884_WIN_X64, "GTA SA Definitive Edition 1.0.17.37984884", 0x140000000)
+		description.sizeArray[0] = 88819032;
+		description.numberOfDefinedSizes = 1;
+		END_GAME_DESCRIPTION_FUNCTION,
+
+			
+
 		BEGIN_GAME_DESCRIPTION_FUNCTION(GAME_VERSION_GTA_V_ANY_WIN_X64, "GTA V", 0x140000000)
 			description.numberOfDefinedSizes = 0;
 		END_GAME_DESCRIPTION_FUNCTION,
@@ -347,6 +365,27 @@ namespace Configuration
 			description.appLibIdentifier = "GTA_SA|2.10";
 			END_GAME_DESCRIPTION_FUNCTION,
 
+			BEGIN_GAME_DESCRIPTION_FUNCTION(GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A, "GTA SA 2.11.32", 0)
+				description.appLibIdentifier = "GTA_SA|2.11.32";
+			END_GAME_DESCRIPTION_FUNCTION,
+
+			BEGIN_GAME_DESCRIPTION_FUNCTION(GAME_VERSION_GTA_SA_DE_ROCKSTAR_1_72_42919648_ANDROID_ARM64_V8A, "GTA SA Definitive Edition Rockstar Games 1.72.42919648", 0)
+				description.appLibIdentifier = "GTA_SA_DE_ROCKSTAR_GAMES|1.72.42919648";
+			END_GAME_DESCRIPTION_FUNCTION,
+
+			BEGIN_GAME_DESCRIPTION_FUNCTION(GAME_VERSION_GTA_SA_DE_ROCKSTAR_1_86_44544238_ANDROID_ARM64_V8A, "GTA SA Definitive Edition Rockstar Games 1.86.44544238", 0)
+				description.appLibIdentifier = "GTA_SA_DE_ROCKSTAR_GAMES|1.86.44544238";
+			END_GAME_DESCRIPTION_FUNCTION,
+
+			PLATFORM_DESCRIPTION_EOF
+	};
+
+	static const CGameDescription applicationList_ANDROID_X64[] =
+	{
+			BEGIN_GAME_DESCRIPTION_FUNCTION(GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64, "GTA SA 2.11.32", 0)
+				description.appLibIdentifier = "GTA_SA|2.11.32";
+			END_GAME_DESCRIPTION_FUNCTION,
+
 			PLATFORM_DESCRIPTION_EOF
 	};
 
@@ -358,6 +397,9 @@ namespace Configuration
 		PLATFORM_CONFIGURATION_ENTRY(WIN_X64, ""),
 		PLATFORM_CONFIGURATION_ENTRY(ANDROID_ARMEABI_V7A, "armeabi-v7a"),
 		PLATFORM_CONFIGURATION_ENTRY(ANDROID_ARM64_V8A, "arm64-v8a"),
+
+		// PLATFORM_CONFIGURATION_ENTRY(ANDROID_X86, "x86"),
+		PLATFORM_CONFIGURATION_ENTRY(ANDROID_X64, "x86_64"),
 
 		PLATFORM_CONFIGURATION_EOF
 	};
@@ -373,6 +415,8 @@ namespace Configuration
 
 			platformConfig++;
 		}
+
+		return nullptr;
 	}
 
 	static const tPlatformConfiguration* FindPlatformConfigByName(const char* name)
@@ -3102,7 +3146,6 @@ namespace Configuration
 
 	static const tConfigurationSectionEntry ConfigurationFuncArray_ID_LIMITS[] =
 	{
-
 		{
 			"Total count of files",
 		BEGIN_FIELD_FUNCTION
@@ -3383,7 +3426,7 @@ namespace Configuration
 		{
 			"Number of animation group lines",
 		BEGIN_FIELD_FUNCTION
-		if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
+		if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion) || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 		{
 			pField->SetIntValue(
 				g_handlingCfgLimits.ms_iAnimationGroupLinesLimit,
@@ -3409,6 +3452,8 @@ namespace Configuration
 					INI_FIELD_INACTIVE,
 					EXCEL_FIELD_STATE_SUPPORTED
 				);
+
+				pField->SetComment("Altering this limit can produce different savefiles that can't be loaded if value of this limit is different.");
 			}
 		END_FIELD_FUNCTION
 		},
@@ -3423,6 +3468,8 @@ namespace Configuration
 					INI_FIELD_INACTIVE,
 					EXCEL_FIELD_STATE_SUPPORTED
 				);
+
+				pField->SetComment("Altering this limit can produce different savefiles that can't be loaded if value of this limit is different.");
 			}
 		END_FIELD_FUNCTION
 		},
@@ -3438,6 +3485,8 @@ namespace Configuration
 					INI_FIELD_INACTIVE,
 					EXCEL_FIELD_STATE_SUPPORTED
 				);
+
+				pField->SetComment("Altering this limit can produce different savefiles that can't be loaded if value of this limit is different.");
 			}
 		END_FIELD_FUNCTION
 		},
@@ -3509,7 +3558,7 @@ namespace Configuration
 		{
 			"Coronas",
 		BEGIN_FIELD_FUNCTION
-			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
+			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion) || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 			{
 				pField->SetIntValue(
 					g_otherLimits.ms_iCoronasLimit,
@@ -3910,7 +3959,7 @@ namespace Configuration
 		{
 			"Make save of variable size",
 		BEGIN_FIELD_FUNCTION
-			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
+			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion) || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 			{
 				pField->SetIntValue(
 					false,
@@ -3973,6 +4022,8 @@ namespace Configuration
 				|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A
+				|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A
+				|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64
 				|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_BULLY_AE_1_0_0_18_ANDROID_ARMEABI_V7A)
 			{
@@ -4009,9 +4060,17 @@ namespace Configuration
 		{
 			"Fix crashes on newer systems",
 		BEGIN_FIELD_FUNCTION
-			if (gameVersion == GAME_VERSION_GTA_SA_1_08_ANDROID_ARMEABI_V7A
+			if (gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A
+				|| gameVersion == GAME_VERSION_GTA_SA_1_08_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_GTA_SA_GER_2_09_ANDROID_ARMEABI_V7A
+
+				|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARMEABI_V7A
+				|| gameVersion == GAME_VERSION_GTA_SA_2_10_ANDROID_ARM64_V8A
+
+				|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_ARM64_V8A
+				|| gameVersion == GAME_VERSION_GTA_SA_2_11_32_ANDROID_X64
+
 				|| gameVersion == GAME_VERSION_GTA_LCS_2_4_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_BULLY_AE_1_0_0_18_ANDROID_ARMEABI_V7A
 				|| gameVersion == GAME_VERSION_GTA_CTW_1_04_ANDROID_ARMEABI_V7A)
@@ -4047,8 +4106,7 @@ namespace Configuration
 	{
 			"Disable CINFO.BIN and MINFO.BIN loading",
 		BEGIN_FIELD_FUNCTION
-			if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A
-				|| gameVersion == GAME_VERSION_GTA_TRILOGY_SA_1_0_0_14718_WIN_X64)
+			if (true)
 			{
 				pField->SetIntValue(
 					true,
@@ -4887,11 +4945,17 @@ void CLimitAdjuster::ProcessFLAaction(eFLA_actionToDo action, void* pData)
 		else if (action == eFLA_actionToDo::Stop)
 			this->StopLimitAdjuster();
 	}
+	catch (f92_runtime_error_not_critical& error)
+	{
+		CLimitAdjuster::ManageErrorMessage(error.what());
+
+#if !PROJECT_IS_UNRELEASED_EDITION || (!defined(IS_PLATFORM_ANDROID))
+		this->TerminateProcess();
+#endif
+	}
 	catch (f92_runtime_error& error)
 	{
-		const char* errorStr = error.what();
-		CGenericLogStorage::SaveTextLn(errorStr);
-		printf_MessageBox("%s", errorStr);
+		CLimitAdjuster::ManageErrorMessage(error.what());
 		
 		this->TerminateProcess();
 	}
@@ -4902,7 +4966,7 @@ void CLimitAdjuster::ProcessUnableToDetectTheGame()
 {
 	CGenericLogStorage::SaveFormattedTextLn("Unable to detect the game!");
 
-	throw f92_runtime_error(
+	throw f92_runtime_error_not_critical(
 		"%s requires one of the following games:\n%s",
 		PROJECT_NAME,
 		this->pPlatformConfig->GetTextDescriptionAboutGames().c_str()
@@ -5044,6 +5108,44 @@ void CLimitAdjuster::StartLimitAdjuster(const tLimitAdjusterStartParams* pLimitA
 	this->jvm = pLimitAdjusterStartParams->jvm;
 	this->second_param_reserved = pLimitAdjusterStartParams->second_param_reserved;
 
+	this->jniEnv = 0;
+	this->jvm->GetEnv((void **)&this->jniEnv, JNI_VERSION_1_4);
+
+	// fastman92 APK modifier
+	char f92modifierVersion[256] = "not found";
+
+	{
+		bool bF92modifierVersionRead = false;
+
+		jclass f92modifierSettingsGenerated = this->jniEnv->FindClass("com/fastman92/main_activity_launcher/SettingsGenerated");
+
+		if (f92modifierSettingsGenerated)
+		{
+			jfieldID fieldIDcompileDateTime = jniEnv->GetStaticFieldID(f92modifierSettingsGenerated, "apkModifierCompileDateTime", "Ljava/lang/String;");
+
+			if (fieldIDcompileDateTime)
+			{
+				jstring pStringFromField = (jstring)jniEnv->GetStaticObjectField(f92modifierSettingsGenerated, fieldIDcompileDateTime);
+
+				if (pStringFromField)
+				{
+					const char* pStr = jniEnv->GetStringUTFChars(pStringFromField, NULL);
+
+					strncpy(f92modifierVersion, pStr, sizeof(f92modifierVersion));
+
+					jniEnv->ReleaseStringUTFChars(pStringFromField, pStr);
+
+					bF92modifierVersionRead = true;
+				}
+			}
+		}
+
+		if (this->jniEnv->ExceptionCheck())
+			this->jniEnv->ExceptionClear();
+	}
+
+	CGenericLogStorage::SaveFormattedTextLn("fastman92 APK modifier: %s", f92modifierVersion);
+
 	// get path to application library directory
 	{
 		int index_of_last_slash = 0;
@@ -5101,6 +5203,11 @@ void CLimitAdjuster::StartLimitAdjuster(const tLimitAdjusterStartParams* pLimitA
 
 	// Set pointer to platform configuration
 	this->pPlatformConfig = Configuration::FindPlatformConfigByName(TOSTRING(SOLUTION_PLATFORM));
+
+	if (!this->pPlatformConfig)
+		throw f92_runtime_error(
+			"Missing platform config for current solution platform."
+		);
 
 	///////////////////////////////////	
 #if FLA_CUSTOMIZATION == 1
@@ -5172,7 +5279,6 @@ void CLimitAdjuster::StartLimitAdjuster(const tLimitAdjusterStartParams* pLimitA
 		memcpy(appLibIdentifierOnly, appLibIdentifier, pLastPartInIdentifier - appLibIdentifier);
 		appLibIdentifierOnly[pLastPartInIdentifier - appLibIdentifier] = 0;
 
-
 		auto pGameVersionDescription = Configuration::FindGameVersionDescriptionInPlatformConfigurationFunc(
 			pPlatformConfig,
 			[appLibIdentifierOnly](const Configuration::CGameDescription* pGameDescription) {
@@ -5184,7 +5290,7 @@ void CLimitAdjuster::StartLimitAdjuster(const tLimitAdjusterStartParams* pLimitA
 
 		this->SetGameInfo(0, currentVA, pGameVersionDescription->gameVersion, pGameVersionDescription->humanReadableName);
 
-		OutputFormattedDebugString("Game detected: %s", this->gameDetectedStr);
+		OutputFormattedDebugString("App detected: %s", this->gameDetectedStr);
 	#endif
 #endif
 
@@ -5198,15 +5304,15 @@ void CLimitAdjuster::StartLimitAdjuster(const tLimitAdjusterStartParams* pLimitA
 	}
 	#endif
 
-	CGenericLogStorage::SaveFormattedTextLn("Game detected: %s", this->gameDetectedStr);
+	CGenericLogStorage::SaveFormattedTextLn("App detected: %s", this->gameDetectedStr);
 
 	if(this->bDynamicImageBase)
-		CGenericLogStorage::SaveTextLn("Game uses dynamic image base? Yes");
+		CGenericLogStorage::SaveTextLn("App uses dynamic image base? Yes");
 	else
-		CGenericLogStorage::SaveTextLn("Game uses dynamic image base? No");
+		CGenericLogStorage::SaveTextLn("App uses dynamic image base? No");
 		
-	CGenericLogStorage::SaveFormattedTextLn("Game preferred image base: 0x%llX", (uint64_t)g_mCalc.GetPreferedModuleBase());
-	CGenericLogStorage::SaveFormattedTextLn("Game current image base: 0x%llX", (uint64_t)g_mCalc.GetCurrentModuleBase());
+	CGenericLogStorage::SaveFormattedTextLn("App preferred image base: 0x%llX", (uint64_t)g_mCalc.GetPreferedModuleBase());
+	CGenericLogStorage::SaveFormattedTextLn("App current image base: 0x%llX", (uint64_t)g_mCalc.GetCurrentModuleBase());
 	
 	CGenericLogStorage::WriteNewLine();
 	
@@ -5475,6 +5581,10 @@ bool CLimitAdjuster::GenerateINIfile(const char* filename)
 	fprintf(fp, "; %s",
 		onlyFilename
 	);
+
+	fprintf(fp, "\n\n; Important information: do not set limits to very high values like 9999999!"
+		"\n; Each increase of limit is usually correlated with an increase of memory being used."
+		"\n; Some understanding is required to set up the limits.");
 
 	// Iterate over sections
 	const tConfigurationSection* pSection = ConfigurationSectionArray;
@@ -5946,18 +6056,105 @@ void CLimitAdjuster::Process()
 {
 	eGameVersion gameVersion = this->GetGameVersion();
 
+	
+
 	// Set informations about directories
+	{
+		const char* relativePathToContent = "";
+		bool bIsUnrealEngine;
+
+		std::string relativePath;
+
+		#ifdef IS_PLATFORM_WIN
+		relativePath += "\\../../" "Content";
+		#endif
+
+		if (CGameVersion::IsAny_GTA_III_UnrealEngine(gameVersion))
+		{
+			bIsUnrealEngine = true;
+			// relativePath += PATH_SEPARATOR + "OriginalData" PATH_SEPARATOR "GTA3";
+		}
+		else if (CGameVersion::IsAny_GTA_VC_UnrealEngine(gameVersion))
+		{
+			bIsUnrealEngine = true;
+			// relativePath += PATH_SEPARATOR + "OriginalData" PATH_SEPARATOR "ViceCity";
+		}
+		else if (CGameVersion::IsAny_GTA_SA_UnrealEngine(gameVersion))
+		{
+			bIsUnrealEngine = true;
+			// relativePath += PATH_SEPARATOR + "OriginalData" PATH_SEPARATOR "GTASA";
+		}
+		else
+			relativePath.clear();
+
+		#ifdef IS_PLATFORM_WIN
+		GetCurrentDirectoryA(sizeof(this->InitialDirectory), this->InitialDirectory);
+
+		if (relativePath.length() > 0)
+		{
+			char tmpPath[FLA_MAX_PATH];
+
+			strncpy(tmpPath, this->InitialDirectory, _countof(tmpPath));
+
+			strncat(tmpPath, relativePath.c_str(), _countof(tmpPath));
+
+			GetFullPathNameA(tmpPath, _countof(this->StorageRootDirectory), this->StorageRootDirectory, NULL);
+
+			// printf_MessageBox(this->StorageRootDirectory);
+
+			// Set directory for the FLA
+			if (!SetCurrentWorkingDirectory_OS_independent(this->StorageRootDirectory))
+			{
+				mkdir_p(this->StorageRootDirectory);
+
+				if (!SetCurrentWorkingDirectory_OS_independent(this->StorageRootDirectory))
+					throw f92_runtime_error("Unable to set working directory to %s", this->StorageRootDirectory);
+			}
+		}
+		else
+			strncpy(this->StorageRootDirectory, this->InitialDirectory, _countof(this->StorageRootDirectory));
+		#elif defined IS_PLATFORM_ANDROID
+		// Load additional Java code
+		this->LoadAdditionalJavaCode();
+
+		// Get main activity during launch
+		this->mainActivityDuringLaunch = GetMainActivityDuringLaunch();
+
+		// Get package name
+		strncpy(this->PackageName, GetApplicationPackageName(), sizeof(this->PackageName));
+		strncpy(this->OriginalPackageName, GetApplicationOriginalPackageName(), sizeof(this->OriginalPackageName));
+
+		// Get directory paths
+		strncpy(this->StorageRootBase, GetStorageRootBaseDirectoryPath(), sizeof(this->StorageRootBase));
+
+		// std::string sStorageRootDirectory = GetStorageRootDirectoryPath();
+		// sStorageRootDirectory += relativePath;
+
+		strncpy(this->StorageRootDirectory, GetStorageRootDirectoryPath(), sizeof(this->StorageRootDirectory));
+
+		strncpy(this->InitialDirectory, GetInitialDirectoryPath(), sizeof(this->InitialDirectory));
+		strncpy(this->CacheDirectory, GetCacheDirectoryPath(), sizeof(this->CacheDirectory));
+
+		OutputFormattedDebugString("Package name: %s", g_LimitAdjuster.PackageName);
+		OutputFormattedDebugString("Original package name: %s", g_LimitAdjuster.OriginalPackageName);
+
+		// Set directory for the FLA
+		SetCurrentWorkingDirectory_OS_independent(this->StorageRootDirectory);
+		#endif
+	}
+
+	#if 0
 	#ifdef IS_PLATFORM_WIN
 	GetCurrentDirectoryA(sizeof(this->InitialDirectory), this->InitialDirectory);
 
 	const char* relativePath = NULL;
 
 	if(CGameVersion::IsAny_GTA_III_UnrealEngine(gameVersion))
-		relativePath = "\\../../../Content\\OriginalData\\GTA3";
+		relativePath = "\\../../Content\\OriginalData\\GTA3";
 	else if(CGameVersion::IsAny_GTA_VC_UnrealEngine(gameVersion))
-		relativePath = "\\../../../Content\\OriginalData\\ViceCity";
+		relativePath = "\\../../Content\\OriginalData\\ViceCity";
 	else if (CGameVersion::IsAny_GTA_SA_UnrealEngine(gameVersion))
-		relativePath = "\\../../../Content\\OriginalData\\GTASA";
+		relativePath = "\\../../Content\\OriginalData\\GTASA";
 
 	if (relativePath)
 	{
@@ -5969,6 +6166,8 @@ void CLimitAdjuster::Process()
 
 		GetFullPathNameA(tmpPath, _countof(this->StorageRootDirectory), this->StorageRootDirectory, NULL);
 		
+		/// printf_MessageBox(this->StorageRootDirectory);
+
 		// Set directory for the FLA
 		if (!SetCurrentWorkingDirectory_OS_independent(this->StorageRootDirectory))
 		{
@@ -6004,10 +6203,16 @@ void CLimitAdjuster::Process()
 	// Set directory for the FLA
 	SetCurrentWorkingDirectory_OS_independent(this->StorageRootDirectory);
 	#endif
+#endif
 
 	// Open log file
-	if(!CGenericLogStorage::IsFileOpen())
+	if (!CGenericLogStorage::IsFileOpen())
+	{
 		CGenericLogStorage::OpenFileForTextWriting(LIMIT_ADJUSTER_LOG_FILENAME);
+
+		if (!CGenericLogStorage::IsFileOpen())
+			OutputFormattedDebugString("Unable to open FLA log file.");
+	}
 
 	#ifdef IS_PLATFORM_ANDROID
 	CGenericLogStorage::SaveFormattedTextLn("Package name: %s", this->PackageName);
@@ -6029,10 +6234,16 @@ void CLimitAdjuster::Process()
 
 	const char* iniFilename = this->GetIniFilenameForGame(gameVersion);
 
+	if (!iniFilename)
+		throw f92_runtime_error(
+			"Unable to find the INI file name for current game version."
+		);
+
 	CGenericLogStorage::SaveFormattedTextLn("INI filename: %s", iniFilename);
 	CGenericLogStorage::WriteNewLine();
 
-	this->OpenIniFile(this->GetPathToFlaFileFromRootDirectory(iniFilename).c_str());
+	auto iniFilenamePath = this->GetPathToFlaFileFromRootDirectory(iniFilename);
+	this->OpenIniFile(iniFilenamePath.c_str());
 
 	// Set exception handler.
 	if (
@@ -6123,8 +6334,10 @@ void CLimitAdjuster::Process()
 	}
 	#endif	
 
-	///////////////////////////////////////////////////	
+	
 
+	///////////////////////////////////////////////////	
+	
 	////// save game loading functions //////
 
 	// Patches a loading function, the savefile of any length may be considered as valid savefile.
@@ -6142,7 +6355,7 @@ void CLimitAdjuster::Process()
 	g_otherLimits.PatchSaveBlockLoadingFunctions();
 
 	// Save game of unlimited length		
-	g_SaveOfVariableLength.PatchLoadingFunction();
+	g_SaveOfVariableLength.PatchLoadingFunction();	
 	
 	//////                             //////
 
@@ -6187,11 +6400,11 @@ void CLimitAdjuster::Process()
 	#endif
 
 	// handling.cfg limits
-	this->ProcessHandlingLimits();
+	this->ProcessHandlingLimits();	
 	
 
 	// DYNAMIC LIMITS
-	this->ProcessDynamicLimits();	
+	this->ProcessDynamicLimits();
 
 	//////////////////////
 	
@@ -7019,11 +7232,6 @@ eGameVersion CLimitAdjuster::GetGameVersion() const
 void CLimitAdjuster::Initialize()
 {
 	//////////////////////// directory
-	#ifdef IS_PLATFORM_ANDROID
-	this->jniEnv = 0;
-	this->jvm->GetEnv((void **)&this->jniEnv, JNI_VERSION_1_4);
-	#endif
-
 	CPatch::Init();
 
 	this->InitializeModules();
@@ -7099,6 +7307,13 @@ void CLimitAdjuster::ShutDownModules()
 {
 	for (int i = _countof(LimitAdjusterPtrs) - 1; i >= 0; i--)
 		LimitAdjusterPtrs[i]->Shutdown();
+}
+
+// Manages error message
+void CLimitAdjuster::ManageErrorMessage(const char* msg)
+{
+	CGenericLogStorage::SaveTextLn(msg);
+	printf_MessageBox("%s", msg);
 }
 
 // Set up native code module handles
