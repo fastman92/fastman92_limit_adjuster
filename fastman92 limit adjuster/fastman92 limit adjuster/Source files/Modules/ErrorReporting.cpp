@@ -324,10 +324,10 @@ namespace Game_GTASA
 	}
 
 	// IMG archive needs rebuilding
-	void __cdecl printError_5B61E6(const tImgDescriptor* pIMGdescriptor, const CDirectoryEntry* pFileEntry)
+	void __cdecl printError_5B61E6(const CStreamingFile* pIMGdescriptor, const CDirectoryEntry* pFileEntry)
 	{
 		printError_archiveNeedsRebuilding(
-			pIMGdescriptor->name,
+			pIMGdescriptor->m_name,
 			pFileEntry->Name,
 			pFileEntry->PositionInSectors,
 			CStreaming_IMG_archiveExpectedFilePosition

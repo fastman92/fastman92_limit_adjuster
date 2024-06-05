@@ -7167,7 +7167,7 @@ namespace IDaccessPatches
 	}
 
 	// Function: sub_464F50
-	// Original code:	add     ecx, 0FFFFFEE8h ; switch 8 cases 
+	// Original code:	add     ecx, 0FFFFFEE8h; switch 8 cases
 	static NAKED void patch_464F56()
 	{
 		__asm
@@ -12048,7 +12048,7 @@ namespace IDaccessPatches
 	}
 
 	// Function: sub_4F7670
-	// Original code:	add     eax, 0FFFFFE40h ; switch 136 cases 
+	// Original code:	add     eax, 0FFFFFE40h; switch 136 cases
 	static NAKED void patch_4F7818()
 	{
 		__asm
@@ -34112,7 +34112,7 @@ namespace IDaccessPatches
 	}
 
 	// Function: sub_688A90
-	// Original code:	mov     di, [esi+0Ah]   ; jumptable 00688B54 default case
+	// Original code:	mov     di, [esi+0Ah]; jumptable 00688B54 default case
 	static NAKED void patch_6894A0()
 	{
 		__asm
@@ -38899,7 +38899,7 @@ namespace IDaccessPatches
 	}
 
 	// Function: sub_408C8C
-	// Original code:	mov     ax, [esi+22h]   ; jumptable 006AB36D default case
+	// Original code:	mov     ax, [esi+22h]; jumptable 006AB36D default case
 	static NAKED void patch_6ABC71()
 	{
 		__asm
@@ -45267,6 +45267,46 @@ namespace IDaccessPatches
 		}
 	}
 
+	// Function: sub_6C4197
+	// Original code:	cmp     edi, 1A9h
+	static NAKED void patch_6C41D9_1()
+	{
+		__asm
+		{
+			push eax;
+			push ecx;
+			push edx;
+			push edi;
+			call GetModelIDforModelSpecialFeatures;
+			add esp, 4;
+			cmp eax, 425;
+			pop edx;
+			pop ecx;
+			pop eax;
+			retn;
+		}
+	}
+
+	// Function: sub_6C4197
+	// Original code:	cmp     edi, 1A9h
+	static NAKED void patch_6C41D9_2()
+	{
+		__asm
+		{
+			push eax;
+			push ecx;
+			push edx;
+			push edi;
+			call GetModelIDforModelSpecialFeatures;
+			add esp, 4;
+			cmp eax, 425;
+			pop edx;
+			pop ecx;
+			pop eax;
+			retn;
+		}
+	}
+
 	// Function: sub_6C4400
 	// Original code:	movsx   eax, word ptr [esi+22h]
 	static NAKED void patch_6C440A()
@@ -47388,7 +47428,7 @@ namespace IDaccessPatches
 	}
 
 	// Function: sub_6C94A0
-	// Original code:	mov     ax, [esi+22h]   ; jumptable 006C9DAA default case
+	// Original code:	mov     ax, [esi+22h]; jumptable 006C9DAA default case
 	static NAKED void patch_6C9EE3()
 	{
 		__asm
@@ -51285,7 +51325,7 @@ namespace IDaccessPatches
 	}
 
 	// Function: CVehicle__SetModelIndex
-	// Original code:	lea     eax, [ecx-1DCh] ; switch 101 cases 
+	// Original code:	lea     eax, [ecx-1DCh]; switch 101 cases
 	static NAKED void patch_6D6AB9()
 	{
 		__asm
@@ -58751,7 +58791,7 @@ namespace IDaccessPatches
 	tArrayItem(0x461313, &patch_461313),	// sub_461170 : add     eax, 0FFFFFE55h
 	tArrayItem(0x46212D, &patch_46212D),	// sub_4619C7 : movzx   edx, ds:MI_ROADBLOCKFUCKEDCAR1
 	tArrayItem(0x4624EE, &patch_4624EE),	// sub_4619C7 : movzx   ebp, ds:MI_ROADWORKBARRIER1
-	tArrayItem(0x464F56, &patch_464F56),	// sub_464F50 : add     ecx, 0FFFFFEE8h ; switch 8 cases 
+	tArrayItem(0x464F56, &patch_464F56),	// sub_464F50 : add     ecx, 0FFFFFEE8h; switch 8 cases
 	tArrayItem(0x46579E, &patch_46579E),	// sub_465680 : movsx   edx, word ptr [edi+22h]
 	tArrayItem(0x46963E, &patch_46963E),	// sub_469390 : movsx   edx, word ptr [eax+22h]
 	tArrayItem(0x46A76F, &patch_46A76F),	// sub_46A760 : movsx   edx, word ptr [eax+22h]
@@ -58987,7 +59027,7 @@ namespace IDaccessPatches
 	tArrayItem(0x4F76FC, &patch_4F76FC),	// sub_4F7670 : mov     [ebp+14Ah], si
 	tArrayItem(0x4F77B4, &patch_4F77B4),	// sub_4F7670 : mov     ax, [edx+22h]
 	tArrayItem(0x4F7814, &patch_4F7814),	// sub_4F7670 : movsx   eax, word ptr [edx+22h]
-	tArrayItem(0x4F7818, &patch_4F7818),	// sub_4F7670 : add     eax, 0FFFFFE40h ; switch 136 cases 
+	tArrayItem(0x4F7818, &patch_4F7818),	// sub_4F7670 : add     eax, 0FFFFFE40h; switch 136 cases
 	tArrayItem(0x4F8213 | (1 << 29), &patch_4F8213_1),	// sub_4F8070 : cmp     word ptr [edx+22h], 1C9h
 	tArrayItem(0x4F8213 | (2 << 29), &patch_4F8213_2),	// sub_4F8070 : cmp     word ptr [edx+22h], 1C9h
 	tArrayItem(0x4F8972 | (1 << 29), &patch_4F8972_1),	// sub_4F8940 : cmp     word ptr [ecx+22h], 1C9h
@@ -60051,7 +60091,7 @@ namespace IDaccessPatches
 	tArrayItem(0x68899C, &patch_68899C),	// sub_688930 : mov     [esi+0Ah], bx
 	tArrayItem(0x688B47, &patch_688B47),	// sub_688A90 : movsx   eax, word ptr [esi+0Ah]
 	tArrayItem(0x689356, &patch_689356),	// sub_688A90 : mov     ax, [esi+0Ah]
-	tArrayItem(0x6894A0, &patch_6894A0),	// sub_688A90 : mov     di, [esi+0Ah]   ; jumptable 00688B54 default case
+	tArrayItem(0x6894A0, &patch_6894A0),	// sub_688A90 : mov     di, [esi+0Ah]; jumptable 00688B54 default case
 	tArrayItem(0x6898A7, &patch_6898A7),	// sub_689640 : mov     [esi+0Ah], bp
 	tArrayItem(0x689BC1, &patch_689BC1),	// sub_6899F0 : movsx   eax, word ptr [edi+0Ah]
 	tArrayItem(0x68A193, &patch_68A193),	// sub_6899F0 : mov     di, [edi+0Ah]
@@ -60284,7 +60324,7 @@ namespace IDaccessPatches
 	tArrayItem(0x6AAE2F | (2 << 29), &patch_6AAE2F_2),	// sub_408C8C : cmp     ax, 441
 	tArrayItem(0x6AB350, &patch_6AB350),	// sub_408C8C : movsx   eax, word ptr [esi+22h]
 	tArrayItem(0x6AB354, &patch_6AB354),	// sub_408C8C : lea     edi, [eax-197h]
-	tArrayItem(0x6ABC71, &patch_6ABC71),	// sub_408C8C : mov     ax, [esi+22h]   ; jumptable 006AB36D default case
+	tArrayItem(0x6ABC71, &patch_6ABC71),	// sub_408C8C : mov     ax, [esi+22h]; jumptable 006AB36D default case
 	tArrayItem(0x6ABC75 | (1 << 29), &patch_6ABC75_1),	// sub_408C8C : cmp     ax, 441
 	tArrayItem(0x6ABC75 | (2 << 29), &patch_6ABC75_2),	// sub_408C8C : cmp     ax, 441
 	tArrayItem(0x6ABC7B | (1 << 29), &patch_6ABC7B_1),	// sub_408C8C : cmp     ax, 0FFFEh
@@ -60592,6 +60632,8 @@ namespace IDaccessPatches
 	tArrayItem(0x6C2D60 | (2 << 29), &patch_6C2D60_2),	// sub_6C2B90 : cmp     ax, 460
 	tArrayItem(0x6C318E, &patch_6C318E),	// sub_6C3030 : movsx   eax, word ptr [edi+22h]
 	tArrayItem(0x6C3192, &patch_6C3192),	// sub_6C3030 : add     eax, 0FFFFFE42h
+	tArrayItem(0x6C41D9 | (1 << 29), &patch_6C41D9_1),	// sub_6C4197 : cmp     edi, 1A9h
+	tArrayItem(0x6C41D9 | (2 << 29), &patch_6C41D9_2),	// sub_6C4197 : cmp     edi, 1A9h
 	tArrayItem(0x6C440A, &patch_6C440A),	// sub_6C4400 : movsx   eax, word ptr [esi+22h]
 	tArrayItem(0x6C4F13, &patch_6C4F13),	// sub_6C4E60 : mov     ax, [esi+22h]
 	tArrayItem(0x6C4F17 | (1 << 29), &patch_6C4F17_1),	// sub_6C4E60 : cmp     ax, 465
@@ -60693,7 +60735,7 @@ namespace IDaccessPatches
 	tArrayItem(0x6C97E6 | (2 << 29), &patch_6C97E6_2),	// sub_6C94A0 : cmp     word ptr [esi+22h], 21Bh
 	tArrayItem(0x6C9D7E, &patch_6C9D7E),	// sub_6C94A0 : movsx   eax, word ptr [esi+22h]
 	tArrayItem(0x6C9D82, &patch_6C9D82),	// sub_6C94A0 : add     eax, 0FFFFFE24h
-	tArrayItem(0x6C9EE3, &patch_6C9EE3),	// sub_6C94A0 : mov     ax, [esi+22h]   ; jumptable 006C9DAA default case
+	tArrayItem(0x6C9EE3, &patch_6C9EE3),	// sub_6C94A0 : mov     ax, [esi+22h]; jumptable 006C9DAA default case
 	tArrayItem(0x6C9EE7 | (1 << 29), &patch_6C9EE7_1),	// sub_6C94A0 : cmp     ax, 592
 	tArrayItem(0x6C9EE7 | (2 << 29), &patch_6C9EE7_2),	// sub_6C94A0 : cmp     ax, 592
 	tArrayItem(0x6C9F1C | (1 << 29), &patch_6C9F1C_1),	// sub_6C94A0 : cmp     ax, 520
@@ -60882,7 +60924,7 @@ namespace IDaccessPatches
 	tArrayItem(0x6D698C | (2 << 29), &patch_6D698C_2),	// sub_6D6640 : cmp     ax, 594
 	tArrayItem(0x6D6A7B, &patch_6D6A7B),	// CVehicle__SetModelIndex : movsx   ecx, word ptr [esi+22h]
 	tArrayItem(0x6D6A85, &patch_6D6A85),	// CVehicle__SetModelIndex : lea     eax, [ecx-1B9h]
-	tArrayItem(0x6D6AB9, &patch_6D6AB9),	// CVehicle__SetModelIndex : lea     eax, [ecx-1DCh] ; switch 101 cases 
+	tArrayItem(0x6D6AB9, &patch_6D6AB9),	// CVehicle__SetModelIndex : lea     eax, [ecx-1DCh]; switch 101 cases
 	tArrayItem(0x6D6EC0 | (1 << 29), &patch_6D6EC0_1),	// sub_6D6C00 : cmp     word ptr [ebx+22h], 1B9h
 	tArrayItem(0x6D6EC0 | (2 << 29), &patch_6D6EC0_2),	// sub_6D6C00 : cmp     word ptr [ebx+22h], 1B9h
 	tArrayItem(0x6D76DD | (1 << 29), &patch_6D76DD_1),	// sub_6D73B0 : cmp     word ptr [edi+22h], 1B9h

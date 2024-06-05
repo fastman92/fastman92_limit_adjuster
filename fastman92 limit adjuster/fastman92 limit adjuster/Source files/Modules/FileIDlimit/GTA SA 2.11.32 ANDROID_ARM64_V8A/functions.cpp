@@ -1,4 +1,4 @@
-// Compilation time: 0 seconds 454 ms
+// Compilation time: 0 seconds 326 ms
 
 // patch for 0x427B34
 extern "C"
@@ -51,6 +51,40 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__Initialise_45F534()
 		);
 }
 
+// patch for 0x45F540
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__Initialise_45F544_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__Initialise_45F540()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W0, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Initialise_45F544_arm64)
+		);
+}
+
+// patch for 0x45F5AC
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__Initialise_45F5B0_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__Initialise_45F5AC()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X8, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Initialise_45F5B0_arm64)
+		);
+}
+
 // patch for 0x45F768
 extern "C"
 {
@@ -61,7 +95,7 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F768()
 {
 	__asm(
 	RESTORE_TRAMPOLINE_REGISTER()
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags)
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F770_arm64)
@@ -85,6 +119,40 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F77C()
 		);
 }
 
+// patch for 0x45F78C
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F790_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F78C()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X21, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F790_arm64)
+		);
+}
+
+// patch for 0x45F7DC
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F7E0_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F7DC()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X19, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F7E0_arm64)
+		);
+}
+
 // patch for 0x45F8F8
 extern "C"
 {
@@ -95,7 +163,7 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F8F8()
 {
 	__asm(
 	RESTORE_TRAMPOLINE_REGISTER()
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags)
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F900_arm64)
@@ -116,6 +184,23 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F90C()
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F910_arm64)
+		);
+}
+
+// patch for 0x45F91C
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F920_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F91C()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X20, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F920_arm64)
 		);
 }
 
@@ -170,6 +255,40 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__LoadIpls_4614A4()
 		);
 }
 
+// patch for 0x4614B8
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__LoadIpls_4614BC_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__LoadIpls_4614B8()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X25, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__LoadIpls_4614BC_arm64)
+		);
+}
+
+// patch for 0x46160C
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461614_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_46160C()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461614_arm64)
+		);
+}
+
 // patch for 0x461624
 extern "C"
 {
@@ -184,6 +303,23 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461624()
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461628_arm64)
+		);
+}
+
+// patch for 0x46164C
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461650_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_46164C()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X23, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461650_arm64)
 		);
 }
 
@@ -204,6 +340,23 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__RequestIpls_461768()
 		);
 }
 
+// patch for 0x461778
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__RequestIpls_46177C_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__RequestIpls_461778()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X20, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__RequestIpls_46177C_arm64)
+		);
+}
+
 // patch for 0x46186C
 extern "C"
 {
@@ -218,6 +371,23 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_46186C()
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_461870_arm64)
+		);
+}
+
+// patch for 0x461878
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_46187C_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_461878()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X8, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_46187C_arm64)
 		);
 }
 
@@ -272,6 +442,23 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619B8()
 		);
 }
 
+// patch for 0x4619E8
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619EC_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619E8()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X19, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619EC_arm64)
+		);
+}
+
 // patch for 0x461AF0
 extern "C"
 {
@@ -303,6 +490,23 @@ static NAKED void patch_GTA_SA_2_11_32_CIplStore__RemoveIplAndIgnore_461B50()
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__RemoveIplAndIgnore_461B54_arm64)
+		);
+}
+
+// patch for 0x461BA0
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__RemoveIplWhenFarAway_461BA4_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__RemoveIplWhenFarAway_461BA0()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__RemoveIplWhenFarAway_461BA4_arm64)
 		);
 }
 
@@ -801,6 +1005,23 @@ static NAKED void patch_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465818(
 		);
 }
 
+// patch for 0x465820
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465824_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465820()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(W8, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465824_arm64)
+		);
+}
+
 // patch for 0x465D94
 extern "C"
 {
@@ -832,6 +1053,23 @@ static NAKED void patch_GTA_SA_2_11_32_CStreaming__RequestModel_465E70()
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CStreaming__RequestModel_465E74_arm64)
+		);
+}
+
+// patch for 0x465E78
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CStreaming__RequestModel_465E80_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CStreaming__RequestModel_465E78()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(W8, FILE_TYPE_DFF_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CStreaming__RequestModel_465E80_arm64)
 		);
 }
 
@@ -1747,7 +1985,7 @@ static NAKED void patch_GTA_SA_2_11_32_CColStore__EnsureCollisionIsInMemory_477C
 {
 	__asm(
 	RESTORE_TRAMPOLINE_REGISTER()
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status)
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CColStore__EnsureCollisionIsInMemory_477CCC_arm64)
@@ -1917,7 +2155,7 @@ static NAKED void patch_GTA_SA_2_11_32_CColStore__RemoveAllCollision_478188()
 {
 	__asm(
 	RESTORE_TRAMPOLINE_REGISTER()
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W9, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags)
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CColStore__RemoveAllCollision_478190_arm64)
@@ -3145,6 +3383,40 @@ static NAKED void patch_GTA_SA_2_11_32_CScriptResourceManager__Load_617494()
 
 		SAVE_TRAMPOLINE_REGISTER()
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CScriptResourceManager__Load_617498_arm64)
+		);
+}
+
+// patch for 0x61AB94
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__Save_61AB98_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__Save_61AB94()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(W8, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Save_61AB98_arm64)
+		);
+}
+
+// patch for 0x61ABDC
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_11_32_CIplStore__Save_61ABE0_arm64 = 0;
+}
+
+static NAKED void patch_GTA_SA_2_11_32_CIplStore__Save_61ABDC()
+{
+	__asm(
+	RESTORE_TRAMPOLINE_REGISTER()
+		ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(X21, FILE_TYPE_IPL_COUNT)
+
+		SAVE_TRAMPOLINE_REGISTER()
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_11_32_CIplStore__Save_61ABE0_arm64)
 		);
 }
 

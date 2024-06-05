@@ -599,6 +599,57 @@ void StreamingLimits::SetMaxNumberOfStreamHandles(unsigned int iNumberOfStreamHa
 	CPatch::LeaveThisLevel();
 }
 
+extern "C"
+{
+	uint32_t NumberOfRequestedModelsWhenGameConsidersLoadingVeryBusy;
+	uint32_t MinimumNumberOfIterationsInLoadAllRequestedModels;
+}
+
+namespace Game_GTASA_2_0
+{
+#if IS_PLATFORM_ANDROID_ARMEABI_V7A
+	// patch for 0x2D0DAE
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_00_CStreaming__IsVeryBusy_2D0DBA_thumb = 0;
+	}
+
+	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CStreaming__IsVeryBusy_2D0DAE()
+	{
+		__asm(
+		".thumb\n"
+			ASM_CMP_4BYTE_VALUE_STORED_ON_SYMBOL(R0, NumberOfRequestedModelsWhenGameConsidersLoadingVeryBusy)
+			"IT GT\n"
+			"MOVGT R2, #1\n"
+			"CMP R1, #0\n"
+			"IT NE\n"
+			"MOVNE R1, #1\n"
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CStreaming__IsVeryBusy_2D0DBA_thumb)
+			);
+	}
+
+	// patch for 0x2D4662
+	extern "C"
+	{
+		uintptr_t Address_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D466A = 0;
+		uintptr_t Address_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D466C_thumb = 0;
+	}
+
+	static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D4662()
+	{
+		__asm(
+		".thumb\n"
+			ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R6, MinimumNumberOfIterationsInLoadAllRequestedModels)
+			"MOVS R5, #0\n"
+			ASM_ADD_ADDRESS_STORED_ON_SYMBOL(R0, Address_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D466A)
+			"LDR R0, [R0]\n"
+			"LDR R0, [R0]\n"
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D466C_thumb)
+			);
+	}
+#endif
+}
+
 // Sets the number of requested models when game considers loading very busy.
 void StreamingLimits::SetTheNumberOfRequestedModelsAboveWhichLoadingIsVeryBusy(int iNumberOfRequestedModels)
 {
@@ -610,12 +661,24 @@ void StreamingLimits::SetTheNumberOfRequestedModelsAboveWhichLoadingIsVeryBusy(i
 	if (CPatch::IsDebugModeActive())
 		iNumberOfRequestedModels = this->NumberOfRequestedModelsWhenGameConsidersLoadingVeryBusy;
 
+	::NumberOfRequestedModelsWhenGameConsidersLoadingVeryBusy = this->NumberOfRequestedModelsWhenGameConsidersLoadingVeryBusy;
+
 	MAKE_DEAD_IF();
 	#ifdef IS_PLATFORM_WIN_X86
 	else if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_COMPACT_WIN_X86)
 		CPatch::PatchUINT8(0x4076A9 + 6, iNumberOfRequestedModels);	// cmp     _ZN10CStreaming21ms_numModelsRequestedE, 5 ; CStreaming::ms_numModelsRequested
 	else if (gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86)
 		CPatch::PatchUINT8(0x156D7A9 + 6, iNumberOfRequestedModels);	// cmp     _ZN10CStreaming21ms_numModelsRequestedE, 5 ; CStreaming::ms_numModelsRequested
+#elif defined(IS_PLATFORM_ANDROID_ARMEABI_V7A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+	{
+		using namespace Game_GTASA_2_0;
+
+		Address_GTA_SA_2_00_CStreaming__IsVeryBusy_2D0DBA_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D0DBA));
+		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D0DAE),
+			(void*)&patch_GTA_SA_2_00_CStreaming__IsVeryBusy_2D0DAE
+		);
+	}
 	#endif
 	else
 	{
@@ -646,6 +709,8 @@ void StreamingLimits::SetMinimumNumberOfIterationsInLoadAllRequestedModels(int m
 	if (CPatch::IsDebugModeActive())
 		minimumValue = this->MinimumNumberOfIterationsInLoadAllRequestedModels;
 
+	::MinimumNumberOfIterationsInLoadAllRequestedModels = this->MinimumNumberOfIterationsInLoadAllRequestedModels;
+
 	MAKE_DEAD_IF();
 	#ifdef IS_PLATFORM_WIN_X86
 	else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
@@ -658,6 +723,18 @@ void StreamingLimits::SetMinimumNumberOfIterationsInLoadAllRequestedModels(int m
 		}
 		#endif
 	}
+	#elif defined(IS_PLATFORM_ANDROID_ARMEABI_V7A)
+	else if (gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
+	{
+		using namespace Game_GTASA_2_0;
+
+		Address_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D466A = g_mCalc.GetCurrentVAbyPreferedVA(0x2D466A);
+		Address_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D466C_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x2D466C));
+		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x2D4662),
+			(void*)&patch_GTA_SA_2_00_CStreaming__LoadAllRequestedModels_2D4662, 10
+		);
+	}
+	
 	#endif
 	else
 	{

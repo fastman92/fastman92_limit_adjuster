@@ -85,6 +85,11 @@ CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0
 (void*)&patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BA0, 10
 );
 
+Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BBC_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281BBC));
+CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281BB4),
+(void*)&patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BB4, 8
+);
+
 Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281C84_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x281C84));
 CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x281C7C),
 (void*)&patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281C7C, 8

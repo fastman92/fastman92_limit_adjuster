@@ -431,10 +431,10 @@ namespace Game_GTAIII
 	// Initializes CStreamingInfo
 	void CStreamingInfo::Init()
 	{
-		this->uiLoadFlag = 0;
-		this->usNext = 0;
-		this->usPrev = 0;
-		this->usNextOnCd = -1;
+		this->m_status = 0;
+		this->m_nextIndex = 0;
+		this->m_prevIndex = 0;
+		this->m_nextModelOnCd = -1;
 		this->iBlockCount = 0;
 		this->iBlockOffset = 0;
 	}
@@ -531,231 +531,231 @@ void FileIDlimit::PatchFileIDlimits_GTA_III_1_0()
 	// Patch pointers to CStreaming::ms_aInfoForModel
 	#if TRUE
 	{
-		CPatch::PatchPointer(0x406442 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 0
-		CPatch::PatchPointer(0x40644A + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406454 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edi], 0
-		CPatch::PatchPointer(0x40645E + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edi], 0FFFFh
+		CPatch::PatchPointer(0x406442 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 0
+		CPatch::PatchPointer(0x40644A + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406454 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edi], 0
+		CPatch::PatchPointer(0x40645E + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edi], 0FFFFh
 		CPatch::PatchPointer(0x406466 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[edi], 0
 		CPatch::PatchPointer(0x406470 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[edi], 0
-		CPatch::PatchPointer(0x40648A + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 0
-		CPatch::PatchPointer(0x406491 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40649B + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebx], 0
-		CPatch::PatchPointer(0x4064A5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx], 0FFFFh
+		CPatch::PatchPointer(0x40648A + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 0
+		CPatch::PatchPointer(0x406491 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40649B + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebx], 0
+		CPatch::PatchPointer(0x4064A5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx], 0FFFFh
 		CPatch::PatchPointer(0x4064AD + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ebx], 0
 		CPatch::PatchPointer(0x4064B7 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ebx], 0
-		CPatch::PatchPointer(0x4064CF + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 0
-		CPatch::PatchPointer(0x4064D6 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4064E0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], 0
-		CPatch::PatchPointer(0x4064EA + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebp], 0FFFFh
+		CPatch::PatchPointer(0x4064CF + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 0
+		CPatch::PatchPointer(0x4064D6 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4064E0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], 0
+		CPatch::PatchPointer(0x4064EA + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebp], 0FFFFh
 		CPatch::PatchPointer(0x4064F2 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ebp], 0
 		CPatch::PatchPointer(0x4064FC + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ebp], 0
-		CPatch::PatchPointer(0x406513 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 0
-		CPatch::PatchPointer(0x40651A + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[esi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406524 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[esi], 0
-		CPatch::PatchPointer(0x40652E + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[esi], 0FFFFh
+		CPatch::PatchPointer(0x406513 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 0
+		CPatch::PatchPointer(0x40651A + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[esi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406524 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[esi], 0
+		CPatch::PatchPointer(0x40652E + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[esi], 0FFFFh
 		CPatch::PatchPointer(0x406536 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[esi], 0
 		CPatch::PatchPointer(0x406540 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[esi], 0
-		CPatch::PatchPointer(0x406557 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 0
-		CPatch::PatchPointer(0x40655E + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406568 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], 0
-		CPatch::PatchPointer(0x406572 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edx], 0FFFFh
+		CPatch::PatchPointer(0x406557 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 0
+		CPatch::PatchPointer(0x40655E + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406568 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], 0
+		CPatch::PatchPointer(0x406572 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edx], 0FFFFh
 		CPatch::PatchPointer(0x40657A + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[edx], 0
 		CPatch::PatchPointer(0x406584 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[edx], 0
-		CPatch::PatchPointer(0x40659B + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 0
-		CPatch::PatchPointer(0x4065A2 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4065AC + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], 0
-		CPatch::PatchPointer(0x4065B6 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ecx], 0FFFFh
+		CPatch::PatchPointer(0x40659B + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 0
+		CPatch::PatchPointer(0x4065A2 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4065AC + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], 0
+		CPatch::PatchPointer(0x4065B6 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ecx], 0FFFFh
 		CPatch::PatchPointer(0x4065BE + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ecx], 0
 		CPatch::PatchPointer(0x4065C8 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ecx], 0
-		CPatch::PatchPointer(0x4065DF + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 0
-		CPatch::PatchPointer(0x4065E6 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4065F0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebx], 0
-		CPatch::PatchPointer(0x4065FA + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx], 0FFFFh
+		CPatch::PatchPointer(0x4065DF + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 0
+		CPatch::PatchPointer(0x4065E6 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4065F0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebx], 0
+		CPatch::PatchPointer(0x4065FA + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx], 0FFFFh
 		CPatch::PatchPointer(0x406602 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ebx], 0
 		CPatch::PatchPointer(0x40660C + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ebx], 0
-		CPatch::PatchPointer(0x406627 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 0
-		CPatch::PatchPointer(0x40662E + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406638 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], 0
-		CPatch::PatchPointer(0x406642 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebp], 0FFFFh
+		CPatch::PatchPointer(0x406627 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 0
+		CPatch::PatchPointer(0x40662E + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406638 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], 0
+		CPatch::PatchPointer(0x406642 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebp], 0FFFFh
 		CPatch::PatchPointer(0x40664F + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ebp], 0
 		CPatch::PatchPointer(0x406659 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ebp], 0
-		CPatch::PatchPointer(0x40667F + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 0
-		CPatch::PatchPointer(0x406686 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[esi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406690 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[esi], 0
-		CPatch::PatchPointer(0x40669A + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[esi], 0FFFFh
+		CPatch::PatchPointer(0x40667F + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 0
+		CPatch::PatchPointer(0x406686 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[esi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406690 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[esi], 0
+		CPatch::PatchPointer(0x40669A + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[esi], 0FFFFh
 		CPatch::PatchPointer(0x4066A2 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[esi], 0
 		CPatch::PatchPointer(0x4066AC + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[esi], 0
-		CPatch::PatchPointer(0x4066D4 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 0
-		CPatch::PatchPointer(0x4066DB + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4066E5 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], 0
-		CPatch::PatchPointer(0x4066EF + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edx], 0FFFFh
+		CPatch::PatchPointer(0x4066D4 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 0
+		CPatch::PatchPointer(0x4066DB + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4066E5 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], 0
+		CPatch::PatchPointer(0x4066EF + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edx], 0FFFFh
 		CPatch::PatchPointer(0x4066F7 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[edx], 0
 		CPatch::PatchPointer(0x406701 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[edx], 0
-		CPatch::PatchPointer(0x406736 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 0
-		CPatch::PatchPointer(0x40673D + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406747 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], 0
-		CPatch::PatchPointer(0x406751 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ecx], 0FFFFh
+		CPatch::PatchPointer(0x406736 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 0
+		CPatch::PatchPointer(0x40673D + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406747 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], 0
+		CPatch::PatchPointer(0x406751 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ecx], 0FFFFh
 		CPatch::PatchPointer(0x406759 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ecx], 0
 		CPatch::PatchPointer(0x406763 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ecx], 0
-		CPatch::PatchPointer(0x406798 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 0
-		CPatch::PatchPointer(0x40679F + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4067A9 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebx], 0
-		CPatch::PatchPointer(0x4067B3 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx], 0FFFFh
+		CPatch::PatchPointer(0x406798 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 0
+		CPatch::PatchPointer(0x40679F + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4067A9 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebx], 0
+		CPatch::PatchPointer(0x4067B3 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx], 0FFFFh
 		CPatch::PatchPointer(0x4067BB + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[ebx], 0
 		CPatch::PatchPointer(0x4067C5 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[ebx], 0
-		CPatch::PatchPointer(0x4067F3 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 0
-		CPatch::PatchPointer(0x4067FA + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406804 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edi], 0
-		CPatch::PatchPointer(0x40680E + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edi], 0FFFFh
+		CPatch::PatchPointer(0x4067F3 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 0
+		CPatch::PatchPointer(0x4067FA + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406804 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edi], 0
+		CPatch::PatchPointer(0x40680E + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edi], 0FFFFh
 		CPatch::PatchPointer(0x406816 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[edi], 0
 		CPatch::PatchPointer(0x406820 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[edi], 0
-		CPatch::PatchPointer(0x406845 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 0
-		CPatch::PatchPointer(0x40684C + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x406856 + 2, &CStreaming__ms_aInfoForModel.gta_iii->usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[eax], 0
-		CPatch::PatchPointer(0x406860 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[eax], 0FFFFh
+		CPatch::PatchPointer(0x406845 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 0
+		CPatch::PatchPointer(0x40684C + 2, CStreaming__ms_aInfoForModel.gta_iii);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x406856 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[eax], 0
+		CPatch::PatchPointer(0x406860 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[eax], 0FFFFh
 		CPatch::PatchPointer(0x406868 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockCount);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockCount[eax], 0
 		CPatch::PatchPointer(0x406872 + 2, &CStreaming__ms_aInfoForModel.gta_iii->iBlockOffset);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.iBlockOffset[eax], 0
-		CPatch::PatchPointer(0x4068F8 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
-		CPatch::PatchPointer(0x4068FF + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], 1
-		CPatch::PatchPointer(0x406969 + 2, &CStreaming__ms_aInfoForModel.gta_iii[GetBaseID(FILE_TYPE_TXD)].uiLoadFlag);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1ADB0h)[edx], 1
+		CPatch::PatchPointer(0x4068F8 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
+		CPatch::PatchPointer(0x4068FF + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], 1
+		CPatch::PatchPointer(0x406969 + 2, &CStreaming__ms_aInfoForModel.gta_iii[GetBaseID(FILE_TYPE_TXD)].m_status);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+1ADB0h)[edx], 1
 		CPatch::PatchPointer(0x406EA9 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// add     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; this
 		CPatch::PatchPointer(0x406EF0 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// add     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; this
-		CPatch::PatchPointer(0x406F09 + 4, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx*4], ax
+		CPatch::PatchPointer(0x406F09 + 4, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx*4], ax
 		CPatch::PatchPointer(0x406FD1 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// add     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x407023 + 4, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx*4], ax
+		CPatch::PatchPointer(0x407023 + 4, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx*4], ax
 		CPatch::PatchPointer(0x4077AD + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x407E88 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// add     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; this
-		CPatch::PatchPointer(0x407EB7 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp]
-		CPatch::PatchPointer(0x407EC8 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
-		CPatch::PatchPointer(0x407EDA + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], 8
-		CPatch::PatchPointer(0x407EEA + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], bl
-		CPatch::PatchPointer(0x407EF0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp]
-		CPatch::PatchPointer(0x407EFA + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
-		CPatch::PatchPointer(0x407F26 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x407EB7 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp]
+		CPatch::PatchPointer(0x407EC8 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
+		CPatch::PatchPointer(0x407EDA + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], 8
+		CPatch::PatchPointer(0x407EEA + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], bl
+		CPatch::PatchPointer(0x407EF0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp]
+		CPatch::PatchPointer(0x407EFA + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
+		CPatch::PatchPointer(0x407F26 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x407F2F + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ebx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x407F3D + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
+		CPatch::PatchPointer(0x407F3D + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
 		CPatch::PatchPointer(0x407F95 + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x407FB9 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 2
-		CPatch::PatchPointer(0x407FC0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], bl
-		CPatch::PatchPointer(0x4082A1 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4082B3 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4082CE + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4082E0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4082FD + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x40830F + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x408373 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x408844 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp]
+		CPatch::PatchPointer(0x407FB9 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 2
+		CPatch::PatchPointer(0x407FC0 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], bl
+		CPatch::PatchPointer(0x4082A1 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4082B3 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4082CE + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4082E0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4082FD + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x40830F + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x408373 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x408844 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp]
 		CPatch::PatchPointer(0x40887D + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x408892 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40889B + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 2
-		CPatch::PatchPointer(0x4088A4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
-		CPatch::PatchPointer(0x4088B6 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], 0F7h
+		CPatch::PatchPointer(0x408892 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40889B + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 2
+		CPatch::PatchPointer(0x4088A4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
+		CPatch::PatchPointer(0x4088B6 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], 0F7h
 		CPatch::PatchPointer(0x4088C3 + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4088D1 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 3
-		CPatch::PatchPointer(0x408908 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 4
-		CPatch::PatchPointer(0x408932 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 0
-		CPatch::PatchPointer(0x408960 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
-		CPatch::PatchPointer(0x408969 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
-		CPatch::PatchPointer(0x408989 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], 0
+		CPatch::PatchPointer(0x4088D1 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 3
+		CPatch::PatchPointer(0x408908 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 4
+		CPatch::PatchPointer(0x408932 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 0
+		CPatch::PatchPointer(0x408960 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
+		CPatch::PatchPointer(0x408969 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
+		CPatch::PatchPointer(0x408989 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], 0
 		CPatch::PatchPointer(0x4089C7 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40937A + 3, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax*4], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409403 + 3, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax*4], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40937A + 3, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax*4], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409403 + 3, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax*4], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40946C + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x4094DB + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40958D + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409696 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 1
-		CPatch::PatchPointer(0x4096B7 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[esi]
+		CPatch::PatchPointer(0x409696 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 1
+		CPatch::PatchPointer(0x4096B7 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[esi]
 		CPatch::PatchPointer(0x409757 + 4, CStreaming__ms_aInfoForModel.gta_iii);	// mov     [esp+30h+var_18], offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4098B5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x40991A + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x409945 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x4099F1 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x409A34 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x409AB0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
+		CPatch::PatchPointer(0x4098B5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x40991A + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x409945 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x4099F1 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x409A34 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x409AB0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
 		CPatch::PatchPointer(0x409C92 + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409CDB + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x409D04 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x409D66 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 4
+		CPatch::PatchPointer(0x409CDB + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x409D04 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x409D66 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 4
 		CPatch::PatchPointer(0x409E8C + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409ED5 + 4, &CStreaming__ms_aInfoForModel.gta_iii[GetBaseID(FILE_TYPE_TXD)].uiLoadFlag);	// movzx   eax, ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1ADB0h)[edi*4]
-		CPatch::PatchPointer(0x409EF0 + 4, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx*4]
+		CPatch::PatchPointer(0x409ED5 + 4, &CStreaming__ms_aInfoForModel.gta_iii[GetBaseID(FILE_TYPE_TXD)].m_status);	// movzx   eax, ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+1ADB0h)[edi*4]
+		CPatch::PatchPointer(0x409EF0 + 4, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx*4]
 		CPatch::PatchPointer(0x409F15 + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409F66 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi]
-		CPatch::PatchPointer(0x409F78 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edi], 0F7h
+		CPatch::PatchPointer(0x409F66 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi]
+		CPatch::PatchPointer(0x409F78 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edi], 0F7h
 		CPatch::PatchPointer(0x40A0AB + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A0E6 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
+		CPatch::PatchPointer(0x40A0E6 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
 		CPatch::PatchPointer(0x40A121 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// add     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; this
-		CPatch::PatchPointer(0x40A196 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 2
+		CPatch::PatchPointer(0x40A196 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 2
 		CPatch::PatchPointer(0x40A1A3 + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A1C4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
-		CPatch::PatchPointer(0x40A211 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// mov     dl, ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4]
-		CPatch::PatchPointer(0x40A2B1 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp]
-		CPatch::PatchPointer(0x40A2C3 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], 0F7h
-		CPatch::PatchPointer(0x40A2D0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->usNextOnCd);	// movsx   ebx, ss:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebp]
+		CPatch::PatchPointer(0x40A1C4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
+		CPatch::PatchPointer(0x40A211 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// mov     dl, ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4]
+		CPatch::PatchPointer(0x40A2B1 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp]
+		CPatch::PatchPointer(0x40A2C3 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], 0F7h
+		CPatch::PatchPointer(0x40A2D0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_nextModelOnCd);	// movsx   ebx, ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebp]
 		CPatch::PatchPointer(0x40A4AC + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ebp, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A4C6 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[esi]
-		CPatch::PatchPointer(0x40A4DA + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[esi], 0F7h
+		CPatch::PatchPointer(0x40A4C6 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[esi]
+		CPatch::PatchPointer(0x40A4DA + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[esi], 0F7h
 		CPatch::PatchPointer(0x40A697 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A707 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A7A1 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx], 0FEh
-		CPatch::PatchPointer(0x40A7BD + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx]
-		CPatch::PatchPointer(0x40A7C9 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 1
-		CPatch::PatchPointer(0x40A7D2 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A7A1 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx], 0FEh
+		CPatch::PatchPointer(0x40A7BD + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx]
+		CPatch::PatchPointer(0x40A7C9 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 1
+		CPatch::PatchPointer(0x40A7D2 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A7DB + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A831 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx], 0FDh
-		CPatch::PatchPointer(0x40A84D + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx]
-		CPatch::PatchPointer(0x40A859 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 1
-		CPatch::PatchPointer(0x40A862 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A831 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx], 0FDh
+		CPatch::PatchPointer(0x40A84D + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx]
+		CPatch::PatchPointer(0x40A859 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 1
+		CPatch::PatchPointer(0x40A862 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A86B + 1, CStreaming__ms_aInfoForModel.gta_iii);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A9D5 + 2, CStreaming__ms_aInfoForModel.gta_iii);	// add     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; this
-		CPatch::PatchPointer(0x40ADC7 + 3, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_SPECIAL01].uiLoadFlag);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+208h)[eax*4], 1
-		CPatch::PatchPointer(0x40AEE7 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_ENFORCER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+924h, 1
-		CPatch::PatchPointer(0x40AF2B + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FBICAR].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+85Ch, 1
-		CPatch::PatchPointer(0x40AF82 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_BARRACKS].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+99Ch, 1
-		CPatch::PatchPointer(0x40AF8C + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_RHINO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+988h, 1
-		CPatch::PatchPointer(0x40B018 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 0
-		CPatch::PatchPointer(0x40B0C7 + 4, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   ecx, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[edx*4]
-		CPatch::PatchPointer(0x40B1C3 + 3, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx]
-		CPatch::PatchPointer(0x40B1DD + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 1
-		CPatch::PatchPointer(0x40B223 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 1
-		CPatch::PatchPointer(0x40B22C + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebx]
-		CPatch::PatchPointer(0x40B260 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
-		CPatch::PatchPointer(0x40B270 + 2, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[ebp], al
-		CPatch::PatchPointer(0x4180F4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx*4], 1
-		CPatch::PatchPointer(0x418204 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_ENFORCER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+924h, 1
-		CPatch::PatchPointer(0x41820D + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_SWAT].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+28h, 1
-		CPatch::PatchPointer(0x41824A + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FBICAR].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+85Ch, 1
-		CPatch::PatchPointer(0x418253 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FBI].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+3Ch, 1
-		CPatch::PatchPointer(0x418276 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_RHINO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+988h, 1
-		CPatch::PatchPointer(0x41827F + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_BARRACKS].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+99Ch, 1
-		CPatch::PatchPointer(0x418288 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_ARMY].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+50h, 1
-		CPatch::PatchPointer(0x4182C9 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_GANG01].uiLoadFlag);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0C8h)[eax], 1
-		CPatch::PatchPointer(0x4182D2 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_GANG02].uiLoadFlag);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0DCh)[eax], 1
-		CPatch::PatchPointer(0x41FD28 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_AMBULAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+848h, 1
-		CPatch::PatchPointer(0x41FD33 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_MEDIC].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+64h, 1
-		CPatch::PatchPointer(0x41FD63 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_AMBULAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+848h, 1
-		CPatch::PatchPointer(0x41FDF5 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FIRETRUK].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+794h, 1
-		CPatch::PatchPointer(0x41FE00 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FIREMAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+78h, 1
-		CPatch::PatchPointer(0x41FE30 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FIRETRUK].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+794h, 1
-		CPatch::PatchPointer(0x4276A4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4355A5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4371EF + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x43790A + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x43A778 + 2, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag, 1
-		CPatch::PatchPointer(0x444606 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx*4], 1
-		CPatch::PatchPointer(0x490F11 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_RHINO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+988h, 1
-		CPatch::PatchPointer(0x491171 + 4, &CStreaming__ms_aInfoForModel.gta_iii->ucFlags);	// movzx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax*4]
-		CPatch::PatchPointer(0x4A9ED0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x542726 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x54A5FA + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx*4], 1
-		CPatch::PatchPointer(0x54DD63 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x54FF17 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_TRAIN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+9B0h, 1
-		CPatch::PatchPointer(0x585C27 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5860DE + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5872D0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x587401 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5953AE + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5955B5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi*4], 1
+		CPatch::PatchPointer(0x40ADC7 + 3, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_SPECIAL01].m_status);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+208h)[eax*4], 1
+		CPatch::PatchPointer(0x40AEE7 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_ENFORCER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+924h, 1
+		CPatch::PatchPointer(0x40AF2B + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FBICAR].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+85Ch, 1
+		CPatch::PatchPointer(0x40AF82 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_BARRACKS].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+99Ch, 1
+		CPatch::PatchPointer(0x40AF8C + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_RHINO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+988h, 1
+		CPatch::PatchPointer(0x40B018 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 0
+		CPatch::PatchPointer(0x40B0C7 + 4, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   ecx, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[edx*4]
+		CPatch::PatchPointer(0x40B1C3 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx]
+		CPatch::PatchPointer(0x40B1DD + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 1
+		CPatch::PatchPointer(0x40B223 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 1
+		CPatch::PatchPointer(0x40B22C + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebx]
+		CPatch::PatchPointer(0x40B260 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
+		CPatch::PatchPointer(0x40B270 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_flags[ebp], al
+		CPatch::PatchPointer(0x4180F4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx*4], 1
+		CPatch::PatchPointer(0x418204 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_ENFORCER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+924h, 1
+		CPatch::PatchPointer(0x41820D + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_SWAT].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+28h, 1
+		CPatch::PatchPointer(0x41824A + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FBICAR].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+85Ch, 1
+		CPatch::PatchPointer(0x418253 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FBI].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+3Ch, 1
+		CPatch::PatchPointer(0x418276 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_RHINO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+988h, 1
+		CPatch::PatchPointer(0x41827F + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_BARRACKS].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+99Ch, 1
+		CPatch::PatchPointer(0x418288 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_ARMY].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+50h, 1
+		CPatch::PatchPointer(0x4182C9 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_GANG01].m_status);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+0C8h)[eax], 1
+		CPatch::PatchPointer(0x4182D2 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_GANG02].m_status);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+0DCh)[eax], 1
+		CPatch::PatchPointer(0x41FD28 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_AMBULAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+848h, 1
+		CPatch::PatchPointer(0x41FD33 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_MEDIC].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+64h, 1
+		CPatch::PatchPointer(0x41FD63 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_AMBULAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+848h, 1
+		CPatch::PatchPointer(0x41FDF5 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FIRETRUK].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+794h, 1
+		CPatch::PatchPointer(0x41FE00 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FIREMAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+78h, 1
+		CPatch::PatchPointer(0x41FE30 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_FIRETRUK].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+794h, 1
+		CPatch::PatchPointer(0x4276A4 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4355A5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4371EF + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x43790A + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x43A778 + 2, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status, 1
+		CPatch::PatchPointer(0x444606 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx*4], 1
+		CPatch::PatchPointer(0x490F11 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_RHINO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+988h, 1
+		CPatch::PatchPointer(0x491171 + 4, &CStreaming__ms_aInfoForModel.gta_iii->m_flags);	// movzx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.m_flags[eax*4]
+		CPatch::PatchPointer(0x4A9ED0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x542726 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x54A5FA + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx*4], 1
+		CPatch::PatchPointer(0x54DD63 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x54FF17 + 2, &CStreaming__ms_aInfoForModel.gta_iii[MODEL_TRAIN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+9B0h, 1
+		CPatch::PatchPointer(0x585C27 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5860DE + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5872D0 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x587401 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5953AE + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5955B5 + 3, &CStreaming__ms_aInfoForModel.gta_iii->m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi*4], 1
 	}
 	#endif
 		
@@ -1222,10 +1222,10 @@ namespace Game_GTAVC
 	// Initializes CStreamingInfo
 	void CStreamingInfo::Init()
 	{
-		this->uiLoadFlag = 0;
-		this->usNext = 0;
-		this->usPrev = 0;
-		this->usNextOnCd = -1;
+		this->m_status = 0;
+		this->m_nextIndex = 0;
+		this->m_prevIndex = 0;
+		this->m_nextModelOnCd = -1;
 		this->_unk_inCdImage = 0;
 		this->FilePositionInBlocks = 0;
 	}
@@ -1978,399 +1978,399 @@ void FileIDlimit::PatchFileIDlimits_GTA_VC_1_0()
 	#if TRUE
 	{
 		CPatch::PatchPointer(0x406C56 + 4, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax*4]
-		CPatch::PatchPointer(0x408A30 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
+		CPatch::PatchPointer(0x408A30 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
 		CPatch::PatchPointer(0x408A40 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], al
-		CPatch::PatchPointer(0x408A73 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 1
+		CPatch::PatchPointer(0x408A73 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 1
 		CPatch::PatchPointer(0x408A7C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ebx]
 		CPatch::PatchPointer(0x408AE3 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x408AFD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
+		CPatch::PatchPointer(0x408AFD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
 		CPatch::PatchPointer(0x408BAE + 4, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   edx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx*4]
 		CPatch::PatchPointer(0x408D1B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0C44h, 0FEh
 		CPatch::PatchPointer(0x408D28 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0C44h
-		CPatch::PatchPointer(0x408D34 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0C44h, 1
-		CPatch::PatchPointer(0x408D3D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0C44h, 0
-		CPatch::PatchPointer(0x408D4B + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+0C44h)
-		CPatch::PatchPointer(0x408D50 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0C44h, eax
-		CPatch::PatchPointer(0x408D55 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+0C44h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x408D5F + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0C44h
-		CPatch::PatchPointer(0x408D7B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0C44h, 1
+		CPatch::PatchPointer(0x408D34 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0C44h, 1
+		CPatch::PatchPointer(0x408D3D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0C44h, 0
+		CPatch::PatchPointer(0x408D4B + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0C44h)
+		CPatch::PatchPointer(0x408D50 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0C44h, eax
+		CPatch::PatchPointer(0x408D55 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+0C44h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x408D5F + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0C44h
+		CPatch::PatchPointer(0x408D7B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0C44h, 1
 		CPatch::PatchPointer(0x408D89 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+28h, 0FEh
 		CPatch::PatchPointer(0x408D96 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+28h
-		CPatch::PatchPointer(0x408DA2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+28h, 1
-		CPatch::PatchPointer(0x408DAB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+28h, 0
-		CPatch::PatchPointer(0x408DB9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].usNext);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+28h)
-		CPatch::PatchPointer(0x408DBE + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+28h, eax
-		CPatch::PatchPointer(0x408DC3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+28h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x408DCD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+28h
+		CPatch::PatchPointer(0x408DA2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+28h, 1
+		CPatch::PatchPointer(0x408DAB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+28h, 0
+		CPatch::PatchPointer(0x408DB9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_nextIndex);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+28h)
+		CPatch::PatchPointer(0x408DBE + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+28h, eax
+		CPatch::PatchPointer(0x408DC3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+28h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x408DCD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+28h
 		CPatch::PatchPointer(0x408E25 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+1130h, 0FEh
 		CPatch::PatchPointer(0x408E32 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+1130h
-		CPatch::PatchPointer(0x408E3E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1130h, 1
-		CPatch::PatchPointer(0x408E47 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+1130h, 0
-		CPatch::PatchPointer(0x408E55 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].usNext);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+1130h)
-		CPatch::PatchPointer(0x408E5A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+1130h, eax
-		CPatch::PatchPointer(0x408E5F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+1130h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x408E69 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+1130h
-		CPatch::PatchPointer(0x408E8B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1130h, 1
+		CPatch::PatchPointer(0x408E3E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1130h, 1
+		CPatch::PatchPointer(0x408E47 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1130h, 0
+		CPatch::PatchPointer(0x408E55 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_nextIndex);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1130h)
+		CPatch::PatchPointer(0x408E5A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1130h, eax
+		CPatch::PatchPointer(0x408E5F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+1130h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x408E69 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1130h
+		CPatch::PatchPointer(0x408E8B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1130h, 1
 		CPatch::PatchPointer(0x408E99 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+3Ch, 0FEh
 		CPatch::PatchPointer(0x408EA6 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+3Ch
-		CPatch::PatchPointer(0x408EB2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+3Ch, 1
-		CPatch::PatchPointer(0x408EBB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+3Ch, 0
-		CPatch::PatchPointer(0x408EC9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].usNext);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+3Ch)
-		CPatch::PatchPointer(0x408ECE + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+3Ch, eax
-		CPatch::PatchPointer(0x408ED3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+3Ch, offset dword_A0DAE0
-		CPatch::PatchPointer(0x408EDD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+3Ch
+		CPatch::PatchPointer(0x408EB2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+3Ch, 1
+		CPatch::PatchPointer(0x408EBB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+3Ch, 0
+		CPatch::PatchPointer(0x408EC9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_nextIndex);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+3Ch)
+		CPatch::PatchPointer(0x408ECE + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+3Ch, eax
+		CPatch::PatchPointer(0x408ED3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+3Ch, offset dword_A0DAE0
+		CPatch::PatchPointer(0x408EDD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+3Ch
 		CPatch::PatchPointer(0x408F3C + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0CBCh, 0FEh
 		CPatch::PatchPointer(0x408F49 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0CBCh
-		CPatch::PatchPointer(0x408F55 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CBCh, 1
-		CPatch::PatchPointer(0x408F5E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CBCh, 0
-		CPatch::PatchPointer(0x408F6C + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].usNext);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+0CBCh)
-		CPatch::PatchPointer(0x408F71 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CBCh, eax
-		CPatch::PatchPointer(0x408F76 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+0CBCh, offset dword_A0DAE0
-		CPatch::PatchPointer(0x408F80 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CBCh
+		CPatch::PatchPointer(0x408F55 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CBCh, 1
+		CPatch::PatchPointer(0x408F5E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CBCh, 0
+		CPatch::PatchPointer(0x408F6C + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_nextIndex);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CBCh)
+		CPatch::PatchPointer(0x408F71 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CBCh, eax
+		CPatch::PatchPointer(0x408F76 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+0CBCh, offset dword_A0DAE0
+		CPatch::PatchPointer(0x408F80 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CBCh
 		CPatch::PatchPointer(0x408FA0 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0CA8h, 0FEh
 		CPatch::PatchPointer(0x408FAD + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0CA8h
-		CPatch::PatchPointer(0x408FB9 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CA8h, 1
-		CPatch::PatchPointer(0x408FC2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CA8h, 0
-		CPatch::PatchPointer(0x408FD0 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+0CA8h)
-		CPatch::PatchPointer(0x408FD5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CA8h, eax
-		CPatch::PatchPointer(0x408FDA + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+0CA8h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x408FE4 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CA8h
-		CPatch::PatchPointer(0x408FFF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CBCh, 1
-		CPatch::PatchPointer(0x409008 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CA8h, 1
+		CPatch::PatchPointer(0x408FB9 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CA8h, 1
+		CPatch::PatchPointer(0x408FC2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CA8h, 0
+		CPatch::PatchPointer(0x408FD0 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CA8h)
+		CPatch::PatchPointer(0x408FD5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CA8h, eax
+		CPatch::PatchPointer(0x408FDA + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+0CA8h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x408FE4 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CA8h
+		CPatch::PatchPointer(0x408FFF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CBCh, 1
+		CPatch::PatchPointer(0x409008 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CA8h, 1
 		CPatch::PatchPointer(0x409016 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+50h, 0FEh
 		CPatch::PatchPointer(0x409023 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+50h
-		CPatch::PatchPointer(0x40902F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+50h, 1
-		CPatch::PatchPointer(0x409038 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+50h, 0
-		CPatch::PatchPointer(0x409046 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].usNext);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+50h)
-		CPatch::PatchPointer(0x40904B + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+50h, eax
-		CPatch::PatchPointer(0x409050 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+50h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x40905A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+50h
+		CPatch::PatchPointer(0x40902F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+50h, 1
+		CPatch::PatchPointer(0x409038 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+50h, 0
+		CPatch::PatchPointer(0x409046 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_nextIndex);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+50h)
+		CPatch::PatchPointer(0x40904B + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+50h, eax
+		CPatch::PatchPointer(0x409050 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+50h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x40905A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+50h
 		CPatch::PatchPointer(0x4090A5 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0CE4h, 0FEh
 		CPatch::PatchPointer(0x4090B2 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+0CE4h
-		CPatch::PatchPointer(0x4090BE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CE4h, 1
-		CPatch::PatchPointer(0x4090C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CE4h, 0
-		CPatch::PatchPointer(0x4090D5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].usNext);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+0CE4h)
-		CPatch::PatchPointer(0x4090DA + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CE4h, eax
-		CPatch::PatchPointer(0x4090DF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+0CE4h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4090E9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+0CE4h
+		CPatch::PatchPointer(0x4090BE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CE4h, 1
+		CPatch::PatchPointer(0x4090C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CE4h, 0
+		CPatch::PatchPointer(0x4090D5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_nextIndex);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CE4h)
+		CPatch::PatchPointer(0x4090DA + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CE4h, eax
+		CPatch::PatchPointer(0x4090DF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+0CE4h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4090E9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+0CE4h
 		CPatch::PatchPointer(0x409128 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+794h, 0FEh
 		CPatch::PatchPointer(0x409135 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+794h
-		CPatch::PatchPointer(0x409141 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+794h, 1
-		CPatch::PatchPointer(0x40914A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+794h, 0
-		CPatch::PatchPointer(0x409158 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+794h)
-		CPatch::PatchPointer(0x40915D + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+794h, eax
-		CPatch::PatchPointer(0x409162 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+794h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x40916C + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+794h
+		CPatch::PatchPointer(0x409141 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+794h, 1
+		CPatch::PatchPointer(0x40914A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h, 0
+		CPatch::PatchPointer(0x409158 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h)
+		CPatch::PatchPointer(0x40915D + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h, eax
+		CPatch::PatchPointer(0x409162 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+794h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x40916C + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h
 		CPatch::PatchPointer(0x40918D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7A8h, 0FEh
 		CPatch::PatchPointer(0x40919A + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7A8h
-		CPatch::PatchPointer(0x4091A6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7A8h, 1
-		CPatch::PatchPointer(0x4091AF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h, 0
-		CPatch::PatchPointer(0x4091BD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h)
-		CPatch::PatchPointer(0x4091C2 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h, eax
-		CPatch::PatchPointer(0x4091C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7A8h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4091D1 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h
+		CPatch::PatchPointer(0x4091A6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7A8h, 1
+		CPatch::PatchPointer(0x4091AF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h, 0
+		CPatch::PatchPointer(0x4091BD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h)
+		CPatch::PatchPointer(0x4091C2 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h, eax
+		CPatch::PatchPointer(0x4091C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7A8h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4091D1 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h
 		CPatch::PatchPointer(0x4091EE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7BCh, 0FEh
 		CPatch::PatchPointer(0x4091FB + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7BCh
-		CPatch::PatchPointer(0x409207 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7BCh, 1
-		CPatch::PatchPointer(0x409210 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh, 0
-		CPatch::PatchPointer(0x40921E + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh)
-		CPatch::PatchPointer(0x409223 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh, eax
-		CPatch::PatchPointer(0x409228 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7BCh, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409232 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh
+		CPatch::PatchPointer(0x409207 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7BCh, 1
+		CPatch::PatchPointer(0x409210 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh, 0
+		CPatch::PatchPointer(0x40921E + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh)
+		CPatch::PatchPointer(0x409223 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh, eax
+		CPatch::PatchPointer(0x409228 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7BCh, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409232 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh
 		CPatch::PatchPointer(0x40924F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7D0h, 0FEh
 		CPatch::PatchPointer(0x40925C + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7D0h
-		CPatch::PatchPointer(0x409268 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7D0h, 1
-		CPatch::PatchPointer(0x409271 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h, 0
-		CPatch::PatchPointer(0x40927F + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h)
-		CPatch::PatchPointer(0x409284 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h, eax
-		CPatch::PatchPointer(0x409289 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7D0h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409293 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h
+		CPatch::PatchPointer(0x409268 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7D0h, 1
+		CPatch::PatchPointer(0x409271 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h, 0
+		CPatch::PatchPointer(0x40927F + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h)
+		CPatch::PatchPointer(0x409284 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h, eax
+		CPatch::PatchPointer(0x409289 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7D0h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409293 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h
 		CPatch::PatchPointer(0x4092B0 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7E4h, 0FEh
 		CPatch::PatchPointer(0x4092BD + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7E4h
-		CPatch::PatchPointer(0x4092C9 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7E4h, 1
-		CPatch::PatchPointer(0x4092D2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h, 0
-		CPatch::PatchPointer(0x4092E0 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h)
-		CPatch::PatchPointer(0x4092E5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h, eax
-		CPatch::PatchPointer(0x4092EA + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7E4h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4092F4 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h
+		CPatch::PatchPointer(0x4092C9 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7E4h, 1
+		CPatch::PatchPointer(0x4092D2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h, 0
+		CPatch::PatchPointer(0x4092E0 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h)
+		CPatch::PatchPointer(0x4092E5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h, eax
+		CPatch::PatchPointer(0x4092EA + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7E4h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4092F4 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h
 		CPatch::PatchPointer(0x409311 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7F8h, 0FEh
 		CPatch::PatchPointer(0x40931E + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7F8h
-		CPatch::PatchPointer(0x40932A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7F8h, 1
-		CPatch::PatchPointer(0x409333 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h, 0
-		CPatch::PatchPointer(0x409341 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h)
-		CPatch::PatchPointer(0x409346 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h, eax
-		CPatch::PatchPointer(0x40934B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7F8h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409355 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h
+		CPatch::PatchPointer(0x40932A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7F8h, 1
+		CPatch::PatchPointer(0x409333 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h, 0
+		CPatch::PatchPointer(0x409341 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h)
+		CPatch::PatchPointer(0x409346 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h, eax
+		CPatch::PatchPointer(0x40934B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7F8h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409355 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h
 		CPatch::PatchPointer(0x409372 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+80Ch, 0FEh
 		CPatch::PatchPointer(0x40937F + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+80Ch
-		CPatch::PatchPointer(0x40938B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+80Ch, 1
-		CPatch::PatchPointer(0x409394 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch, 0
-		CPatch::PatchPointer(0x4093A2 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch)
-		CPatch::PatchPointer(0x4093A7 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch, eax
-		CPatch::PatchPointer(0x4093AC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+80Ch, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4093B6 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch
+		CPatch::PatchPointer(0x40938B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+80Ch, 1
+		CPatch::PatchPointer(0x409394 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch, 0
+		CPatch::PatchPointer(0x4093A2 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch)
+		CPatch::PatchPointer(0x4093A7 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch, eax
+		CPatch::PatchPointer(0x4093AC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+80Ch, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4093B6 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch
 		CPatch::PatchPointer(0x4093D3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+820h, 0FEh
 		CPatch::PatchPointer(0x4093E0 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+820h
-		CPatch::PatchPointer(0x4093EC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+820h, 1
-		CPatch::PatchPointer(0x4093F5 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+820h, 0
-		CPatch::PatchPointer(0x409403 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+820h)
-		CPatch::PatchPointer(0x409408 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+820h, eax
-		CPatch::PatchPointer(0x40940D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+820h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409417 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+820h
+		CPatch::PatchPointer(0x4093EC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+820h, 1
+		CPatch::PatchPointer(0x4093F5 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h, 0
+		CPatch::PatchPointer(0x409403 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h)
+		CPatch::PatchPointer(0x409408 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h, eax
+		CPatch::PatchPointer(0x40940D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+820h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409417 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h
 		CPatch::PatchPointer(0x4094D5 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+1270h, 0FEh
 		CPatch::PatchPointer(0x4094E2 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+1270h
-		CPatch::PatchPointer(0x4094EE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1270h, 1
-		CPatch::PatchPointer(0x4094F7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+1270h, 0
-		CPatch::PatchPointer(0x409505 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].usNext);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+1270h)
-		CPatch::PatchPointer(0x40950A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+1270h, eax
-		CPatch::PatchPointer(0x40950F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+1270h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409519 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+1270h
+		CPatch::PatchPointer(0x4094EE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1270h, 1
+		CPatch::PatchPointer(0x4094F7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1270h, 0
+		CPatch::PatchPointer(0x409505 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_nextIndex);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1270h)
+		CPatch::PatchPointer(0x40950A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1270h, eax
+		CPatch::PatchPointer(0x40950F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+1270h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409519 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+1270h
 		CPatch::PatchPointer(0x409540 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+794h, 0FEh
 		CPatch::PatchPointer(0x40954D + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+794h
-		CPatch::PatchPointer(0x409559 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+794h, 1
-		CPatch::PatchPointer(0x409562 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+794h, 0
-		CPatch::PatchPointer(0x409570 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+794h)
-		CPatch::PatchPointer(0x409575 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+794h, eax
-		CPatch::PatchPointer(0x40957A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+794h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409584 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+794h
+		CPatch::PatchPointer(0x409559 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+794h, 1
+		CPatch::PatchPointer(0x409562 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h, 0
+		CPatch::PatchPointer(0x409570 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// mov     ebp, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h)
+		CPatch::PatchPointer(0x409575 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h, eax
+		CPatch::PatchPointer(0x40957A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+794h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409584 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+794h
 		CPatch::PatchPointer(0x4095A1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7A8h, 0FEh
 		CPatch::PatchPointer(0x4095AE + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7A8h
-		CPatch::PatchPointer(0x4095BA + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7A8h, 1
-		CPatch::PatchPointer(0x4095C3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h, 0
-		CPatch::PatchPointer(0x4095D1 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h)
-		CPatch::PatchPointer(0x4095D6 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h, eax
-		CPatch::PatchPointer(0x4095DB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7A8h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4095E5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7A8h
+		CPatch::PatchPointer(0x4095BA + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7A8h, 1
+		CPatch::PatchPointer(0x4095C3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h, 0
+		CPatch::PatchPointer(0x4095D1 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h)
+		CPatch::PatchPointer(0x4095D6 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h, eax
+		CPatch::PatchPointer(0x4095DB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7A8h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4095E5 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7A8h
 		CPatch::PatchPointer(0x409602 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7BCh, 0FEh
 		CPatch::PatchPointer(0x40960F + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7BCh
-		CPatch::PatchPointer(0x40961B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7BCh, 1
-		CPatch::PatchPointer(0x409624 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh, 0
-		CPatch::PatchPointer(0x409632 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh)
-		CPatch::PatchPointer(0x409637 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh, eax
-		CPatch::PatchPointer(0x40963C + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7BCh, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409646 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7BCh
+		CPatch::PatchPointer(0x40961B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7BCh, 1
+		CPatch::PatchPointer(0x409624 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh, 0
+		CPatch::PatchPointer(0x409632 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// mov     esi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh)
+		CPatch::PatchPointer(0x409637 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh, eax
+		CPatch::PatchPointer(0x40963C + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7BCh, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409646 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7BCh
 		CPatch::PatchPointer(0x409663 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7D0h, 0FEh
 		CPatch::PatchPointer(0x409670 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7D0h
-		CPatch::PatchPointer(0x40967C + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7D0h, 1
-		CPatch::PatchPointer(0x409685 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h, 0
-		CPatch::PatchPointer(0x409693 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h)
-		CPatch::PatchPointer(0x409698 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h, eax
-		CPatch::PatchPointer(0x40969D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7D0h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4096A7 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7D0h
+		CPatch::PatchPointer(0x40967C + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7D0h, 1
+		CPatch::PatchPointer(0x409685 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h, 0
+		CPatch::PatchPointer(0x409693 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h)
+		CPatch::PatchPointer(0x409698 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h, eax
+		CPatch::PatchPointer(0x40969D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7D0h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4096A7 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7D0h
 		CPatch::PatchPointer(0x4096C4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7E4h, 0FEh
 		CPatch::PatchPointer(0x4096D1 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7E4h
-		CPatch::PatchPointer(0x4096DD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7E4h, 1
-		CPatch::PatchPointer(0x4096E6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h, 0
-		CPatch::PatchPointer(0x4096F4 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h)
-		CPatch::PatchPointer(0x4096F9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h, eax
-		CPatch::PatchPointer(0x4096FE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7E4h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409708 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7E4h
+		CPatch::PatchPointer(0x4096DD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7E4h, 1
+		CPatch::PatchPointer(0x4096E6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h, 0
+		CPatch::PatchPointer(0x4096F4 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// mov     edi, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h)
+		CPatch::PatchPointer(0x4096F9 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h, eax
+		CPatch::PatchPointer(0x4096FE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7E4h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409708 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7E4h
 		CPatch::PatchPointer(0x409725 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7F8h, 0FEh
 		CPatch::PatchPointer(0x409732 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+7F8h
-		CPatch::PatchPointer(0x40973E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7F8h, 1
-		CPatch::PatchPointer(0x409747 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h, 0
-		CPatch::PatchPointer(0x409755 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h)
-		CPatch::PatchPointer(0x40975A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h, eax
-		CPatch::PatchPointer(0x40975F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+7F8h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409769 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+7F8h
+		CPatch::PatchPointer(0x40973E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7F8h, 1
+		CPatch::PatchPointer(0x409747 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h, 0
+		CPatch::PatchPointer(0x409755 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h)
+		CPatch::PatchPointer(0x40975A + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h, eax
+		CPatch::PatchPointer(0x40975F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+7F8h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409769 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+7F8h
 		CPatch::PatchPointer(0x40978D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+80Ch, 0FEh
 		CPatch::PatchPointer(0x40979A + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+80Ch
-		CPatch::PatchPointer(0x4097A6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+80Ch, 1
-		CPatch::PatchPointer(0x4097AF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch, 0
-		CPatch::PatchPointer(0x4097BD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch)
-		CPatch::PatchPointer(0x4097C2 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch, eax
-		CPatch::PatchPointer(0x4097C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+80Ch, offset dword_A0DAE0
-		CPatch::PatchPointer(0x4097D1 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+80Ch
+		CPatch::PatchPointer(0x4097A6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+80Ch, 1
+		CPatch::PatchPointer(0x4097AF + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch, 0
+		CPatch::PatchPointer(0x4097BD + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// mov     ecx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch)
+		CPatch::PatchPointer(0x4097C2 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch, eax
+		CPatch::PatchPointer(0x4097C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+80Ch, offset dword_A0DAE0
+		CPatch::PatchPointer(0x4097D1 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+80Ch
 		CPatch::PatchPointer(0x4097EE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags+820h, 0FEh
 		CPatch::PatchPointer(0x4097FB + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags+820h
-		CPatch::PatchPointer(0x409807 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+820h, 1
-		CPatch::PatchPointer(0x409810 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+820h, 0
-		CPatch::PatchPointer(0x40981E + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+820h)
-		CPatch::PatchPointer(0x409823 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+820h, eax
-		CPatch::PatchPointer(0x409828 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev+820h, offset dword_A0DAE0
-		CPatch::PatchPointer(0x409832 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].usNext);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.usNext+820h
-		CPatch::PatchPointer(0x4098DE + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx*4], 0
+		CPatch::PatchPointer(0x409807 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+820h, 1
+		CPatch::PatchPointer(0x409810 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h, 0
+		CPatch::PatchPointer(0x40981E + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// mov     edx, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h)
+		CPatch::PatchPointer(0x409823 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h, eax
+		CPatch::PatchPointer(0x409828 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+820h, offset dword_A0DAE0
+		CPatch::PatchPointer(0x409832 + 1, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_nextIndex);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+820h
+		CPatch::PatchPointer(0x4098DE + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx*4], 0
 		CPatch::PatchPointer(0x409980 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].flags);	// and     ds:(_ZN10CStreaming16ms_aInfoForModelE.flags+884h)[edx], 0FDh
 		CPatch::PatchPointer(0x4099A8 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].flags);	// movzx   eax, ds:(_ZN10CStreaming16ms_aInfoForModelE.flags+884h)[edx]
-		CPatch::PatchPointer(0x4099B4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].uiLoadFlag);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+884h)[edx], 1
-		CPatch::PatchPointer(0x4099BD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].usNext);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.usNext+884h)[edx], 0
-		CPatch::PatchPointer(0x4099CB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].usNext);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.usNext+884h)[edx], eax
-		CPatch::PatchPointer(0x4099D1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].usPrev);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.usPrev+884h)[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x4099DE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].usNext);	// mov     eax, ds:(_ZN10CStreaming16ms_aInfoForModelE.usNext+884h)[edx]
+		CPatch::PatchPointer(0x4099B4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].m_status);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+884h)[edx], 1
+		CPatch::PatchPointer(0x4099BD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].m_nextIndex);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+884h)[edx], 0
+		CPatch::PatchPointer(0x4099CB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].m_nextIndex);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+884h)[edx], eax
+		CPatch::PatchPointer(0x4099D1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].m_prevIndex);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex+884h)[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x4099DE + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].m_nextIndex);	// mov     eax, ds:(_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+884h)[edx]
 		CPatch::PatchPointer(0x4099EE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// add     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409A17 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+884h[eax*4], 1
-		CPatch::PatchPointer(0x409A91 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1
+		CPatch::PatchPointer(0x409A17 + 3, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SPECIAL01].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+884h[eax*4], 1
+		CPatch::PatchPointer(0x409A91 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1
 		CPatch::PatchPointer(0x409A9A + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax]
 		CPatch::PatchPointer(0x409B1E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x409B42 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x409B4E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x409B57 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409B4E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x409B57 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409B60 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409B6C + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409B72 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409B7C + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409B6C + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409B72 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409B7C + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409BB9 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax], 0FEh
 		CPatch::PatchPointer(0x409BE9 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   edx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax]
-		CPatch::PatchPointer(0x409BF5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1
-		CPatch::PatchPointer(0x409BFE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409C0D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], ebp; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409BF5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1
+		CPatch::PatchPointer(0x409BFE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409C0D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], ebp; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409C13 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ebp, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409C1A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[eax], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409C24 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409C1A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[eax], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409C24 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409C81 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x409CA5 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x409CB1 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x409CBA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409CB1 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x409CBA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409CC3 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409CCF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409CD5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409CDF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409CCF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409CD5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409CDF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409D1F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x409D4D + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x409D59 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x409D62 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409D59 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x409D62 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409D6B + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409D77 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409D7D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409D87 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409D77 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409D7D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409D87 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409DC0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x409DE4 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x409DF0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x409DF9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409DF0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x409DF9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409E02 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409E0E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409E14 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409E1E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409E0E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409E14 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409E1E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409E5F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x409E8D + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x409E99 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x409EA2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409E99 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x409EA2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409EAB + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409EB7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409EBD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409EC7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409EB7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409EBD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409EC7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409F00 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x409F24 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x409F30 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x409F39 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409F30 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x409F39 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409F42 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409F4E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409F54 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x409F5E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409F4E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409F54 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x409F5E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409F9F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x409FCD + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x409FD9 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x409FE2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409FD9 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x409FE2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x409FEB + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409FF7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x409FFD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A007 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409FF7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x409FFD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A007 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A0CF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x40A0F3 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x40A0FF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x40A108 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A0FF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x40A108 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A111 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ebx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A11D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A123 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A12D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A11D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A123 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A12D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A169 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x40A197 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x40A1A3 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x40A1AC + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A1A3 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x40A1AC + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A1B5 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ebx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A1C1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A1C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A1D1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A1C1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A1C7 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A1D1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A396 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x40A3BA + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x40A3C6 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x40A3CF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A3C6 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x40A3CF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A3D8 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ebp, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A3E4 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A3EA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A3F4 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A3E4 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A3EA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A3F4 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A42E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax], 0FEh
 		CPatch::PatchPointer(0x40A45E + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax]
-		CPatch::PatchPointer(0x40A46A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1
-		CPatch::PatchPointer(0x40A473 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A46A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1
+		CPatch::PatchPointer(0x40A473 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A47C + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ebx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A489 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], ebp; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A48F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[eax], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A499 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A489 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], ebp; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A48F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[eax], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A499 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A609 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x40A62D + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x40A639 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x40A642 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A639 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x40A642 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A64B + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A657 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A65D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A667 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A657 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A65D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A667 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A691 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x40A6B5 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x40A6C1 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x40A6CA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A6C1 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x40A6CA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A6D3 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A6DF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A6E5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A6EF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A6DF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A6E5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A6EF + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A72F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x40A75D + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x40A769 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x40A772 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A769 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x40A772 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A77B + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A787 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A78D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A797 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A787 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A78D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A797 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A7DD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x40A80B + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x40A817 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x40A820 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A817 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x40A820 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A829 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A835 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A83B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A845 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A835 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A83B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A845 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A8C4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], 0FEh
 		CPatch::PatchPointer(0x40A8E6 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   ecx, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
-		CPatch::PatchPointer(0x40A8F2 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
-		CPatch::PatchPointer(0x40A8FB + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A8F2 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
+		CPatch::PatchPointer(0x40A8FB + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A904 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A910 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A916 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A920 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A910 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A916 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A920 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A960 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx], 0FEh
 		CPatch::PatchPointer(0x40A98E + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ecx]
-		CPatch::PatchPointer(0x40A99A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 1
-		CPatch::PatchPointer(0x40A9A3 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A99A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 1
+		CPatch::PatchPointer(0x40A9A3 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40A9AC + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ebp, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A9B8 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40A9BE + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40A9C8 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A9B8 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40A9BE + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40A9C8 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40AD3B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[esi], edx
 		CPatch::PatchPointer(0x40AD41 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[esi], eax
 		CPatch::PatchPointer(0x40AD70 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FDh
 		CPatch::PatchPointer(0x40AD94 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x40ADA0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x40ADA9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40ADA0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x40ADA9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40ADB2 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40ADBE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40ADC4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40ADCE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40ADBE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40ADC4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40ADCE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40AE16 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax], 0FEh
 		CPatch::PatchPointer(0x40AE46 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   edx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax]
-		CPatch::PatchPointer(0x40AE52 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1
-		CPatch::PatchPointer(0x40AE5B + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40AE6A + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], ecx; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40AE52 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1
+		CPatch::PatchPointer(0x40AE5B + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40AE6A + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], ecx; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40AE70 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40AE77 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[eax], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40AE81 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40AE77 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[eax], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40AE81 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40AEB0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx], 0FEh
 		CPatch::PatchPointer(0x40AED4 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx]
-		CPatch::PatchPointer(0x40AEE0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 1
-		CPatch::PatchPointer(0x40AEE9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40AEE0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 1
+		CPatch::PatchPointer(0x40AEE9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40AEF2 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40AEFE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40AF04 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40AF0E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40AEFE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40AF04 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40AF0E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40AF98 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40B3E2 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax], 0DFh
 		CPatch::PatchPointer(0x40B3F2 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edx*4], 0DFh
@@ -2397,19 +2397,19 @@ void FileIDlimit::PatchFileIDlimits_GTA_VC_1_0()
 		CPatch::PatchPointer(0x40B918 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], 0
 		CPatch::PatchPointer(0x40B97D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     edx, ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ecx]
 		CPatch::PatchPointer(0x40B987 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ecx]
-		CPatch::PatchPointer(0x40B9FA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 2
+		CPatch::PatchPointer(0x40B9FA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 2
 		CPatch::PatchPointer(0x40BA07 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[esi]
 		CPatch::PatchPointer(0x40BA1D + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[esi]
-		CPatch::PatchPointer(0x40BA6B + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx*4]
-		CPatch::PatchPointer(0x40BA90 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4]
+		CPatch::PatchPointer(0x40BA6B + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx*4]
+		CPatch::PatchPointer(0x40BA90 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     al, ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4]
 		CPatch::PatchPointer(0x40BB22 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40BB4F + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[esi]
 		CPatch::PatchPointer(0x40BB5B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[esi], 0F7h
-		CPatch::PatchPointer(0x40BB68 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> usNextOnCd);	// movsx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[esi]
+		CPatch::PatchPointer(0x40BB68 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_nextModelOnCd);	// movsx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[esi]
 		CPatch::PatchPointer(0x40BCDC + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40BD29 + 4, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_TXD)].uiLoadFlag);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1FBD0h[edi*4]
+		CPatch::PatchPointer(0x40BD29 + 4, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_TXD)].m_status);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1FBD0h[edi*4]
 		CPatch::PatchPointer(0x40BD44 + 4, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ebx*4]
-		CPatch::PatchPointer(0x40BD73 + 4, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// movzx   ecx, ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx*4]
+		CPatch::PatchPointer(0x40BD73 + 4, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// movzx   ecx, ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx*4]
 		CPatch::PatchPointer(0x40BD8D + 4, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   edx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ebx*4]
 		CPatch::PatchPointer(0x40BDC6 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edi], 0
 		CPatch::PatchPointer(0x40BDD3 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[edi]
@@ -2418,7 +2418,7 @@ void FileIDlimit::PatchFileIDlimits_GTA_VC_1_0()
 		CPatch::PatchPointer(0x40BF72 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[esi]
 		CPatch::PatchPointer(0x40BFB2 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[esi]
 		CPatch::PatchPointer(0x40BFEB + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[esi]
-		CPatch::PatchPointer(0x40C08B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 4
+		CPatch::PatchPointer(0x40C08B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 4
 		CPatch::PatchPointer(0x40C1ED + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40C3B9 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edi]
 		CPatch::PatchPointer(0x40C3EA + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edi]
@@ -2429,243 +2429,243 @@ void FileIDlimit::PatchFileIDlimits_GTA_VC_1_0()
 		CPatch::PatchPointer(0x40C61B + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edi]
 		CPatch::PatchPointer(0x40C684 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     eax, ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edi]
 		CPatch::PatchPointer(0x40C77D + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40C8A5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
+		CPatch::PatchPointer(0x40C8A5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
 		CPatch::PatchPointer(0x40C8AC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     eax, ss:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebp]
 		CPatch::PatchPointer(0x40C8CA + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
 		CPatch::PatchPointer(0x40C9DD + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40CAAB + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40CB9C + 3, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax*4], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40CC17 + 3, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax*4], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40CB9C + 3, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax*4], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40CC17 + 3, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax*4], 0; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40D447 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40D5C7 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40D6F4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp]
+		CPatch::PatchPointer(0x40D6F4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp]
 		CPatch::PatchPointer(0x40D775 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     eax, ss:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebp]
-		CPatch::PatchPointer(0x40D784 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40D78D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 2
+		CPatch::PatchPointer(0x40D784 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40D78D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 2
 		CPatch::PatchPointer(0x40D796 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
 		CPatch::PatchPointer(0x40D7A8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], 0F7h
-		CPatch::PatchPointer(0x40D7B5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     eax, ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp]
-		CPatch::PatchPointer(0x40D7BB + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40D7C4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     edx, ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp]
-		CPatch::PatchPointer(0x40D7CA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40D7D2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40D7DC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], 0
-		CPatch::PatchPointer(0x40D7E8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 3
-		CPatch::PatchPointer(0x40D81B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 4
-		CPatch::PatchPointer(0x40D885 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 0
-		CPatch::PatchPointer(0x40E329 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp]
+		CPatch::PatchPointer(0x40D7B5 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp]
+		CPatch::PatchPointer(0x40D7BB + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     ecx, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40D7C4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     edx, ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp]
+		CPatch::PatchPointer(0x40D7CA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40D7D2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40D7DC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], 0
+		CPatch::PatchPointer(0x40D7E8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 3
+		CPatch::PatchPointer(0x40D81B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 4
+		CPatch::PatchPointer(0x40D885 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 0
+		CPatch::PatchPointer(0x40E329 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp]
 		CPatch::PatchPointer(0x40E33A + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
 		CPatch::PatchPointer(0x40E34C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], 8
 		CPatch::PatchPointer(0x40E35C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], bl
-		CPatch::PatchPointer(0x40E362 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp]
+		CPatch::PatchPointer(0x40E362 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     al, ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp]
 		CPatch::PatchPointer(0x40E370 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
-		CPatch::PatchPointer(0x40E3A1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     esi, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E3AB + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     eax, ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp]
-		CPatch::PatchPointer(0x40E3B4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ebx, ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp]
-		CPatch::PatchPointer(0x40E3BA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E3C2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E3CC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], 0
+		CPatch::PatchPointer(0x40E3A1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     esi, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E3AB + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     eax, ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp]
+		CPatch::PatchPointer(0x40E3B4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ebx, ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp]
+		CPatch::PatchPointer(0x40E3BA + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E3C2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E3CC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], 0
 		CPatch::PatchPointer(0x40E3D6 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
 		CPatch::PatchPointer(0x40E3E2 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E3EE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E3F4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], offset dword_A0DAE0
-		CPatch::PatchPointer(0x40E3FE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E3EE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E3F4 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], offset dword_A0DAE0
+		CPatch::PatchPointer(0x40E3FE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40E465 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E471 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E477 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], offset dword_97871C
-		CPatch::PatchPointer(0x40E481 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40E4A3 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 2
+		CPatch::PatchPointer(0x40E471 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E477 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], offset dword_97871C
+		CPatch::PatchPointer(0x40E481 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x40E4A3 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 2
 		CPatch::PatchPointer(0x40E4AA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], bl
 		CPatch::PatchPointer(0x40E4C7 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[eax*4], 0
 		CPatch::PatchPointer(0x40F0B8 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40FD69 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// add     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40FDC2 + 4, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[esi*4], ax
+		CPatch::PatchPointer(0x40FDC2 + 4, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[esi*4], ax
 		CPatch::PatchPointer(0x40FED8 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// sub     edx, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x40FF80 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 1
+		CPatch::PatchPointer(0x40FF80 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 1
 		CPatch::PatchPointer(0x40FF9D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.flags[ebx], 0
 		CPatch::PatchPointer(0x40FFB5 + 1, CStreaming__ms_aInfoForModel.gta_vc);	// mov     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel
 		CPatch::PatchPointer(0x40FFCB + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
 		CPatch::PatchPointer(0x40FFD7 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// and     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], 0FDh
 		CPatch::PatchPointer(0x40FFF4 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   eax, ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp]
-		CPatch::PatchPointer(0x410000 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
-		CPatch::PatchPointer(0x410009 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x41001D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], eax; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410023 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], offset dword_A0DAE0
-		CPatch::PatchPointer(0x41002D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp]; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4100AA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 0
-		CPatch::PatchPointer(0x4100B2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4100BC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], 0
-		CPatch::PatchPointer(0x4100C6 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edx], 0FFFFh
+		CPatch::PatchPointer(0x410000 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
+		CPatch::PatchPointer(0x410009 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// cmp     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x41001D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], eax; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410023 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], offset dword_A0DAE0
+		CPatch::PatchPointer(0x41002D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     eax, dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp]; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4100AA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 0
+		CPatch::PatchPointer(0x4100B2 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4100BC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], 0
+		CPatch::PatchPointer(0x4100C6 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edx], 0FFFFh
 		CPatch::PatchPointer(0x4100CE + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edx], 0
 		CPatch::PatchPointer(0x4100D8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[edx], 0
-		CPatch::PatchPointer(0x4100F2 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 0
-		CPatch::PatchPointer(0x4100F9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410103 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edi], 0
-		CPatch::PatchPointer(0x41010D + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edi], 0FFFFh
+		CPatch::PatchPointer(0x4100F2 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 0
+		CPatch::PatchPointer(0x4100F9 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410103 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edi], 0
+		CPatch::PatchPointer(0x41010D + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edi], 0FFFFh
 		CPatch::PatchPointer(0x410115 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edi], 0
 		CPatch::PatchPointer(0x41011F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[edi], 0
-		CPatch::PatchPointer(0x410136 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 0
-		CPatch::PatchPointer(0x41013D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410147 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebx], 0
-		CPatch::PatchPointer(0x410151 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx], 0FFFFh
+		CPatch::PatchPointer(0x410136 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 0
+		CPatch::PatchPointer(0x41013D + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410147 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebx], 0
+		CPatch::PatchPointer(0x410151 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx], 0FFFFh
 		CPatch::PatchPointer(0x410159 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebx], 0
 		CPatch::PatchPointer(0x410163 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ebx], 0
-		CPatch::PatchPointer(0x41017B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 0
-		CPatch::PatchPointer(0x410182 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x41018C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], 0
-		CPatch::PatchPointer(0x410196 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebp], 0FFFFh
+		CPatch::PatchPointer(0x41017B + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 0
+		CPatch::PatchPointer(0x410182 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x41018C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], 0
+		CPatch::PatchPointer(0x410196 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebp], 0FFFFh
 		CPatch::PatchPointer(0x41019E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebp], 0
 		CPatch::PatchPointer(0x4101A8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ebp], 0
-		CPatch::PatchPointer(0x4101BF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 0
-		CPatch::PatchPointer(0x4101C6 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[esi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4101D0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[esi], 0
-		CPatch::PatchPointer(0x4101DA + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[esi], 0FFFFh
+		CPatch::PatchPointer(0x4101BF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 0
+		CPatch::PatchPointer(0x4101C6 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[esi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4101D0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[esi], 0
+		CPatch::PatchPointer(0x4101DA + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[esi], 0FFFFh
 		CPatch::PatchPointer(0x4101E2 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[esi], 0
 		CPatch::PatchPointer(0x4101EC + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[esi], 0
-		CPatch::PatchPointer(0x410203 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 0
-		CPatch::PatchPointer(0x41020A + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410214 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], 0
-		CPatch::PatchPointer(0x41021E + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ecx], 0FFFFh
+		CPatch::PatchPointer(0x410203 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 0
+		CPatch::PatchPointer(0x41020A + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410214 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], 0
+		CPatch::PatchPointer(0x41021E + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ecx], 0FFFFh
 		CPatch::PatchPointer(0x410226 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ecx], 0
 		CPatch::PatchPointer(0x410230 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ecx], 0
-		CPatch::PatchPointer(0x410247 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 0
-		CPatch::PatchPointer(0x41024E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410258 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edi], 0
-		CPatch::PatchPointer(0x410262 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edi], 0FFFFh
+		CPatch::PatchPointer(0x410247 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 0
+		CPatch::PatchPointer(0x41024E + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410258 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edi], 0
+		CPatch::PatchPointer(0x410262 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edi], 0FFFFh
 		CPatch::PatchPointer(0x41026A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edi], 0
 		CPatch::PatchPointer(0x410274 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[edi], 0
-		CPatch::PatchPointer(0x41028E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 0
-		CPatch::PatchPointer(0x410295 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x41029F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebx], 0
-		CPatch::PatchPointer(0x4102A9 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx], 0FFFFh
+		CPatch::PatchPointer(0x41028E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 0
+		CPatch::PatchPointer(0x410295 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x41029F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebx], 0
+		CPatch::PatchPointer(0x4102A9 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx], 0FFFFh
 		CPatch::PatchPointer(0x4102B6 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebx], 0
 		CPatch::PatchPointer(0x4102C0 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ebx], 0
-		CPatch::PatchPointer(0x4102E7 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 0
-		CPatch::PatchPointer(0x4102EE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebp], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4102F8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebp], 0
-		CPatch::PatchPointer(0x410302 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebp], 0FFFFh
+		CPatch::PatchPointer(0x4102E7 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 0
+		CPatch::PatchPointer(0x4102EE + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebp], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4102F8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebp], 0
+		CPatch::PatchPointer(0x410302 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ss:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebp], 0FFFFh
 		CPatch::PatchPointer(0x41030A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebp], 0
 		CPatch::PatchPointer(0x410314 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ebp], 0
-		CPatch::PatchPointer(0x41033C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi], 0
-		CPatch::PatchPointer(0x410343 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[esi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x41034D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[esi], 0
-		CPatch::PatchPointer(0x410357 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[esi], 0FFFFh
+		CPatch::PatchPointer(0x41033C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi], 0
+		CPatch::PatchPointer(0x410343 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[esi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x41034D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[esi], 0
+		CPatch::PatchPointer(0x410357 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[esi], 0FFFFh
 		CPatch::PatchPointer(0x41035F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[esi], 0
 		CPatch::PatchPointer(0x410369 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[esi], 0
-		CPatch::PatchPointer(0x41039E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx], 0
-		CPatch::PatchPointer(0x4103A5 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ecx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4103AF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ecx], 0
-		CPatch::PatchPointer(0x4103B9 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ecx], 0FFFFh
+		CPatch::PatchPointer(0x41039E + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx], 0
+		CPatch::PatchPointer(0x4103A5 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ecx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4103AF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ecx], 0
+		CPatch::PatchPointer(0x4103B9 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ecx], 0FFFFh
 		CPatch::PatchPointer(0x4103C1 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ecx], 0
 		CPatch::PatchPointer(0x4103CB + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ecx], 0
-		CPatch::PatchPointer(0x410400 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 0
-		CPatch::PatchPointer(0x410407 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edi], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410411 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edi], 0
-		CPatch::PatchPointer(0x41041B + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edi], 0FFFFh
+		CPatch::PatchPointer(0x410400 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 0
+		CPatch::PatchPointer(0x410407 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edi], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410411 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edi], 0
+		CPatch::PatchPointer(0x41041B + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edi], 0FFFFh
 		CPatch::PatchPointer(0x410423 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edi], 0
 		CPatch::PatchPointer(0x41042D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[edi], 0
-		CPatch::PatchPointer(0x410462 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebx], 0
-		CPatch::PatchPointer(0x410469 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[ebx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x410473 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[ebx], 0
-		CPatch::PatchPointer(0x41047D + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[ebx], 0FFFFh
+		CPatch::PatchPointer(0x410462 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebx], 0
+		CPatch::PatchPointer(0x410469 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[ebx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x410473 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[ebx], 0
+		CPatch::PatchPointer(0x41047D + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[ebx], 0FFFFh
 		CPatch::PatchPointer(0x410485 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[ebx], 0
 		CPatch::PatchPointer(0x41048F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[ebx], 0
-		CPatch::PatchPointer(0x4104BA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx], 0
-		CPatch::PatchPointer(0x4104C1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[edx], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x4104CB + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[edx], 0
-		CPatch::PatchPointer(0x4104D5 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[edx], 0FFFFh
+		CPatch::PatchPointer(0x4104BA + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx], 0
+		CPatch::PatchPointer(0x4104C1 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[edx], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x4104CB + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[edx], 0
+		CPatch::PatchPointer(0x4104D5 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[edx], 0FFFFh
 		CPatch::PatchPointer(0x4104DD + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[edx], 0
 		CPatch::PatchPointer(0x4104E7 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[edx], 0
-		CPatch::PatchPointer(0x41050C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 0
-		CPatch::PatchPointer(0x410513 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0; CStreaming::ms_aInfoForModel
-		CPatch::PatchPointer(0x41051D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> usPrev);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.usPrev[eax], 0
-		CPatch::PatchPointer(0x410527 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->usNextOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[eax], 0FFFFh
+		CPatch::PatchPointer(0x41050C + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 0
+		CPatch::PatchPointer(0x410513 + 2, CStreaming__ms_aInfoForModel.gta_vc);	// mov     dword ptr ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0; CStreaming::ms_aInfoForModel
+		CPatch::PatchPointer(0x41051D + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_prevIndex);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_prevIndex[eax], 0
+		CPatch::PatchPointer(0x410527 + 3, &CStreaming__ms_aInfoForModel.gta_vc ->m_nextModelOnCd);	// or      ds:_ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[eax], 0FFFFh
 		CPatch::PatchPointer(0x41052F + 2, &CStreaming__ms_aInfoForModel.gta_vc -> _unk_inCdImage);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE._unk_inCdImage[eax], 0
 		CPatch::PatchPointer(0x410539 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> FilePositionInBlocks);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.FilePositionInBlocks[eax], 0
-		CPatch::PatchPointer(0x410545 + 2, &CStreaming__ms_aInfoForModel.gta_vc[240].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+12C0h, 1
-		CPatch::PatchPointer(0x410553 + 2, &CStreaming__ms_aInfoForModel.gta_vc[241].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+12D4h, 1
-		CPatch::PatchPointer(0x410564 + 2, &CStreaming__ms_aInfoForModel.gta_vc[242].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+12E8h, 1
-		CPatch::PatchPointer(0x41056B + 2, &CStreaming__ms_aInfoForModel.gta_vc[243].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+12FCh, 1
-		CPatch::PatchPointer(0x410572 + 2, &CStreaming__ms_aInfoForModel.gta_vc[244].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1310h, 1
-		CPatch::PatchPointer(0x410579 + 2, &CStreaming__ms_aInfoForModel.gta_vc[245].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1324h, 1
-		CPatch::PatchPointer(0x410580 + 2, &CStreaming__ms_aInfoForModel.gta_vc[246].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1338h, 1
-		CPatch::PatchPointer(0x410587 + 2, &CStreaming__ms_aInfoForModel.gta_vc[247].uiLoadFlag);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+134Ch, 1
-		CPatch::PatchPointer(0x4105D8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ebp], 1
+		CPatch::PatchPointer(0x410545 + 2, &CStreaming__ms_aInfoForModel.gta_vc[240].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+12C0h, 1
+		CPatch::PatchPointer(0x410553 + 2, &CStreaming__ms_aInfoForModel.gta_vc[241].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+12D4h, 1
+		CPatch::PatchPointer(0x410564 + 2, &CStreaming__ms_aInfoForModel.gta_vc[242].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+12E8h, 1
+		CPatch::PatchPointer(0x41056B + 2, &CStreaming__ms_aInfoForModel.gta_vc[243].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+12FCh, 1
+		CPatch::PatchPointer(0x410572 + 2, &CStreaming__ms_aInfoForModel.gta_vc[244].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1310h, 1
+		CPatch::PatchPointer(0x410579 + 2, &CStreaming__ms_aInfoForModel.gta_vc[245].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1324h, 1
+		CPatch::PatchPointer(0x410580 + 2, &CStreaming__ms_aInfoForModel.gta_vc[246].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1338h, 1
+		CPatch::PatchPointer(0x410587 + 2, &CStreaming__ms_aInfoForModel.gta_vc[247].m_status);	// mov     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+134Ch, 1
+		CPatch::PatchPointer(0x4105D8 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.m_status[ebp], 1
 		CPatch::PatchPointer(0x4105DF + 2, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// mov     ss:_ZN10CStreaming16ms_aInfoForModelE.flags[ebp], 1
-		CPatch::PatchPointer(0x41064F + 2, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_TXD)].uiLoadFlag);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1FBD0h)[edx], 1
-		CPatch::PatchPointer(0x41CA74 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_AMBULAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0B68h, 1
-		CPatch::PatchPointer(0x41CA7F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_MEDIC].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+64h, 1
-		CPatch::PatchPointer(0x41CAB2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_AMBULAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0B68h, 1
-		CPatch::PatchPointer(0x41CB96 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FIRETRUK].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0AB4h, 1
-		CPatch::PatchPointer(0x41CBA1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FIREMAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+78h, 1
-		CPatch::PatchPointer(0x41CC07 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FIRETRUK].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0AB4h, 1
-		CPatch::PatchPointer(0x426881 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1270h, 1
-		CPatch::PatchPointer(0x4268A2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+794h, 1; jumptable 0042689B case 0
-		CPatch::PatchPointer(0x4268AB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7A8h, 1
-		CPatch::PatchPointer(0x4268BD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7BCh, 1; jumptable 0042689B case 1
-		CPatch::PatchPointer(0x4268C6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7D0h, 1
-		CPatch::PatchPointer(0x4268D8 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7E4h, 1; jumptable 0042689B case 2
-		CPatch::PatchPointer(0x4268E1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+7F8h, 1
-		CPatch::PatchPointer(0x4268F3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+80Ch, 1; jumptable 0042689B case 3
-		CPatch::PatchPointer(0x4268FC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+820h, 1
-		CPatch::PatchPointer(0x426924 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0C44h, 1
-		CPatch::PatchPointer(0x42692D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+28h, 1
-		CPatch::PatchPointer(0x4269A4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1130h, 1
-		CPatch::PatchPointer(0x4269AD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+3Ch, 1
-		CPatch::PatchPointer(0x4269D4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CA8h, 1
-		CPatch::PatchPointer(0x4269DD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CBCh, 1
-		CPatch::PatchPointer(0x4269E6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+50h, 1
-		CPatch::PatchPointer(0x426BD5 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[ecx*4], 1
-		CPatch::PatchPointer(0x426BE8 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx*4], 1
-		CPatch::PatchPointer(0x426D13 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4273A1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_PREDATOR].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0C80h, 1
-		CPatch::PatchPointer(0x427502 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x42AE8B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_KAUFMAN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+10E0h, 1; jumptable 0042AE84 case 1
-		CPatch::PatchPointer(0x42DF54 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x431B54 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BOMB].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+16BCh, 1
-		CPatch::PatchPointer(0x44091B + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4436FA + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x443B41 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x44408A + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x44E761 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag, 1
-		CPatch::PatchPointer(0x458A48 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx*4], 1
+		CPatch::PatchPointer(0x41064F + 2, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_TXD)].m_status);	// mov     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+1FBD0h)[edx], 1
+		CPatch::PatchPointer(0x41CA74 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_AMBULAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0B68h, 1
+		CPatch::PatchPointer(0x41CA7F + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_MEDIC].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+64h, 1
+		CPatch::PatchPointer(0x41CAB2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_AMBULAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0B68h, 1
+		CPatch::PatchPointer(0x41CB96 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FIRETRUK].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0AB4h, 1
+		CPatch::PatchPointer(0x41CBA1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FIREMAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+78h, 1
+		CPatch::PatchPointer(0x41CC07 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FIRETRUK].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0AB4h, 1
+		CPatch::PatchPointer(0x426881 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICECHEE].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1270h, 1
+		CPatch::PatchPointer(0x4268A2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE1].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+794h, 1; jumptable 0042689B case 0
+		CPatch::PatchPointer(0x4268AB + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE2].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7A8h, 1
+		CPatch::PatchPointer(0x4268BD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE3].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7BCh, 1; jumptable 0042689B case 1
+		CPatch::PatchPointer(0x4268C6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE4].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7D0h, 1
+		CPatch::PatchPointer(0x4268D8 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE5].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7E4h, 1; jumptable 0042689B case 2
+		CPatch::PatchPointer(0x4268E1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE6].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+7F8h, 1
+		CPatch::PatchPointer(0x4268F3 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE7].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+80Ch, 1; jumptable 0042689B case 3
+		CPatch::PatchPointer(0x4268FC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_VICE8].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+820h, 1
+		CPatch::PatchPointer(0x426924 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ENFORCER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0C44h, 1
+		CPatch::PatchPointer(0x42692D + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+28h, 1
+		CPatch::PatchPointer(0x4269A4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBIRANCH].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1130h, 1
+		CPatch::PatchPointer(0x4269AD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+3Ch, 1
+		CPatch::PatchPointer(0x4269D4 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_RHINO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CA8h, 1
+		CPatch::PatchPointer(0x4269DD + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BARRACKS].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CBCh, 1
+		CPatch::PatchPointer(0x4269E6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+50h, 1
+		CPatch::PatchPointer(0x426BD5 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[ecx*4], 1
+		CPatch::PatchPointer(0x426BE8 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx*4], 1
+		CPatch::PatchPointer(0x426D13 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4273A1 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_PREDATOR].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0C80h, 1
+		CPatch::PatchPointer(0x427502 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x42AE8B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_KAUFMAN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+10E0h, 1; jumptable 0042AE84 case 1
+		CPatch::PatchPointer(0x42DF54 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x431B54 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_BOMB].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+16BCh, 1
+		CPatch::PatchPointer(0x44091B + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4436FA + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x443B41 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x44408A + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x44E761 + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status, 1
+		CPatch::PatchPointer(0x458A48 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx*4], 1
 		CPatch::PatchPointer(0x4AE872 + 4, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[eax*4]
 		CPatch::PatchPointer(0x4AE922 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> flags);	// movzx   ebx, ds:_ZN10CStreaming16ms_aInfoForModelE.flags[edi]
-		CPatch::PatchPointer(0x4AE93A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi], 1
-		CPatch::PatchPointer(0x4C75F9 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x4FFC9C + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi*4], 1
-		CPatch::PatchPointer(0x4FFCAE + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi*4], 1
-		CPatch::PatchPointer(0x4FFD38 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi*4], 1
-		CPatch::PatchPointer(0x4FFD4A + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[esi*4], 1
-		CPatch::PatchPointer(0x53C522 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_COP].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+14h, 1
-		CPatch::PatchPointer(0x53C547 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+3Ch, 1
-		CPatch::PatchPointer(0x53C55E + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x53C57E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+28h, 1
-		CPatch::PatchPointer(0x53C595 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x53C5B7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+50h, 1
-		CPatch::PatchPointer(0x53C5CE + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x53C5E6 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5A71F6 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5A72B3 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5ABE40 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+28h, 1
-		CPatch::PatchPointer(0x5ACDD6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CE4h, 1
-		CPatch::PatchPointer(0x5ACE47 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CE4h, 1
-		CPatch::PatchPointer(0x5B18C0 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x5B1DE2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_DEADDODO].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0E24h, 1
-		CPatch::PatchPointer(0x5B1E8E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+0CE4h, 1
-		CPatch::PatchPointer(0x5B894B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHROMEGUN].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+15A4h, 1
-		CPatch::PatchPointer(0x5B89AC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_GOLFCLUB].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+1464h, 1
-		CPatch::PatchPointer(0x603CE0 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x603E11 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x604624 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x604B63 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
-		CPatch::PatchPointer(0x621381 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx*4], 1
-		CPatch::PatchPointer(0x6215ED + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edi*4], 1
-		CPatch::PatchPointer(0x62171C + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[edx*4], 1
-		CPatch::PatchPointer(0x623989 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax*4], 1
+		CPatch::PatchPointer(0x4AE93A + 2, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi], 1
+		CPatch::PatchPointer(0x4C75F9 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x4FFC9C + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi*4], 1
+		CPatch::PatchPointer(0x4FFCAE + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi*4], 1
+		CPatch::PatchPointer(0x4FFD38 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi*4], 1
+		CPatch::PatchPointer(0x4FFD4A + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[esi*4], 1
+		CPatch::PatchPointer(0x53C522 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_COP].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+14h, 1
+		CPatch::PatchPointer(0x53C547 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_FBI].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+3Ch, 1
+		CPatch::PatchPointer(0x53C55E + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x53C57E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+28h, 1
+		CPatch::PatchPointer(0x53C595 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x53C5B7 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_ARMY].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+50h, 1
+		CPatch::PatchPointer(0x53C5CE + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x53C5E6 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5A71F6 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5A72B3 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5ABE40 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+28h, 1
+		CPatch::PatchPointer(0x5ACDD6 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CE4h, 1
+		CPatch::PatchPointer(0x5ACE47 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CE4h, 1
+		CPatch::PatchPointer(0x5B18C0 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x5B1DE2 + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_DEADDODO].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0E24h, 1
+		CPatch::PatchPointer(0x5B1E8E + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHOPPER].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+0CE4h, 1
+		CPatch::PatchPointer(0x5B894B + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_CHROMEGUN].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+15A4h, 1
+		CPatch::PatchPointer(0x5B89AC + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_GOLFCLUB].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+1464h, 1
+		CPatch::PatchPointer(0x603CE0 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x603E11 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x604624 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x604B63 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
+		CPatch::PatchPointer(0x621381 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx*4], 1
+		CPatch::PatchPointer(0x6215ED + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edi*4], 1
+		CPatch::PatchPointer(0x62171C + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[edx*4], 1
+		CPatch::PatchPointer(0x623989 + 3, &CStreaming__ms_aInfoForModel.gta_vc -> m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status[eax*4], 1
 		CPatch::PatchPointer(0x62A018 + 3, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_COL)].flags);	// movzx   eax, ds:(_ZN10CStreaming16ms_aInfoForModelE.flags+26804h)[esi]
-		CPatch::PatchPointer(0x62A307 + 2, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_COL)].uiLoadFlag);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+26804h)[esi], 1
-		CPatch::PatchPointer(0x63256A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].uiLoadFlag);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag+28h, 1
+		CPatch::PatchPointer(0x62A307 + 2, &CStreaming__ms_aInfoForModel.gta_vc[GetBaseID(FILE_TYPE_COL)].m_status);	// cmp     ds:(_ZN10CStreaming16ms_aInfoForModelE.m_status+26804h)[esi], 1
+		CPatch::PatchPointer(0x63256A + 2, &CStreaming__ms_aInfoForModel.gta_vc[MODEL_SWAT].m_status);	// cmp     ds:_ZN10CStreaming16ms_aInfoForModelE.m_status+28h, 1
 	}
 	#endif
 
@@ -3094,11 +3094,11 @@ namespace Game_GTASA
 			switch (memberOffset)
 			{
 			case 0:
-				return &pFileInfo->usNext;
+				return &pFileInfo->m_nextIndex;
 			case 2:
-				return &pFileInfo->usPrev;
+				return &pFileInfo->m_prevIndex;
 			case 4:
-				return &pFileInfo->usNextOnCd;
+				return &pFileInfo->m_nextModelOnCd;
 			}
 			#endif
 			return NULL;
@@ -3532,7 +3532,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	cmp word ptr ds:ms_aInfoForModel.usNext[edi], bp
+		// Original code:	cmp word ptr ds:ms_aInfoForModel.m_nextIndex[edi], bp
 		NAKED void patch_408ADA()
 		{
 			__asm
@@ -3548,7 +3548,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	movsx eax, word ptr ds:ms_aInfoForModel.usNext[edi]
+		// Original code:	movsx eax, word ptr ds:ms_aInfoForModel.m_nextIndex[edi]
 		NAKED void patch_408B22()
 		{
 			__asm
@@ -3564,7 +3564,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	mov ax, ds:ms_aInfoForModel.usPrev[edi]
+		// Original code:	mov ax, ds:ms_aInfoForModel.m_prevIndex[edi]
 		NAKED void patch_408B32()
 		{
 			__asm
@@ -3599,7 +3599,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	movsx eax, ds:ms_aInfoForModel.usPrev[edi]
+		// Original code:	movsx eax, ds:ms_aInfoForModel.m_prevIndex[edi]
 		NAKED void patch_408B3E()
 		{
 			__asm
@@ -3615,7 +3615,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	mov ax, word ptr ds:ms_aInfoForModel.usNext[edi]
+		// Original code:	mov ax, word ptr ds:ms_aInfoForModel.m_nextIndex[edi]
 		NAKED void patch_408B4E()
 		{
 			__asm
@@ -3650,7 +3650,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	mov word ptr ds:ms_aInfoForModel.usNext[edi], bp
+		// Original code:	mov word ptr ds:ms_aInfoForModel.m_nextIndex[edi], bp
 		NAKED void patch_408B59()
 		{
 			__asm
@@ -3664,7 +3664,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	mov ds:ms_aInfoForModel.usPrev[edi], bp
+		// Original code:	mov ds:ms_aInfoForModel.m_prevIndex[edi], bp
 		NAKED void patch_408B60()
 		{
 			__asm
@@ -3678,7 +3678,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	mov ax, [eax+CStreamingInfo.usNext]
+		// Original code:	mov ax, [eax+CStreamingInfo.m_nextIndex]
 		NAKED void patch_408E28()
 		{
 			__asm
@@ -3730,7 +3730,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	cmp word ptr ds:ms_aInfoForModel.usNext[eax], 0FFFFh
+		// Original code:	cmp word ptr ds:ms_aInfoForModel.m_nextIndex[eax], 0FFFFh
 		NAKED void patch_4098C8()
 		{
 			__asm
@@ -3746,7 +3746,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	cmp ds:ms_aInfoForModel.usNext[ecx*4], 0FFFFh
+		// Original code:	cmp ds:ms_aInfoForModel.m_nextIndex[ecx*4], 0FFFFh
 		NAKED void patch_409978()
 		{
 			__asm
@@ -3763,7 +3763,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	cmp ds:ms_aInfoForModel.usNext[ecx*4], 0FFFFh
+		// Original code:	cmp ds:ms_aInfoForModel.m_nextIndex[ecx*4], 0FFFFh
 		NAKED void patch_409A39()
 		{
 			__asm
@@ -3812,7 +3812,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	mov ds:ms_aInfoForModel.usNextOnCd[eax], 0FFFFh
+		// Original code:	mov ds:ms_aInfoForModel.m_nextModelOnCd[eax], 0FFFFh
 		NAKED void patch_409FCA()
 		{
 			__asm
@@ -4428,7 +4428,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	movsx esi, ds:ms_aInfoForModel.usNextOnCd[ebx]
+		// Original code:	movsx esi, ds:ms_aInfoForModel.m_nextModelOnCd[ebx]
 		NAKED void patch_40CEDB()
 		{
 			__asm
@@ -5143,7 +5143,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	cmp word ptr ds:ms_aInfoForModel.usNext[eax], 0
+		// Original code:	cmp word ptr ds:ms_aInfoForModel.m_nextIndex[eax], 0
 		NAKED void patch_1567B73()
 		{
 			__asm
@@ -5159,7 +5159,7 @@ namespace Game_GTASA
 			}
 		}
 
-		// Original code:	cmp ds:ms_aInfoForModel.usPrev[eax], 0
+		// Original code:	cmp ds:ms_aInfoForModel.m_prevIndex[eax], 0
 		NAKED void patch_1567B7D()
 		{
 			__asm
@@ -5512,7 +5512,7 @@ namespace Game_GTASA
 
 	45th file is wrong - 25020, but should be 25012
 
-	Problem: CStreaming__ms_pStartRequestedList->usNext = 25020 when limit hacked.
+	Problem: CStreaming__ms_pStartRequestedList->m_nextIndex = 25020 when limit hacked.
 
 
 	*/
@@ -5665,8 +5665,8 @@ namespace Game_GTASA
 				{
 					CStreamingInfo* file = oInfoForModel + i;
 
-					if (file->uiLoadFlag == 1 && iFlags[i] != 0xFF)
-						file->ucFlags |= iFlags[i];
+					if (file->m_status == 1 && iFlags[i] != 0xFF)
+						file->m_flags |= iFlags[i];
 				}
 
 				/*
@@ -5732,8 +5732,8 @@ namespace Game_GTASA
 
 						CStreamingInfo* file = oInfoForModel + i;
 
-						if (file->uiLoadFlag == 1 && flags != 0xFF)
-							file->ucFlags |= flags;
+						if (file->m_status == 1 && flags != 0xFF)
+							file->m_flags |= flags;
 					}
 
 					// Skip file flags
@@ -5776,8 +5776,8 @@ namespace Game_GTASA
 
 				flags = -1;
 
-				if (file->uiLoadFlag == 1)
-					flags = file->ucFlags;
+				if (file->m_status == 1)
+					flags = file->m_flags;
 
 				CGenericGameStorage::SaveDataToWorkBuffer(&flags, 1);
 			}
@@ -5822,8 +5822,8 @@ namespace Game_GTASA
 
 				uint8_t flags = -1;
 
-				if (file->uiLoadFlag == 1)
-					flags = file->ucFlags;
+				if (file->m_status == 1)
+					flags = file->m_flags;
 
 				CGenericGameStorage::SaveDataToWorkBuffer(&flags, 1);
 			}
@@ -5877,14 +5877,14 @@ namespace Game_GTASA
 		do
 		{
 			if (curID == firstID)
-				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].usPrev.raw = -1;
+				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].m_prevIndex.raw = -1;
 			else
-				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].usPrev.raw = curID - 1;
+				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].m_prevIndex.raw = curID - 1;
 
 			if (curID == lastID)
-				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].usNext.raw = -1;
+				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].m_nextIndex.raw = -1;
 			else
-				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].usNext.raw = curID + 1;
+				g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[curID].m_nextIndex.raw = curID + 1;
 
 			curID++;
 
@@ -5913,14 +5913,14 @@ namespace Game_GTASA
 			);
 
 			/*
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26312].usNext = 26313;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26312].usPrev = -1;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26313].usNext = -1;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26313].usPrev = 26312;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26314].usNext = 26315;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26314].usPrev = -1;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26315].usNext = -1;
-			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26315].usPrev = 26314;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26312].m_nextIndex = 26313;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26312].m_prevIndex = -1;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26313].m_nextIndex = -1;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26313].m_prevIndex = 26312;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26314].m_nextIndex = 26315;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26314].m_prevIndex = -1;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26315].m_nextIndex = -1;
+			CLimitAdjusterMain::CStreaming__ms_aInfoForModel[26315].m_prevIndex = 26314;
 			*/
 		}
 	}
@@ -5943,9 +5943,9 @@ namespace Game_GTASA
 			for (tFileTypeBaseID i = 0; i < countOfFiles; i++)
 			{
 				const CStreamingInfo* pFileInfo = pIDlimits->CStreaming__ms_aInfoForModel.gta_sa + i;
-				New_ID_from16bit(&pFileInfo->usNext);
-				New_ID_from16bit(&pFileInfo->usPrev);
-				New_ID_from16bit(&pFileInfo->usNextOnCd);
+				New_ID_from16bit(&pFileInfo->m_nextIndex);
+				New_ID_from16bit(&pFileInfo->m_prevIndex);
+				New_ID_from16bit(&pFileInfo->m_nextModelOnCd);
 			}			
 		}
 		*/
@@ -8188,234 +8188,234 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_PC_1_0_HOODLUM()
 	#if TRUE
 	{
 		// Generated automatically, non-modified functions on HOODLUM
-		CPatch::PatchPointer(0x405451 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL) + 1].uiLoadFlag);
-		CPatch::PatchPointer(0x405509 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_DAT)].uiLoadFlag);
-		CPatch::PatchPointer(0x405733 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL) + 1].ucFlags);
-		CPatch::PatchPointer(0x405773 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_DAT)].ucFlags);
-		CPatch::PatchPointer(0x407C73 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407C84 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407C9E + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407CAA + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407CDA + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407CED + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407D62 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x407FDD + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x4089AC + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x405451 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL) + 1].m_status);
+		CPatch::PatchPointer(0x405509 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_DAT)].m_status);
+		CPatch::PatchPointer(0x405733 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL) + 1].m_flags);
+		CPatch::PatchPointer(0x405773 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_DAT)].m_flags);
+		CPatch::PatchPointer(0x407C73 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407C84 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407C9E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407CAA + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407CDA + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407CED + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407D62 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x407FDD + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x4089AC + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x408AC3 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
 		CPatch::PatchPointer(0x408ADA + 3, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x408AE1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408AF7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x408B08 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x408B17 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x408AE1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408AF7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x408B08 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x408B17 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x408B22 + 3, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x408B32 + 3, &CStreaming__ms_aInfoForModel.gta_sa->usPrev);
-		CPatch::PatchPointer(0x408B3E + 3, &CStreaming__ms_aInfoForModel.gta_sa->usPrev);
+		CPatch::PatchPointer(0x408B32 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_prevIndex);
+		CPatch::PatchPointer(0x408B3E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_prevIndex);
 		CPatch::PatchPointer(0x408B4E + 3, CStreaming__ms_aInfoForModel.gta_sa);
 		CPatch::PatchPointer(0x408B59 + 3, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x408B60 + 3, &CStreaming__ms_aInfoForModel.gta_sa->usPrev);
-		CPatch::PatchPointer(0x408B90 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408BAB + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408BCC + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408BED + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408C0E + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408C37 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408C5A + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408CBF + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x408B60 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_prevIndex);
+		CPatch::PatchPointer(0x408B90 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408BAB + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408BCC + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408BED + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408C0E + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408C37 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408C5A + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408CBF + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x408CE4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
 		CPatch::PatchPointer(0x408DC6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x408DDD + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408DF3 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x408DDD + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408DF3 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x408E65 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x408ECE + 4, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD)].uiLoadFlag);
-		CPatch::PatchPointer(0x408EE3 + 4, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x408F17 + 4, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408F7F + 4, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x408FB9 + 2, &CStreaming__ms_aInfoForModel.gta_sa[7].uiLoadFlag);
-		CPatch::PatchPointer(0x408FC5 + 4, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
-		CPatch::PatchPointer(0x408FCD + 3, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-		CPatch::PatchPointer(0x40907A + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x408ECE + 4, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD)].m_status);
+		CPatch::PatchPointer(0x408EE3 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x408F17 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408F7F + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x408FB9 + 2, &CStreaming__ms_aInfoForModel.gta_sa[7].m_status);
+		CPatch::PatchPointer(0x408FC5 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
+		CPatch::PatchPointer(0x408FCD + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+		CPatch::PatchPointer(0x40907A + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x4098C8 + 3, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x4098D6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x4098D6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x409A39 + 4, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x409C1B + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x409C1B + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x409C21 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x409C2D + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x409C38 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x409CA6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x409C2D + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x409C38 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x409CA6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x409CAC + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x409CB8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x409CC3 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x409CB8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x409CC3 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x409D39 + 3, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
 		CPatch::PatchPointer(0x409D42 + 3, CStreaming__ms_aInfoForModel.gta_sa);
 		CPatch::PatchPointer(0x409FB1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockOffset);
 		CPatch::PatchPointer(0x409FBB + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x409FC4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
-		CPatch::PatchPointer(0x409FCA + 3, &CStreaming__ms_aInfoForModel.gta_sa->usNextOnCd);
+		CPatch::PatchPointer(0x409FC4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
+		CPatch::PatchPointer(0x409FCA + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_nextModelOnCd);
 		CPatch::PatchPointer(0x40A052 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockOffset);
 		CPatch::PatchPointer(0x40A05F + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x40A065 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
-		CPatch::PatchPointer(0x40A3D8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40A3EE + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40ABC5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40A065 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
+		CPatch::PatchPointer(0x40A3D8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40A3EE + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40ABC5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40ABCB + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40ABD7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40ABE2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40AC33 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40ABD7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40ABE2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40AC33 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40AC39 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40AC45 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40AC50 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40ACEB + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40ADF9 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40AC45 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40AC50 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40ACEB + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40ADF9 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40ADFF + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40AE0B + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40AE16 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40AEA2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40AE0B + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40AE16 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40AEA2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40AEA8 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40AEB4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40AEBF + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40B747 + 1, &CStreaming__ms_aInfoForModel.gta_sa[427].uiLoadFlag);
-		CPatch::PatchPointer(0x40B79C + 1, &CStreaming__ms_aInfoForModel.gta_sa[490].uiLoadFlag);
-		CPatch::PatchPointer(0x40B807 + 1, &CStreaming__ms_aInfoForModel.gta_sa[433].uiLoadFlag);
-		CPatch::PatchPointer(0x40B813 + 2, &CStreaming__ms_aInfoForModel.gta_sa[432].uiLoadFlag);
-		CPatch::PatchPointer(0x40B92C + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40AEB4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40AEBF + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40B747 + 1, &CStreaming__ms_aInfoForModel.gta_sa[427].m_status);
+		CPatch::PatchPointer(0x40B79C + 1, &CStreaming__ms_aInfoForModel.gta_sa[490].m_status);
+		CPatch::PatchPointer(0x40B807 + 1, &CStreaming__ms_aInfoForModel.gta_sa[433].m_status);
+		CPatch::PatchPointer(0x40B813 + 2, &CStreaming__ms_aInfoForModel.gta_sa[432].m_status);
+		CPatch::PatchPointer(0x40B92C + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40B932 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40B93E + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40B949 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40BAD5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40B93E + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40B949 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40BAD5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40BADB + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40BAE6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40BAF1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40BB39 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40BAE6 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40BAF1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40BB39 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40BB3F + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40BB4A + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40BB55 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40BE94 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40BB4A + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40BB55 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40BE94 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40BE9A + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40BEA5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40BEB0 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40BEF4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40BEA5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40BEB0 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40BEF4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40BEFA + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40BF05 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40BF10 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40C05F + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C067 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40C0D0 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C0D8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40C13E + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C146 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x40BF05 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40BF10 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40C05F + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C067 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40C0D0 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C0D8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40C13E + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C146 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x40C212 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40C2B9 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40C491 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x40C2B9 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40C491 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x40C6CC + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x40C81B + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40C876 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C8E4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C92F + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40C94E + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C99F + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40C9F0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40CA3D + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40CAFA + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40CB10 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40C81B + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40C876 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C8E4 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C92F + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40C94E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C99F + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40C9F0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40CA3D + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40CAFA + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40CB10 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40CB18 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40CB49 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40CB49 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40CB58 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40CB63 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40CB71 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x40CB63 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40CB71 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x40CB78 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x40CBD8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40CBD8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40CC38 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x40CC45 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
+		CPatch::PatchPointer(0x40CC45 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
 		CPatch::PatchPointer(0x40CC58 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockOffset);
-		CPatch::PatchPointer(0x40CC8E + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+		CPatch::PatchPointer(0x40CC8E + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 		CPatch::PatchPointer(0x40CCA6 + 3, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x40CCAF + 3, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-		CPatch::PatchPointer(0x40CD1F + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x40CCAF + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+		CPatch::PatchPointer(0x40CD1F + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x40CD2C + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
 		CPatch::PatchPointer(0x40CD34 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40CD49 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40CD9F + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40CDC6 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x40CDF8 + 2, &CStreaming__ms_aInfoForModel.gta_sa[7].uiLoadFlag);
-		CPatch::PatchPointer(0x40CEB2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40CEDB + 3, &CStreaming__ms_aInfoForModel.gta_sa->usNextOnCd);
+		CPatch::PatchPointer(0x40CD49 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40CD9F + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40CDC6 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x40CDF8 + 2, &CStreaming__ms_aInfoForModel.gta_sa[7].m_status);
+		CPatch::PatchPointer(0x40CEB2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40CEDB + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_nextModelOnCd);
 		CPatch::PatchPointer(0x40D012 + 2, CStreaming__ms_aInfoForModel.gta_sa);
 		CPatch::PatchPointer(0x40D332 + 2, CStreaming__ms_aInfoForModel.gta_sa);
 		CPatch::PatchPointer(0x40E1F7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-		CPatch::PatchPointer(0x40E232 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40E250 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x40E2CA + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x40E232 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40E250 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x40E2CA + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x40E52C + 2, CStreaming__ms_aInfoForModel.gta_sa);
 		CPatch::PatchPointer(0x40EC02 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-		CPatch::PatchPointer(0x40ED3E + 1, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x410B31 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_COL) + 1].uiLoadFlag);
-		CPatch::PatchPointer(0x410BDE + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL)].uiLoadFlag);
-		CPatch::PatchPointer(0x410E13 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_COL) + 1].ucFlags);
-		CPatch::PatchPointer(0x410E53 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL)].ucFlags);
-		CPatch::PatchPointer(0x42194F + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x421998 + 2, &CStreaming__ms_aInfoForModel.gta_sa[427].uiLoadFlag);
-		CPatch::PatchPointer(0x4219A0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[285].uiLoadFlag);
-		CPatch::PatchPointer(0x4219D5 + 2, &CStreaming__ms_aInfoForModel.gta_sa[490].uiLoadFlag);
-		CPatch::PatchPointer(0x4219DD + 2, &CStreaming__ms_aInfoForModel.gta_sa[286].uiLoadFlag);
-		CPatch::PatchPointer(0x421A01 + 2, &CStreaming__ms_aInfoForModel.gta_sa[432].uiLoadFlag);
-		CPatch::PatchPointer(0x421A09 + 2, &CStreaming__ms_aInfoForModel.gta_sa[433].uiLoadFlag);
-		CPatch::PatchPointer(0x421A11 + 2, &CStreaming__ms_aInfoForModel.gta_sa[287].uiLoadFlag);
-		CPatch::PatchPointer(0x424D8E + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x424F66 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x42C334 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x43A5B1 + 1, &CStreaming__ms_aInfoForModel.gta_sa[584].uiLoadFlag);
-		CPatch::PatchPointer(0x443A68 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x445961 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x447E98 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x44B5DD + 2, &CStreaming__ms_aInfoForModel.gta_sa[364].uiLoadFlag);
-		CPatch::PatchPointer(0x4614F0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x46CE45 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].uiLoadFlag);
-		CPatch::PatchPointer(0x46CFB6 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].uiLoadFlag);
-		CPatch::PatchPointer(0x47EFFF + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x4D5C57 + 4, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x55497F + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x56EC4D + 2, &CStreaming__ms_aInfoForModel.gta_sa[371].uiLoadFlag);
-		CPatch::PatchPointer(0x5B0025 + 4, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x5B11E8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x40ED3E + 1, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x410B31 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_COL) + 1].m_status);
+		CPatch::PatchPointer(0x410BDE + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL)].m_status);
+		CPatch::PatchPointer(0x410E13 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_COL) + 1].m_flags);
+		CPatch::PatchPointer(0x410E53 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL)].m_flags);
+		CPatch::PatchPointer(0x42194F + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x421998 + 2, &CStreaming__ms_aInfoForModel.gta_sa[427].m_status);
+		CPatch::PatchPointer(0x4219A0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[285].m_status);
+		CPatch::PatchPointer(0x4219D5 + 2, &CStreaming__ms_aInfoForModel.gta_sa[490].m_status);
+		CPatch::PatchPointer(0x4219DD + 2, &CStreaming__ms_aInfoForModel.gta_sa[286].m_status);
+		CPatch::PatchPointer(0x421A01 + 2, &CStreaming__ms_aInfoForModel.gta_sa[432].m_status);
+		CPatch::PatchPointer(0x421A09 + 2, &CStreaming__ms_aInfoForModel.gta_sa[433].m_status);
+		CPatch::PatchPointer(0x421A11 + 2, &CStreaming__ms_aInfoForModel.gta_sa[287].m_status);
+		CPatch::PatchPointer(0x424D8E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x424F66 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x42C334 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x43A5B1 + 1, &CStreaming__ms_aInfoForModel.gta_sa[584].m_status);
+		CPatch::PatchPointer(0x443A68 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x445961 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x447E98 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x44B5DD + 2, &CStreaming__ms_aInfoForModel.gta_sa[364].m_status);
+		CPatch::PatchPointer(0x4614F0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x46CE45 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].m_status);
+		CPatch::PatchPointer(0x46CFB6 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].m_status);
+		CPatch::PatchPointer(0x47EFFF + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x4D5C57 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x55497F + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x56EC4D + 2, &CStreaming__ms_aInfoForModel.gta_sa[371].m_status);
+		CPatch::PatchPointer(0x5B0025 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x5B11E8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		CPatch::PatchPointer(0x5B8AE7 + 1, CStreaming__ms_aInfoForModel.gta_sa);
 		CPatch::PatchPointer(0x5B8B08 + 6, CStreaming__ms_aInfoForModel.gta_sa);
 
-		CPatch::PatchPointer(0x5B8B86 + 2, &CStreaming__ms_aInfoForModel.gta_sa[374].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8B8D + 2, &CStreaming__ms_aInfoForModel.gta_sa[375].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8B94 + 2, &CStreaming__ms_aInfoForModel.gta_sa[376].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8B9B + 2, &CStreaming__ms_aInfoForModel.gta_sa[377].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8BA2 + 2, &CStreaming__ms_aInfoForModel.gta_sa[378].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8BA9 + 2, &CStreaming__ms_aInfoForModel.gta_sa[379].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8BB0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[380].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8BB7 + 2, &CStreaming__ms_aInfoForModel.gta_sa[381].uiLoadFlag);
-		CPatch::PatchPointer(0x5B8C1D + 1, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-		CPatch::PatchPointer(0x5B8C4F + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD)].ucFlags);
-		CPatch::PatchPointer(0x5B8C63 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD) + 1].uiLoadFlag);
-		CPatch::PatchPointer(0x5DE619 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x5E896B + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x5E897E + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x60FED6 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x61329E + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x613A5A + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x61B58E + 2, &CStreaming__ms_aInfoForModel.gta_sa[396].uiLoadFlag);
-		CPatch::PatchPointer(0x61B5BB + 2, &CStreaming__ms_aInfoForModel.gta_sa[397].uiLoadFlag);
-		CPatch::PatchPointer(0x61B5E4 + 2, &CStreaming__ms_aInfoForModel.gta_sa[394].uiLoadFlag);
-		CPatch::PatchPointer(0x61B611 + 2, &CStreaming__ms_aInfoForModel.gta_sa[395].uiLoadFlag);
-		CPatch::PatchPointer(0x61B66A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IFP)].uiLoadFlag);
-		CPatch::PatchPointer(0x64D0D8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x67B5C0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[370].uiLoadFlag);
-		CPatch::PatchPointer(0x6C6A24 + 2, &CStreaming__ms_aInfoForModel.gta_sa[285].uiLoadFlag);
-		CPatch::PatchPointer(0x6C7A96 + 2, &CStreaming__ms_aInfoForModel.gta_sa[497].uiLoadFlag);
-		CPatch::PatchPointer(0x6C7AEE + 2, &CStreaming__ms_aInfoForModel.gta_sa[488].uiLoadFlag);
-		CPatch::PatchPointer(0x6CD352 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x6D19BC + 2, &CStreaming__ms_aInfoForModel.gta_sa[349].uiLoadFlag);
-		CPatch::PatchPointer(0x6D1A04 + 2, &CStreaming__ms_aInfoForModel.gta_sa[333].uiLoadFlag);
-		CPatch::PatchPointer(0x6D6537 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD)].uiLoadFlag);
-		CPatch::PatchPointer(0x6F3549 + 1, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x6F3639 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-		CPatch::PatchPointer(0x6F3654 + 2, &CStreaming__ms_aInfoForModel.gta_sa[168].uiLoadFlag);
-		CPatch::PatchPointer(0x6F3CC0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[168].uiLoadFlag);
-		CPatch::PatchPointer(0x6F7B26 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+		CPatch::PatchPointer(0x5B8B86 + 2, &CStreaming__ms_aInfoForModel.gta_sa[374].m_status);
+		CPatch::PatchPointer(0x5B8B8D + 2, &CStreaming__ms_aInfoForModel.gta_sa[375].m_status);
+		CPatch::PatchPointer(0x5B8B94 + 2, &CStreaming__ms_aInfoForModel.gta_sa[376].m_status);
+		CPatch::PatchPointer(0x5B8B9B + 2, &CStreaming__ms_aInfoForModel.gta_sa[377].m_status);
+		CPatch::PatchPointer(0x5B8BA2 + 2, &CStreaming__ms_aInfoForModel.gta_sa[378].m_status);
+		CPatch::PatchPointer(0x5B8BA9 + 2, &CStreaming__ms_aInfoForModel.gta_sa[379].m_status);
+		CPatch::PatchPointer(0x5B8BB0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[380].m_status);
+		CPatch::PatchPointer(0x5B8BB7 + 2, &CStreaming__ms_aInfoForModel.gta_sa[381].m_status);
+		CPatch::PatchPointer(0x5B8C1D + 1, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+		CPatch::PatchPointer(0x5B8C4F + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD)].m_flags);
+		CPatch::PatchPointer(0x5B8C63 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD) + 1].m_status);
+		CPatch::PatchPointer(0x5DE619 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x5E896B + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x5E897E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x60FED6 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x61329E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x613A5A + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x61B58E + 2, &CStreaming__ms_aInfoForModel.gta_sa[396].m_status);
+		CPatch::PatchPointer(0x61B5BB + 2, &CStreaming__ms_aInfoForModel.gta_sa[397].m_status);
+		CPatch::PatchPointer(0x61B5E4 + 2, &CStreaming__ms_aInfoForModel.gta_sa[394].m_status);
+		CPatch::PatchPointer(0x61B611 + 2, &CStreaming__ms_aInfoForModel.gta_sa[395].m_status);
+		CPatch::PatchPointer(0x61B66A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IFP)].m_status);
+		CPatch::PatchPointer(0x64D0D8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x67B5C0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[370].m_status);
+		CPatch::PatchPointer(0x6C6A24 + 2, &CStreaming__ms_aInfoForModel.gta_sa[285].m_status);
+		CPatch::PatchPointer(0x6C7A96 + 2, &CStreaming__ms_aInfoForModel.gta_sa[497].m_status);
+		CPatch::PatchPointer(0x6C7AEE + 2, &CStreaming__ms_aInfoForModel.gta_sa[488].m_status);
+		CPatch::PatchPointer(0x6CD352 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x6D19BC + 2, &CStreaming__ms_aInfoForModel.gta_sa[349].m_status);
+		CPatch::PatchPointer(0x6D1A04 + 2, &CStreaming__ms_aInfoForModel.gta_sa[333].m_status);
+		CPatch::PatchPointer(0x6D6537 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_TXD)].m_status);
+		CPatch::PatchPointer(0x6F3549 + 1, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x6F3639 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+		CPatch::PatchPointer(0x6F3654 + 2, &CStreaming__ms_aInfoForModel.gta_sa[168].m_status);
+		CPatch::PatchPointer(0x6F3CC0 + 2, &CStreaming__ms_aInfoForModel.gta_sa[168].m_status);
+		CPatch::PatchPointer(0x6F7B26 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 		// Added manually				
 		{
@@ -8423,224 +8423,224 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_PC_1_0_HOODLUM()
 			CPatch::PatchPointer(0x1565177 + 3, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
 
 			// CStreaming__HasVehicleUpgradeLoaded
-			CPatch::PatchPointer(0x156A107 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x156A12D + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x156A107 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x156A12D + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_407A40
-			CPatch::PatchPointer(0x1566496 + 1, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x1566496 + 1, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 
 			// CStreaming__AreAnimsUsedByRequestedModels
 			CPatch::PatchPointer(0x407B02 + 2, CStreaming__ms_aInfoForModel.gta_sa);
 
 			// sub_407C00
-			CPatch::PatchPointer(0x156C9F0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x156CA0A + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x156C9F0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x156CA0A + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// CStreaming::isSpecialActorLoaded
-			CPatch::PatchPointer(0x15642C7 + 3, &CStreaming__ms_aInfoForModel.gta_sa[290].uiLoadFlag);
+			CPatch::PatchPointer(0x15642C7 + 3, &CStreaming__ms_aInfoForModel.gta_sa[290].m_status);
 
 			// sub_407F80
-			CPatch::PatchPointer(0x1567B6A + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x1567B73 + 3, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-			CPatch::PatchPointer(0x1567B7D + 3, &CStreaming__ms_aInfoForModel.gta_sa->usPrev);
+			CPatch::PatchPointer(0x1567B6A + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x1567B73 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+			CPatch::PatchPointer(0x1567B7D + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_prevIndex);
 
 			// CStreaming__RequestModel
-			CPatch::PatchPointer(0x404C95 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x408802 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x408811 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x408820 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x40882F + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x408835 + 2, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-			CPatch::PatchPointer(0x408840 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x4088BC + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x40897F + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x408989 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x404C95 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x408802 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x408811 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x408820 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x40882F + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x408835 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+			CPatch::PatchPointer(0x408840 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x4088BC + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x40897F + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x408989 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// CStreaming__DeleteRwObjectsNotInFrustumInSectorList
-			CPatch::PatchPointer(0x409978 + 4, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
+			CPatch::PatchPointer(0x409978 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
 
 			// CStreaming::AreTexturesUsedByRequestedModels
 			CPatch::PatchPointer(0x15664EE + 2, CStreaming__ms_aInfoForModel.gta_sa);
 
 			// CStreaming__InitObjectInfoAndRequestModel
 			CPatch::PatchPointer(0x15663C9 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-			CPatch::PatchPointer(0x15663D8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
+			CPatch::PatchPointer(0x15663D8 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
 			CPatch::PatchPointer(0x15663EB + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockOffset);
 			CPatch::PatchPointer(0x156643C + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockOffset);
 			CPatch::PatchPointer(0x1566442 + 2, &CStreaming__ms_aInfoForModel.gta_sa->iBlockCount);
-			CPatch::PatchPointer(0x1566449 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
+			CPatch::PatchPointer(0x1566449 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
 
 			// CStreaming__ReloadCopModel
-			CPatch::PatchPointer(0x156C202 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x156C21D + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x156C202 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x156C21D + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// CStreaming__ReloadFiremanModels
-			CPatch::PatchPointer(0x15703AA + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x15703C0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x15703AA + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x15703C0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_40A560
-			CPatch::PatchPointer(0x40A61A + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x40A61A + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 			CPatch::PatchPointer(0x40A621 + 3, CStreaming__ms_aInfoForModel.gta_sa);
-			CPatch::PatchPointer(0x40A70A + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x40A70A + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 			CPatch::PatchPointer(0x40A711 + 3, CStreaming__ms_aInfoForModel.gta_sa);
-			CPatch::PatchPointer(0x40A838 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x40A838 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 			CPatch::PatchPointer(0x40A83E + 2, CStreaming__ms_aInfoForModel.gta_sa);
-			CPatch::PatchPointer(0x40A84A + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x40A859 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x40A8FC + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x40A84A + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x40A859 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x40A8FC + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 			CPatch::PatchPointer(0x40A902 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-			CPatch::PatchPointer(0x40A90E + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x40A91D + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x40A90E + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x40A91D + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_40B080
-			CPatch::PatchPointer(0x15629EC + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x15629F2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-			CPatch::PatchPointer(0x15629FE + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562A09 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x1562A4C + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562A52 + 2, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-			CPatch::PatchPointer(0x1562A5E + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562A69 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x1562AEF + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562AF5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-			CPatch::PatchPointer(0x1562B01 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562B0C + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x1562BAB + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562BB1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->usNext);
-			CPatch::PatchPointer(0x1562BBD + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x1562BC8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x15629EC + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x15629F2 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+			CPatch::PatchPointer(0x15629FE + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562A09 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x1562A4C + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562A52 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+			CPatch::PatchPointer(0x1562A5E + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562A69 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x1562AEF + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562AF5 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+			CPatch::PatchPointer(0x1562B01 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562B0C + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x1562BAB + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562BB1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_nextIndex);
+			CPatch::PatchPointer(0x1562BBD + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x1562BC8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_40B340
-			CPatch::PatchPointer(0x1566F13 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x1566F1C + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x1566F13 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x1566F1C + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 
 			// _ZN10CStreaming15StreamOneNewCarEv
-			CPatch::PatchPointer(0x1563C12 + 2, &CStreaming__ms_aInfoForModel.gta_sa[420].uiLoadFlag);
-			CPatch::PatchPointer(0x1563C22 + 2, &CStreaming__ms_aInfoForModel.gta_sa[438].uiLoadFlag);
+			CPatch::PatchPointer(0x1563C12 + 2, &CStreaming__ms_aInfoForModel.gta_sa[420].m_status);
+			CPatch::PatchPointer(0x1563C22 + 2, &CStreaming__ms_aInfoForModel.gta_sa[438].m_status);
 
 			// sub_40CF80
-			CPatch::PatchPointer(0x1564604 + 1, &CStreaming__ms_aInfoForModel.gta_sa[1000].ucFlags);
+			CPatch::PatchPointer(0x1564604 + 1, &CStreaming__ms_aInfoForModel.gta_sa[1000].m_flags);
 
 			// sub_40E560
-			CPatch::PatchPointer(0x156D020 + 1, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x156D020 + 1, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 
 			// sub_42FBC0
-			CPatch::PatchPointer(0x1570109 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x1570109 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// _ZN8CCarCtrl20GenerateOneRandomCarEv
-			CPatch::PatchPointer(0x4304E6 + 2, &CStreaming__ms_aInfoForModel.gta_sa[430].uiLoadFlag);
-			CPatch::PatchPointer(0x430535 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x4304E6 + 2, &CStreaming__ms_aInfoForModel.gta_sa[430].m_status);
+			CPatch::PatchPointer(0x430535 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// _spawnCarAtPlayerLocation
-			CPatch::PatchPointer(0x43A128 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x43A13C + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x43A128 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x43A13C + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_441D30
-			CPatch::PatchPointer(0x1560FCF + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x1560FE0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x1560FCF + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x1560FE0 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// CGangWars__HasAnyPedFromGangLoaded
-			CPatch::PatchPointer(0x443A06 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x443A06 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// CGangWars__InitWave
-			CPatch::PatchPointer(0x444A33 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x444A44 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x4450F4 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x444A33 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x444A44 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x4450F4 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// ?processPickup
-			CPatch::PatchPointer(0x457A9C + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x457A9C + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_45CA70
-			CPatch::PatchPointer(0x45CC8E + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x45CC8E + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_45CEA0
-			CPatch::PatchPointer(0x156EDFA + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x156EDFA + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_45F380
-			CPatch::PatchPointer(0x45F406 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x45F674 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x45F7B2 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x45F8E5 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x45FA18 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x45FB5F + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x45F406 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x45F674 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x45F7B2 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x45F8E5 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x45FA18 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x45FB5F + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 
 			// sub_4619C0
-			CPatch::PatchPointer(0x461BFC + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x461BFC + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// _opcode_handler_00
-			CPatch::PatchPointer(0x4668E7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x4668E7 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_46AA80
-			CPatch::PatchPointer(0x156D9A4 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].uiLoadFlag);
+			CPatch::PatchPointer(0x156D9A4 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].m_status);
 
 			// sub_46AB20
-			CPatch::PatchPointer(0x1561671 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].uiLoadFlag);
+			CPatch::PatchPointer(0x1561671 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].m_status);
 
 			// _opcode_handler_22
-			CPatch::PatchPointer(0x475071 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].uiLoadFlag);
+			CPatch::PatchPointer(0x475071 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].m_status);
 
 			// CCutSceneMgr__LoadCutsceneFile_preload
-			CPatch::PatchPointer(0x5B0606 + 1, &CStreaming__ms_aInfoForModel.gta_sa[300].uiLoadFlag);
-			CPatch::PatchPointer(0x5B0646 + 2, &CStreaming__ms_aInfoForModel.gta_sa[319].uiLoadFlag);
-			CPatch::PatchPointer(0x5B112F + 3, &CStreaming__ms_aInfoForModel.gta_sa[300].uiLoadFlag);
-			CPatch::PatchPointer(0x5B1139 + 3, &CStreaming__ms_aInfoForModel.gta_sa[300].uiLoadFlag);
+			CPatch::PatchPointer(0x5B0606 + 1, &CStreaming__ms_aInfoForModel.gta_sa[300].m_status);
+			CPatch::PatchPointer(0x5B0646 + 2, &CStreaming__ms_aInfoForModel.gta_sa[319].m_status);
+			CPatch::PatchPointer(0x5B112F + 3, &CStreaming__ms_aInfoForModel.gta_sa[300].m_status);
+			CPatch::PatchPointer(0x5B1139 + 3, &CStreaming__ms_aInfoForModel.gta_sa[300].m_status);
 
 			// CStreaming__LoadCdDirectory2
 			CPatch::PatchPointer(0x409BBC + 3, CStreaming__ms_aInfoForModel.gta_sa);
-			CPatch::PatchPointer(0x5B6468 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucImgId);
+			CPatch::PatchPointer(0x5B6468 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_image);
 			CPatch::PatchPointer(0x5B6480 + 2, CStreaming__ms_aInfoForModel.gta_sa);
-			CPatch::PatchPointer(0x5B6495 + 3, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x5B64A2 + 4, &CStreaming__ms_aInfoForModel.gta_sa->usNextOnCd);
+			CPatch::PatchPointer(0x5B6495 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x5B64A2 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_nextModelOnCd);
 
 			// sub_612F90
-			CPatch::PatchPointer(0x612FFD + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x612FFD + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// CPopulation::AddToPopulation
-			CPatch::PatchPointer(0x615076 + 2, &CStreaming__ms_aInfoForModel.gta_sa[286].uiLoadFlag);
-			CPatch::PatchPointer(0x615092 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x6150AE + 2, &CStreaming__ms_aInfoForModel.gta_sa[285].uiLoadFlag);
-			CPatch::PatchPointer(0x6150CA + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
-			CPatch::PatchPointer(0x6150E4 + 2, &CStreaming__ms_aInfoForModel.gta_sa[287].uiLoadFlag);
-			CPatch::PatchPointer(0x615100 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x615076 + 2, &CStreaming__ms_aInfoForModel.gta_sa[286].m_status);
+			CPatch::PatchPointer(0x615092 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x6150AE + 2, &CStreaming__ms_aInfoForModel.gta_sa[285].m_status);
+			CPatch::PatchPointer(0x6150CA + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
+			CPatch::PatchPointer(0x6150E4 + 2, &CStreaming__ms_aInfoForModel.gta_sa[287].m_status);
+			CPatch::PatchPointer(0x615100 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// Later added
 
 			// _sub_4044C0
-			CPatch::PatchPointer(0x4044C7 + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x4044C7 + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// sub_4044E0
-			CPatch::PatchPointer(0x4044E7 + 4, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
+			CPatch::PatchPointer(0x4044E7 + 4, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
 
 			// _sub_404530
-			CPatch::PatchPointer(0x404537 + 4, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL)].ucFlags);
+			CPatch::PatchPointer(0x404537 + 4, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_IPL)].m_flags);
 
 			// _sub_4080B0
-			CPatch::PatchPointer(0x4080C8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->ucFlags);
-			CPatch::PatchPointer(0x4080D1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x4080C8 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_flags);
+			CPatch::PatchPointer(0x4080D1 + 2, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 
 			// _sub_410380
-			CPatch::PatchPointer(0x410387 + 4, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_COL)].ucFlags);
+			CPatch::PatchPointer(0x410387 + 4, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_COL)].m_flags);
 
 			// _sub_46A590
-			CPatch::PatchPointer(0x46A597 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].uiLoadFlag);
+			CPatch::PatchPointer(0x46A597 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_SCM)].m_status);
 
 			// _sub_6E2900
-			CPatch::PatchPointer(0x6E298A + 3, &CStreaming__ms_aInfoForModel.gta_sa->uiLoadFlag);
+			CPatch::PatchPointer(0x6E298A + 3, &CStreaming__ms_aInfoForModel.gta_sa->m_status);
 		}
 
 		// offset _ZN14CStreamingInfo13ms_pArrayBaseE+2
 		{
 			// sub_407A40
-			CPatch::PatchPointer(0x15664A5 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs()].ucFlags);
+			CPatch::PatchPointer(0x15664A5 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs()].m_flags);
 
 			
 
 			// sub_40E560
-			CPatch::PatchPointer(0x156D037 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs()].ucFlags);
+			CPatch::PatchPointer(0x156D037 + 2, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs()].m_flags);
 
 			// sub_40EB70
-			CPatch::PatchPointer(0x40ED49 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs()].ucFlags);
+			CPatch::PatchPointer(0x40ED49 + 1, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs()].m_flags);
 		}
 
 		// References to of ms_aInfoForModel + countof(ms_aInfoForModel)
@@ -9336,18 +9336,18 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_PC_1_0_HOODLUM()
 		{
 			/*
 			// useless if there's a function for this
-			CPatch::PatchPointer(0x5B8B12 + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_LOADED_START)].usNext);
-			CPatch::PatchPointer(0x5B8B1C + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START) - 1].usNext);
-			CPatch::PatchPointer(0x5B8B26 + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START)].usNext);
-			CPatch::PatchPointer(0x5B8B30 + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs() - 1].usNext);
-			CPatch::PatchPointer(0x5B8B3A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_LOADED_START)].usNext);
-			CPatch::PatchPointer(0x5B8B43 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_LOADED_START)].usPrev);
-			CPatch::PatchPointer(0x5B8B4A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START) - 1].usNext);
-			CPatch::PatchPointer(0x5B8B51 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START) - 1].usPrev);
-			CPatch::PatchPointer(0x5B8B5A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START)].usNext);
-			CPatch::PatchPointer(0x5B8B63 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START)].usPrev);
-			CPatch::PatchPointer(0x5B8B6A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs() - 1].usNext);
-			CPatch::PatchPointer(0x5B8B71 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs() - 1].usPrev);
+			CPatch::PatchPointer(0x5B8B12 + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_LOADED_START)].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B1C + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START) - 1].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B26 + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START)].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B30 + 6, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs() - 1].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B3A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_LOADED_START)].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B43 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_LOADED_START)].m_prevIndex);
+			CPatch::PatchPointer(0x5B8B4A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START) - 1].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B51 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START) - 1].m_prevIndex);
+			CPatch::PatchPointer(0x5B8B5A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START)].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B63 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetBaseID(FILE_TYPE_REQUESTED_START)].m_prevIndex);
+			CPatch::PatchPointer(0x5B8B6A + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs() - 1].m_nextIndex);
+			CPatch::PatchPointer(0x5B8B71 + 3, &CStreaming__ms_aInfoForModel.gta_sa[GetCountOfAllFileIDs() - 1].m_prevIndex);
 
 			CPatch::PatchUINT16(0x5B8B3A + 7, GetBaseID(FILE_TYPE_REQUESTED_START) - 1);
 			CPatch::PatchUINT16(0x5B8B51 + 7, GetBaseID(FILE_TYPE_LOADED_START));
@@ -9365,13 +9365,13 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_PC_1_0_HOODLUM()
 		{
 			/*
 			// readModelFlagsFromSave
-			CPatch::PatchPointer(0x5D29E2 + 1, &CStreaming__ms_aInfoForModel->ucFlags);
-			CPatch::PatchPointer(0x5D2A0A + 2, &CStreaming__ms_aInfoForModel[GetCountOfAllFileIDs()].ucFlags);
+			CPatch::PatchPointer(0x5D29E2 + 1, &CStreaming__ms_aInfoForModel->m_flags);
+			CPatch::PatchPointer(0x5D2A0A + 2, &CStreaming__ms_aInfoForModel[GetCountOfAllFileIDs()].m_flags);
 
 
 			// saveModelFlagsInSave
-			CPatch::PatchPointer(0x5D29A2 + 1, &CStreaming__ms_aInfoForModel->ucFlags);
-			CPatch::PatchPointer(0x5D29D3 + 2, &CStreaming__ms_aInfoForModel[GetCountOfAllFileIDs()].ucFlags);
+			CPatch::PatchPointer(0x5D29A2 + 1, &CStreaming__ms_aInfoForModel->m_flags);
+			CPatch::PatchPointer(0x5D29D3 + 2, &CStreaming__ms_aInfoForModel[GetCountOfAllFileIDs()].m_flags);
 			*/
 			// 0x5D29A0 - saveModelFlagsInSave
 			ApplyPatchForCStreaming__Save(this, 0x5D29A0);
@@ -9729,16 +9729,19 @@ extern "C"
 	uint32_t negated_file_ID_offset_to_array_to_CStreamedScriptInfo_status = 0;	// GTA SA: 0xCCEBC
 
 	uint32_t FILE_TYPE_TXD_COUNT_multiplied_by_sizeof_TxdDef = 0;	// GTA SA: 280000
-	uint32_t FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 0x61000 + 0xA90 = 0x61A90
-	uint32_t FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 0x7CE1C
-	uint32_t FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags; // GTA SA: 0x7B526
+	uint32_t FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_m_status;	// GTA SA: 0x61000 + 0xA90 = 0x61A90
+	uint32_t FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_m_status;	// GTA SA: 0x7CE1C
+	uint32_t FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags; // GTA SA: 0x7B526
+	uint32_t FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status;	// GTA SA: 0x7B530
+	uint32_t FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status_then_minus_1312;	// GTA SA: 0x7B000
 	uint32_t FILE_TYPE_IPL_COUNT_multiplied_by_sizeof_IplDef = 0;	// 0x3400
 
-	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags;	// GTA SA: 500026
-	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 500036
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags;	// GTA SA: 500026
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status;	// GTA SA: 500036
 
-	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags_then_minus_314;	// GTA SA: 499712
-	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag_then_minus_324;	// GTA SA: 499712
+	uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_then_minus_308;		// GTA SA: 499712
+	// uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags_then_minus_314;	// GTA SA: 499712
+	// uint32_t FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag_then_minus_324;	// GTA SA: 499712
 
 	uint32_t FILE_TYPE_COL_COUNT_multiplied_by_sizeof_CCollisionFile;	// 0x2BD4
 	uint32_t FILE_TYPE_SCM_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag;	// GTA SA: 0x80148
@@ -9808,8 +9811,7 @@ namespace Game_GTASA
 	// patch for 0x46BAB6
 	extern "C"
 	{
-		uintptr_t Address_CStreaming__Init2_46BB82_thumb = 0;
-		uintptr_t Address_CStreaming__m_bHarvesterModelsRequested = 0;
+		uintptr_t Address_CStreaming__Init2_46BAC2_thumb = 0;
 	}
 
 	// use patch_CStreaming__Init2_initializeLoadedAndRequested
@@ -9819,14 +9821,11 @@ namespace Game_GTASA
 			".thumb\n"
 			"BLX patch_CStreaming__Init2_initializeLoadedAndRequested\n"
 
-			ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R6, Address_CStreaming__ms_aInfoForModel)
-			ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R5, Address_CStreamingInfo__ms_pArrayBase)
-			"STR             R6, [R5]\n"
+			"LDR R0, =("/* _ZN10CStreaming16ms_aInfoForModelE_ptr */"0x677DD8 - 0x46BACA)\n"
+			"MOV R2, #26313\n"
+			"LDR R1, =("/* _ZN10CStreaming10ms_channelE_ptr */"0x678334 - 0x46BAD0)\n"
 
-			ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R8, Address_CStreaming__ms_channel)
-			ASM_LOAD_ADDRESS_STORED_ON_SYMBOL(R0, Address_CStreaming__m_bHarvesterModelsRequested)
-
-			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CStreaming__Init2_46BB82_thumb)
+			ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_CStreaming__Init2_46BAC2_thumb)
 			);
 	}
 	#endif
@@ -9841,7 +9840,7 @@ namespace Game_GTASA
 	{
 		__asm(
 		".thumb\n"
-			ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag)
+			ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_m_status)
 
 			"LDR R1, [R2]\n"
 
@@ -10075,33 +10074,39 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_2_0_ARMEABI_V7A()
 			"_ZN9CPathFind8ShutdownEv"
 		), &CPathFind_extended::Shutdown);
 
+
 		// CPathFind::LoadSceneForPathNodes 
 		CPatch::RedirectMethod((uintptr_t)Library::GetSymbolAddress(
 			&g_LimitAdjuster.hModule_of_game,
 			"_ZN9CPathFind21LoadSceneForPathNodesE7CVector"
 		), &CPathFind_extended::LoadSceneForPathNodes);
 
+		
 		// CStreaming::Init2
-		Address_CStreaming__m_bHarvesterModelsRequested = (uintptr_t)Library::GetSymbolAddress(&g_LimitAdjuster.hModule_of_game,
-			"_ZN10CStreaming27m_bHarvesterModelsRequestedE");
+		Address_CStreaming__Init2_46BAC2_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46BAC2));
 
-		Address_CStreaming__Init2_46BB82_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46BB82));
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BAB6),
 			(void*)&patch_CStreaming__Init2_46BAB6
 		);
 
+		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BAE8), 2);
+		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BAF2), 2);
+		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BAFC), 2);
+		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB0E), 2);
+
+		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB66), 2);
+		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB7E), 2);
 		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB84), 2);
 		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB8A), 2);
 		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB92), 4);
 		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BB98), 2);
 		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BBA0), 2);
 		CPatch::NOPinstructions(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BBA4), 2);
-
 		
 		Address_CStreaming__Init2_46BC5E_thumb = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_THUMB_ADDRESS_FOR_JUMP(0x46BC5E));
 		CPatch::RedirectCodeEx(INSTRUCTION_SET_THUMB, g_mCalc.GetCurrentVAbyPreferedVA(0x46BC54),
 			(void*)&patch_CStreaming__Init2_46BC54
-		);
+		);		
 
 		///// Shopping /////
 		Address_CShopping__ShutdownForRestart_19BC1C_arm = g_mCalc.GetCurrentVAbyPreferedVA(ASM_GET_ARM_ADDRESS_FOR_JUMP(0x19BC1C));
@@ -10256,11 +10261,8 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA_2_11_32_ANDROID_ARM64_V8A()
 	}
 	#endif
 
-
-	return;
-
 	// Manual patches
-	#if FALSE
+	#if TRUE
 	{
 		// CPathFind::LoadSceneForPathNodes 
 		CPatch::RedirectMethod((uintptr_t)Library::GetSymbolAddress(
@@ -10322,19 +10324,21 @@ void FileIDlimit::SetVariables()
 			FILE_TYPE_RRR_LAST_ID_multiplied_by_sizeof_CStreamingInfo_then_plus_one = GetLastIDforType(FILE_TYPE_RRR) * TypeDetails::SizeOf<CStreamingInfo>() + 1;
 			negated_file_ID_offset_to_array_to_CStreamedScriptInfo_status = -(TypeDetails::SizeOf<CStreamedScriptInfo>() * FILE_TYPE_SCM_BASE_ID - offsetof(CStreamedScriptInfo, status));
 			FILE_TYPE_TXD_COUNT_multiplied_by_sizeof_TxdDef = FILE_TYPE_TXD_COUNT * TypeDetails::SizeOf<TxdDef_Android>();
-			FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_TXD) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+			FILE_TYPE_TXD_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_m_status = GetBaseID(FILE_TYPE_TXD) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_status);
 
-			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags = (GetBaseID(FILE_TYPE_COL) + 1) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, ucFlags);
-			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = (GetBaseID(FILE_TYPE_COL) + 1) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
-			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags_then_minus_314 = FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags - 314;
-			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag_then_minus_324 = FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag - 324;
-
-			FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_IFP) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags = FILE_TYPE_COL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_flags);
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status = FILE_TYPE_COL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_status);
+			FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_then_minus_308 = FILE_TYPE_COL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() - 308;
 			
-			FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags = FILE_TYPE_IPL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, ucFlags);
+			FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_m_status = GetBaseID(FILE_TYPE_IFP) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_status);
+			
+			FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags = FILE_TYPE_IPL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_flags);\
+			FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status = FILE_TYPE_IPL_BASE_ID_PLUS_ONE * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_status);
+			FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status_then_minus_1312 = FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status - 1328;
+
 			FILE_TYPE_IPL_COUNT_multiplied_by_sizeof_IplDef = FILE_TYPE_IPL_COUNT * TypeDetails::SizeOf <CIplFile>();
 			FILE_TYPE_COL_COUNT_multiplied_by_sizeof_CCollisionFile = FILE_TYPE_COL_COUNT * TypeDetails::SizeOf <CCollisionFile>();
-			FILE_TYPE_SCM_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_SCM) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, uiLoadFlag);
+			FILE_TYPE_SCM_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag = GetBaseID(FILE_TYPE_SCM) * TypeDetails::SizeOf<CStreamingInfo>() + offsetof(CStreamingInfo, m_status);
 			FILE_TYPE_COUNT_OF_IDS = GetCountOfAllFileIDs();
 		}
 	}
@@ -10347,7 +10351,7 @@ void FileIDlimit::PatchFileIDlimits_GTA_SA()
 	MAKE_VAR_GAME_VERSION();
 	using namespace Game_GTASA;
 	
-	if(!WriteToLogIfLimitsAreChanged(true))
+	if(!WriteToLogIfLimitsAreChanged(gameVersion == GAME_VERSION_GTA_SA_1_0_US_HOODLUM_WIN_X86))
 		return;
 
 	// ID limit checks
@@ -14670,67 +14674,67 @@ void FileIDlimit::PatchFileIDlimits_Bully_SE_1_20()
 		{				
 			CPatch::PatchPointer(0x52DD40 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52DD30
 			CPatch::PatchPointer(0x52DD5F + 2, CStreaming__ms_aInfoForModel.bully_se);	// sub     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52DD50
-			CPatch::PatchPointer(0x52DED1 + 1, &CStreaming__ms_aInfoForModel.bully_se->usPrev);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE.usPrev	; sub_52DDA0
-			CPatch::PatchPointer(0x52DF73 + 1, &CStreaming__ms_aInfoForModel.bully_se->usPrev);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE.usPrev	; sub_52DDA0
+			CPatch::PatchPointer(0x52DED1 + 1, &CStreaming__ms_aInfoForModel.bully_se->m_prevIndex);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE.m_prevIndex	; sub_52DDA0
+			CPatch::PatchPointer(0x52DF73 + 1, &CStreaming__ms_aInfoForModel.bully_se->m_prevIndex);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE.m_prevIndex	; sub_52DDA0
 			CPatch::PatchPointer(0x52E002 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52DFF0
 			CPatch::PatchPointer(0x52E2F3 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; _ZN10CStreaming15LoadCdDirectoryEPKci
-			CPatch::PatchPointer(0x52E499 + 3, &CStreaming__ms_aInfoForModel.bully_se->usNextOnCd);	// mov     _ZN10CStreaming16ms_aInfoForModelE.usNextOnCd[eax], dx	; _ZN10CStreaming15LoadCdDirectoryEPKci
+			CPatch::PatchPointer(0x52E499 + 3, &CStreaming__ms_aInfoForModel.bully_se->m_nextModelOnCd);	// mov     _ZN10CStreaming16ms_aInfoForModelE.m_nextModelOnCd[eax], dx	; _ZN10CStreaming15LoadCdDirectoryEPKci
 			CPatch::PatchPointer(0x52E72D + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52E720
 			CPatch::PatchPointer(0x52E78D + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52E780
 			CPatch::PatchPointer(0x52E806 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52E7F0
 			CPatch::PatchPointer(0x52E880 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52E870
 			CPatch::PatchPointer(0x52E8F3 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52E8D0
-			CPatch::PatchPointer(0x52E9BD + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// or      _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], 0C0h	; sub_52E8D0
-			CPatch::PatchPointer(0x52E9C4 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax]	; sub_52E8D0
-			CPatch::PatchPointer(0x52E9D9 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax]	; sub_52E8D0
-			CPatch::PatchPointer(0x52EA16 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// or      _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], 0C0h	; sub_52E8D0
-			CPatch::PatchPointer(0x52EA1D + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax]	; sub_52E8D0
-			CPatch::PatchPointer(0x52EA32 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax]	; sub_52E8D0
-			CPatch::PatchPointer(0x52EA94 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// test    _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], 0C0h	; sub_52E8D0
-			CPatch::PatchPointer(0x52EAA6 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax]	; sub_52E8D0
+			CPatch::PatchPointer(0x52E9BD + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// or      _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], 0C0h	; sub_52E8D0
+			CPatch::PatchPointer(0x52E9C4 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax]	; sub_52E8D0
+			CPatch::PatchPointer(0x52E9D9 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax]	; sub_52E8D0
+			CPatch::PatchPointer(0x52EA16 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// or      _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], 0C0h	; sub_52E8D0
+			CPatch::PatchPointer(0x52EA1D + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax]	; sub_52E8D0
+			CPatch::PatchPointer(0x52EA32 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax]	; sub_52E8D0
+			CPatch::PatchPointer(0x52EA94 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// test    _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], 0C0h	; sub_52E8D0
+			CPatch::PatchPointer(0x52EAA6 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// lea     eax, _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax]	; sub_52E8D0
 			CPatch::PatchPointer(0x52F652 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; _ZN10CStreaming11RemoveModelEi
-			CPatch::PatchPointer(0x52F940 + 3, CStreaming__ms_aInfoForModel.bully_se);	// cmp     word ptr _ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0FFFFh; CStreaming::ms_aInfoForModel	; sub_52F8B0
-			CPatch::PatchPointer(0x52FA34 + 3, CStreaming__ms_aInfoForModel.bully_se);	// cmp     word ptr _ZN10CStreaming16ms_aInfoForModelE.usNext[eax], 0FFFFh; CStreaming::ms_aInfoForModel	; sub_52F9A0
+			CPatch::PatchPointer(0x52F940 + 3, CStreaming__ms_aInfoForModel.bully_se);	// cmp     word ptr _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0FFFFh; CStreaming::ms_aInfoForModel	; sub_52F8B0
+			CPatch::PatchPointer(0x52FA34 + 3, CStreaming__ms_aInfoForModel.bully_se);	// cmp     word ptr _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex[eax], 0FFFFh; CStreaming::ms_aInfoForModel	; sub_52F9A0
 			CPatch::PatchPointer(0x52FE4E + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52FE40
 			CPatch::PatchPointer(0x52FF4E + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_52FF40
-			CPatch::PatchPointer(0x53009D + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// test    _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], 3	; sub_530060
-			CPatch::PatchPointer(0x5300C0 + 2, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1	; sub_530060
+			CPatch::PatchPointer(0x53009D + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// test    _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], 3	; sub_530060
+			CPatch::PatchPointer(0x5300C0 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1	; sub_530060
 			CPatch::PatchPointer(0x530154 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_530100
-			CPatch::PatchPointer(0x53037E + 1, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// mov     ebp, offset _ZN10CStreaming16ms_aInfoForModelE.ucFlags	; sub_530100
+			CPatch::PatchPointer(0x53037E + 1, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// mov     ebp, offset _ZN10CStreaming16ms_aInfoForModelE.m_flags	; sub_530100
 			CPatch::PatchPointer(0x530AE7 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_530A70
 			CPatch::PatchPointer(0x531CCF + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; _ZN10CStreaming21ConvertBufferToObjectEPcii
 			CPatch::PatchPointer(0x532036 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; _ZN10CStreaming21ProcessLoadingChannelEi
 			CPatch::PatchPointer(0x532524 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     ebp, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532510
-			CPatch::PatchPointer(0x5327A7 + 2, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 4	; sub_532750
+			CPatch::PatchPointer(0x5327A7 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 4	; sub_532750
 			CPatch::PatchPointer(0x53286C + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     edi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532750
-			CPatch::PatchPointer(0x532AA8 + 3, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// movzx   eax, _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax]	; sub_532A10
-			CPatch::PatchPointer(0x532AE5 + 3, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// movzx   eax, _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax]	; sub_532A10
-			CPatch::PatchPointer(0x532B57 + 3, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// movzx   eax, _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax]	; sub_532A10
+			CPatch::PatchPointer(0x532AA8 + 3, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// movzx   eax, _ZN10CStreaming16ms_aInfoForModelE.m_status[eax]	; sub_532A10
+			CPatch::PatchPointer(0x532AE5 + 3, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// movzx   eax, _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax]	; sub_532A10
+			CPatch::PatchPointer(0x532B57 + 3, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// movzx   eax, _ZN10CStreaming16ms_aInfoForModelE.m_status[eax]	; sub_532A10
 			CPatch::PatchPointer(0x532B85 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532A10
-			CPatch::PatchPointer(0x532CD8 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// test    _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], bl	; sub_532C80
+			CPatch::PatchPointer(0x532CD8 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// test    _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], bl	; sub_532C80
 			CPatch::PatchPointer(0x532D33 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532C80
-			CPatch::PatchPointer(0x532D79 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// test    _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], bl	; sub_532C80
+			CPatch::PatchPointer(0x532D79 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// test    _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], bl	; sub_532C80
 			CPatch::PatchPointer(0x532D97 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532C80
 			CPatch::PatchPointer(0x532DD4 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532C80
 			CPatch::PatchPointer(0x532E57 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532C80
 			CPatch::PatchPointer(0x532EB6 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_532C80
-			CPatch::PatchPointer(0x533041 + 2, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 2	; sub_533030
-			CPatch::PatchPointer(0x533056 + 2, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1	; sub_533030
+			CPatch::PatchPointer(0x533041 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 2	; sub_533030
+			CPatch::PatchPointer(0x533056 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1	; sub_533030
 			CPatch::PatchPointer(0x5333B5 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_533200
 			CPatch::PatchPointer(0x533433 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_5333E0
 			CPatch::PatchPointer(0x5334DF + 6, CStreaming__ms_aInfoForModel.bully_se);	// mov     dword_CA397C, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; CStreaming::Init
-			CPatch::PatchPointer(0x5334E9 + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 4]);	// mov     dword_CA3884, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+43300h)	; CStreaming::Init
-			CPatch::PatchPointer(0x5334F3 + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 3]);	// mov     dword_CA3880, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+43310h)	; CStreaming::Init
-			CPatch::PatchPointer(0x5334FD + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 2]);	// mov     dword_CA387C, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+43320h)	; CStreaming::Init
-			CPatch::PatchPointer(0x533507 + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 1]);	// mov     dword_CA3878, (offset _ZN10CStreaming16ms_aInfoForModelE.usNext+43330h)	; CStreaming::Init
-			CPatch::PatchPointer(0x53366A + 2, &CStreaming__ms_aInfoForModel.bully_se->uiLoadFlag);	// mov     _ZN10CStreaming16ms_aInfoForModelE.uiLoadFlag[eax], 1	; CStreaming::Init
+			CPatch::PatchPointer(0x5334E9 + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 4]);	// mov     dword_CA3884, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+43300h)	; CStreaming::Init
+			CPatch::PatchPointer(0x5334F3 + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 3]);	// mov     dword_CA3880, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+43310h)	; CStreaming::Init
+			CPatch::PatchPointer(0x5334FD + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 2]);	// mov     dword_CA387C, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+43320h)	; CStreaming::Init
+			CPatch::PatchPointer(0x533507 + 6, &CStreaming__ms_aInfoForModel.bully_se[NumberOfStreamingInfos - 1]);	// mov     dword_CA3878, (offset _ZN10CStreaming16ms_aInfoForModelE.m_nextIndex+43330h)	; CStreaming::Init
+			CPatch::PatchPointer(0x53366A + 2, &CStreaming__ms_aInfoForModel.bully_se->m_status);	// mov     _ZN10CStreaming16ms_aInfoForModelE.m_status[eax], 1	; CStreaming::Init
 			CPatch::PatchPointer(0x53384E + 2, &CStreaming__ms_aInfoForModel.bully_se->iBlockCount);	// cmp     _ZN10CStreaming16ms_aInfoForModelE.iBlockCount[eax], ebx	; CStreaming::Init
 			CPatch::PatchPointer(0x5338B3 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_533880
-			CPatch::PatchPointer(0x5339A6 + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// test    _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], 2	; sub_533980
+			CPatch::PatchPointer(0x5339A6 + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// test    _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], 2	; sub_533980
 			CPatch::PatchPointer(0x533FC1 + 2, CStreaming__ms_aInfoForModel.bully_se);	// add     esi, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; _ZN10CStreaming22LoadAllRequestedModelsEb
-			CPatch::PatchPointer(0x534680 + 1, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// mov     eax, offset _ZN10CStreaming16ms_aInfoForModelE.ucFlags	; sub_534510
+			CPatch::PatchPointer(0x534680 + 1, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// mov     eax, offset _ZN10CStreaming16ms_aInfoForModelE.m_flags	; sub_534510
 			CPatch::PatchPointer(0x534916 + 1, CStreaming__ms_aInfoForModel.bully_se);	// add     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; sub_5348D0
-			CPatch::PatchPointer(0x5349AC + 2, &CStreaming__ms_aInfoForModel.bully_se->ucFlags);	// test    _ZN10CStreaming16ms_aInfoForModelE.ucFlags[eax], 0C0h	; sub_5348D0
+			CPatch::PatchPointer(0x5349AC + 2, &CStreaming__ms_aInfoForModel.bully_se->m_flags);	// test    _ZN10CStreaming16ms_aInfoForModelE.m_flags[eax], 0C0h	; sub_5348D0
 			CPatch::PatchPointer(0x8DDB80 + 1, CStreaming__ms_aInfoForModel.bully_se);	// mov     eax, offset _ZN10CStreaming16ms_aInfoForModelE; CStreaming::ms_aInfoForModel	; ms_aInfoForModel_constructor
 		}
 		#endif
@@ -16273,7 +16277,7 @@ void FileIDlimit::PatchUseFileBinarySearchByName()
 	CGenericLogStorage::WriteLineSeparator();
 }
 
-// Returns usPrev 
+// Returns m_prevIndex 
 int32_t FileIDlimit::GetFileInfoPrev(int32_t fileID)
 {
 	MAKE_VAR_GAME_VERSION();
@@ -16287,13 +16291,13 @@ int32_t FileIDlimit::GetFileInfoPrev(int32_t fileID)
 		MAKE_DEAD_IF();
 #ifdef IS_PLATFORM_WIN_X86
 		else if (gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.gta_iii[fileID].usPrev - this->CStreaming__ms_aInfoForModel.gta_iii;
+			result = this->CStreaming__ms_aInfoForModel.gta_iii[fileID].m_prevIndex - this->CStreaming__ms_aInfoForModel.gta_iii;
 		else if(gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.gta_vc[fileID].usPrev - this->CStreaming__ms_aInfoForModel.gta_vc;
+			result = this->CStreaming__ms_aInfoForModel.gta_vc[fileID].m_prevIndex - this->CStreaming__ms_aInfoForModel.gta_vc;
 		else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
-			result = this->CStreaming__ms_aInfoForModel.gta_sa[fileID].usPrev.raw;
+			result = this->CStreaming__ms_aInfoForModel.gta_sa[fileID].m_prevIndex.raw;
 		else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.bully_se[fileID].usPrev;
+			result = this->CStreaming__ms_aInfoForModel.bully_se[fileID].m_prevIndex;
 #endif
 
 		return result == 0xFFFF ? -1 : result;
@@ -16314,13 +16318,13 @@ int32_t FileIDlimit::GetFileInfoNext(int32_t fileID)
 		MAKE_DEAD_IF();
 		#ifdef IS_PLATFORM_WIN_X86
 		else if (gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.gta_iii[fileID].usNext - this->CStreaming__ms_aInfoForModel.gta_iii;
+			result = this->CStreaming__ms_aInfoForModel.gta_iii[fileID].m_nextIndex - this->CStreaming__ms_aInfoForModel.gta_iii;
 		else if (gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.gta_vc[fileID].usNext - this->CStreaming__ms_aInfoForModel.gta_vc;
+			result = this->CStreaming__ms_aInfoForModel.gta_vc[fileID].m_nextIndex - this->CStreaming__ms_aInfoForModel.gta_vc;
 		else if(CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
-			result = this->CStreaming__ms_aInfoForModel.gta_sa[fileID].usNext.raw;
+			result = this->CStreaming__ms_aInfoForModel.gta_sa[fileID].m_nextIndex.raw;
 		else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.bully_se[fileID].usNext;
+			result = this->CStreaming__ms_aInfoForModel.bully_se[fileID].m_nextIndex;
 		#endif
 
 		return result == 0xFFFF ? -1 : result;
@@ -16341,13 +16345,13 @@ int32_t FileIDlimit::GetFileInfoNextOnCD(int32_t fileID)
 		MAKE_DEAD_IF();
 		#ifdef IS_PLATFORM_WIN_X86
 		else if (gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.gta_iii[fileID].usNextOnCd;
+			result = this->CStreaming__ms_aInfoForModel.gta_iii[fileID].m_nextModelOnCd;
 		else if (gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.gta_vc[fileID].usNextOnCd;
+			result = this->CStreaming__ms_aInfoForModel.gta_vc[fileID].m_nextModelOnCd;
 		else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
-			result = this->CStreaming__ms_aInfoForModel.gta_sa[fileID].usNextOnCd.raw;
+			result = this->CStreaming__ms_aInfoForModel.gta_sa[fileID].m_nextModelOnCd.raw;
 		else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
-			result = this->CStreaming__ms_aInfoForModel.bully_se[fileID].usNextOnCd;
+			result = this->CStreaming__ms_aInfoForModel.bully_se[fileID].m_nextModelOnCd;
 		#endif
 
 		return result == 0xFFFF ? -1 : result;
@@ -16366,13 +16370,13 @@ void FileIDlimit::SetFileInfoPrev(int32_t fileID, int32_t newValue)
 		MAKE_DEAD_IF();
 		#ifdef IS_PLATFORM_WIN_X86
 		else if(gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
-			CStreaming__ms_aInfoForModel.gta_iii[fileID].usPrev = CStreaming__ms_aInfoForModel.gta_iii + newValue;
+			CStreaming__ms_aInfoForModel.gta_iii[fileID].m_prevIndex = CStreaming__ms_aInfoForModel.gta_iii + newValue;
 		else if (gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
-			CStreaming__ms_aInfoForModel.gta_vc[fileID].usPrev = CStreaming__ms_aInfoForModel.gta_vc + newValue;
+			CStreaming__ms_aInfoForModel.gta_vc[fileID].m_prevIndex = CStreaming__ms_aInfoForModel.gta_vc + newValue;
 		else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
-			this->CStreaming__ms_aInfoForModel.gta_sa[fileID].usPrev.raw = newValue;
+			this->CStreaming__ms_aInfoForModel.gta_sa[fileID].m_prevIndex.raw = newValue;
 		else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
-			this->CStreaming__ms_aInfoForModel.bully_se[fileID].usPrev = newValue;
+			this->CStreaming__ms_aInfoForModel.bully_se[fileID].m_prevIndex = newValue;
 		#endif
 	}
 }
@@ -16389,13 +16393,13 @@ void FileIDlimit::SetFileInfoNext(int32_t fileID, int32_t newValue)
 		MAKE_DEAD_IF();
 		#ifdef IS_PLATFORM_WIN_X86
 		else if (gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
-			CStreaming__ms_aInfoForModel.gta_iii[fileID].usNext = CStreaming__ms_aInfoForModel.gta_iii + newValue;
+			CStreaming__ms_aInfoForModel.gta_iii[fileID].m_nextIndex = CStreaming__ms_aInfoForModel.gta_iii + newValue;
 		else if (gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
-			CStreaming__ms_aInfoForModel.gta_vc[fileID].usNext = CStreaming__ms_aInfoForModel.gta_vc + newValue;
+			CStreaming__ms_aInfoForModel.gta_vc[fileID].m_nextIndex = CStreaming__ms_aInfoForModel.gta_vc + newValue;
 		else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
-			this->CStreaming__ms_aInfoForModel.gta_sa[fileID].usNext.raw = newValue;
+			this->CStreaming__ms_aInfoForModel.gta_sa[fileID].m_nextIndex.raw = newValue;
 		else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
-			this->CStreaming__ms_aInfoForModel.bully_se[fileID].usNext = newValue;
+			this->CStreaming__ms_aInfoForModel.bully_se[fileID].m_nextIndex = newValue;
 		#endif
 	}
 }
@@ -16412,13 +16416,13 @@ void FileIDlimit::SetFileInfoNextOnCD(int32_t fileID, int32_t newValue)
 		MAKE_DEAD_IF();
 		#ifdef IS_PLATFORM_WIN_X86
 		else if(gameVersion == GAME_VERSION_GTA_III_1_0_WIN_X86)
-			CStreaming__ms_aInfoForModel.gta_iii[fileID].usNextOnCd = newValue;
+			CStreaming__ms_aInfoForModel.gta_iii[fileID].m_nextModelOnCd = newValue;
 		else if (gameVersion == GAME_VERSION_GTA_VC_1_0_WIN_X86)
-			CStreaming__ms_aInfoForModel.gta_vc[fileID].usNextOnCd = newValue;
+			CStreaming__ms_aInfoForModel.gta_vc[fileID].m_nextModelOnCd = newValue;
 		else if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
-			this->CStreaming__ms_aInfoForModel.gta_sa[fileID].usNextOnCd.raw = newValue;
+			this->CStreaming__ms_aInfoForModel.gta_sa[fileID].m_nextModelOnCd.raw = newValue;
 		else if (gameVersion == GAME_VERSION_BULLY_SE_1_2_WIN_X86)
-			this->CStreaming__ms_aInfoForModel.bully_se[fileID].usNextOnCd = newValue;
+			this->CStreaming__ms_aInfoForModel.bully_se[fileID].m_nextModelOnCd = newValue;
 		#endif
 	}
 }

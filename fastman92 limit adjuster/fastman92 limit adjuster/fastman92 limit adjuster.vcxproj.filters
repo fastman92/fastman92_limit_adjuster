@@ -1170,4 +1170,9 @@
   <ItemGroup>
     <Text Include="$(FASTMAN92_INCLUDE)\Info.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Source files\resources\resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
 </Project>

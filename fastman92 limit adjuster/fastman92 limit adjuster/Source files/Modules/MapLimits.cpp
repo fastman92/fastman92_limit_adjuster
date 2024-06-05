@@ -5107,6 +5107,113 @@ extern "C"
 	
 }
 
+namespace Game_GTASA
+{
+	extern "C"
+	{
+		MAKE_GTA_SA_CPATH_FIND(CPathFind, STRUCTURE_MEMBER_OFFSET_VARIABLE_DEFINITION);
+
+		// m_field_1544
+		#define NAMEOF_m_field_1544_index(index) Offset_CPathFind__m_field_1544_index_##index
+
+		#define MAKE_m_field_1544_indices(macro) \
+			macro(0); \
+			macro(1); \
+			macro(2); \
+			macro(3); \
+			macro(4); \
+			macro(5); \
+			macro(6); \
+			macro(7); \
+			macro(8); \
+			macro(9); \
+			macro(10); \
+			macro(11); \
+			macro(12); \
+			macro(13); \
+			macro(14); \
+			macro(15);
+
+		#define m_field_1544_indices_DEFINITION(index) uint32_t NAMEOF_m_field_1544_index(index)
+
+		MAKE_m_field_1544_indices(m_field_1544_indices_DEFINITION)
+
+			#define MAKE_m_field_1544_plus_1024_indices(macro) \
+			macro(1024); \
+			macro(1025); \
+			macro(1026); \
+			macro(1027); \
+			macro(1028); \
+			macro(1029); \
+			macro(1030); \
+			macro(1031); \
+			macro(1032); \
+			macro(1033); \
+			macro(1034); \
+			macro(1035); \
+			macro(1036); \
+			macro(1037); \
+			macro(1038); \
+			macro(1039);
+
+			MAKE_m_field_1544_plus_1024_indices(m_field_1544_indices_DEFINITION)
+
+			// m_interiorAreaIDarray
+			#define NAMEOF_m_interiorNodes_index(index) Offset_CPathFind__m_interiorAreaIDarray_index_##index
+			#define MAKE_interior_indices(macro) \
+			macro(0); \
+			macro(1); \
+			macro(2); \
+			macro(3); \
+			macro(4); \
+			macro(5); \
+			macro(6); \
+			macro(7);
+
+			#define m_interiorNodes_indices_DEFINITION(index) uint32_t NAMEOF_m_interiorNodes_index(index);
+			MAKE_interior_indices(m_interiorNodes_indices_DEFINITION);
+
+		uint32_t Offset_CPathFind__m_dwNumAddresses_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__m_dwNumCarPathLinks_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__m_dwNumPedNodes_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__m_dwNumVehicleNodes_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__m_dwNumNodes_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__pPathIntersections_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__m_pLinkLengths_index_1 = 0;
+		uint32_t Offset_CPathFind__m_pLinkLengths_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathFind__m_pNodeLinks_index_1 = 0;
+		uint32_t Offset_CPathFind__m_pNodeLinks_index_TotalNumberOfPathFile = 0;
+		uint32_t Offset_CPathNode_index_1_m_dwFlags = 0;
+
+		int iNumberOfPathFilesPerDimensionNegated;
+		int iNumberOfPathFilesPerDimensionTimes2Negated;
+		int iNumberOfPathFilesPerDimensionTimes2Plus1Negated;
+		int iNumberOfPathFilesPerDimensionTimes2Plus2Negated;
+		int iNumberOfPathFilesPerDimensionPlus1;
+		unsigned int iNumberOfPathFilesPerDimension_multiplied_by_sizeof_CNodeAddress;
+		int iTotalNumberOfPathFilesNegatedCNodeAddressMask;
+
+		uint32_t Offset_CPathFind__m_pPathNodes_divided_by_sizeOf_CNodeAddress_minus_NumberOfPathFilesPerDimension_minus_2;
+
+		// for interior nodes
+		#define MAKE_interior_indices_plus_totalNumberOfPathFiles(macro) \
+			macro(64); \
+			macro(65); \
+			macro(66); \
+			macro(67); \
+			macro(68); \
+			macro(69); \
+			macro(70); \
+			macro(71);
+		#define NAMEOF_totalNumberOfPathFiles_index(index) iTotalNumberOfPathFiles_plus_##index
+		#define totalNumberOfPathFiles_indices_DEFINITION(index) uint32_t NAMEOF_totalNumberOfPathFiles_index(index)
+		MAKE_interior_indices_plus_totalNumberOfPathFiles(totalNumberOfPathFiles_indices_DEFINITION);
+
+		/////
+		
+	}
+}
+
 // Does the initialising work for patching the paths map size
 bool MapLimits::PatchPaths_DoInitialisingWork()
 {
@@ -5172,6 +5279,52 @@ bool MapLimits::PatchPaths_DoInitialisingWork()
 			);
 	}
 	#endif
+
+	// Set variables
+	#if TRUE
+	{
+		MAKE_GTA_SA_CPATH_FIND(CPathFind, STRUCTURE_MEMBER_OFFSET_VARIABLE_ASSIGNMENT);
+
+		// m_field_1544
+		#define m_field_1544_indices_ASSIGNMENT(index) NAMEOF_m_field_1544_index(index) = CPathFind::m_field_1544.GetOffset() + index * sizeof(void*)
+		#define m_field_1544_plus_1024_indices_ASSIGNMENT(index) NAMEOF_m_field_1544_index(index) = CPathFind::m_field_1544.GetOffset() + (CPathFind_field_1544_numberOfElementsPerPathFile + index) * sizeof(void*)
+
+		MAKE_m_field_1544_indices(m_field_1544_indices_ASSIGNMENT);
+		MAKE_m_field_1544_plus_1024_indices(m_field_1544_plus_1024_indices_ASSIGNMENT);
+
+		// m_interiorAreaIDarray
+		#define m_interiorNodes_indices_ASSIGNMENT(index) NAMEOF_m_interiorNodes_index(index) = CPathFind::m_interiorAreaIDarray.GetOffset() + index * sizeof(CNodeAddress)
+		MAKE_interior_indices(m_interiorNodes_indices_ASSIGNMENT);
+
+		// totalNumberOfPathFiles__indices
+		#define totalNumberOfPathFiles__indices_ASSIGNMENT(index) NAMEOF_totalNumberOfPathFiles_index(index) = iTotalNumberOfPathFiles + index;
+		MAKE_interior_indices_plus_totalNumberOfPathFiles(totalNumberOfPathFiles__indices_ASSIGNMENT);
+
+		Offset_CPathFind__m_dwNumAddresses_index_TotalNumberOfPathFile = CPathFind::m_dwNumAddresses.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t*);
+		Offset_CPathFind__m_dwNumCarPathLinks_index_TotalNumberOfPathFile = CPathFind::m_dwNumCarPathLinks.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t);
+		Offset_CPathFind__m_dwNumPedNodes_index_TotalNumberOfPathFile = CPathFind::m_dwNumPedNodes.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t);
+		Offset_CPathFind__m_dwNumVehicleNodes_index_TotalNumberOfPathFile = CPathFind::m_dwNumVehicleNodes.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t*);
+		Offset_CPathFind__m_dwNumNodes_index_TotalNumberOfPathFile = CPathFind::m_dwNumNodes.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t*);
+
+		Offset_CPathFind__pPathIntersections_index_TotalNumberOfPathFile = CPathFind::m_pPathIntersections.GetOffset() + iTotalNumberOfPathFiles * sizeof(void*);
+		Offset_CPathFind__m_pLinkLengths_index_1 = CPathFind::m_pLinkLengths.GetOffset() + 1 * sizeof(void*);
+		Offset_CPathFind__m_pLinkLengths_index_TotalNumberOfPathFile = CPathFind::m_pLinkLengths.GetOffset() + iTotalNumberOfPathFiles * sizeof(void*);
+		Offset_CPathFind__m_pNodeLinks_index_1 = CPathFind::m_pNodeLinks.GetOffset() + 1 * sizeof(void*);
+		Offset_CPathFind__m_pNodeLinks_index_TotalNumberOfPathFile = CPathFind::m_pNodeLinks.GetOffset() + iTotalNumberOfPathFiles * sizeof(void*);
+		Offset_CPathNode_index_1_m_dwFlags = SizeOfCPathNode + offsetof(CPathNode, m_dwFlags);
+
+		iNumberOfPathFilesPerDimensionNegated = -iNumberOfPathFilesPerDimension;
+		iNumberOfPathFilesPerDimensionTimes2Negated = -(iNumberOfPathFilesPerDimension * 2);
+		iNumberOfPathFilesPerDimensionTimes2Plus1Negated = -(iNumberOfPathFilesPerDimension * 2 + 1);
+		iNumberOfPathFilesPerDimensionTimes2Plus2Negated = -(iNumberOfPathFilesPerDimension * 2 + 2);
+		iNumberOfPathFilesPerDimensionPlus1 = iNumberOfPathFilesPerDimension + 1;
+		iNumberOfPathFilesPerDimension_multiplied_by_sizeof_CNodeAddress = iNumberOfPathFilesPerDimension * sizeof(CNodeAddress);
+		iTotalNumberOfPathFilesNegatedCNodeAddressMask = (~iTotalNumberOfPathFilesMinusOne) & 0xFFFF;
+		
+		Offset_CPathFind__m_pPathNodes_divided_by_sizeOf_CNodeAddress_minus_NumberOfPathFilesPerDimension_minus_2 =
+			(CPathFind::m_pPathNodes.standard.GetOffset() / sizeof(CNodeAddress)) - iNumberOfPathFilesPerDimension - 2;
+	}
+	#endif	
 
 	// Allocate memory
 	#if TRUE
@@ -9766,109 +9919,6 @@ void MapLimits::PatchPaths_GTA_SA_PC_1_0_HOODLUM()
 #ifdef IS_PLATFORM_ANDROID_ARMEABI_V7A
 namespace Game_GTASA
 {
-	extern "C"
-	{
-		MAKE_GTA_SA_CPATH_FIND(CPathFind, STRUCTURE_MEMBER_OFFSET_VARIABLE_DEFINITION);
-
-		// m_field_1544
-		#define NAMEOF_m_field_1544_index(index) Offset_CPathFind__m_field_1544_index_##index
-
-		#define MAKE_m_field_1544_indices(macro) \
-			macro(0); \
-			macro(1); \
-			macro(2); \
-			macro(3); \
-			macro(4); \
-			macro(5); \
-			macro(6); \
-			macro(7); \
-			macro(8); \
-			macro(9); \
-			macro(10); \
-			macro(11); \
-			macro(12); \
-			macro(13); \
-			macro(14); \
-			macro(15);
-
-		#define m_field_1544_indices_DEFINITION(index) uint32_t NAMEOF_m_field_1544_index(index)
-
-		MAKE_m_field_1544_indices(m_field_1544_indices_DEFINITION)
-
-			#define MAKE_m_field_1544_plus_1024_indices(macro) \
-			macro(1024); \
-			macro(1025); \
-			macro(1026); \
-			macro(1027); \
-			macro(1028); \
-			macro(1029); \
-			macro(1030); \
-			macro(1031); \
-			macro(1032); \
-			macro(1033); \
-			macro(1034); \
-			macro(1035); \
-			macro(1036); \
-			macro(1037); \
-			macro(1038); \
-			macro(1039);
-
-			MAKE_m_field_1544_plus_1024_indices(m_field_1544_indices_DEFINITION)
-
-			// m_interiorAreaIDarray
-			#define NAMEOF_m_interiorNodes_index(index) Offset_CPathFind__m_interiorAreaIDarray_index_##index
-			#define MAKE_interior_indices(macro) \
-			macro(0); \
-			macro(1); \
-			macro(2); \
-			macro(3); \
-			macro(4); \
-			macro(5); \
-			macro(6); \
-			macro(7);
-
-			#define m_interiorNodes_indices_DEFINITION(index) uint32_t NAMEOF_m_interiorNodes_index(index);
-			MAKE_interior_indices(m_interiorNodes_indices_DEFINITION);
-
-		uint32_t Offset_CPathFind__m_dwNumAddresses_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__m_dwNumCarPathLinks_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__m_dwNumPedNodes_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__m_dwNumVehicleNodes_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__m_dwNumNodes_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__pPathIntersections_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__m_pLinkLengths_index_1 = 0;
-		uint32_t Offset_CPathFind__m_pLinkLengths_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathFind__m_pNodeLinks_index_1 = 0;
-		uint32_t Offset_CPathFind__m_pNodeLinks_index_TotalNumberOfPathFile = 0;
-		uint32_t Offset_CPathNode_index_1_m_dwFlags = 0;
-
-		int iNumberOfPathFilesPerDimensionNegated;
-		int iNumberOfPathFilesPerDimensionTimes2Negated;
-		int iNumberOfPathFilesPerDimensionTimes2Plus1Negated;
-		int iNumberOfPathFilesPerDimensionTimes2Plus2Negated;
-		int iNumberOfPathFilesPerDimensionPlus1;
-		unsigned int iNumberOfPathFilesPerDimension_multiplied_by_sizeof_CNodeAddress;
-		int iTotalNumberOfPathFilesNegatedCNodeAddressMask;
-
-		uint32_t Offset_CPathFind__m_pPathNodes_divided_by_sizeOf_CNodeAddress_minus_NumberOfPathFilesPerDimension_minus_2;
-
-		// for interior nodes
-		#define MAKE_interior_indices_plus_totalNumberOfPathFiles(macro) \
-			macro(64); \
-			macro(65); \
-			macro(66); \
-			macro(67); \
-			macro(68); \
-			macro(69); \
-			macro(70); \
-			macro(71);
-		#define NAMEOF_totalNumberOfPathFiles_index(index) iTotalNumberOfPathFiles_plus_##index
-		#define totalNumberOfPathFiles_indices_DEFINITION(index) uint32_t NAMEOF_totalNumberOfPathFiles_index(index)
-		MAKE_interior_indices_plus_totalNumberOfPathFiles(totalNumberOfPathFiles_indices_DEFINITION);
-
-		/////
-		
-	}
 
 	// Automatic patches
 	#include "PathsMapSize/GTA SA 2.0 ANDROID_ARMEABI_V7A/functions.cpp"
@@ -10710,52 +10760,6 @@ void MapLimits::PatchPaths_GTA_SA_2_0_ANDROID_ARM32()
 
 	if (!this->PatchPaths_DoInitialisingWork())
 		return;
-
-	// Set variables
-	#if TRUE
-	{
-		MAKE_GTA_SA_CPATH_FIND(CPathFind, STRUCTURE_MEMBER_OFFSET_VARIABLE_ASSIGNMENT);
-
-		// m_field_1544
-		#define m_field_1544_indices_ASSIGNMENT(index) NAMEOF_m_field_1544_index(index) = CPathFind::m_field_1544.GetOffset() + index * sizeof(void*)
-		#define m_field_1544_plus_1024_indices_ASSIGNMENT(index) NAMEOF_m_field_1544_index(index) = CPathFind::m_field_1544.GetOffset() + (CPathFind_field_1544_numberOfElementsPerPathFile + index) * sizeof(void*)
-
-		MAKE_m_field_1544_indices(m_field_1544_indices_ASSIGNMENT);
-		MAKE_m_field_1544_plus_1024_indices(m_field_1544_plus_1024_indices_ASSIGNMENT);
-
-		// m_interiorAreaIDarray
-		#define m_interiorNodes_indices_ASSIGNMENT(index) NAMEOF_m_interiorNodes_index(index) = CPathFind::m_interiorAreaIDarray.GetOffset() + index * sizeof(CNodeAddress)
-		MAKE_interior_indices(m_interiorNodes_indices_ASSIGNMENT);
-
-		// totalNumberOfPathFiles__indices
-		#define totalNumberOfPathFiles__indices_ASSIGNMENT(index) NAMEOF_totalNumberOfPathFiles_index(index) = iTotalNumberOfPathFiles + index;
-		MAKE_interior_indices_plus_totalNumberOfPathFiles(totalNumberOfPathFiles__indices_ASSIGNMENT);
-
-		Offset_CPathFind__m_dwNumAddresses_index_TotalNumberOfPathFile = CPathFind::m_dwNumAddresses.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t*);
-		Offset_CPathFind__m_dwNumCarPathLinks_index_TotalNumberOfPathFile = CPathFind::m_dwNumCarPathLinks.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t);
-		Offset_CPathFind__m_dwNumPedNodes_index_TotalNumberOfPathFile = CPathFind::m_dwNumPedNodes.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t);
-		Offset_CPathFind__m_dwNumVehicleNodes_index_TotalNumberOfPathFile = CPathFind::m_dwNumVehicleNodes.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t*);
-		Offset_CPathFind__m_dwNumNodes_index_TotalNumberOfPathFile = CPathFind::m_dwNumNodes.GetOffset() + iTotalNumberOfPathFiles * sizeof(uint32_t*);
-
-		Offset_CPathFind__pPathIntersections_index_TotalNumberOfPathFile = CPathFind::m_pPathIntersections.GetOffset() + iTotalNumberOfPathFiles * sizeof(void*);
-		Offset_CPathFind__m_pLinkLengths_index_1 = CPathFind::m_pLinkLengths.GetOffset() + 1 * sizeof(void*);
-		Offset_CPathFind__m_pLinkLengths_index_TotalNumberOfPathFile = CPathFind::m_pLinkLengths.GetOffset() + iTotalNumberOfPathFiles * sizeof(void*);
-		Offset_CPathFind__m_pNodeLinks_index_1 = CPathFind::m_pNodeLinks.GetOffset() + 1 * sizeof(void*);
-		Offset_CPathFind__m_pNodeLinks_index_TotalNumberOfPathFile = CPathFind::m_pNodeLinks.GetOffset() + iTotalNumberOfPathFiles * sizeof(void*);
-		Offset_CPathNode_index_1_m_dwFlags = SizeOfCPathNode + offsetof(CPathNode, m_dwFlags);
-
-		iNumberOfPathFilesPerDimensionNegated = -iNumberOfPathFilesPerDimension;
-		iNumberOfPathFilesPerDimensionTimes2Negated = -(iNumberOfPathFilesPerDimension * 2);
-		iNumberOfPathFilesPerDimensionTimes2Plus1Negated = -(iNumberOfPathFilesPerDimension * 2 + 1);
-		iNumberOfPathFilesPerDimensionTimes2Plus2Negated = -(iNumberOfPathFilesPerDimension * 2 + 2);
-		iNumberOfPathFilesPerDimensionPlus1 = iNumberOfPathFilesPerDimension + 1;
-		iNumberOfPathFilesPerDimension_multiplied_by_sizeof_CNodeAddress = iNumberOfPathFilesPerDimension * sizeof(CNodeAddress);
-		iTotalNumberOfPathFilesNegatedCNodeAddressMask = (~iTotalNumberOfPathFilesMinusOne) & 0xFFFF;
-		
-		Offset_CPathFind__m_pPathNodes_divided_by_sizeOf_CNodeAddress_minus_NumberOfPathFilesPerDimension_minus_2 =
-			(CPathFind::m_pPathNodes.standard.GetOffset() / sizeof(CNodeAddress)) - iNumberOfPathFilesPerDimension - 2;
-	}
-	#endif	
 
 	// Patch pointers to ToBeStreamed
 	#if TRUE
@@ -13250,7 +13254,7 @@ void MapLimits::Initialise()
 
 				NumTempExternalNodes = (uint32_t*)0x96F030;
 			}
-			#elif defined(IS_PLATFORM_ANDROID_ARM32)
+			#elif defined(IS_PLATFORM_ANDROID)
 			{
 				// Water quads and triangles in each block
 				this->CWaterLevel__m_QuadsAndTrianglesInEachBlock.ptr = (int16_t*)Library::GetSymbolAddress(

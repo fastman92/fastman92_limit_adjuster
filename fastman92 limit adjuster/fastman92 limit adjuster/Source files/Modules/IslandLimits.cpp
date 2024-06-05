@@ -182,8 +182,8 @@ namespace Game_GTASA_PC_HOODLUM
 				CStreaming::RequestModel(pedModelID, 8);
 				CStreaming::RequestModel(carModelID, 8);
 
-				if (g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[pedModelID].uiLoadFlag == 1
-					&& g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[carModelID].uiLoadFlag == 1
+				if (g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[pedModelID].m_status == 1
+					&& g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[carModelID].m_status == 1
 					)
 					return true;
 			}
@@ -214,7 +214,7 @@ namespace Game_GTASA_PC_HOODLUM
 	{
 		unsigned int lastDriverID = g_islandLimits.ms_CabDriverPedIDsPerIsland[CStreaming::LastSelectedCabDriver];
 
-		if (lastDriverID == 0xFFFFFFFF || !g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[lastDriverID].uiLoadFlag)
+		if (lastDriverID == 0xFFFFFFFF || !g_fileIDlimits.CStreaming__ms_aInfoForModel.gta_sa[lastDriverID].m_status)
 		{
 			int currLevel = *(int*)0xBA6718;
 

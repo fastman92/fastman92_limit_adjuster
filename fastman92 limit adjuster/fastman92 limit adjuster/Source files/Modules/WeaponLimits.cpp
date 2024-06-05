@@ -4453,7 +4453,7 @@ namespace Game_GTASA
 			imul eax, SIZE CStreamingInfo;
 			add eax, ASM_ACCESS_LIMIT_VAR_32_BIT(g_fileIDlimits, FileIDlimit, CStreaming__ms_aInfoForModel);
 
-			cmp byte ptr[eax + CStreamingInfo::uiLoadFlag], 1;
+			cmp byte ptr[eax + CStreamingInfo::m_status], 1;
 
 			push    esi;
 			mov     esi, ecx;

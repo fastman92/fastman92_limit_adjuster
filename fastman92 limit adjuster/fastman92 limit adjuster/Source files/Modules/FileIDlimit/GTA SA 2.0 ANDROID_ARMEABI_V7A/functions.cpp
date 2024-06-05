@@ -1,4 +1,4 @@
-// Compilation time: 3 seconds 322 ms
+// Compilation time: 2 seconds 829 ms
 
 // patch for 0x280298
 extern "C"
@@ -76,7 +76,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CIplStore__Shutdown_280434()
 {
 	__asm(
 	".thumb\n"
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags)
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CIplStore__Shutdown_28043C_thumb)
 		);
 }
@@ -156,7 +156,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CIplStore__RemoveAllIpls_2805FE
 {
 	__asm(
 	".thumb\n"
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_flags)
 		"MOVS R5, #0\n"
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CIplStore__RemoveAllIpls_280608_thumb)
 		);
@@ -305,6 +305,22 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemor
 
 		// Data
 		ASM_PUT_CONSTANT_FLOAT(101, -190.0)
+		);
+}
+
+// patch for 0x281BB4
+extern "C"
+{
+	uintptr_t Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BBC_thumb = 0;
+}
+
+static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BB4()
+{
+	__asm(
+	".thumb\n"
+		ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_IPL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_m_status_then_minus_1312)
+		"ADD R6, R0, #0x530\n"
+		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CIplStore__EnsureIplsAreInMemory_281BBC_thumb)
 		);
 }
 
@@ -985,7 +1001,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CStreaming__RequestModel_2D2A88
 	__asm(
 	".thumb\n"
 		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_TXD_BASE_ID)
-		"MOV R1, #0x1387\n"
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_TXD_COUNT_MINUS_ONE)
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CStreaming__RequestModel_2D2A90_thumb)
 		);
 }
@@ -1527,7 +1543,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CStreaming__RequestModelStream_
 {
 	__asm(
 	".thumb\n"
-		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag)
+		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R1, FILE_TYPE_IFP_BASE_ID_multiplied_by_sizeof_CStreamingInfo_plus_m_status)
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CStreaming__RequestModelStream_2D4194_thumb)
 		);
 }
@@ -1921,7 +1937,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CColStore__EnsureCollisionIsInM
 {
 	__asm(
 	".thumb\n"
-		ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_uiLoadFlag_then_minus_324)
+		ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_then_minus_308)
 		"ADD R6, R0, #0x144\n"
 		"LDR R0, =("/* _ZN9CColStore11ms_pColPoolE_ptr */"0x679660 - 0x2E2CAC)\n"
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CColStore__EnsureCollisionIsInMemory_2E2CA8_thumb)
@@ -2088,7 +2104,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CColStore__RemoveAllCollision_2
 		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R8, FILE_TYPE_COL_BASE_ID_PLUS_ONE)
 		ASM_ADD_ADDRESS_STORED_ON_SYMBOL(R0, Address_GTA_SA_2_00_CColStore__RemoveAllCollision_2E308C)
 		"LDR R0, [R0]\n"
-		ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_plus_ucFlags_then_minus_314)
+		ASM_ADD_4BYTE_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_COL_BASE_ID_PLUS_ONE_then_multiplied_by_sizeof_CStreamingInfo_then_minus_308)
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CColStore__RemoveAllCollision_2E3090_thumb)
 		);
 }
@@ -3443,7 +3459,7 @@ static TARGET_THUMB NAKED void patch_GTA_SA_2_00_CIplStore__Save_48E39A()
 		ASM_LOAD_4BYTE_SIGNED_VALUE_STORED_ON_SYMBOL(R0, FILE_TYPE_IPL_COUNT)
 		"STR R0, [R4]\n"
 		"MOV R0, R4\n"
-		"MOVS R1, #4\n"
+		"MOVS R1, #"/* byte_4 */"0x4\n"
 		ASM_JUMP_TO_ADDRESS_STORED_ON_SYMBOL(Address_GTA_SA_2_00_CIplStore__Save_48E3A4_thumb)
 		);
 }

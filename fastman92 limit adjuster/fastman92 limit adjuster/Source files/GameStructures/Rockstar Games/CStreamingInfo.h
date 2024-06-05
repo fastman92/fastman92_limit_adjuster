@@ -14,11 +14,11 @@ namespace Game_GTAIII
 {
 	struct CStreamingInfo
 	{
-		CStreamingInfo *usNext;
-		CStreamingInfo* usPrev;
-		char uiLoadFlag;
-		char ucFlags;
-		uint16_t usNextOnCd;
+		CStreamingInfo *m_nextIndex;
+		CStreamingInfo* m_prevIndex;
+		char m_status;
+		char m_flags;
+		uint16_t m_nextModelOnCd;
 		int iBlockOffset;
 		int iBlockCount;
 
@@ -37,11 +37,11 @@ namespace Game_GTAVC
 	class CStreamingInfo
 	{
 	public:
-	  CStreamingInfo *usNext;
-	  CStreamingInfo *usPrev;
-	  char uiLoadFlag;
+	  CStreamingInfo *m_nextIndex;
+	  CStreamingInfo *m_prevIndex;
+	  char m_status;
 	  char flags;
-	  uint16_t usNextOnCd;
+	  uint16_t m_nextModelOnCd;
 	  int FilePositionInBlocks;
 	  int _unk_inCdImage;
 
@@ -60,14 +60,14 @@ namespace Game_GTASA
 	class CStreamingInfo
 	{
 	public:
-		CFileIDex usNext;		// unused when 32-bit indices on
-		CFileIDex usPrev;		// unused when 32-bit indices on
-		CFileIDex usNextOnCd;	// unused when 32-bit indices on
-		char ucFlags;
-		uint8_t ucImgId;
+		CFileIDex m_nextIndex;		// unused when 32-bit indices on
+		CFileIDex m_prevIndex;		// unused when 32-bit indices on
+		CFileIDex m_nextModelOnCd;	// unused when 32-bit indices on
+		char m_flags;
+		uint8_t m_image;
 		int iBlockOffset;		// m_OriginalSizeInSectors
 		int iBlockCount;
-		uint8_t uiLoadFlag;
+		uint8_t m_status;
 
 		// Returns position and size of file
 		bool GetCdPosnAndSize(unsigned int &outBlockOffsetWithStreamHandle, unsigned int &outBlockCount);
@@ -84,11 +84,11 @@ namespace Game_BullyScholarschipEdition
 {
 	struct CStreamingInfo
 	{
-		uint16_t usNext;
-		uint16_t usPrev;
-		uint8_t uiLoadFlag;
-		char ucFlags;
-		uint16_t usNextOnCd;
+		uint16_t m_nextIndex;
+		uint16_t m_prevIndex;
+		uint8_t m_status;
+		char m_flags;
+		uint16_t m_nextModelOnCd;
 		int iBlockOffset;
 		int iBlockCount;
 	};

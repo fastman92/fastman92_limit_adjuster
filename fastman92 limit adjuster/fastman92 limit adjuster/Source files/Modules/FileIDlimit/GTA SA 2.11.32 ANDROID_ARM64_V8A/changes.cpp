@@ -7,17 +7,32 @@ CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x427B44), (void*)&patch_G
 Address_GTA_SA_2_11_32_CIplStore__Initialise_45F538_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F538), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F534), (void*)&patch_GTA_SA_2_11_32_CIplStore__Initialise_45F534, 4);
 
+Address_GTA_SA_2_11_32_CIplStore__Initialise_45F544_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F544), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F540), (void*)&patch_GTA_SA_2_11_32_CIplStore__Initialise_45F540, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__Initialise_45F5B0_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F5B0), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F5AC), (void*)&patch_GTA_SA_2_11_32_CIplStore__Initialise_45F5AC, 4);
+
 Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F770_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F770), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F768), (void*)&patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F768, 8);
 
 Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F780_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F780), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F77C), (void*)&patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F77C, 4);
 
+Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F790_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F790), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F78C), (void*)&patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F78C, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__Shutdown_45F7E0_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F7E0), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F7DC), (void*)&patch_GTA_SA_2_11_32_CIplStore__Shutdown_45F7DC, 4);
+
 Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F900_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F900), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F8F8), (void*)&patch_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F8F8, 8);
 
 Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F910_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F910), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F90C), (void*)&patch_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F90C, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F920_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x45F920), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x45F91C), (void*)&patch_GTA_SA_2_11_32_CIplStore__RemoveAllIpls_45F91C, 4);
 
 Address_GTA_SA_2_11_32_CIplStore__SetupRelatedIpls_460D9C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x460D9C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x460D98), (void*)&patch_GTA_SA_2_11_32_CIplStore__SetupRelatedIpls_460D98, 4);
@@ -28,14 +43,29 @@ CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x460F30), (void*)&patch_G
 Address_GTA_SA_2_11_32_CIplStore__LoadIpls_4614A8_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x4614A8), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x4614A4), (void*)&patch_GTA_SA_2_11_32_CIplStore__LoadIpls_4614A4, 4);
 
+Address_GTA_SA_2_11_32_CIplStore__LoadIpls_4614BC_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x4614BC), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x4614B8), (void*)&patch_GTA_SA_2_11_32_CIplStore__LoadIpls_4614B8, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461614_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461614), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x46160C), (void*)&patch_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_46160C, 8);
+
 Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461628_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461628), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461624), (void*)&patch_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461624, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_461650_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461650), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x46164C), (void*)&patch_GTA_SA_2_11_32_CIplStore__EnsureIplsAreInMemory_46164C, 4);
 
 Address_GTA_SA_2_11_32_CIplStore__RequestIpls_46176C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x46176C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461768), (void*)&patch_GTA_SA_2_11_32_CIplStore__RequestIpls_461768, 4);
 
+Address_GTA_SA_2_11_32_CIplStore__RequestIpls_46177C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x46177C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461778), (void*)&patch_GTA_SA_2_11_32_CIplStore__RequestIpls_461778, 4);
+
 Address_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_461870_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461870), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x46186C), (void*)&patch_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_46186C, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_46187C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x46187C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461878), (void*)&patch_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_461878, 4);
 
 Address_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_461924_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461924), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461920), (void*)&patch_GTA_SA_2_11_32_CIplStore__HaveIplsLoaded_461920, 4);
@@ -46,11 +76,17 @@ CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461948), (void*)&patch_G
 Address_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619BC_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x4619BC), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x4619B8), (void*)&patch_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619B8, 4);
 
+Address_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619EC_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x4619EC), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x4619E8), (void*)&patch_GTA_SA_2_11_32_CIplStore__LoadAllRemainingIpls_4619E8, 4);
+
 Address_GTA_SA_2_11_32_CIplStore__RequestIplAndIgnore_461AF4_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461AF4), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461AF0), (void*)&patch_GTA_SA_2_11_32_CIplStore__RequestIplAndIgnore_461AF0, 4);
 
 Address_GTA_SA_2_11_32_CIplStore__RemoveIplAndIgnore_461B54_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461B54), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461B50), (void*)&patch_GTA_SA_2_11_32_CIplStore__RemoveIplAndIgnore_461B50, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__RemoveIplWhenFarAway_461BA4_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x461BA4), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x461BA0), (void*)&patch_GTA_SA_2_11_32_CIplStore__RemoveIplWhenFarAway_461BA0, 4);
 
 Address_GTA_SA_2_11_32_CStreaming__ReInit_462A30_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x462A30), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x462A28), (void*)&patch_GTA_SA_2_11_32_CStreaming__ReInit_462A28, 8);
@@ -139,11 +175,17 @@ CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465780), (void*)&patch_G
 Address_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_46581C_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x46581C), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465818), (void*)&patch_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465818, 4);
 
+Address_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465824_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x465824), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465820), (void*)&patch_GTA_SA_2_11_32_CStreaming__ProcessLoadingChannel_465820, 4);
+
 Address_GTA_SA_2_11_32_CStreaming__RequestModel_465D98_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x465D98), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465D94), (void*)&patch_GTA_SA_2_11_32_CStreaming__RequestModel_465D94, 4);
 
 Address_GTA_SA_2_11_32_CStreaming__RequestModel_465E74_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x465E74), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465E70), (void*)&patch_GTA_SA_2_11_32_CStreaming__RequestModel_465E70, 4);
+
+Address_GTA_SA_2_11_32_CStreaming__RequestModel_465E80_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x465E80), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465E78), (void*)&patch_GTA_SA_2_11_32_CStreaming__RequestModel_465E78, 8);
 
 Address_GTA_SA_2_11_32_CStreaming__RequestModel_465E90_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x465E90), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x465E8C), (void*)&patch_GTA_SA_2_11_32_CStreaming__RequestModel_465E8C, 4);
@@ -552,6 +594,12 @@ CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x612C6C), (void*)&patch_G
 
 Address_GTA_SA_2_11_32_CScriptResourceManager__Load_617498_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x617498), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x617494), (void*)&patch_GTA_SA_2_11_32_CScriptResourceManager__Load_617494, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__Save_61AB98_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x61AB98), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x61AB94), (void*)&patch_GTA_SA_2_11_32_CIplStore__Save_61AB94, 4);
+
+Address_GTA_SA_2_11_32_CIplStore__Save_61ABE0_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x61ABE0), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
+CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x61ABDC), (void*)&patch_GTA_SA_2_11_32_CIplStore__Save_61ABDC, 4);
 
 Address_GTA_SA_2_11_32_CPed___CPed_631494_arm64 = (uintptr_t)CPatch::AllocRedirection(g_mCalc.GetCurrentVAbyPreferedVA(0x631494), INSTRUCTION_SET_ARM64, TRAMPOLINE_REGISTER_RESTORE_REGISTER);
 CPatch::RedirectCode(g_mCalc.GetCurrentVAbyPreferedVA(0x631490), (void*)&patch_GTA_SA_2_11_32_CPed___CPed_631490, 4);

@@ -22,9 +22,9 @@
 extern "C" {
 	struct tImgDescriptorInGTASA
 	{
-		char name[40];
-		char isNotPlayerImg;
-		int streamHandle;
+		char m_name[40];
+		char m_bRegister;
+		int m_lsn;
 	};
 
 	// GTA SA IMG loading call

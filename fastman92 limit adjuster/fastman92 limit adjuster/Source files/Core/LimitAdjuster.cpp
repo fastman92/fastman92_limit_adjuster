@@ -2910,7 +2910,7 @@ namespace Configuration
 		{
 			"Number of requested models above which the game considers loading very busy",
 		BEGIN_FIELD_FUNCTION
-			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
+			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion) || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 			{
 				pField->SetIntValue(
 					g_streamingLimits.NumberOfRequestedModelsWhenGameConsidersLoadingVeryBusy,
@@ -2924,7 +2924,7 @@ namespace Configuration
 		{
 			"Minimum number of iterations in LoadAllRequestedModels",
 		BEGIN_FIELD_FUNCTION
-			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion))
+			if (CGameVersion::Is_GTA_SA_1_0_US_WIN_X86(gameVersion) || gameVersion == GAME_VERSION_GTA_SA_2_00_ANDROID_ARMEABI_V7A)
 			{
 				pField->SetIntValue(
 					g_streamingLimits.MinimumNumberOfIterationsInLoadAllRequestedModels,

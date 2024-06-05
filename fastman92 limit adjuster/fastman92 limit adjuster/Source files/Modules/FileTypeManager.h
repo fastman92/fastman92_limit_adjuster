@@ -13,7 +13,7 @@ namespace Game_GTASA
 	// Loads CD directory item and returns file ID
 	__int32 LoadCDdirectoryItem(
 		const CDirectoryEntryExtended& entry,
-		const tImgDescriptor *img,
+		const CStreamingFile *img,
 		int imgId,
 		const tGTASAimgLoadingCallPriv& loadingCallPriv
 		);
