@@ -38,6 +38,9 @@ const tWeaponTypeInfo* GetWeaponTypeInfo(int weaponType)
 // Returns skill stat index
 int __cdecl CWeaponInfo_generic::GetSkillStatIndex(signed int weaponType)
 {
+	if (weaponType < 0 || weaponType >= g_weaponLimits.NumberOfWeaponTypes)
+		return -1;
+
 	tWeaponTypeInfo* pInfo = g_weaponLimits.WeaponTypes + weaponType;
 
 	return pInfo->statIndex;
@@ -111,7 +114,7 @@ bool CWeaponInfo_generic::IsUserOperatedWeapon(int weaponType)
 // Returns weapon parent type
 int CWeaponInfo_generic::GetWeaponHighestParentType(int weaponType)
 {
-	if (weaponType >= g_weaponLimits.NumberOfWeaponTypes)
+	if (weaponType < 0 || weaponType >= g_weaponLimits.NumberOfWeaponTypes)
 		return false;
 
 	tWeaponTypeInfo* pInfo = g_weaponLimits.WeaponTypes + weaponType;
@@ -161,7 +164,7 @@ int CWeaponInfo_generic::GetWeaponParentTypeUntilFastman92(int weaponType)
 // Returns true if weapon parent type is recursive
 bool CWeaponInfo_generic::IsWeaponParentTypeRecursive(int weaponType)
 {
-	if (weaponType >= g_weaponLimits.NumberOfWeaponTypes)
+	if (weaponType < 0 || weaponType >= g_weaponLimits.NumberOfWeaponTypes)
 		return false;
 
 	tWeaponTypeInfo* pInfo = g_weaponLimits.WeaponTypes + weaponType;
@@ -188,6 +191,9 @@ bool CWeaponInfo_generic::IsWeaponParentTypeRecursive(int weaponType)
 int CWeaponInfo_generic::GetWeaponInfoIndex(int weaponType, char skill)
 {
 	MAKE_VAR_GAME_VERSION();
+	
+	if (weaponType < 0 || weaponType >= g_weaponLimits.NumberOfWeaponTypes)
+		return -1;
 
 	tWeaponTypeInfo* pInfo = g_weaponLimits.WeaponTypes + weaponType;
 
