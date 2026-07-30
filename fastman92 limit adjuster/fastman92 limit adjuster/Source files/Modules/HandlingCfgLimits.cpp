@@ -43,6 +43,8 @@ void cHandlingDataMgr::InitVariables()
 	this->numberOfFlyingLines(this) = 0;
 	this->numberOfBoatLines(this) = 0;
 
+	g_handlingCfgLimits.m_iDefaultFlyingHandlingID = -2;	// resolve lazily, see GetDefaultFlyingPointer
+
 	// offsets
 	this->m_aStandardHandling_offset(this) = this->m_standardEntryArray.GetOffset();
 	this->m_aBikeHandling_offset(this) = this->m_bikeEntryArray.GetOffset();
@@ -173,15 +175,62 @@ tBikeHandlingData* __thiscall cHandlingDataMgr::GetBikePointer(uint16_t handling
 		return (tBikeHandlingData*)this->m_bikeEntryArray(this);
 }
 
+// Returns the flying handling entry used as fallback for vehicles that have
+// no '$' line of their own.
+//
+// Vanilla cHandlingDataMgr::GetFlyingPointer (0x6F52D0) is:
+//
+//     if (handlingId >= 186 && handlingId <= 209)
+//         return &m_aFlyingHandling[handlingId - 186];
+//     return &m_aFlyingHandling[0];
+//
+// so the fallback is the entry of handling ID 186, which is SEAPLANE by
+// definition of the array indexing - regardless of the order of the lines
+// in handling.cfg.
+//
+// The extended version used to return m_flyingEntryArray[0] instead, which
+// is a different concept: the FIRST '$' line the parser happened to meet.
+// With a stock handling.cfg the two coincide, because SEAPLANE is the first
+// '$' line. With a reordered handling.cfg - i.e. after installing any
+// vehicle mod, which is precisely why the handling patch gets enabled -
+// they do not, and every ground vehicle driven with the flying cars cheat
+// (RIPAZHA) inherits the flight model of an arbitrary aircraft. See issue #11.
+tFlyingHandlingData* __thiscall cHandlingDataMgr::GetDefaultFlyingPointer()
+{
+	int defaultID = g_handlingCfgLimits.m_iDefaultFlyingHandlingID;
+
+	if (defaultID == -2)	// not resolved yet
+	{
+		defaultID = this->GetHandlingId("SEAPLANE");
+		g_handlingCfgLimits.m_iDefaultFlyingHandlingID = defaultID;
+	}
+
+	if (defaultID >= 0 && (unsigned int)defaultID < this->numberOfVehicleLines(this))
+	{
+		tHandlingData_extended* pSeaplane = this->GetStandardPointer((uint16_t)defaultID);
+
+		if (pSeaplane->pFlyingHandling(pSeaplane))
+			return pSeaplane->pFlyingHandling(pSeaplane);
+	}
+
+	// no SEAPLANE entry in this handling.cfg - old behaviour as last resort
+	return (tFlyingHandlingData*)this->m_flyingEntryArray(this);
+}
+
 // Returns pointer to flying handling data
 tFlyingHandlingData* __thiscall cHandlingDataMgr::GetFlyingPointer(uint16_t handlingID)
 {
+	// vanilla takes a uint8_t; a caller that was not widened to 16 bit would
+	// pass a truncated ID, and an out of range ID would index past the array
+	if (handlingID >= this->numberOfVehicleLines(this))
+		return this->GetDefaultFlyingPointer();
+
 	tHandlingData_extended* pStandardVehData = this->GetStandardPointer(handlingID);
 
 	if (pStandardVehData->pFlyingHandling(pStandardVehData))
 		return pStandardVehData->pFlyingHandling(pStandardVehData);
 	else
-		return (tFlyingHandlingData*)this->m_flyingEntryArray(this);
+		return this->GetDefaultFlyingPointer();
 }
 
 // Returns pointer to boat handling data
