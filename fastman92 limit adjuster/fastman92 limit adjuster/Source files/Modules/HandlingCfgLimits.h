@@ -96,6 +96,10 @@ public:
 	uint32_t m_sizeof_tBoatHandlingData;
 	uint32_t m_sizeof_CAnimGroup;
 
+	// Handling ID whose flying entry is handed to vehicles without one.
+	// -2 = not resolved yet, -1 = not found. Reset in InitVariables().
+	int m_iDefaultFlyingHandlingID;
+
 	// Returns pointer to mod_HandlingManager
 	cHandlingDataMgr* Get_mod_HandlingManager();
 

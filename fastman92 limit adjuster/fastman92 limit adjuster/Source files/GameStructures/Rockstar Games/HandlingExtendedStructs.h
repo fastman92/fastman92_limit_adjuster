@@ -119,6 +119,11 @@ public:
 	// Returns pointer to flying handling data
 	tFlyingHandlingData *__thiscall GetFlyingPointer(uint16_t handlingID);
 
+	// Returns the flying handling entry used as fallback for vehicles
+	// that have no '$' line of their own (vanilla: m_aFlyingHandling[0], which
+	// is by definition the entry of handling ID 186 = SEAPLANE)
+	tFlyingHandlingData *__thiscall GetDefaultFlyingPointer();
+
 	// Returns pointer to boat handling data
 	tBoatHandlingData *__thiscall GetBoatPointer(uint16_t handlingID);
 
